@@ -1,0 +1,183 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Source+Sans+3:ital,wght@0,400;0,500;0,600;1,400&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --font-display: "Fraunces", ui-serif, Georgia, "Times New Roman", serif;
+  --font-sans: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "Source Code Pro", monospace;
+
+  --color-bg: #f3f0e8;
+  --color-bg-subtle: #eae6db;
+  --color-surface: #fbf8f1;
+  --color-surface-2: #f6f2e8;
+  --color-ink: #1a2420;
+  --color-ink-muted: #5c6661;
+  --color-ink-subtle: #7a847e;
+  --color-line: #d9d3c6;
+  --color-line-strong: #c4bdb0;
+  --color-primary: #245c4a;
+  --color-primary-fg: #f7f3ea;
+  --color-primary-hover: #1b4a3c;
+  --color-primary-soft: #dce8e3;
+  --color-danger: #8a3a32;
+  --color-danger-fg: #fbf8f1;
+  --color-warn: #8a5a2a;
+  --color-ok: #2a5c45;
+
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+
+  --aspect-photo: 16 / 10;
+  --tracking-caps: 0.12em;
+  --tracking-mark: 0.14em;
+
+  --shadow-border:
+    0px 0px 0px 1px rgba(26, 36, 32, 0.08),
+    0px 1px 2px -1px rgba(26, 36, 32, 0.06),
+    0px 2px 4px 0px rgba(26, 36, 32, 0.04);
+  --shadow-border-hover:
+    0px 0px 0px 1px rgba(26, 36, 32, 0.12),
+    0px 1px 2px -1px rgba(26, 36, 32, 0.08),
+    0px 2px 6px 0px rgba(26, 36, 32, 0.06);
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  html,
+  body,
+  #app {
+    min-height: 100%;
+  }
+
+  body {
+    background: var(--color-bg);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    line-height: 1.55;
+  }
+
+  h1,
+  h2,
+  h3 {
+    text-wrap: balance;
+    font-family: var(--font-display);
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  button:not(:disabled),
+  [role="button"]:not(:disabled) {
+    cursor: pointer;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  img {
+    outline: 1px solid rgba(26, 36, 32, 0.1);
+    outline-offset: -1px;
+  }
+
+  ::selection {
+    background: var(--color-primary-soft);
+    color: var(--color-ink);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+.skip-link {
+  position: absolute;
+  left: 1rem;
+  top: -4rem;
+  z-index: 80;
+  border-radius: var(--radius-sm);
+  background: var(--color-primary);
+  color: var(--color-primary-fg);
+  padding: 0.75rem 1rem;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.prose-legal h2 {
+  margin-top: 1.75rem;
+  margin-bottom: 0.5rem;
+  font-size: 1.25rem;
+}
+
+.prose-legal p,
+.prose-legal li {
+  color: var(--color-ink-muted);
+}
+
+.prose-legal ul {
+  margin: 0.5rem 0 1rem 1.25rem;
+  list-style: disc;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+
+  body {
+    background: white;
+    color: #111;
+  }
+
+  a[href]::after {
+    content: none !important;
+  }
+
+  .print-only {
+    display: block !important;
+  }
+
+  .dokument-house {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #d9d3c6;
+  }
+
+  .dokument {
+    max-width: none;
+  }
+
+  .dokument [aria-label="Wartezeit-Schätzung"] button {
+    display: none !important;
+  }
+
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+}
+
+.print-only {
+  display: none;
+}

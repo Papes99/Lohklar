@@ -1,0 +1,43 @@
+# dependencies
+node_modules/
+.node_modules.lock
+.node_modules.tmp.*
+
+# secrets & env
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+credentials.json
+secrets/
+
+# build / cache
+.vercel/
+.tanstack/
+dist/
+.output/
+.nitro/
+coverage/
+*.tsbuildinfo
+
+# logs & OS
+*.log
+.DS_Store
+Thumbs.db
+
+# platform / local only
+.grok/preview.log
+.grok/status
+.grok/skills/
+.grok/references/
+public/__grok/
+attachments/
+screenshots/*
+!screenshots/.gitkeep
+
+# editor
+.idea/
+.vscode/
+*.swp
