@@ -37,8 +37,9 @@ DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistik
 | Offizieller Steckbrief | Einheitliche 13-Block-Vorlage inkl. Fotos. Owner: Agent E. |
 | Persönlicher Steckbrief | Genau 4 Felder: `passt` / `passtNicht` / `offeneFragen` / `rueckmeldungen`. |
 | Dashboard | Nur angemeldet. Tag / Monat / Jahr (Europe/Berlin). URL `?view=&date=`. Nur Zahlen, plus Katalog-Log (aufgenommen / aktualisiert / entfernt). |
+| Antragsweg | Unterlagen- und Fristen-Checkliste am Fallordner. Keine Dokumentinhalte, keine Diagnosen. |
 
-Navigation: Dashboard, Klar-o-Mat, Fälle, Lohlotse, Steckbriefe.
+Navigation: Dashboard, Klar-o-Mat, Fälle, Lohlotse, Steckbriefe. Fallordner-Tabs inkl. Antragsweg.
 
 Lauf-Status: `entwurf` | `fertig` | `exportiert`.
 
@@ -48,7 +49,7 @@ Lauf-Status: `entwurf` | `fertig` | `exportiert`.
 
 | Owner | Objekt | Dateien |
 |---|---|---|
-| **A** | Klar-o-Mat, Fallordner, Arbeitsname, Gastlauf + Claim | `src/components/klaromat/*`, `src/routes/klar-o-mat.tsx`, `src/routes/app/klar-o-mat.tsx`, `src/routes/app/fallordner/*`, `src/lib/server/cases.ts`, `src/lib/domain/folder-search.ts`, `src/lib/domain/matching.ts`, `src/lib/guest-run.ts`, `migrations/0002_schema.sql`, `migrations/0003_case_runs.sql` |
+| **A** | Klar-o-Mat, Fallordner, Arbeitsname, Gastlauf + Claim, Antragsweg | `src/components/klaromat/*`, `src/components/antragsweg/*`, `src/routes/klar-o-mat.tsx`, `src/routes/app/klar-o-mat.tsx`, `src/routes/app/fallordner/*`, `src/lib/server/cases.ts`, `src/lib/server/antragsweg.ts`, `src/lib/domain/folder-search.ts`, `src/lib/domain/matching.ts`, `src/lib/domain/antragsweg.ts`, `src/lib/guest-run.ts`, `migrations/0002_schema.sql`, `migrations/0003_case_runs.sql`, `migrations/0007_antragsweg.sql` |
 | **B** | Ergebnisdokument + Editor + PDF/DOCX | `src/components/dokument/*`, `src/lib/domain/document.ts`, `src/lib/domain/document-export.ts`, `migrations/0004_result_document.sql` |
 | **C** | Wartezeit-Komponente | `src/components/wait/wartezeit-schaetzung.tsx`, `src/lib/domain/wait-time.ts` |
 | **D** | Lohlotse | `src/components/lohlotse/*`, `src/routes/app/lohlotse.tsx`, `src/lib/domain/lohlotse.ts`, `src/lib/server/lohlotse.ts`, `migrations/0005_lohlotse.sql` |
