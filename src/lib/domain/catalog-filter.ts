@@ -181,6 +181,18 @@ export const CATALOG_EDITIONS: CatalogEdition[] = [
     houses: 50,
     note: "Erstprüfung der öffentlichen Steckbriefe.",
   },
+  {
+    ymd: "2026-09-05",
+    kind: "aufnahme",
+    houses: 200,
+    note: "Katalog um 200 Reha-Häuser erweitert.",
+  },
+  {
+    ymd: "2026-09-05",
+    kind: "pruefung",
+    houses: 200,
+    note: "Erstprüfung der neu aufgenommenen Steckbriefe.",
+  },
 ];
 
 export function editionsInRange(

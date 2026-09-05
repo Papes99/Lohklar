@@ -13,7 +13,7 @@ import {
 import { clinicCardTags } from "./types.ts";
 
 describe("catalog completeness", () => {
-  it("counts complete houses as a subset of the 50", () => {
+  it("counts complete houses as a subset of the catalog", () => {
     const complete = CLINIC_SEED.filter(isClinicComplete);
     assert.ok(complete.length >= 1);
     assert.ok(complete.length < CLINIC_SEED.length);
@@ -33,7 +33,7 @@ describe("catalog completeness", () => {
 describe("catalog filter", () => {
   it("returns all houses for an empty filter", () => {
     const rows = filterClinics(CLINIC_SEED, emptyCatalogFilter());
-    assert.equal(rows.length, 50);
+    assert.equal(rows.length, 250);
     assert.equal(catalogFilterActive(emptyCatalogFilter()), false);
   });
 
@@ -84,16 +84,18 @@ describe("clinicCardTags", () => {
 });
 
 describe("catalog pulse", () => {
-  it("covers 16 Länder and records the September 2026 edition", () => {
+  it("covers 16 Länder and records the September 2026 editions", () => {
     const pulse = catalogPulse(CLINIC_SEED, "2026-08-31");
-    assert.equal(pulse.houses, 50);
+    assert.equal(pulse.houses, 250);
     assert.equal(pulse.statesCovered, 16);
-    assert.equal(pulse.addedInPeriod, 50);
-    assert.equal(pulse.pruefungenInPeriod, 50);
-    assert.equal(pulse.complete + pulse.incomplete, 50);
+    assert.equal(pulse.addedInPeriod, 250);
+    assert.equal(pulse.pruefungenInPeriod, 250);
+    assert.equal(pulse.complete + pulse.incomplete, 250);
     assert.ok(pulse.topGaps.length >= 1);
-    assert.equal(CATALOG_EDITIONS.length, 2);
-    const before = catalogPulse(CLINIC_SEED, "2026-09-02");
+    assert.equal(CATALOG_EDITIONS.length, 4);
+    const mid = catalogPulse(CLINIC_SEED, "2026-09-02");
+    assert.equal(mid.addedInPeriod, 200);
+    const before = catalogPulse(CLINIC_SEED, "2026-09-06");
     assert.equal(before.addedInPeriod, 0);
   });
 });

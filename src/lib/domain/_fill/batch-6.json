@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ck-heiligenfeld-parkklinik",
+    "phone": "0971 84-4444",
+    "email": "info@heiligenfeld.de",
+    "room": "einbett",
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken/parkklinik-heiligenfeld-bad-kissingen",
+    "note": "Klinikseite Patientenservice Aufnahme 0971 84-4444; Kontakt/Impressum info@heiligenfeld.de. Zitat: „Alle Patientinnen und Patienten erhalten ein ansprechendes Einzelzimmer“. Foto Dateiname pk_haus_aussen auf der Klinikseite."
+  },
+  {
+    "id": "ck-heiligenfeld-rosengarten",
+    "phone": "0971 84-0",
+    "email": "info@heiligenfeld.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.heiligenfeld.de/kliniken/rosengartenklinik-heiligenfeld-bad-kissingen",
+    "note": "Patientenservice Aufnahme 0971 84-0; info@heiligenfeld.de auf Kontakt/Impressum. Zitat: „Alle Rehabilitandinnen und Rehabilitanden erhalten ein ansprechendes Einzelzimmer“. Kein klinikspezifisches Außenfoto auf der Klinikseite (nur Innenfoto rk_haus_innen)."
+  },
+  {
+    "id": "ck-heiligenfeld-uffenheim",
+    "phone": "0971 84-0",
+    "email": "info@heiligenfeld.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.heiligenfeld.de/kliniken/heiligenfeld-klinik-uffenheim",
+    "note": "Offizielle Aufnahme 0971 84-0 / info@heiligenfeld.de. Ambiente: „ansprechendes Zimmer“, ohne Einzel/Doppel. FAQ: GKV-Standardleistung maximal Zweibettzimmer, kein Anspruch auf Einbett; Krisenintervention regelhaft Zweibett; Haustier im Einbett. Mix nicht als Mehrheit belegt."
+  },
+  {
+    "id": "ck-heiligenfeld-waldmuenchen",
+    "phone": "0971 84-0",
+    "email": "info@heiligenfeld.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.heiligenfeld.de/kliniken/heiligenfeld-klinik-waldmuenchen",
+    "note": "Offizielle Aufnahme 0971 84-0 / info@heiligenfeld.de (lokale 09972-Nummer nicht auf der aktuellen Klinikseite). FAQ: GKV maximal Zweibettzimmer, kein Anspruch auf Einbett. Ambiente ohne Einzel/Doppel-Angabe."
+  },
+  {
+    "id": "ck-hermannsborn",
+    "phone": "05253 40-7000",
+    "email": "zentrale@graefliche-kliniken.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.kbh.de/wp-content/uploads/park_klinik-2301_k-693-481.jpg",
+    "source": "https://www.kbh.de/unterbringung/",
+    "note": "Angegebene Domain badhermannsborn.de nicht erreichbar (503). Nachfolger-Offiziellseite Park Klinik Bad Hermannsborn kbh.de: Zentrale 05253 40-7000, zentrale@graefliche-kliniken.de, Aufnahme aufnahme-pk@graefliche-kliniken.de. Zitat: „Die Unterbringung erfolgt in der Regel in Einzelzimmern“ plus Einzel- und Doppelzimmer."
+  },
+  {
+    "id": "ck-herrenalb-celenus",
+    "phone": "07083 7439-0",
+    "email": "info@fachklinik-schweizerwiese.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.celenus-kliniken.de/schweizerwiese/kontakt/",
+    "note": "celenus-kliniken.de/bad-herrenalb/ ist 404. Nachfolger im selben Träger: emeis Fachklinik Schweizerwiese Bad Herrenalb. Kontakt 07083 7439-0, info@fachklinik-schweizerwiese.de. Ausstattung: 115 Einzelzimmer 21 qm plus 15 behindertengerechte Zimmer 25 qm; keine Doppelzimmer genannt."
+  },
+  {
+    "id": "ck-hochgrat",
+    "phone": "08386 9622-0",
+    "email": "info@hochgrat-klinik.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.reisach-kliniken.de/unsere-kliniken/hochgrat-klinik.html",
+    "note": "hochgratklinik.de leitet auf 404. Offiziell jetzt Reisach Kliniken. Tel 08386 9622-0, info@hochgrat-klinik.de. Aufnahme-Seite: „Zwei Drittel aller Zimmer im Haus sind Zweibettzimmer. Die reguläre Unterbringung erfolgt in Zweibettzimmern“; Einzelzimmer wählbar."
+  },
+  {
+    "id": "ck-homberg",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.klinik-am-homberg.de/",
+    "note": "klinik-am-homberg.de leitet auf die Wicker-Gruppenstartseite. Keine eigene Homberg-Kontaktseite, kein Homberg-Eintrag im Wicker-Impressum. Gebäude laut Wicker-Magazin zur Aufgabe vorgesehen. Nichts Klinik-spezifisches veröffentlicht."
+  },
+  {
+    "id": "ck-hoppegarten",
+    "phone": "+49 3342 353-0",
+    "email": "kontakt.hoppegarten@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-hoppegarten/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-hoppegarten/",
+    "note": "Klinikseite und Kontakt: +49 3342 353-0, kontakt.hoppegarten@median-kliniken.de. Leben & Wohnen: „wohnen in behaglichen Einzelzimmern“. FAQ: „Bei uns werden Sie in einem Einzelzimmer untergebracht. Bei Bedarf stehen auch Doppelzimmer für eine Begleitperson zur Verfügung.“"
+  },
+  {
+    "id": "ck-inntal",
+    "phone": "+49 8571 985 0",
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.ameos.eu/reha-klinikum-inntal/kontakt",
+    "note": "Kontaktseite veröffentlicht +49 8571 985 0. Keine E-Mail-Adresse im Klartext (nur Formular). Zimmerart auf Klinik-/Aufenthaltsseiten nicht angegeben."
+  },
+  {
+    "id": "ck-irmingard",
+    "phone": "+49 8051 607-0",
+    "email": "info@st-irmingard.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.st-irmingard.de/impressum/",
+    "note": "Impressum: Telefon +49 8051 607-0, E-Mail info (at) st-irmingard.de. Zimmerseite Psychosomatik: „Selbstverständlich erfolgt die Unterbringung ausschließlich in Einzelzimmern“."
+  },
+  {
+    "id": "ck-kandertal",
+    "phone": "07626 902-200",
+    "email": "rehaklinik.kandertal@kur.org",
+    "room": "einbett",
+    "photoUrl": "https://www.rehaklinik-kandertal.de/fileadmin/Redakteure/kandertal/galerie/klinik.jpg",
+    "source": "https://www.rehaklinik-kandertal.de/kontakt",
+    "note": "Kontakt: 07626 / 902 200, rehaklinik.kandertal@kur.org. Ausstattung: Haus Blauen 40 Einzelzimmer für Jugendliche und Erwachsene; Familien in 52 Appartements Haus Schweizerblick. Erwachsenen-Psychosomatik damit Einbett."
+  },
+  {
+    "id": "ck-kirchberg",
+    "phone": "05524 859-0",
+    "email": "info@kirchbergklinik.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.kirchbergklinik.de/impressum",
+    "note": "Impressum/Footer 05524 859-0. E-Mail per Joomla-hidden-mail base64 first=info last=kirchbergklinik.de. Zimmerart auf den öffentlich lesbaren Seiten nicht angegeben."
+  },
+  {
+    "id": "ck-kneipp-bad-woerishofen",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.sebastian-kneipp-klinik.de/",
+    "note": "Angegebene Domain nicht erreichbar (Verbindungsfehler). Nicht identisch mit DRV Klinik Bad Wörishofen (klinik-badwoerishofen.de, Tannenbaum 2). Keine offizielle Seite ausgewertet."
+  },
+  {
+    "id": "ck-koenigstein",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.asklepios.com/koenigstein/",
+    "note": "asklepios.com/koenigstein/ liefert 404. Keine aktuelle Asklepios-Klinikseite für Frankfurter Straße 12 / Königstein Psychosomatik gefunden. Nicht mit Asklepios Falkenstein (Neurologie) vermischt."
+  },
+  {
+    "id": "ck-koenigstuhl",
+    "phone": "06221 907-0",
+    "email": "info@rehaklinik-koenigstuhl.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.rehaklinik-koenigstuhl.de/startseite",
+    "note": "Startseite: Tel 06221 907-0, info@rehaklinik-koenigstuhl.de. Kontakt-/Impressum-Unterseiten 404. Zimmerart auf der Startseite nicht angegeben."
+  },
+  {
+    "id": "ck-korso",
+    "phone": "05731 181-0",
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": "https://www.johanniter.de/assets/_processed_/9/e/csm_Aussenansicht_06_1406cafa06.jpg",
+    "source": "https://www.johanniter.de/johanniter-kliniken/klinik-am-korso/kontakt/",
+    "note": "Kontakt tel:+4957311810 → 05731 181-0. Keine Klartext-E-Mail (nur Formular/„E-Mail“-Link). Zimmerart auf Kontakt/Aufenthalt nicht veröffentlicht. Außenansicht auf der Kontaktseite."
+  },
+  {
+    "id": "ck-lahnhoehe",
+    "phone": "02621 915-0",
+    "email": "info@klinik-lahnhoehe.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.lahnhoehe.de/wp-content/uploads/2025/10/Lahnhoehe-1-675x450.jpg",
+    "source": "https://www.lahnhoehe.de/impressum/",
+    "note": "vamed-gesundheit.de-URL 404, Weiterleitung vitrea. Offiziell lahnhoehe.de: 02621 / 915-0, info@klinik-lahnhoehe.de. Zweibett nur in einer Patientenbewertung, nicht im Kliniktext. og:image Klinikgebäude."
+  },
+  {
+    "id": "ck-lippoldsberg",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.dbkg.de/kliniken/klinik-lippoldsberg/",
+    "note": "dbkg.de/kliniken/klinik-lippoldsberg/ ist 404. Dr. Becker listet die Klinik nicht mehr unter den aktuellen Standorten. Nicht verwechselt mit Klinik- und Rehabilitationszentrum Lippoldsberg (Birkenallee 1, andere Träger/Indikation)."
+  },
+  {
+    "id": "ck-luisenklinik",
+    "phone": "07726 668-4",
+    "email": "info@luisenklinik.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://luisenklinik.de/fileadmin/user_upload/00_Global/bad-duerrheim.jpg",
+    "source": "https://luisenklinik.de/kliniken/bad-duerrheim/",
+    "note": "Kontakt 07726 668-4, info@luisenklinik.de. Reha-Bereich Erwachsene: „Die Unterbringung erfolgt generell in Einzelzimmern.“ Akut Erwachsene GKV-Regelleistung Zweibett; Kinder/Jugendliche in Zweibettzimmern."
+  },
+  {
+    "id": "ck-marbachtal",
+    "phone": "0971 808-0",
+    "email": "info.marbachtal-klinik@drv-oldenburg-bremen.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.marbachtalklinik.de/klinik/badkissingen/unsere_klinik/ausstattung_zimmer/ausstattung_node",
+    "note": "Startseite/Ausstattung 0971 808-0, info.marbachtal-klinik@drv-oldenburg-bremen.de. Zitat: „Unsere modern ausgestatteten Einzelzimmer sind hell, freundlich und einladend gestaltet.“ Keine Doppelzimmer genannt. Seitenfotos sind Zimmer, kein Außenfoto verwendet."
+  },
+  {
+    "id": "ck-median-bad-bertrich",
+    "phone": "+49 2674 182-0",
+    "email": "kontakt.badbertrich@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/reha-zentrum-bad-bertrich/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/reha-zentrum-bad-bertrich/",
+    "note": "Aktuelle MEDIAN-URL (alte /median-klinik-bad-bertrich/ 404). Klinikkontakt +49 2674 182-0, Impressum kontakt.badbertrich@median-kliniken.de. Leben & Wohnen: 207 Einbettzimmer, 75 Zweibett nur für Begleitperson; „Unterbringung erfolgt ausschließlich in Einzelbelegung“."
+  },
+  {
+    "id": "ck-median-bad-dueben",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/median-klinik-bad-dueben/",
+    "note": "Angegebene MEDIAN-URL 404. Keine aktuelle Klinikseite Bad Düben im MEDIAN-Auftritt gefunden. Nichts veröffentlicht."
+  },
+  {
+    "id": "ck-median-berka-ilmtal",
+    "phone": "+49 36458 38-0",
+    "email": "kontakt.ilmtal@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/reha-zentrum-bad-berka-ilmtal-klinik/rechtliches/impressum/",
+    "note": "Klinikseite +49 36458 38-0. Impressum kontakt.ilmtal@median-kliniken.de. Leben-&-Wohnen-Seite ohne verwertbare Einzel-/Doppelzimmer-Angabe."
+  },
+  {
+    "id": "ck-median-bernkastel",
+    "phone": "+49 6531 92-0",
+    "email": "kontakt.bernkastel@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/reha-zentrum-bernkastel-kues/",
+    "note": "Klinikseite +49 6531 92-0, kontakt.bernkastel@median-kliniken.de. FAQ: „Bekomme ich ein Einzelzimmer? Bei uns werden Sie in einem Einzelzimmer mit Balkon untergebracht.“"
+  }
+]

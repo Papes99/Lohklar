@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ck-median-schweriner-see",
+    "phone": "+49 3867 9000",
+    "email": "schwerinersee-kontakt@median-kliniken.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-schweriner-see/bilder/Klinik_und_See.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-schweriner-see/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Official: 65 Einzel- und 77 Zweibettzimmer. Sucht in Zweibettzimmern; Psychosomatik überwiegend Einzelzimmer. Majority of rooms are Zweibett."
+  },
+  {
+    "id": "ck-median-toenisstein",
+    "phone": "+49 2641 9140",
+    "email": "toenisstein-kontakt@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-toenisstein/bilder/Header_Toenistein.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-toenisstein/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Official: 140 allergenarme Einzelzimmer, darunter zehn barrierefreie; WC, Dusche, TV."
+  },
+  {
+    "id": "ck-median-waldsee",
+    "phone": "+49 2655 9330",
+    "email": "waldsee-kontakt@median-kliniken.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-am-waldsee/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Official: 30 Zweibettzimmer und vier Einzelzimmer, jeweils mit eigenem Bad. Homepage also says Einzel- oder Doppelzimmer."
+  },
+  {
+    "id": "ck-median-wied",
+    "phone": "+49 2662 806-0",
+    "email": "kontakt.wied@median-kliniken.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-wied/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-wied/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Official: Unterbringung in Doppelzimmern; auf Indikation oder je nach Gruppenmodell zum Teil auch in Einzelzimmern."
+  },
+  {
+    "id": "ck-median-wigbertshoehe",
+    "phone": "+49 6621 1850",
+    "email": "wigbertshoehe-kontakt@median-kliniken.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-wigbertshoehe/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-wigbertshoehe/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Official: 72 Plätze; Beginn in 16 Doppelzimmern, Verlauf in 43 Einzelzimmer. Majority of rooms are Einzelzimmer."
+  },
+  {
+    "id": "ck-ostberge",
+    "phone": "02304 941200",
+    "email": "verwaltung@ostberge.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://fachklinik-ostberge.de/",
+    "note": "Footer publishes Tel. 02304 – 94 12 00 and verwaltung(at)ostberge.de. No room type on official pages. Impressum repeats same phone."
+  },
+  {
+    "id": "ck-pirna-adaption",
+    "phone": "03501 75800-12",
+    "email": "adaption@fk-heidehof.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://diakoniestiftung-sachsen.de/path/app/?rq_AppGuid=B2713E72CB38D775ED30CEB0144CE8D134C8BE46&rq_TargetPageGuid=423F5C237F16633EC7B12ADF6514E6937EC2B360&rq_RecId=363732",
+    "note": "Listed diakonie-sachsen.de has no house contact. Official operator page Adaptionseinrichtung Pirna (Heidehof/Diakoniestiftung): Geibeltstraße 3, Bianca Kluge, +49 3501 75800-12, adaption@fk-heidehof.de. No room type published."
+  },
+  {
+    "id": "ck-prowo",
+    "phone": "02237 63840-0",
+    "email": "aufnahme@prowo.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://prowo.de/entwoehnung/",
+    "note": "Kontakt/Impressum: Tel. 0 22 37 / 638 40-0, prowo@prowo.de. Aufnahme Entwöhnung: aufnahme@prowo.de. Official Entwöhnung page: 'Wir bieten Einbettzimmer an.'"
+  },
+  {
+    "id": "ck-pskbgl",
+    "phone": "02202 206-0",
+    "email": "info@klinikum-oberberg.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.klinikum-oberberg.de/standorte/psk-psychosomatische-klinik-bergisch-land/ueber-uns-1/anfahrt",
+    "note": "Listed pskbgl.de does not resolve. Official successor is Klinikum Oberberg PSK page: Tel. 0 22 02.206 0, Mail info@klinikum-oberberg.de. Room type for the main house not published (only Adaption: 10 Plätze in Einzel- und Doppelzimmern)."
+  },
+  {
+    "id": "ck-raupennest",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.johannesbad.de/fachkliniken/fachklinik-raupennest/",
+    "note": "Listed URL redirects to johannesbad.com group homepage without this house's sucht contact. Johannesbad Raupennest today is the orthopedic clinic at Rehefelder Str. 18 (Tel. +49 35056 30-0), not the catalog address Raupennest 1 / 035056 33-0. No sucht-house contact extracted."
+  },
+  {
+    "id": "ck-release",
+    "phone": "+49 155 60288146",
+    "email": "aufnahme@netzwerk-suchthilfe.org",
+    "room": "einbett",
+    "photoUrl": "https://www.drogenhilfe-hamm.de/wordpress/wp-content/uploads/2015/02/release-start-head.jpg",
+    "source": "https://www.drogenhilfe-hamm.de/fachklinik-release-entwoehnung/aufnahme-kontakt/",
+    "note": "Listed fachklinik-release.de does not resolve. Official Träger site: exclusively Einzelzimmer, also Paarzimmer. Current Aufnahme contact: Merschstraße 49, Tel. +49.155.60288146, aufnahme@netzwerk-suchthilfe.org. Träger flyer on same domain also lists Fon 02599.93850 and release@netzwerk-suchthilfe.org."
+  },
+  {
+    "id": "ck-salus-castrop",
+    "phone": "02305 4457-0",
+    "email": "mail@salus-castrop-rauxel.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/contents/Kliniken/Castrop/Klinikbilder/KLinikHinten.jpg",
+    "source": "https://www.salus-kliniken.de/castrop-rauxel/kontakt/",
+    "note": "Kontakt page: 02305 44570 / 02305 / 4457 - 0, mail@salus-castrop-rauxel.de. Official clinic flyer PDF: Unterbringung in wohnlichen Doppelzimmern mit eigenem Duschbad."
+  },
+  {
+    "id": "ck-salus-friedberg",
+    "phone": "06031 7121-0",
+    "email": "mail@salus-friedberg.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/2/f/csm_Luftaufnahme_homepage_568c96b08c.jpg",
+    "source": "https://www.salus-kliniken.de/friedberg/kontakt/",
+    "note": "Kontakt: 06031 / 7121 - 0, mail@salus-friedberg.de (also info@salus-friedberg.de). No room-type statement found on official HTML pages."
+  },
+  {
+    "id": "ck-salus-lindow",
+    "phone": "033933 88-0",
+    "email": "mail@salus-lindow.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/c/6/csm_Luftaufnahme_Klinik_1645_ed018c6442.jpg",
+    "source": "https://www.salus-kliniken.de/lindow/ueber-uns/kontakt-und-ansprechpartner/",
+    "note": "Kontakt: 033933 / 88 - 0, mail@salus-lindow.de. Official sucht concept PDF: Suchtpatient*innen in Zweibettzimmern. Psychosomatik exclusively Einzelzimmer (on Wunsch Zweibett). Majority of 273 places are Sucht."
+  },
+  {
+    "id": "ck-schlehreut",
+    "phone": "08592 8817-0",
+    "email": "info@fk-schlehreut.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.fachklinik-schlehreut.com/kontakt-anreise",
+    "note": "Listed .de is a stub; official site is fachklinik-schlehreut.com. Kontakt: +49 (0) 8592 / 8817-0; Impressum/Klinik-ABC: info@fk-schlehreut.de; Kontaktformular also i.enzl@fachklinik-schlehreut.de. 3 Wohnhäuser with Einzel- und Doppelzimmer; Mütter mit Kindern in Doppel-/Familienzimmern. No majority stated. Exterior photos on webador CDN, not clinic domain."
+  },
+  {
+    "id": "ck-schlosspark-bgl",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.schlosspark-klinik-gladbach.de/",
+    "note": "Listed domain does not resolve. Third-party Träger directory states closed 31.12.2025; no live official clinic page to extract from."
+  },
+  {
+    "id": "ck-siloah",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.siloah.fliedner.de/",
+    "note": "Listed URL returns 404. Träger Fliedner: Fachklinik Haus Siloah Reha ended 2024; building now used as psychiatric day clinic. No current official sucht-clinic contact/room published."
+  },
+  {
+    "id": "ck-spielwigge",
+    "phone": "02351 9485-0",
+    "email": "info@fachklinik-spielwigge.de",
+    "room": "unbekannt",
+    "photoUrl": "https://fachklinik-spielwigge.de/wp-content/uploads/2023/08/Fachklinik_Spielwigge_Ausblick-1024x681.jpg",
+    "source": "https://fachklinik-spielwigge.de/ueber-uns",
+    "note": "Homepage tel:+49235194850; Impressum +49 (0) 23 51 / 94 85; email info@fachklinik-spielwigge.de. Über uns: Ein- und Zweibettzimmer, women in a separate building with own bathroom. No majority stated."
+  },
+  {
+    "id": "ck-spittler",
+    "phone": "030 130 20 8600",
+    "email": "entwoehnung@vivantes.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.vivantes.de/gesundheitsnetzwerk/krankenhaeuser/auguste-viktoria-klinikum/fachbereiche/entwoehnungstherapie-hartmut-spittler-fachklinik/",
+    "note": "Official Vivantes department page: 24h-Kontakttelefon 030 130 20 8600, entwoehnung@vivantes.de. Room type for this Fachklinik not published (site-wide Wahlleistung Einzel-/Zweibettzimmer is the hospital, not this ward)."
+  },
+  {
+    "id": "ck-tauwetter",
+    "phone": "02222 9324-0",
+    "email": "tauwetter@skm-koeln.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.skm-koeln.de/wp-content/uploads/Tauwetter_slider.jpg",
+    "source": "https://www.skm-koeln.de/fachklinik-tauwetter/",
+    "note": "Listed fachklinik-tauwetter.de SSL handshake fails. Official SKM page: Tel. 02222/9324-0; obfuscated email decodes to tauwetter@skm-koeln.de. No current room-type statement on the clinic page."
+  },
+  {
+    "id": "ck-vielbach",
+    "phone": "02626 9783-0",
+    "email": "info@fachkrankenhaus-vielbach.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.fachkrankenhaus-vielbach.de/templates/yootheme/cache/64/VB_Haupthaus_HG_1920_1080-6416cdc0.jpeg",
+    "source": "https://www.fachkrankenhaus-vielbach.de/index.php/kontakt",
+    "note": "Listed fachklinik-vielbach.de does not resolve. Official Fachkrankenhaus Vielbach: Nordhofener Straße 1, 56244 Vielbach (catalog street/PLZ/phone differ). Tel 02626-97830, JS-cloaked info@fachkrankenhaus-vielbach.de. Homepage: Zweibett- oder Einzelzimmer, no majority."
+  },
+  {
+    "id": "ck-villa-lilly",
+    "phone": "06124 7008-0",
+    "email": "villalilly@jj-ev.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://villalilly.jj-ev.de/",
+    "note": "Listed villa-lilly.de does not resolve. Official JJ e.V. house page: Fon 06124 7008-0, villalilly@jj-ev.de. Adaption page says Einzelzimmer there; main Therapiedorf room type not published."
+  },
+  {
+    "id": "ck-villa-linden",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.frankfurt-suchthilfe.de/",
+    "note": "Listed URL redirects to ordenswerke.de/suchthilfe/ group overview. No current house page, phone or email for Villa unter den Linden / Weinbergstraße 9 found on that official site."
+  },
+  {
+    "id": "ck-vitrea-berghof-2",
+    "phone": "05472 935-00",
+    "email": "info.berghof2-bad-essen@vitrea.de",
+    "room": "einbett",
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/7/8/csm_head_berghof-edited_2e1cdb3270.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/vitrea-berghofklinik-ii-bad-essen/ihre-reha-bei-uns/ueber-den-aufenthalt/aufenthalt-und-komfort/",
+    "note": "Official: 25 Einzelapartments with kitchenette, bathroom, balcony/terrace. Phone +495472 935-00 on clinic pages."
+  },
+  {
+    "id": "ck-vitrea-berghofklinik",
+    "phone": "05472 935-00",
+    "email": "info.berghof-bad-essen@vitrea.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/b/7/csm_PKBadEssen_Berghofklinik_Gebaeude_Luftbild_741a96d8f8.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/vitrea-berghofklinik-bad-essen/ihre-reha-bei-uns/ueber-den-aufenthalt/aufenthalt-und-komfort/",
+    "note": "Listed paracelsus URL redirects to vitrea. Official: 130 Plätze in modernen Doppelzimmern; Einzelzimmer nach ärztlich/therapeutischer Indikation. Email info.berghof-bad-essen@vitrea.de on homepage."
+  }
+]

@@ -1,0 +1,338 @@
+[
+  {
+    "id": "ck-nordlicht",
+    "phone": "04342 789-112",
+    "email": "fachklinik@landesverein.de",
+    "room": "einbett",
+    "source": "https://landesverein.de/suchthilfe/fachklinik-freudenholm-ruhleben/",
+    "note": "Aufnahmeplanung Tel. 04342 789-112. Zitat: „Die Unterbringung in der Rehabilitationsabteilung erfolgt in Einzelzimmern mit Dusche und WC.“"
+  },
+  {
+    "id": "ck-auwald",
+    "phone": "07193 52-0",
+    "email": "wilhelmsheim-kontakt@median-kliniken.de",
+    "room": "zweibett",
+    "source": "https://www.median-kliniken.de/de/klinik-wilhelmsheim/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "„Zu Beginn Ihres Aufenthalts wohnen Sie in Zweibettzimmern … Nach einigen Wochen ist in der Regel ein Wechsel in ein Einzelzimmer möglich.“ Ausgewogene Anzahl Doppel-/Einzelzimmer."
+  },
+  {
+    "id": "ck-weserblick",
+    "phone": "05731 865-2816",
+    "email": "kontakt.klinikampark@median-kliniken.de",
+    "room": "einbett",
+    "source": "https://www.median-kliniken.de/de/klinik-am-park-bad-oeynhausen/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "„Einzelzimmer mit eigenem Bad/Dusche sowie einem Zweibettzimmer für Paare.“"
+  },
+  {
+    "id": "ck-bergstrasse",
+    "phone": "06251 102-0",
+    "email": "aufnahme-falkenhof@caritas-darmstadt.de",
+    "room": "unbekannt",
+    "source": "https://www.klinik-falkenhof.de/falkenhof/aufnahme-und-kontakt/aufnahme-und-kontakt",
+    "note": "Zentrale Tel. 06251 102-0 (Startseite). Aufnahme-Mail laut offizieller Seite caritas-darmstadt.de. Keine Zimmerregel auf der Klinikseite (nur Bild-Alt „Einzelzimmer“ Adaption)."
+  },
+  {
+    "id": "ck-rosenhoehe",
+    "phone": "07931 591-0",
+    "email": "reha-klinik.taubertal@drv-bund.de",
+    "room": "einbett",
+    "source": "https://www.reha-klinik-taubertal.de/klinik/taubertal/startseite",
+    "note": "Angegebene Domain reha-bad-mergentheim.de löst nicht auf. Offizielle DRV-Nachfolgeseite. FAQ: „Habe ich ein Einzelzimmer? Selbstverständlich haben Sie ein Einzelzimmer bei uns.“"
+  },
+  {
+    "id": "ck-eifelhoehe",
+    "phone": "06592 201-0",
+    "email": "daun-kontakt@median-kliniken.de",
+    "room": "unbekannt",
+    "source": "https://www.median-kliniken.de/de/rehazentrum-daun-thommener-hoehe/",
+    "note": "Klinikkontakt +49 6592 201-0. FAQ: „Bei uns werden Sie in einem Einzel- oder Doppelzimmer untergebracht“ — keine Mehrheit genannt."
+  },
+  {
+    "id": "ck-lichtblick",
+    "phone": "037603 54-0",
+    "email": "info.wiesen@asklepios.com",
+    "room": "unbekannt",
+    "source": "https://www.asklepios.com/wiesen/impressum",
+    "note": "Impressum: Tel. (0 37603) 54-0, info.wiesen@asklepios.com. Keine Zimmerart auf den Klinikseiten."
+  },
+  {
+    "id": "ck-haffkueste",
+    "phone": "038203 44-0",
+    "email": "kontakt.heiligendamm@median-kliniken.de",
+    "room": "einbett-mehrheit",
+    "source": "https://www.median-kliniken.de/de/klinik-heiligendamm/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "245 Einzelzimmer und zehn Doppelzimmer. Klinik-Mail im Impressum: kontakt.heiligendamm@median-kliniken.de. Reservierung auch bettenplanung-hld@median-kliniken.de."
+  },
+  {
+    "id": "ck-isargrund",
+    "phone": "06094 9715-113",
+    "email": "elke.basser@hephata.de",
+    "room": "unbekannt",
+    "source": "https://www.hephata.de/standort/fachklinik-weibersbrunn",
+    "note": "„Die Fachklinik Weibersbrunn verfügt über 20 Einzelzimmer und 20 Zweibettzimmer.“ Keine Mehrheit. Tel./Mail der Klinikleitung Elke Basser auf der Standortseite."
+  },
+  {
+    "id": "ck-spreeaue",
+    "phone": "030 36503-0",
+    "email": "kontakt.berlin-kladow@median-kliniken.de",
+    "room": "unbekannt",
+    "source": "https://www.median-kliniken.de/de/klinik-berlin-kladow/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "„Unsere Patienten wohnen in behaglichen Einzel- oder Doppelzimmern.“ Premium-Station erwähnt Einzelzimmer, keine Haus-Regel."
+  },
+  {
+    "id": "ck-teutoburg",
+    "phone": "05241 502-0",
+    "email": "info@lwl-klinik-guetersloh.de",
+    "room": "unbekannt",
+    "source": "https://www.lwl-klinikum-guetersloh.de/de/",
+    "note": "Klinikum-Kontakt Tel. 05241 502-0, info@lwl-klinik-guetersloh.de. Zimmerseite nennt Einzel-, Doppel- und wenige Drei-Bett-Zimmer für das ganze Klinikum, nicht spezifisch Bernhard-Salzmann-Klinik."
+  },
+  {
+    "id": "ck-mainbogen",
+    "phone": "09228 9968-0",
+    "email": "info-immanuel@dgd-stiftung.de",
+    "room": "einbett",
+    "source": "https://www.haus-immanuel.de/ihr-aufenthalt-bei-uns/zimmer-verpfel",
+    "note": "Kontakt: Telefon 09228 / 99 68-0. „…bewohnen unsere Patientinnen großzügige und moderne Einzelzimmer…“"
+  },
+  {
+    "id": "ck-alsterufer",
+    "phone": "040 2092-0",
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.schoen-klinik.de/hamburg-eilbek/kontakt",
+    "note": "Nur Telefon und Kontaktformular; keine Klinik-E-Mail und keine Zimmerregel auf den offiziellen Seiten."
+  },
+  {
+    "id": "ck-muenchwies",
+    "phone": "06858 691-0",
+    "email": "muenchwies-kontakt@median-kliniken.de",
+    "room": "zweibett",
+    "source": "https://www.median-kliniken.de/de/klinik-muenchwies/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Abhängigkeitsabteilung: Doppelzimmer. Psychosomatik: Einzelzimmer. Diese Klinik ist als Sucht geführt. Mail aus Impressum."
+  },
+  {
+    "id": "ck-berus",
+    "phone": "06836 39-0",
+    "email": "berus-kontakt@median-kliniken.de",
+    "room": "einbett",
+    "source": "https://www.median-kliniken.de/de/klinik-berus-rehabilitation/",
+    "note": "Angegebene URL /de/klinik-berus/ ist 404; Nachfolger /de/klinik-berus-rehabilitation/. „Ihre Unterbringung erfolgt in Einzelzimmern“; akut 10 Einbett- und 12 Zweibettzimmer."
+  },
+  {
+    "id": "ck-roseneck",
+    "phone": "08051 68-0",
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.schoen-klinik.de/roseneck/kontakt",
+    "note": "Nur Telefon/Formular. FAQ erwähnt Doppel- oder Mehrbettzimmer bei Besuch, ohne Haus-Regel."
+  },
+  {
+    "id": "ck-heiligenfeld",
+    "phone": "0971 84-0",
+    "email": "info@heiligenfeld.de",
+    "room": "unbekannt",
+    "source": "https://www.heiligenfeld.de/kliniken/fachklinik-heiligenfeld-bad-kissingen",
+    "note": "Telefon 0971 84-0, info@heiligenfeld.de. Einzelzimmer nur in Patientenstimme, keine offizielle Zimmerregel."
+  },
+  {
+    "id": "ck-glotterbad",
+    "phone": "07684 809-0",
+    "email": "info@rehaklinik-glotterbad.de",
+    "room": "einbett",
+    "source": "https://www.rehaklinik-glotterbad.de/faq",
+    "note": "FAQ: „Die Zimmerbelegung erfolgt in Einzelzimmer mit Dusche/WC … Für Paare gerne auch in Doppelzimmer.“ Kontakt/Impressum: Tel. 07684 809-0."
+  },
+  {
+    "id": "ck-furth",
+    "phone": "09973 502-0",
+    "email": "info.furth@johannesbad.com",
+    "room": "unbekannt",
+    "source": "https://www.johannesbad-medizin.com/furth-im-wald/service/kontakt-anfahrt",
+    "note": "johannesbad.de leitet auf johannesbad.com. Zimmerseite: Einzel- und Doppelzimmer, keine Mehrheit."
+  },
+  {
+    "id": "ck-seehof",
+    "phone": "03328 345-0",
+    "email": "reha-klinik.seehof@drv-bund.de",
+    "room": "einbett",
+    "source": "https://www.reha-klinik-seehof.de/klinik/seehof/startseite",
+    "note": "FAQ: „Habe ich ein Einzelzimmer? Selbstverständlich. Die verfügbaren Doppelzimmer sind … für Begleitperson vorgesehen.“"
+  },
+  {
+    "id": "ck-tannenhof",
+    "phone": "030 864946-0",
+    "email": "zentrale@tannenhof.de",
+    "room": "unbekannt",
+    "source": "https://www.tannenhof.de/kontakt/impressum/",
+    "note": "Standort Birkenwerder/Summter Straße steht nicht in der aktuellen Einrichtungsliste. Veröffentlicht: Zentrale Wexstraße 2, 030 86 49 46-0. Platzhalter 030 123 456 789 nicht verwendet."
+  },
+  {
+    "id": "ck-oldenfelde",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.therapiehilfe.de/alle-standorte/",
+    "note": "Standort „Oldenfelder Tannen“ / Am Stadtrand 70 auf der offiziellen Trägerseite nicht veröffentlicht."
+  },
+  {
+    "id": "ck-borkum",
+    "phone": "04922 302-0",
+    "email": "reha-klinik.borkumriff@drv-bund.de",
+    "room": "einbett",
+    "source": "https://www.reha-klinik-borkum-riff.de/klinik/borkum_riff/startseite",
+    "note": "„Rehabilitandinnen und Rehabilitanden sind in unserer Klinik grundsätzlich in Einzelzimmern untergebracht.“"
+  },
+  {
+    "id": "ck-erlengrund",
+    "phone": "05341 300-40",
+    "email": "fachklinik@lukas-werk.de",
+    "room": "einbett-mehrheit",
+    "source": "https://www.lukas-werk.de/sucht/behandlung-therapie/stationaere-behandlung",
+    "note": "fachklinik-erlengrund.de leitet auf lukas-werk.de. 54 Einzel- und sechs Doppelzimmer (66 Plätze)."
+  },
+  {
+    "id": "ck-sonnenberg",
+    "phone": "0611 571-0",
+    "email": "kontakt.sonnenberg@median-kliniken.de",
+    "room": "einbett",
+    "source": "https://www.median-kliniken.de/de/reha-zentrum-wiesbaden-sonnenberg/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "„Unsere Patientinnen und Patienten wohnen in einem modernen Einzelzimmer.“ Mail aus Impressum."
+  },
+  {
+    "id": "ck-nauheim",
+    "phone": "06032 9917-0",
+    "email": "mail@salus-bad-nauheim.de",
+    "room": "unbekannt",
+    "source": "https://www.salus-kliniken.de/bad-nauheim/impressum-bad-nauheim/",
+    "note": "Impressum: Tel. (0 60 32) 99 17-0, mail@salus-bad-nauheim.de. Koordination auch kontakt@salus-bad-nauheim.de. Keine Zimmerregel gefunden."
+  },
+  {
+    "id": "ck-richelsdorf",
+    "phone": "06626 9222-0",
+    "email": "richelsdorf-kontakt@median-kliniken.de",
+    "room": "zweibett",
+    "source": "https://www.median-kliniken.de/de/klinik-richelsdorf/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Zimmer „verfügen als Zweibettzimmer über Dusche, WC … Einzelzimmer stehen in einer begrenzten Anzahl zur Verfügung.“"
+  },
+  {
+    "id": "ck-waren",
+    "phone": "03991 635-0",
+    "email": "waren-kontakt@median-kliniken.de",
+    "room": "einbett",
+    "source": "https://www.median-kliniken.de/de/ahg-klinik-waren/",
+    "note": "ahg.de Timeout. Offizielle MEDIAN-Seite: 200 Behandlungsplätze in Einzelzimmern. „Sie wohnen komfortabel in einem Einzelzimmer.“"
+  },
+  {
+    "id": "ck-driburg",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.ahg.de",
+    "note": "Offizielle Domain ahg.de Timeout. Keine Klinikseite AHG/MEDIAN Bad Driburg Kaiserallee auf median-kliniken.de gefunden. Nicht mit Knappschafts-Klinik Bad Driburg verwechselt."
+  },
+  {
+    "id": "ck-holthausen",
+    "phone": "02974 778-0",
+    "email": "info.hm@johannesbad.com",
+    "room": "unbekannt",
+    "source": "https://www.johannesbad-medizin.com/bad-fredeburg-holthauser-muehle/service/kontakt-anfahrt",
+    "note": "Johannesbad Fachklinik Holthauser Mühle, Mittelstraße 1, 57392 Schmallenberg (nicht Hattingen). Keine Zimmerregel auf der Kontaktseite."
+  },
+  {
+    "id": "ck-ratingen",
+    "phone": "02102 443300",
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.suchthilfe-duesseldorf.de/kontakt",
+    "note": "Tel. +49 2102 443300 auf der Trägerseite. Keine E-Mail und keine Zimmerregel veröffentlicht."
+  },
+  {
+    "id": "ck-fredeburg",
+    "phone": "02974 73-0",
+    "email": "info.hsl@johannesbad.com",
+    "room": "unbekannt",
+    "source": "https://www.johannesbad-medizin.com/bad-fredeburg-psychosomatik",
+    "note": "Psychosomatik = Johannesbad Fachklinik Hochsauerland, Zu den Drei Buchen 2. DSGVO-Liste johannesbad.com: Tel. +49 2974 73-0, info.hsl@johannesbad.com. Keine Zimmerregel."
+  },
+  {
+    "id": "ck-thonberg",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.fachklinik-thonberg.de",
+    "note": "Domain löst nicht auf. Keine offizielle Nachfolgeseite der Sucht-Fachklinik Thonberg identifiziert (Thonbergklinik Notfallzentrum ist eine andere Einrichtung)."
+  },
+  {
+    "id": "ck-elbingerode",
+    "phone": "039454 8-2701",
+    "email": "reha.sekretariat@diako-harz.de",
+    "room": "zweibett",
+    "source": "https://www.diako-harz.de/fachgebiete-leistungen/rehaklinik-sucht",
+    "note": "fachklinik-elbingerode.de löst nicht auf. Offiziell Diakonie-Krankenhaus Harz. „Die Unterbringung erfolgt überwiegend in Zweibettzimmern … bei entsprechender Indikation sind auch Einzelzimmer möglich.“ Zentrale 039454 / 8 20 00, info@diako-harz.de."
+  },
+  {
+    "id": "ck-bramstedt",
+    "phone": "04192 504-7600",
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.schoen-klinik.de/bad-bramstedt/kontakt",
+    "note": "Kontaktseite Tel. +49 4192 504-7600. Keine E-Mail, keine Zimmerregel."
+  },
+  {
+    "id": "ck-salza",
+    "phone": "03603 803-0",
+    "email": "info@rehaklinik-badlangensalza.de",
+    "room": "einbett-mehrheit",
+    "source": "https://www.celenus-kliniken.de/salza/kontakt/",
+    "note": "Klinikseite: Tel. 03603 803-0. Offizieller Klinikflyer auf celenus-kliniken.de: 198 Einzel- und 4 Doppelzimmer."
+  },
+  {
+    "id": "ck-burgklinik",
+    "phone": "036965 68-0",
+    "email": "info.burg-klinik@dbkg.de",
+    "room": "einbett",
+    "source": "https://dbkg.de/kliniken/dr-becker-burg-klinik/impressum",
+    "note": "Zentrale Tel. (03 69 65) 68-0. Offizielles FAQ-PDF: „Alle Patient:innen werden in Einzelzimmern … untergebracht.“ „Doppelzimmer stehen leider nicht zur Verfügung.“"
+  },
+  {
+    "id": "ck-motzen",
+    "phone": "033769 86-0",
+    "email": "info@fontane-klinik.de",
+    "room": "unbekannt",
+    "source": "https://www.fontane-klinik.de/kontakt.html",
+    "note": "Telefon 03 37 69.86-0. FAQ erwähnt 2 Einzelzimmer nur für Hundemitnahme, keine allgemeine Zimmerregel."
+  },
+  {
+    "id": "ck-vitus",
+    "phone": "04445 899-0",
+    "email": "info@sucht-fachkliniken.de",
+    "room": "zweibett",
+    "source": "https://www.sucht-fachkliniken.de/vitus/kontakt/",
+    "note": "fachklinik-st-vitus.de löst nicht auf. Offiziell sucht-fachkliniken.de/vitus. A–Z: 2-Bett- und 1-Bettzimmer; Einzelzimmer nicht vorab reservierbar, nur nach Indikation im Verlauf."
+  },
+  {
+    "id": "ck-udersleben",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "source": "https://www.salus-kliniken.de",
+    "note": "Klinik Udersleben auf der aktuellen salus-kliniken.de-Präsenz nicht veröffentlicht."
+  },
+  {
+    "id": "ck-hainberg",
+    "phone": "06621 173-0",
+    "email": "info@klinik-am-hainberg.de",
+    "room": "einbett",
+    "source": "https://www.klinik-am-hainberg.de/ueberblick/ausstattung/ausstattung.html",
+    "note": "„Jedes unserer Einzelzimmer ist modern und komfortabel eingerichtet.“ E-Mail aus Impressum."
+  },
+  {
+    "id": "ck-flechtingen",
+    "phone": "039054 82-0",
+    "email": "kontakt.flechtingen@median-kliniken.de",
+    "room": "unbekannt",
+    "source": "https://www.median-kliniken.de/de/klinik-flechtingen/",
+    "note": "FAQ-Zimmerangaben nur Pneumologie/Kardiologie (Einzel) und Neurologie (vereinzelt Doppel), nicht für Psychosomatik."
+  }
+]

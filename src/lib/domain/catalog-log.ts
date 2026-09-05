@@ -17,12 +17,13 @@ function pad(n: number): string {
   return String(n).padStart(2, "0");
 }
 
-/** Per-house official catalog log. No invented later edits — the 50 houses were admitted on 2026-09-01. */
+/** Per-house official catalog log. Core 50: 2026-09-01. Erweiterung: 2026-09-05. */
 export const CATALOG_LOG: CatalogLogEntry[] = HOUSES.map((house) => {
-  const minute = Math.max(0, house.sortOrder - 1);
+  const isNew = house.sortOrder > 50;
+  const ymd = isNew ? "2026-09-05" : "2026-09-01";
+  const minute = isNew ? house.sortOrder - 51 : Math.max(0, house.sortOrder - 1);
   const hour = 8 + Math.floor(minute / 60);
   const min = minute % 60;
-  const ymd = "2026-09-01";
   return {
     at: `${ymd}T${pad(hour)}:${pad(min)}:00+02:00`,
     ymd,

@@ -1,0 +1,20 @@
+[
+  {
+    "id": "ck-klosterwald",
+    "phone": null,
+    "email": "info@fachklinik-klosterwald.de",
+    "source": "https://fachklinik-klosterwald.de/impressum/"
+  },
+  {
+    "id": "ck-aggerblick",
+    "phone": "02206 95 22 0 ",
+    "email": "aggerblick@drogenhilfe.koeln",
+    "source": "https://www.fachklinik-aggerblick.de/"
+  },
+  {
+    "id": "ck-kamillushaus",
+    "phone": null,
+    "email": null,
+    "source": "https://www.kamillushaus.de/"
+  }
+]

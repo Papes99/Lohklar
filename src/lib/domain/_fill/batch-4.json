@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ck-vitrea-wiehengebirge",
+    "phone": "05472 405-0",
+    "email": "info.wiehengebirgsklinik-bad-essen@vitrea.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/9/4/csm_2020_LuftaufnahmeWHGK-1350x900%402x_3c90f74a68.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/vitrea-wiehengebirgsklinik-bad-essen/unsere-klinik/impressum/",
+    "note": "Alte Paracelsus-URL leitet auf VITREA. Impressum: Tel 05472 405-0, Mail info.wiehengebirgsklinik-bad-essen@vitrea.de. Aufenthalt: Unterbringung in modernen Doppelzimmern."
+  },
+  {
+    "id": "ck-weihersmuehle",
+    "phone": "09105 9944-0",
+    "email": "fachklinik.weihersmuehle@deutscher-orden.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.suchthilfe-nuernberg.de/fileadmin/_processed_/2/e/csm_Suchthilfe_Nuernberg_Klinik_Fixed-Image_864ca0688c.jpg",
+    "source": "https://www.suchthilfe-nuernberg.de/kontakt",
+    "note": "Kontakt: Tel +49 9105 9944-0, Mail fachklinik.weihersmuehle@deutscher-orden.de. Unsere Klinik: helle Ein- und Zweibettzimmer, Mehrheit nicht genannt."
+  },
+  {
+    "id": "ck-willich",
+    "phone": "02154 41330",
+    "email": "willich-kontakt@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/therapiezentrum-haus-willich/",
+    "note": "Footer/Kontakt: +49 2154 41330, Mail willich-kontakt@median-kliniken.de. Besondere Wohnform: Assistenz, keine Zimmerart genannt."
+  },
+  {
+    "id": "ck-wuermtal",
+    "phone": "089 8989 133-6",
+    "email": "wuermtalklinik@deutscher-orden.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.suchtklinik-muenchen.de/fileadmin/_processed_/7/f/csm_Ordenswerke_Suchtklinik_Muenchen_Wuermtalklinik_Aussenansicht_b3be4e8b3c.jpg",
+    "source": "https://www.suchtklinik-muenchen.de/kontakt",
+    "note": "ordenswerke.de ist Trägerseite ohne Klinikkontakt. Klinikseite suchtklinik-muenchen.de: Tel +49 89 8989 133-6, Mail wuermtalklinik@deutscher-orden.de. Ein- und Zweibettzimmer, Mehrheit nicht genannt."
+  },
+  {
+    "id": "ck-alpenblick",
+    "phone": "07562 71-1411",
+    "email": "info@klinik-alpenblick.de",
+    "room": "einbett",
+    "photoUrl": "https://www.wz-kliniken.de/fileadmin/_processed_/c/9/csm_AB_Luftaufnahme_1064_94d7ac9c10.jpg",
+    "source": "https://www.wz-kliniken.de/klinik-alpenblick/",
+    "note": "Kontakt: +49 (0) 7562 71-1411, info@klinik-alpenblick.de. Startseite: jedes Einzelzimmer mit Bad. Patienteninfo-PDF der Klinik: 251 Einzelzimmer, Zweibett nur auf Wunsch bei Paaren."
+  },
+  {
+    "id": "ck-am-stein",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.klinik-am-stein.de/",
+    "note": "Offizielle URL leitet auf Johanniter Klinik am Stein Dortmund (ambulante Reha, Feldstraße 77). Das ist nicht das Olsberger Haus. Keine Olsberg-Kontakte auf der Seite übernommen."
+  },
+  {
+    "id": "ck-ameos-kuehlungsborn",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.ameos.eu/",
+    "note": "AMEOS-Gruppenseite listet kein Reha Klinikum Ostsee Kühlungsborn (Waldstraße 1). Nicht mit MEDIAN Klinik Kühlungsborn verwechselt."
+  },
+  {
+    "id": "ck-asklepios-bad-schwartau",
+    "phone": "0451 2004-0",
+    "email": "badschwartau@asklepios.com",
+    "room": "einbett",
+    "photoUrl": "https://www.asklepios.com/.imaging/mte/asklepios/introImageV2/dam/klinikbilder/bad-schwartau/Luftbildaufnahme_klinik_am_kurpark_bad_schwartau_1232x747.jpg/jcr:content/Luftbildaufnahme_klinik_am_kurpark_bad_schwartau_1232x747.jpg",
+    "source": "https://www.asklepios.com/bad-schwartau/unternehmen/impressum/",
+    "note": "Impressum: Tel. (0 451) 200 40, badschwartau@asklepios.com. Zimmerseite: freuen Sie sich auf Ihr Einzelzimmer."
+  },
+  {
+    "id": "ck-asklepios-fuerstenhof",
+    "phone": "05621 704-0",
+    "email": "fuerstenhof.badwildungen@asklepios.com",
+    "room": "unbekannt",
+    "photoUrl": "https://www.asklepios.com/.imaging/mte/asklepios/introImageV2/dam/klinikbilder/bad-wildungen/Aussenansichten-Kliniken/F-rstenhof.jpg/jcr:content/F%C3%BCrstenhof.jpg",
+    "source": "https://www.asklepios.com/bad-wildungen/fuerstenhof/unternehmen/impressum/",
+    "note": "Impressum: Tel. (0 56 21) 7 04 - 0, fuerstenhof.badwildungen@asklepios.com. Zimmerseite nennt Ausstattung, nicht Ein- vs. Zweibett."
+  },
+  {
+    "id": "ck-wiesengrund",
+    "phone": "07442 83786-0",
+    "email": "wiesengrund@bw-lv.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-wiesengrund/",
+    "note": "Klinikseite: Sekretariat 07442 83786-0, Mail als wiesengrund bw-lv de. Konzeption 2025 (PDF auf bw-lv.de): 26 Doppelzimmer und 2 Einzelzimmer; Flyer: 2er Zimmer mit Bad."
+  },
+  {
+    "id": "ck-aukrug",
+    "phone": "04873 9097-0",
+    "email": "info@rehazentrum-aukrug.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://rehazentrum-aukrug.de/impressum/",
+    "note": "Impressum/Kontakt: Tel. 04873 9097 0, info@rehazentrum-aukrug.de. Ausstattungsseite nennt Zimmer, nicht Ein- vs. Zweibett."
+  },
+  {
+    "id": "ck-bavaria-kreischa",
+    "phone": "035206 6-0",
+    "email": null,
+    "room": "einbett",
+    "photoUrl": "https://www.klinik-bavaria.de/fileadmin/_processed_/7/e/csm_Klinik-Bavaria-Kreischa-Panorama-Luftaufnahme_2500px_3eb538aefb.jpg",
+    "source": "https://www.klinik-bavaria.de/medizinische-bereiche/psychosomatik",
+    "note": "Impressum: Tel. 035206-6-0. E-Mail nur als stopspam-Hash, nicht lesbar. Psychosomatik: Unterbringung Klinik IV in renovierten Einzelzimmern."
+  },
+  {
+    "id": "ck-bergisch-land",
+    "phone": "0202 2463-01",
+    "email": "info.bergisch-land@vitrea-gesundheit.de",
+    "room": "einbett",
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/0/e/csm_VITREA_BergischLand_Klinik_Drohne2_37d42e2566.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/bergisch-land",
+    "note": "Startseite: Tel (0202) 2463-01, info.bergisch-land@vitrea-gesundheit.de; Aufnahme 0202 2463-2225. Klinikseite: 203 Einzelzimmer, Doppelzimmer für Begleitpersonen."
+  },
+  {
+    "id": "ck-berleburg",
+    "phone": "02751 88-10000",
+    "email": "RBBB-Aufnahme-Psychosomatik@vitrea-gesundheit.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.vitrea-gesundheit.de/reha/bad-berleburg/",
+    "note": "Impressum Zentrale 02751-88-10000. Psychosomatik-Aufnahme Tel. 02751/8872510, Mail RBBB-Aufnahme-Psychosomatik@vitrea-gesundheit.de. Zimmerseite Psychosomatik: Unterbringung in Einzelzimmern."
+  },
+  {
+    "id": "ck-berolina",
+    "phone": "05731 782-900",
+    "email": "service@berolinaklinik.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.berolinaklinik.de/kontakt-1",
+    "note": "Kontakt: T. 05731 782-900. Footer/Impressum Mail obfuscated als service … @ … berolinaklinik . de. Zimmerart auf den geprüften Seiten nicht genannt."
+  },
+  {
+    "id": "ck-celenus-carolabad",
+    "phone": "0371 8142-0",
+    "email": "klinik@carolabad.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.celenus-kliniken.de/carolabad/klinik/ausstattung/",
+    "note": "Footer/Kontakt: 0371-8142-0, Klinik@Carolabad.de. Ausstattung: 130 Patientenzimmer, die als Einzelzimmer belegt werden; Aufenthalt: ausschließlich Einzelzimmer."
+  },
+  {
+    "id": "ck-celenus-dekimed",
+    "phone": "037437 75-0",
+    "email": "info@dekimed.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/1/f/csm_2010_Dekimed_Klinik_aussen_1_0e54fb1ac5.jpg",
+    "source": "https://www.celenus-kliniken.de/dekimed/klinik/ausstattung/",
+    "note": "Kontakt: 037437-75-0, info@dekimed.de. Ausstattung: 200 Einzel- und 20 Doppelzimmer."
+  },
+  {
+    "id": "ck-celenus-freiburg",
+    "phone": "0761 88859-0",
+    "email": "info@fachklinik-freiburg.de",
+    "room": "einbett",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/1/1/csm_FF_Gebaeude_1353_66ba2d392d.jpg",
+    "source": "https://www.celenus-kliniken.de/freiburg/klinik/ausstattung/",
+    "note": "Kontakt: 0761-88859-0, info@fachklinik-freiburg.de. 119 Einzelzimmer; Zweibett nur bei Begleitperson nach Prüfung. Aufenthalt: ausschließlich Einzelzimmer."
+  },
+  {
+    "id": "ck-celenus-kinzigtal",
+    "phone": "07803 808-0",
+    "email": "info@klinik-kinzigtal.de",
+    "room": "einbett",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/e/3/csm_KK_Gebaeude_6387_37c089122b.jpg",
+    "source": "https://www.celenus-kliniken.de/kinzigtal/klinik/ausstattung/",
+    "note": "Kontakt: 07803-808-0, info@klinik-kinzigtal.de. 144 Einzelzimmer; Klinikseite: Unterbringung in einem Einzelzimmer."
+  },
+  {
+    "id": "ck-celenus-ortenau-add",
+    "phone": "07803 808-0",
+    "email": "info@klinik-ortenau.de",
+    "room": "einbett",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/f/a/csm_KK_Gebaeude_6404_f3deb740b3.jpg",
+    "source": "https://www.celenus-kliniken.de/ortenau/kontakt/",
+    "note": "Kontaktseite veröffentlicht Tel. 078 03 / 808-0 und info@klinik-ortenau.de (gemeinsame GmbH Gengenbach mit Kinzigtal). Ausstattung Ortenau: 88 Einzelzimmer."
+  },
+  {
+    "id": "ck-celenus-schoemberg",
+    "phone": "07084 50-0",
+    "email": "info@klinik-schoemberg.de",
+    "room": "einbett",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/5/5/csm_KS_Gebaeude_7198_d96ed0708b.jpg",
+    "source": "https://www.celenus-kliniken.de/schoemberg/klinik/ausstattung/",
+    "note": "Kontakt: 07084-50-0, info@klinik-schoemberg.de. Alle Patienten in Einzelzimmern; Aufenthalt: ausschließlich Einzelzimmer."
+  },
+  {
+    "id": "ck-celenus-schweizerwiese",
+    "phone": "07083 7439-0",
+    "email": "info@fachklinik-schweizerwiese.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.celenus-kliniken.de/schweizerwiese/klinik/ausstattung/",
+    "note": "Kontakt: 07083 7439-0, info@fachklinik-schweizerwiese.de. 115 Einzelzimmer plus 15 behindertengerechte Zimmer."
+  },
+  {
+    "id": "ck-db-brunnen",
+    "phone": "05234 906-900",
+    "email": "info.brunnen-klinik@dbkg.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://dbkg.de/kliniken/dr-becker-brunnen-klinik/kontakt",
+    "note": "Kontaktseite: Aufnahme Tel. (0 52 34) 9 06-9 00, info.brunnen-klinik@dbkg.de. Kurzprofil/FAQ: komfortable Einzelzimmer / alle Patient:innen in Einzelzimmern."
+  },
+  {
+    "id": "ck-db-juliana",
+    "phone": "0202 28159-1104",
+    "email": "aufnahme.klinik-juliana@dbkg.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://dbkg.de/kliniken/dr-becker-klinik-juliana/kontakt",
+    "note": "Kontaktseite: Tel. (02 02) 2 81 59-11 04, aufnahme.klinik-juliana@dbkg.de. Kurzprofil/FAQ: alle Zimmer sind Einzelzimmer."
+  },
+  {
+    "id": "ck-db-moehnesee",
+    "phone": "02924 800-0",
+    "email": "info.klinik-moehnesee@dbkg.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://dbkg.de/kliniken/dr-becker-klinik-mohnesee/kontakt",
+    "note": "Kontakt: Rezeption Tel. (0 29 24) 8 00-0, info.klinik-moehnesee@dbkg.de. FAQ/Flyer auf dbkg.de: alle Patient:innen in Einzelzimmern / 230 Betten Einzelzimmer."
+  }
+]

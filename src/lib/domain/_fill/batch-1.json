@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ck-achertal",
+    "phone": "07842 949-0",
+    "email": "kontakt.achertal@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/achertal-klinik-ottenhoefen/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/achertal-klinik-ottenhoefen/",
+    "note": "Klinikkontakt +49 7842 949-0, mailto kontakt.achertal@median-kliniken.de. Zimmerart nicht veröffentlicht (nur Wahlleistung komfortableres Zimmer)."
+  },
+  {
+    "id": "ck-aggerblick",
+    "phone": "02206 95 22 0",
+    "email": "aggerblick@drogenhilfe.koeln",
+    "room": "unbekannt",
+    "photoUrl": "https://www.drogenhilfe.koeln/wp-content/uploads/2026/05/Fachklinik-scaled.jpg",
+    "source": "https://www.drogenhilfe.koeln/einrichtungen/fachklinik-aggerblick/",
+    "note": "Offizielle Domain fachklinik-aggerblick.de leitet auf Drogenhilfe Köln. Tel. 02206 95 22 0, Aufnahme 02206 95 22 12. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-alpenland",
+    "phone": "08061 28142-0",
+    "email": "alpenland@deutscher-orden.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": null,
+    "source": "https://www.rosenheim-suchthilfe.de/",
+    "note": "66 Einbett- sowie zehn Doppel- bzw. behindertengerechte Zimmer. Zentrale +49 8061 28142-0, Aufnahme +49 8061 28142-120, eric.hartmann@deutscher-orden.de. Standort auf der Klinikseite: Rosenheimer Str. 61, 83043 Bad Aibling."
+  },
+  {
+    "id": "ck-altenkirchen",
+    "phone": "02681 943-0",
+    "email": "info@fachklinik-altenkirchen.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://fachklinik-altenkirchen.de/impressum/",
+    "note": "Startseite im Wartungsmodus (SeedProd). Telefon und E-Mail stehen im Impressum-HTML. Zimmerart auf der live geschalteten Seite nicht veröffentlicht."
+  },
+  {
+    "id": "ck-altenpost",
+    "phone": "07447 9465-0",
+    "email": "zur.alten.post@t-online.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.fachklinik-zur-alten-post.de/images/klinik_front.jpg",
+    "source": "https://www.fachklinik-zur-alten-post.de/",
+    "note": "Betrieb zum 31.03.2023 eingestellt. Telefon und cloaked E-Mail weiter auf der Startseite. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-annenhof",
+    "phone": "05233 9596-0",
+    "email": "info.ahk@medizinisches-zentrum.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.medizinisches-zentrum.de/fileadmin/_processed_/7/1/csm_Aussenansicht_72989b3c07.png",
+    "source": "https://www.medizinisches-zentrum.de/einrichtungen/klinik-am-park/annenhofklinik/",
+    "note": "annenhofklinik.de leitet auf MZG. Unterbringung in der Regel in Zweibettzimmern, Einzelzimmer je nach medizinischer Indikation. Tel. 0 52 33 95 96 0."
+  },
+  {
+    "id": "ck-boeddiger",
+    "phone": "05662 9480-0",
+    "email": "infoboeddigerberg@drogenhilfe.com",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.fachklinik-boeddigerberg.de/index.php/home.html",
+    "note": "Trägerseite drogenhilfe.com verweist auf die Klinikdomain. Tel. (0 56 62) 94 80-0. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-bornheim-schloss",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.suchthilfeverbund.de/",
+    "note": "Gelistete Domain leitet auf suchthilfe-spessart.de (andere Einrichtung). Keine belegten Kontakte/Zimmer für Schloss Bornheim auf der Zielseite; Haus laut öffentlicher Trägerhistorie 2018 geschlossen. Nicht übernommen."
+  },
+  {
+    "id": "ck-bruderhilfe",
+    "phone": "0201 85688-120",
+    "email": "thomas.kilian@csuw-essen.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.csuw-essen.de/",
+    "note": "csw-essen.de löst nicht auf. haus-bruderhilfe.net leitet auf csuw-essen.de; CSUW hat ab 1.1.2026 die Rolle von Haus Bruderhilfe übernommen. tel:020185688120, mailto thomas.kilian@csuw-essen.de. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-bussmannshof",
+    "phone": "02327 9754-0",
+    "email": "bussmannshof@gmx.de",
+    "room": "einbett",
+    "photoUrl": "https://fachklinik-bussmannshof.de/wp-content/uploads/2023/11/bussmannshof-gelaende1.jpg",
+    "source": "https://fachklinik-bussmannshof.de/klinik/",
+    "note": "Ausschließlich Einzelzimmer. Zentrale 02327 9754-0, Aufnahme kordula.schadwell@bussmannshof.de / (0 23 27) 97 54-24."
+  },
+  {
+    "id": "ck-doerenhof",
+    "phone": "05265 6439",
+    "email": "andrea.dalpke@bethel.de",
+    "room": "einbett",
+    "photoUrl": "https://www.bethel-regional.de/assets/images/7/Br_Region%206_Gut%20D%C3%B6renhof_D%C3%B6rentrup_Hof-cnzxs77vxy6gnwb.jpg",
+    "source": "https://www.bethel-regional.de/angebote-details/gut-dorenhof.html",
+    "note": "gut-doerenhof.de ist bot-geschützt. Trägerseite: 24 Einzelzimmer, Tel. 05265 6439, Bereichsleitung Andrea Dalpke."
+  },
+  {
+    "id": "ck-eichelsdorf",
+    "phone": "09523 9520-17",
+    "email": "eichelsdorf@bw-lv.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-schloss-eichelsdorf/",
+    "note": "Aufnahmenabteilung 09523-9520-17, allgemein 09523 9520-0, Mail als 'eichelsdorf bw-lv de'. Unterbringung in Einzel- und Doppelzimmern, Paar- und Familienzimmer möglich; keine Mehrheit veröffentlicht."
+  },
+  {
+    "id": "ck-eschenberg",
+    "phone": "02242 9498-0",
+    "email": "info@reha-ewk.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.reha-ewk.de/kontakt/",
+    "note": "Zentrale 02242 9498 0, info@reha-ewk.de, Aufnahme patientenaufnahme@reha-ewk.de. Zimmerseite nennt Ausstattung (Dusche/WC, Balkon), nicht die Bettzahl."
+  },
+  {
+    "id": "ck-eschenburg",
+    "phone": "02774 9134-0",
+    "email": "kontakt.eschenburg@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-eschenburg/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-eschenburg/",
+    "note": "Klinikkontakt +49 2774 9134-0. Zimmer als barrierearm/vollausgestattet beschrieben, Bettzahl nicht veröffentlicht."
+  },
+  {
+    "id": "ck-fachklinik-meckenheim",
+    "phone": "02225 9222-0",
+    "email": "fachklinik@vfg-bonn.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.vfg-bonn.de/fachklinik/wp-content/uploads/DSC5032-450x299.jpg",
+    "source": "https://www.vfg-bonn.de/fachklinik/unser-haus/",
+    "note": "fachklinik-meckenheim.de ist die Klinikseite (VFG). Tel. 0 22 25 - 92 22 0. Unterbringung in Einzel- und Doppelzimmern, Mehrheit nicht angegeben."
+  },
+  {
+    "id": "ck-foursteps",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.vfj-bb.de/",
+    "note": "HTTPS nur Apache-Default. HTTP leitet auf mevesta.de (Nachfolge Verein für Jugendhilfe). Four Steps dort nicht genannt; Einrichtung 2017 geschlossen. Keine belegten Klinikdaten."
+  },
+  {
+    "id": "ck-freiolsheim",
+    "phone": "07204 9204-0",
+    "email": "rehaklinik-freiolsheim@agj-freiburg.de",
+    "room": "unbekannt",
+    "photoUrl": "https://agj-fachklinik-freiolsheim.de/wp-content/uploads/2023/12/AGJ_Fachklinik_Freiolsheim-1024x165.jpg",
+    "source": "https://agj-fachklinik-freiolsheim.de/unsere-einrichtung/klinikaufenthalt/",
+    "note": "Kontakt auch im AGJ-Verzeichnis (agj-freiburg.de). Telefon 07204 9204-0 / Reha-Support 07204 9204-27. Einzel- oder Doppelzimmer, Mehrheit nicht angegeben."
+  },
+  {
+    "id": "ck-friedrichshof",
+    "phone": "07130 4733-0",
+    "email": "friedrichshof@bw-lv.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-friedrichshof/",
+    "note": "Allgemein 07130 4733 0 / friedrichshof bw-lv de; Aufnahme 07130 4733 47, aufnahme.friedrichshof@bw-lv.de. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-germerode",
+    "phone": "05657 7404",
+    "email": "hausgermerode@t-online.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.hausgermerode.de/kontakt.html",
+    "note": "Fachklinik Tel. 05657 7404 und 05657 913390. Zimmerart auf Start/Angebot/Besonderheiten/Kontakt nicht veröffentlicht."
+  },
+  {
+    "id": "ck-grafrath",
+    "phone": "08144 9317-3",
+    "email": "grafrath@deutscher-orden.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.muenchen-suchthilfe.de/",
+    "note": "ordenswerke.de listet die Klinik; Klinikdomain muenchen-suchthilfe.de. Tel. +49 8144 9317-3, Aufnahme +49 8144 9317-47 / aufnahme.grafrath@deutscher-orden.de. 'Helle Zweibettzimmer', Einzelzimmer nicht erwähnt. Adresse dort Bahnhofstraße 61."
+  },
+  {
+    "id": "ck-haseems",
+    "phone": "05961 2002-0",
+    "email": "info@fk-hase-ems.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.caritas-os.de/crt-caritas-reha-und-teilhabe-gmbh/fachklinik-hase-ems/kontakt/kontakt",
+    "note": "fachklinik-hase-ems.de (HTTP) leitet auf caritas-os.de. Telefon 05961 20020 / 05961 2002-0. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-heidehof",
+    "phone": "035243 43-111",
+    "email": "info@fk-heidehof.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://diakoniestiftung-sachsen.de/path/app/?qs_page=C78C0DC5F685E2F265422D64A795AC3D57FB33F2&shortlink=heidehof",
+    "note": "fk-heidehof.de leitet auf Diakoniestiftung Sachsen. Zentrale +49 35243 43-111. Nach der Aufnahmephase Zweibettzimmer mit Dusche/WC."
+  },
+  {
+    "id": "ck-heimathof",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.heimathof-ruhr.de/",
+    "note": "Gelistete Domain löst nicht auf. Keine offizielle Klinikseite erreichbar; nicht aus Trägerdrittseiten übernommen."
+  },
+  {
+    "id": "ck-heimathof-ge",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.heimathof-ruhr.de/",
+    "note": "Dieselbe tote Domain wie ck-heimathof. Keine belegten Kontakte/Zimmer auf erreichbarer offizieller Klinikseite."
+  },
+  {
+    "id": "ck-hirtenstein",
+    "phone": "08326 311-0",
+    "email": "fachklinik.hirtenstein@deutscher-orden.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.suchthilfe-allgaeu.de/unsere-klinik/",
+    "note": "Tel. +49 8326 311-0. 'Die Fachklinik verfügt über Zweibettzimmer.' Kontaktseite: fachklinik.hirtenstein@deutscher-orden.de."
+  }
+]

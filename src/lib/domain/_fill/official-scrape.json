@@ -1,0 +1,2252 @@
+[
+  {
+    "id": "ck-rosenhoehe",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.reha-bad-mergentheim.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-elbmarsch",
+    "phone": "02233 / 8081 - 0",
+    "email": "mail@salus-huerth.de",
+    "room": null,
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/4/4/csm_Luftbild_e1d4ea4264.jpg",
+    "source": "https://www.salus-kliniken.de/huerth-frauen/ueber-uns/zimmer-und-ausstattung/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-nordlicht",
+    "phone": "04342 789 112",
+    "email": "fachklinik@landesverein.de",
+    "room": null,
+    "photoUrl": "https://landesverein.de/fileadmin/_processed_/6/5/csm_Landesverein-Website-Startseite-Fullsize-Banner-Slider-01_6b1801a0c5.jpg",
+    "source": "https://landesverein.de/teilhabe/wohnen-und-foerdern/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-weserblick",
+    "phone": "05731 865-2816",
+    "email": "kontakt.klinikampark@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-am-park-bad-oeynhausen/bilder/Header_Krafttraining.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-am-park-bad-oeynhausen/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-auwald",
+    "phone": "07193 52-0",
+    "email": "wilhelmsheim-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-wilhelmsheim/bilder/Header_Zusammenarbeit.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-wilhelmsheim/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bergstrasse",
+    "phone": "06251 10 20",
+    "email": "c.helmes@caritas-darmstadt.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.klinik-falkenhof.de/cms/contents/klinik-falkenhof.de/medien/bilder/adaption/einzelzimmer-2026/einzelzimmer_-_web_v2.jpg",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-eifelhoehe",
+    "phone": "065922010",
+    "email": "daun-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/rehazentrum-daun-thommener-hoehe/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/rehazentrum-daun-thommener-hoehe/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-haffkueste",
+    "phone": "038203 44-0",
+    "email": "bettenplanung-hld@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-heiligendamm/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-heiligendamm/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-lichtblick",
+    "phone": "0 37 603 54-0",
+    "email": "medizinproduktesicherheit.harburg@asklepios.com",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.asklepios.com/wiesen",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-isargrund",
+    "phone": "06094 9715 113",
+    "email": "elke.basser@hephata.de",
+    "room": null,
+    "photoUrl": "https://www.hephata.de/fileadmin/_processed_/6/b/csm_header-hilfe-und-ratsuchende_537448820f.jpg",
+    "source": "https://www.hephata.de/sucht/betreutes-wohnen/haus-bickenbach",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-spreeaue",
+    "phone": "030 365030",
+    "email": "kontakt.berlin-kladow@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-berlin-kladow/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-berlin-kladow/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-eusserthal",
+    "phone": "06345 20-0",
+    "email": "fachklinik-eusserthal@drv-rlp.de",
+    "room": "einbett",
+    "photoUrl": "https://www.fachklinik-eusserthal.de/SharedDocs/Bilder/klinik/eussertal/startseite_1440x600px.jpg?__blob=poster&amp;v=4",
+    "source": "https://www.fachklinik-eusserthal.de/klinik/eussertal/startseite",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-rothaar",
+    "phone": "02961 9810",
+    "email": "info@reha-kbw.de",
+    "room": null,
+    "photoUrl": "https://www.reha-kbw.de/fileadmin/_processed_/6/7/csm_iStock-682196798_4ade36330f.jpg",
+    "source": "https://www.reha-kbw.de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mainbogen",
+    "phone": "09228-9968-0",
+    "email": "info@amedick-sommer.de",
+    "room": null,
+    "photoUrl": "https://www.haus-immanuel.de/fileadmin/_processed_/f/5/csm_Titelfoto_Startseite___AdobeStock_267638447_e7ec6c4ca2.webp",
+    "source": "https://www.haus-immanuel.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-muenchwies",
+    "phone": "068586910",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-muenchwies/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-muenchwies/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-alsterufer",
+    "phone": "040 2092-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.schoen-klinik.de/Sortiert/%C3%9Cber%20uns/image-thumb__3380__m-stage-slider/eil_header_index_20474.jpg",
+    "source": "https://www.schoen-klinik.de/hamburg-eilbek/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-berus",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-berus/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-roseneck",
+    "phone": "08051 68-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.schoen-klinik.de/Sortiert/%C3%9Cber%20uns/image-thumb__3384__m-stage-slider/ros_header_index_20509.jpg",
+    "source": "https://www.schoen-klinik.de/roseneck/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-glotterbad",
+    "phone": "07684 809–0",
+    "email": "info@rehaklinik-glotterbad.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.rehaklinik-glotterbad.de/fileadmin/_processed_/8/d/csm_GLO_T1A3593_9d486f985f.jpg",
+    "source": "https://www.rehaklinik-glotterbad.de/allgemeine-infos/klinikaufenthalt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-tannenhof",
+    "phone": "030 123 456 789",
+    "email": "zentrale@tannenhof.de",
+    "room": null,
+    "photoUrl": "https://www.tannenhof.de/fileadmin/_processed_/b/2/csm_instagram_2x_d9adfc3d54.png",
+    "source": "https://www.tannenhof.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-landelin",
+    "phone": "0761 21807-0",
+    "email": "info@agj-freiburg.de",
+    "room": null,
+    "photoUrl": "https://agj-fachklinik-st-landelin.de/wp-content/uploads/2024/10/freepik-30-1-732x1024.jpg",
+    "source": "https://agj-fachklinik-st-landelin.de/aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-seewiesen",
+    "phone": "08158 24-0",
+    "email": "information@hoehenried.de",
+    "room": null,
+    "photoUrl": "https://hoehenried.de/wp-content/uploads/2024/03/Header_Startseite_Slide7.jpg",
+    "source": "https://hoehenried.de/home/klinik/zimmer/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-waldschloesschen",
+    "phone": "0551 900498–0",
+    "email": "therapiezentrum-open@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.goettingen-suchthilfe.de/fileadmin/_processed_/2/b/csm_Suchthilfe_Goettingen_Startseite_02_5584f5be6b.jpg",
+    "source": "https://www.goettingen-suchthilfe.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-erlengrund",
+    "phone": "05331 8852 0",
+    "email": "info@lukas-werk.de",
+    "room": null,
+    "photoUrl": "https://www.lukas-werk.de/fileadmin/_processed_/f/1/csm_140626-lukas-sz-54_ddc82cac69.jpg",
+    "source": "https://www.lukas-werk.de/sucht/behandlung-therapie/stationaere-behandlung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-seehof",
+    "phone": "03328 345-0",
+    "email": "reha-klinik.seehof@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.reha-klinik-seehof.de/SharedDocs/Bilder/klinik/seehof/klinik_aussen_sonnenuntergang_bild.jpg?__blob=poster&amp;v=1",
+    "source": "https://www.reha-klinik-seehof.de/klinik/seehof/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-borkum",
+    "phone": "04922 302-0",
+    "email": "reha-klinik.borkumriff@drv-bund.de",
+    "room": null,
+    "photoUrl": "https://www.reha-klinik-borkum-riff.de/SharedDocs/Bilder/klinik/borkum_riff/startseite_neu_bild.jpg?__blob=poster&amp;v=2",
+    "source": "https://www.reha-klinik-borkum-riff.de/klinik/borkum_riff/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-richelsdorf",
+    "phone": "0662692220",
+    "email": "richelsdorf-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-richelsdorf/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-richelsdorf/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld",
+    "phone": "0971 84-4195",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-nauheim",
+    "phone": null,
+    "email": "s.igelmund@salus-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/c/2/csm_salue_Titel_f58df2eba2.jpg",
+    "source": "https://www.salus-kliniken.de/impressum",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-sonnenberg",
+    "phone": "0611 5710",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/reha-zentrum-wiesbaden-sonnenberg/bilder/Header_Unsere_Klinik_Sonnenaufgang.jpg",
+    "source": "https://www.median-kliniken.de/de/reha-zentrum-wiesbaden-sonnenberg/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-furth",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.johannesbad.com/fileadmin/_processed_/d/b/csm_johannesbad-klinik-arzt-patientin-gespraech_662c4c6660.webp",
+    "source": "https://www.johannesbad.com/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-ratingen",
+    "phone": "02102 9427715",
+    "email": "schwarzbachklinik@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.suchthilfe-duesseldorf.de/fileadmin/_processed_/a/4/csm_Suchthilfe_Duesseldorf_Schwarzbachklinik_02_f4d4ae9f1f.jpg",
+    "source": "https://www.suchthilfe-duesseldorf.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-thonberg",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-thonberg.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-elbingerode",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-elbingerode.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bergzabern",
+    "phone": "06343-942-0",
+    "email": "info@parkklinik-bad-bergzabern.de",
+    "room": null,
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/3/5/csm_parkklinik-Neubau_Gebaeude1_ad4a93dc45.png",
+    "source": "https://www.celenus-kliniken.de/bad-bergzabern/patienten-besucher/aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-salza",
+    "phone": "0781-932036-0",
+    "email": "info@celenus-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/a/6/csm_celenus-salvea-2go-titelbild_a2548aacb3.jpg",
+    "source": "https://www.celenus-kliniken.de/infos-zur-reha/komfortzimmer/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-teutoburg",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.lwl-klinikum-guetersloh.de/de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bramstedt",
+    "phone": "04192 504-7600",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.schoen-klinik.de/Sortiert/%C3%9Cber%20uns/image-thumb__3376__m-stage-slider/bbr_header_index_20445.jpg",
+    "source": "https://www.schoen-klinik.de/bad-bramstedt/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vitus",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-st-vitus.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-holthausen",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.johannesbad.com/fileadmin/_processed_/d/b/csm_johannesbad-klinik-arzt-patientin-gespraech_662c4c6660.webp",
+    "source": "https://www.johannesbad.com/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-fredeburg",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.johannesbad.com/fileadmin/_processed_/d/b/csm_johannesbad-klinik-arzt-patientin-gespraech_662c4c6660.webp",
+    "source": "https://www.johannesbad.com/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-udersleben",
+    "phone": null,
+    "email": "s.igelmund@salus-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/c/2/csm_salue_Titel_f58df2eba2.jpg",
+    "source": "https://www.salus-kliniken.de/impressum",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-osterholz",
+    "phone": "0421/80 94 90",
+    "email": "rehacentrum@therapiehilfe.de",
+    "room": null,
+    "photoUrl": "https://www.therapiehilfe.de/wp-content/uploads/2021/04/rehacentrum-alt-osterholz-vorhaenge-speiseraum.jpg",
+    "source": "https://www.therapiehilfe.de/standorte/rehacentrum-alt-osterholz/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-oldenfelde",
+    "phone": "040 200010 1200",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.therapiehilfe.de/wp-content/uploads/2021/05/thv.png",
+    "source": "https://www.therapiehilfe.de/impressum/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-burgklinik",
+    "phone": null,
+    "email": "infoservice@dbkg.de\\&quot;",
+    "room": null,
+    "photoUrl": "https://dbkg.de/og-image.jpg",
+    "source": "https://dbkg.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-motzen",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fontane-klinik.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-achertal",
+    "phone": "078429490",
+    "email": "kontakt.achertal@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/achertal-klinik-ottenhoefen/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/achertal-klinik-ottenhoefen/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-flechtingen",
+    "phone": "039054 82-0",
+    "email": "kontakt.flechtingen@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-flechtingen/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-flechtingen/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hainberg",
+    "phone": "0 6621 173-0",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.klinik-am-hainberg.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-alpenland",
+    "phone": "08061 28142-120",
+    "email": "alpenland@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.rosenheim-suchthilfe.de/fileadmin/_processed_/3/f/csm_Volleyball_b57b466cfb.jpeg",
+    "source": "https://www.rosenheim-suchthilfe.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-altenpost",
+    "phone": "07447 9465 - 0",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-zur-alten-post.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bruderhilfe",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.csw-essen.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-annenhof",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.annenhofklinik.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bornheim-schloss",
+    "phone": "09355 97673-0",
+    "email": "soziotherapieverbund-spessart@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.suchthilfe-spessart.de/fileadmin/_processed_/e/0/csm_Hirtenhof_10_d25956fad4.jpg",
+    "source": "https://www.suchthilfe-spessart.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-boeddiger",
+    "phone": "0561 7395039",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://drogenhilfe.com/fileadmin/user_upload/teststart005.jpg",
+    "source": "https://drogenhilfe.com/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-aggerblick",
+    "phone": "02206 95 22 0",
+    "email": "aggerblick@drogenhilfe.koeln",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.drogenhilfe.koeln/einrichtungen/betreutes-wohnen/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-altenkirchen",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://fachklinik-altenkirchen.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-eschenburg",
+    "phone": "02774 9134-0",
+    "email": "kontakt.eschenburg@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-eschenburg/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-eschenburg/schwerpunkte/betreutes-wohnen/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bussmannshof",
+    "phone": "02327 9754-0",
+    "email": "kordula.schadwell@bussmannshof.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://fachklinik-bussmannshof.de/ambulantes-betreutes-wohnen/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-eschenberg",
+    "phone": "02242 9498 0",
+    "email": "info@reha-ewk.de",
+    "room": null,
+    "photoUrl": "https://www.reha-ewk.de/fileadmin/_processed_/f/8/csm_Fachtagung_1a_d7738b5292.jpg",
+    "source": "https://www.reha-ewk.de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-eichelsdorf",
+    "phone": "09523-9520-17",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.bw-lv.de/fileadmin/_processed_/9/a/csm_5_Klinikgebaeude_Schloss_Eichelsdorf_61068340a9.jpg",
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-schloss-eichelsdorf/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-foursteps",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.vfj-bb.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-grafrath",
+    "phone": "08020 906-385",
+    "email": "maren.ruhstorfer@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.ordenswerke.de/fileadmin/_processed_/f/b/csm_ordenswerke-behindertenhilfe-leben-im-haus2-0_bd13cacf8b.jpg",
+    "source": "https://www.ordenswerke.de/altenhilfe/betreutes-wohnen",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-freiolsheim",
+    "phone": "0761 21807-0",
+    "email": "lindenhof@agj-freiburg.de",
+    "room": null,
+    "photoUrl": "https://agj-freiburg.de/wp-content/uploads/2025/02/fauxels-Prexels-1024x683.jpg",
+    "source": "https://agj-freiburg.de/arbeitsfelder/wohnen-und-arbeiten/wohnungsnotfallhilfe/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-friedrichshof",
+    "phone": "07130 4733 47",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.bw-lv.de/fileadmin/_processed_/7/7/csm_FK_FH_Haupthaus_1_6e5074c279.jpg",
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-friedrichshof/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heimathof",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.heimathof-ruhr.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heimathof-ge",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.heimathof-ruhr.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-fachklinik-meckenheim",
+    "phone": null,
+    "email": "fachklinik@vfg-bonn.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-meckenheim.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-haseems",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-hase-ems.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hirtenstein",
+    "phone": "08326 311-0",
+    "email": "ursula.fennen@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.suchthilfe-allgaeu.de/fileadmin/_processed_/e/2/csm_Suchthilfe_Allgaeu_Startseite_Teaser_Team_9ecfefea8f.jpg",
+    "source": "https://www.suchthilfe-allgaeu.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-doerenhof",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.gut-doerenhof.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hohenfels",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.salus-kliniken.de/hohenfels/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-johannesbad-adaption-dortmund",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.johannesbad-medizin.com/fileadmin/_processed_/5/1/csm_BFW_Luftbild_klein_147ee49987.jpg",
+    "source": "https://www.johannesbad-medizin.com/adaption-dortmund",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hohenrodt",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-hohenrodt.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-weitenau",
+    "phone": "07627 7085-111",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.bw-lv.de/fileadmin/_processed_/3/d/csm_Bilder_HW_Bereiche_004-2_8430ed168c.jpg",
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-haus-weitenau/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-kamillushaus",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.kamillushaus.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heidehof",
+    "phone": "03722 46937 0",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://diakoniestiftung-sachsen.de/path/app/?qs_page=C78C0DC5F685E2F265422D64A795AC3D57FB33F2&shortlink=heidehof",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-lindenhof",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-lindenhof.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-kaisberg",
+    "phone": "02331 381-10",
+    "email": "christian.huelsebusch@awo-ha-mk.de",
+    "room": null,
+    "photoUrl": "https://www.awo-ha-mk.de/fileadmin/_processed_/1/6/csm_klinik-kaisberg_7a89946132.jpg",
+    "source": "https://www.awo-ha-mk.de/was-wir-tun/ambulant-betreutes-wohnen-iserlohn",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-legau",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-legau.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-loerrach-bwlv",
+    "phone": "07843 949 141",
+    "email": "info@bw-lv.de",
+    "room": null,
+    "photoUrl": "https://www.bw-lv.de/fileadmin/_processed_/c/1/csm_AdobeStock_300658613_bearbeitet_5021ff81e1.jpg",
+    "source": "https://www.bw-lv.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-ludwigsmuehle",
+    "phone": "06341 / 5202113",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.ludwigsmuehle.de/images/startseite_section_header/nidro.jpg",
+    "source": "https://www.ludwigsmuehle.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-marienstift",
+    "phone": "05493-502 0",
+    "email": "info@sucht-fachkliniken.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.sucht-fachkliniken.de/marienstift/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-liblar",
+    "phone": "02235 927090",
+    "email": "info@fachklinik-liblar.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.telos-fachklinik-liblar.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-germerode",
+    "phone": "05657 / 7404",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.hausgermerode.de/start.html",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-daun-adaption",
+    "phone": "065922010",
+    "email": "daun-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/rehazentrum-daun-am-rosenberg/bilder/Header_Freizeit_und_Umgebung.jpg",
+    "source": "https://www.median-kliniken.de/de/medizin-teilhabe/eingliederung/ambulant-betreutes-wohnen/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-martha-stz",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.martha-stiftung.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-klosterwald",
+    "phone": "03 66 01 859-37",
+    "email": "info@fachklinik-klosterwald.de",
+    "room": null,
+    "photoUrl": "https://fachklinik-klosterwald.de/wp-content/themes/Fachklinik-Kol/assets/og.jpg",
+    "source": "https://fachklinik-klosterwald.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-dormagen",
+    "phone": "02133 266-00",
+    "email": "dormagen-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-dormagen/bilder/Header_Integrative_Sucht-_und_Traumatherapie.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-dormagen/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-mecklenburg",
+    "phone": "038872 91-0",
+    "email": "mecklenburg-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-mecklenburg/bilder/Header_Startseite_01.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-mecklenburg/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-daun-rosenberg",
+    "phone": "06592 2010",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/rehazentrum-daun-am-rosenberg/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/rehazentrum-daun-am-rosenberg/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mackenzell",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.schloss-mackenzell.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-ptk-liebenwerda",
+    "phone": "035341902136",
+    "email": "kontakt.ptk@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/psychotherapeutische-klinik-bad-liebenwerda/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/psychotherapeutische-klinik-bad-liebenwerda/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-roemhild",
+    "phone": "036948 87-0",
+    "email": "roemhild-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-roemhild/bilder/Header_Beratung.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-roemhild/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-lwl-muensterland",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.lwl-klinik-muenster.de/de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-schweriner-see",
+    "phone": "03867 9000",
+    "email": "schwerinersee-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-schweriner-see/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-schweriner-see/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-odenwald",
+    "phone": "06163 74-0",
+    "email": "odenwald-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-odenwald-rehabilitation/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-odenwald-rehabilitation/rechtliches/impressum/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-toenisstein",
+    "phone": "02641 9140",
+    "email": "toenisstein-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-toenisstein/bilder/Header_Toenistein.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-toenisstein/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-rhein-haardt",
+    "phone": "06322 794-305",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/rhein-haardt-klinik-bad-duerkheim/bilder/Startseite_Rhein-Haardt-Klinik.jpg",
+    "source": "https://www.median-kliniken.de/de/rhein-haardt-klinik-bad-duerkheim/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-waldsee",
+    "phone": "02655 9330",
+    "email": "waldsee-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/MEDIAN/behandlungsgebiete/psychosomatik/Perspektiven.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-am-waldsee/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-wied",
+    "phone": "026628060",
+    "email": "kontakt.wied@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-wied/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-wied/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-pskbgl",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.pskbgl.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-wigbertshoehe",
+    "phone": "06621 1850",
+    "email": "wigbertshoehe-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-wigbertshoehe/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-wigbertshoehe/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-release",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-release.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-kraichtal",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.kraichtal-kliniken.de/wp-content/uploads/2018/08/alexandradusin-fotografien-9601-1600x500.jpg",
+    "source": "https://www.kraichtal-kliniken.de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-salus-castrop",
+    "phone": "02305 / 4457 - 0",
+    "email": "mail@salus-castrop-rauxel.de",
+    "room": null,
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/6/6/csm_IMG_8267_65e03a262e.jpeg",
+    "source": "https://www.salus-kliniken.de/castrop-rauxel/informationsportal/informationen-zum-aufenthalt/faqs-rund-um-die-aufnahme/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-salus-lindow",
+    "phone": "033933 / 88 - 0",
+    "email": "mail@salus-lindow.de",
+    "room": null,
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/6/d/csm_230727_SALUS_Klinik_Drohne_0118_HDR_6aed30db77.jpg",
+    "source": "https://www.salus-kliniken.de/lindow/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-salus-friedberg",
+    "phone": "06031 / 7121 - 0",
+    "email": "mail@salus-friedberg.de",
+    "room": null,
+    "photoUrl": "https://www.salus-kliniken.de/fileadmin/_processed_/2/f/csm_Suchtbehandlung_Bild_Startseite_ec36abf420.jpg",
+    "source": "https://www.salus-kliniken.de/friedberg/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-schlosspark-bgl",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.schlosspark-klinik-gladbach.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-schlehreut",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-schlehreut.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-raupennest",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.johannesbad.com/fileadmin/_processed_/d/b/csm_johannesbad-klinik-arzt-patientin-gespraech_662c4c6660.webp",
+    "source": "https://www.johannesbad.com/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-siloah",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.siloah.fliedner.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-spielwigge",
+    "phone": "0235194850",
+    "email": "info@fachklinik-spielwigge.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://fachklinik-spielwigge.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vielbach",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-vielbach.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-villa-lilly",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.villa-lilly.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-ostberge",
+    "phone": "02304-941200 1",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://fachklinik-ostberge.de/impressum",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-tauwetter",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.fachklinik-tauwetter.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-spittler",
+    "phone": "030 13010",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.vivantes.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-villa-linden",
+    "phone": "08020 906 0",
+    "email": "maren.ruhstorfer@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.ordenswerke.de/fileadmin/user_upload/Deutscher_Orden/0.0.0_Startseite/Deutscher_Orden_Header_Breadcrumb.jpg",
+    "source": "https://www.ordenswerke.de/altenhilfe/betreutes-wohnen",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vitrea-berghof-2",
+    "phone": "0Tel: +495472 935-00",
+    "email": "info.berghof2-bad-essen@vitrea.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/VITREA_Klink_Scheidegg/01_Startseite/Zertifikate/lga_Bad-Essen-150x72%402x.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/vitrea-berghofklinik-ii-bad-essen/ihre-reha-bei-uns/ueber-den-aufenthalt/aufenthalt-und-komfort/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vitrea-berghofklinik",
+    "phone": "0Tel: +495472 935-00",
+    "email": "info.berghof-bad-essen@vitrea.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/b/7/csm_PKBadEssen_Berghofklinik_Gebaeude_Luftbild_741a96d8f8.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/vitrea-berghofklinik-bad-essen/ihre-reha-bei-uns/ueber-den-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-weihersmuehle",
+    "phone": "09105 9944-0",
+    "email": "fachklinik.weihersmuehle@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.suchthilfe-nuernberg.de/fileadmin/_processed_/5/e/csm_Ordenswerke_Reha_Klinik_Grosshabersdorf_WeihersmuehleDSC02741_48f45f90c7.jpg",
+    "source": "https://www.suchthilfe-nuernberg.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-wuermtal",
+    "phone": "08020 906-385",
+    "email": "maren.ruhstorfer@deutscher-orden.de",
+    "room": null,
+    "photoUrl": "https://www.ordenswerke.de/fileadmin/_processed_/f/b/csm_ordenswerke-behindertenhilfe-leben-im-haus2-0_bd13cacf8b.jpg",
+    "source": "https://www.ordenswerke.de/altenhilfe/betreutes-wohnen",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vitrea-wiehengebirge",
+    "phone": "0Tel: +49 4352 80-1155 Zentrale",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/d/4/csm_vitrea-Header-staerker-als-gestern_2c296791ad.jpg",
+    "source": "https://www.vitrea-gesundheit.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-alpenblick",
+    "phone": "0 0 7562 71-1411",
+    "email": "horst.veile-reiter@wz-kliniken.de",
+    "room": "einbett",
+    "photoUrl": "https://www.wz-kliniken.de/fileadmin/_processed_/0/a/csm_Fotoshooting_AB_8eded1cd8b.jpg",
+    "source": "https://www.wz-kliniken.de/klinik-alpenblick/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-willich",
+    "phone": "0215441330",
+    "email": "willich-kontakt@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/therapiezentrum-haus-willich/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/therapiezentrum-haus-willich/ihr-leben-mit-uns/leben-wohnen/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-pirna-adaption",
+    "phone": "0351 83 15",
+    "email": "info@diakonie-sachsen.de",
+    "room": null,
+    "photoUrl": "https://www.diakonie-sachsen.de/wp-content/uploads/2025/09/Kachel_Wir-machen-1024x1024.png",
+    "source": "https://www.diakonie-sachsen.de/wp-content/uploads/2023/03/kontakt.png",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-prowo",
+    "phone": "0221 / 64 01 715",
+    "email": "prowo@prowo.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://prowo.de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-asklepios-fuerstenhof",
+    "phone": "0562170403",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.asklepios.com/.imaging/mte/asklepios/introImageV2/dam/klinikbilder/bad-wildungen/Aussenansichten-Kliniken/F-rstenhof.jpg/jcr:content/F%C3%BCrstenhof.jpg",
+    "source": "https://www.asklepios.com/bad-wildungen/fuerstenhof/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-asklepios-bad-schwartau",
+    "phone": "045120040",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.asklepios.com/.imaging/mte/asklepios/introImageV2/dam/klinikbilder/bad-schwartau/Luftbildaufnahme_klinik_am_kurpark_bad_schwartau_1232x747.jpg/jcr:content/Luftbildaufnahme_klinik_am_kurpark_bad_schwartau_1232x747.jpg",
+    "source": "https://www.asklepios.com/bad-schwartau/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bergisch-land",
+    "phone": "Tel: 0202 24 63-01",
+    "email": "aufnahme.bergisch-land@vitrea-gesundheit.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/assets-rebrush/img/bg/VITREA-Header-Mobile-05.png",
+    "source": "https://www.vitrea-gesundheit.de/reha/bergisch-land",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-am-stein",
+    "phone": "0231 4882850",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.johanniter.de/assets/_processed_/c/0/csm_Klinik_am_Stein_aussen_1_8e95383f7e.png",
+    "source": "https://www.johanniter.de/johanniter-kliniken/klinik-am-stein/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-berleburg",
+    "phone": "Tel: 02751 88-100 00",
+    "email": "rbbb-aufnahme-neurologie@vitrea-gesundheit.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/8/9/csm_Bad_Berleburg_REHA_VITREA_Header_1920x900px_D__11_9fe797a879.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/bad-berleburg/ihre-reha-bei-uns/ueber-den-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-bavaria-kreischa",
+    "phone": "080057347242",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.klinik-bavaria.de/fileadmin/_processed_/7/e/csm_Klinik-Bavaria-Kreischa-Panorama-Luftaufnahme_2500px_3eb538aefb.jpg",
+    "source": "https://www.klinik-bavaria.de/impressum",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-berolina",
+    "phone": "00495731782900",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.berolinaklinik.de/fileadmin/images/Dankkarte_Patient_vorne02.jpg",
+    "source": "https://www.berolinaklinik.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-wiesengrund",
+    "phone": "07442 83786-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.bw-lv.de/fileadmin/_processed_/a/2/csm_IMG_2265_adb6ca6cad.jpg",
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-wiesengrund/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-ameos-kuehlungsborn",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.ameos.eu/fileadmin/_processed_/9/3/csm_cover_podcast_58ccec35cf.jpg",
+    "source": "https://www.ameos.eu/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-celenus-carolabad",
+    "phone": "0371-8142-0",
+    "email": "klinik@carolabad.de",
+    "room": null,
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/7/a/csm_135_3556_bc8904791f.jpg",
+    "source": "https://www.celenus-kliniken.de/carolabad/patienten-besucher/aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-celenus-freiburg",
+    "phone": "0761-88859-0",
+    "email": "info@fachklinik-freiburg.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/1/1/csm_FF_Gebaeude_1353_66ba2d392d.jpg",
+    "source": "https://www.celenus-kliniken.de/freiburg/klinik/ausstattung/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-celenus-dekimed",
+    "phone": "037437-75-0",
+    "email": "info@dekimed.de",
+    "room": null,
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/1/f/csm_2010_Dekimed_Klinik_aussen_1_0e54fb1ac5.jpg",
+    "source": "https://www.celenus-kliniken.de/dekimed/patienten-besucher/aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-celenus-kinzigtal",
+    "phone": "07803-808-0",
+    "email": "info@klinik-kinzigtal.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/e/3/csm_KK_Gebaeude_6387_37c089122b.jpg",
+    "source": "https://www.celenus-kliniken.de/kinzigtal/klinik/ausstattung/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-celenus-schweizerwiese",
+    "phone": "07083-7439-0",
+    "email": "info@fachklinik-schweizerwiese.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/2/3/csm_CelenusBadHerrenalb_I_071_bearb_036db77e40.jpg",
+    "source": "https://www.celenus-kliniken.de/schweizerwiese/klinik/ausstattung/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-celenus-ortenau-add",
+    "phone": "07803-808-0",
+    "email": "info@klinik-ortenau.de",
+    "room": null,
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/f/a/csm_KK_Gebaeude_6404_f3deb740b3.jpg",
+    "source": "https://www.celenus-kliniken.de/ortenau/patienten-besucher/aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-celenus-schoemberg",
+    "phone": "07084-50-0",
+    "email": "info@klinik-schoemberg.de",
+    "room": null,
+    "photoUrl": "https://www.celenus-kliniken.de/files/_processed_/5/5/csm_KS_Gebaeude_7198_d96ed0708b.jpg",
+    "source": "https://www.celenus-kliniken.de/schoemberg/patienten-besucher/aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-diana",
+    "phone": "05821 80-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.diana-klinik.de/fileadmin/user_upload/01_Startseite/dianaklinik-header-2.webp",
+    "source": "https://www.diana-klinik.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-diessen",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.klinik-kloster-diessen.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-damp-psom",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-baltic.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-db-juliana",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://dbkg.de/og-image.jpg",
+    "source": "https://dbkg.de/kliniken/dr-becker-klinik-juliana/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-db-brunnen",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://dbkg.de/og-image.jpg",
+    "source": "https://dbkg.de/kliniken/dr-becker-brunnen-klinik/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-db-moehnesee",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://dbkg.de/og-image.jpg",
+    "source": "https://dbkg.de/kliniken/dr-becker-klinik-mohnesee/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-db-norddeich",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": "https://dbkg.de/og-image.jpg",
+    "source": "https://dbkg.de/kliniken/dr-becker-klinik-norddeich/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-frankenhausen",
+    "phone": "034671 58-0",
+    "email": "reha-klinik.frankenhausen@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.reha-klinik-frankenhausen.de/SharedDocs/Bilder/klinik/frankenhausen/Klinik_Luftbild_Garten_2023.jpg?__blob=normal&amp;v=2",
+    "source": "https://www.reha-klinik-frankenhausen.de/klinik/frankenhausen/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-moelln-helms",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-helms.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-aukrug",
+    "phone": "04873/90970",
+    "email": "info@rehazentrum-aukrug.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://rehazentrum-aukrug.de/impressum/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-friedrichshoehe",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.rehazentrum-bad-pyrmont.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-hellbachtal",
+    "phone": "04542 804-0",
+    "email": "reha-klinik.hellbachtal@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.reha-klinik-hellbachtal.de/SharedDocs/Bilder/klinik/foehrenkamp/moelln_luftbild_bild.jpg?__blob=poster&amp;v=1",
+    "source": "https://www.reha-klinik-hellbachtal.de/klinik/hellbachtal/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-lipperland",
+    "phone": "05222 62-0",
+    "email": "reha-klinik.lipperland@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.reha-klinik-lipperland.de/SharedDocs/Bilder/klinik/am_lietholz/klinik-aussen_bild.jpg?__blob=wide&amp;v=1",
+    "source": "https://www.reha-klinik-lipperland.de/klinik/lipperland/startseite",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-enzensberg",
+    "phone": "08362 12-0",
+    "email": "info@fachklinik-enzensberg.de",
+    "room": null,
+    "photoUrl": "https://www.fachklinik-enzensberg.de/content/cache/slider/1/764/b11078b4bca7092c/klinikgruppe_enzenzberg_webseite_headerbild_c_01.jpg",
+    "source": "https://www.fachklinik-enzensberg.de/fur-patienten-angehoerige/vor-dem-aufenthalt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-wingertsberg",
+    "phone": "06172 104-0",
+    "email": "reha-klinik.wingertsberg@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.reha-klinik-wingertsberg.de/SharedDocs/Bilder/klinik/wingertsberg/klinik_wingertsberg_aussen_hinten_bild.jpg?__blob=normal&amp;v=6",
+    "source": "https://www.reha-klinik-wingertsberg.de/klinik/wingertsberg/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-kurhessen",
+    "phone": "05652 953-0",
+    "email": "klinik-kurhessen@drv-hessen.de",
+    "room": null,
+    "photoUrl": "https://www.klinik-kurhessen.de/SharedDocs/Bilder/klinik/kurhessen/bild-schwimmbad-startseite.jpg?__blob=poster&amp;v=1",
+    "source": "https://www.klinik-kurhessen.de/klinik/kurhessen/unsere_klinik/ausstattung/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-drv-werra",
+    "phone": "05652 953-0",
+    "email": "klinik-kurhessen@drv-hessen.de",
+    "room": null,
+    "photoUrl": "https://www.klinik-kurhessen.de/SharedDocs/Bilder/klinik/kurhessen/bild-schwimmbad-startseite.jpg?__blob=poster&amp;v=1",
+    "source": "https://www.klinik-kurhessen.de/klinik/kurhessen/unsere_klinik/ausstattung/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-gelderland",
+    "phone": "02831 137-0",
+    "email": "verwaltung@gelderlandklinik.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.gelderlandklinik.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-franziska",
+    "phone": "tel:06718820100",
+    "email": "a.weiand@ctt-reha.de",
+    "room": null,
+    "photoUrl": "https://www.ctt-reha.de/wp-content/uploads/2025/02/2024-07-19_BKN-SFS_Image_0996.jpg",
+    "source": "https://www.ctt-reha.de/standorte/st-franziska-stift/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-eifelklinik",
+    "phone": "06572 / 925-01",
+    "email": "redaktion@eifelklinik.de",
+    "room": null,
+    "photoUrl": "https://eifelklinik.de/dw/uploads/sites/5/2024/12/drv-rheinland-klinikkette-headerbild-eifelklinik-startseite-1423x747px-02.webp",
+    "source": "https://eifelklinik.de/aufenthalt/checkliste/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-groenenbach",
+    "phone": "Tel: 08334 981-100",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/assets-rebrush/img/bg/VITREA-Header-Mobile-09.png",
+    "source": "https://www.vitrea-gesundheit.de/reha/bad-groenenbach/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hardtwald-i",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.vamed-gesundheit.de/reha/bad-zwesten/hardtwaldklinik-i/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heilbrunn",
+    "phone": "08046 18-0",
+    "email": "info@fachklinik-bad-heilbrunn.de",
+    "room": null,
+    "photoUrl": "https://www.fachklinik-bad-heilbrunn.de/content/cache/slider/1/97c/71b8ec8af48f831a/klinikgruppe_bad_heilbrunn_webseite_headerbild_rgb_js_v3_c_01.jpg",
+    "source": "https://www.fachklinik-bad-heilbrunn.de/fur-patienten-angehoerige/vor-dem-aufenthalt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hardtwald-ii-psom",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.vamed-gesundheit.de/reha/bad-zwesten/hardtwaldklinik-ii/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld-bad-woerishofen",
+    "phone": "0971844444",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld-familienklinik",
+    "phone": "0971844444",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld-berlin",
+    "phone": "0971844444",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-haussee",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.klinik-am-haussee.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hermannsborn",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.badhermannsborn.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld-parkklinik",
+    "phone": "0971 84-4444",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken/parkklinik-heiligenfeld-bad-kissingen",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld-waldmuenchen",
+    "phone": "0971 84-4195",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken/heiligenfeld-klinik-waldmuenchen/aufnahme-kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld-uffenheim",
+    "phone": "0971 84-4195",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken/heiligenfeld-klinik-uffenheim/aufnahme-kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-herrenalb-celenus",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.celenus-kliniken.de/bad-herrenalb/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-heiligenfeld-rosengarten",
+    "phone": "0971 84-4195",
+    "email": "info@heiligenfeld.de",
+    "room": null,
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/08/150807_pk_haus_aussen_01-1024x683.jpg",
+    "source": "https://www.heiligenfeld.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-irmingard",
+    "phone": "08051 607-0",
+    "email": "ksi.diaetberatung@st-irmingard.de",
+    "room": "einbett",
+    "photoUrl": "https://www.st-irmingard.de/wp-content/uploads/sites/7/2025/06/KSI_Aussenaufnahmen_Klinik_Eingang.jpg",
+    "source": "https://www.st-irmingard.de/impressum/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-kandertal",
+    "phone": "0761 / 45 39 039",
+    "email": "info@kur.org",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.rehaklinik-kandertal.de/fileadmin/Redakteure/kandertal/image/familienreha.png",
+    "source": "https://www.rehaklinik-kandertal.de/die-klinik/die-ausstattung/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hoppegarten",
+    "phone": "03342 353-0",
+    "email": "kontakt.hoppegarten@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-hoppegarten/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-hoppegarten/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-kneipp-bad-woerishofen",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.sebastian-kneipp-klinik.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-homberg",
+    "phone": "05621 80 60",
+    "email": "info@wicker.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.wicker.de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-kirchberg",
+    "phone": "05524 859 0",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.kirchbergklinik.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-koenigstuhl",
+    "phone": "06221 907–0",
+    "email": "info@rehaklinik-koenigstuhl.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.rehaklinik-koenigstuhl.de/fileadmin/_processed_/2/7/csm_HDK_S0A9471_web_e7441fbb63.jpg",
+    "source": "https://www.rehaklinik-koenigstuhl.de/allgemeine-infos/klinikaufenthalt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-koenigstein",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.asklepios.com/koenigstein/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-inntal",
+    "phone": "08571 985 0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.ameos.eu/fileadmin/_processed_/8/4/csm_Header_Reha_54c19aa43f.jpg",
+    "source": "https://www.ameos.eu/reha-klinikum-inntal/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-waren",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.ahg.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-luisenklinik",
+    "phone": "0 77 26 93 90-0",
+    "email": "info@luisenklinik.de",
+    "room": null,
+    "photoUrl": "https://luisenklinik.de/fileadmin/_processed_/c/e/csm_Header-Image_4089b77561.jpg",
+    "source": "https://luisenklinik.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-korso",
+    "phone": "0573 11810",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.johanniter.de/assets/_processed_/9/e/csm_Aussenansicht_06_1406cafa06.jpg",
+    "source": "https://www.johanniter.de/johanniter-kliniken/klinik-am-korso/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-driburg",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.ahg.de",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-hochgrat",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.hochgratklinik.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-ginsterhof",
+    "phone": "041085980",
+    "email": "info@ginsterhof.de",
+    "room": null,
+    "photoUrl": "https://ginsterhof.de/wp-content/uploads/2024/08/Startseite-Teaser-Infoveranstaltung.jpg",
+    "source": "https://ginsterhof.de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-marbachtal",
+    "phone": "0971 808-0",
+    "email": "info.marbachtal-klinik@drv-oldenburg-bremen.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.marbachtalklinik.de/SharedDocs/Bilder/klinik/badkissingen/KISS_Zimmer_Balkon.jpg?__blob=wide&v=3",
+    "source": "https://www.marbachtalklinik.de/klinik/badkissingen/unsere_klinik/ausstattung_zimmer/ausstattung_node",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-bernkastel",
+    "phone": "06531 92-0",
+    "email": "kontakt.bernkastel@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/reha-zentrum-bernkastel-kues-klinik-bernkastel/bilder/Header_Freizeit_und_Umgebung.jpg",
+    "source": "https://www.median-kliniken.de/de/medizin-teilhabe/eingliederung/ambulant-betreutes-wohnen/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-lahnhoehe",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.vamed-gesundheit.de/reha/lahnstein/ahg-klinik-lahnhoehe/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-lippoldsberg",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.dbkg.de/kliniken/klinik-lippoldsberg/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-bad-bertrich",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/median-klinik-bad-bertrich/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-pyrmont-psm",
+    "phone": "05281 6190",
+    "email": "pyrmont-kontakt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/zentrum-fuer-verhaltensmedizin-bad-pyrmont-klinik-fuer-psychosomatik/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/zentrum-fuer-verhaltensmedizin-bad-pyrmont-klinik-fuer-psychosomatik/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-berka-ilmtal",
+    "phone": "036458 38-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/reha-zentrum-bad-berka-ilmtal-klinik/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/reha-zentrum-bad-berka-ilmtal-klinik/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-bad-dueben",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/median-klinik-bad-dueben/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-hohenfeld",
+    "phone": "06434 29-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/hohenfeld-klinik-bad-camberg/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/hohenfeld-klinik-bad-camberg/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-schoenen-moos",
+    "phone": "07581507191",
+    "email": "info@klinik-a-s-moos.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.klinik-a-s-moos.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-muehlengrund",
+    "phone": "05621 82-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-muehlengrund-bad-wildungen/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-muehlengrund-bad-wildungen/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-kinzigtal-soden",
+    "phone": "06056 7370",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/kinzigtal-klinik-bad-soden-salmuenster/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/kinzigtal-klinik-bad-soden-salmuenster/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-psm-duerkheim",
+    "phone": "06322 9340",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-fuer-psychosomatik-bad-duerkheim/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-fuer-psychosomatik-bad-duerkheim/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-rothenfelde",
+    "phone": "05424 648-0",
+    "email": "kontakt.badrothenfelde@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/parkklinik-bad-rothenfelde/bilder/Header_Unsere_Klinik.jpg",
+    "source": "https://www.median-kliniken.de/de/parkklinik-bad-rothenfelde/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-salze",
+    "phone": "05063 47-02",
+    "email": "verwaltung.salze@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/salze-klinik-bad-salzdetfurth/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/salze-klinik-bad-salzdetfurth/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-tennstedt",
+    "phone": "036041 35-0",
+    "email": "rehaklinik.tennstedt@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-bad-tennstedt/bilder/Header_Startseite_Klinik.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-bad-tennstedt/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-saale-koesen",
+    "phone": "034463 41-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/saale-klinik-bad-koesen-i/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/saale-klinik-bad-koesen-i/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-wismar",
+    "phone": "03841 646-0",
+    "email": "kontakt.wismar@median-kliniken.de",
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-wismar/bilder/Header__Orthopaedie.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-wismar/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mediclin-bad-wildungen",
+    "phone": "05621 796 0",
+    "email": "info.badwildungen@mediclin.de",
+    "room": null,
+    "photoUrl": "https://www.mediclin-badwildungen.de/fileadmin/_processed_/1/9/csm_mediclin2019101_315_d19a7bdd3f.jpg",
+    "source": "https://www.mediclin-badwildungen.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mediclin-bliestal",
+    "phone": "06842 54 0",
+    "email": "info.bliestal@mediclin.de",
+    "room": null,
+    "photoUrl": "https://www.bliestal-kliniken.de/fileadmin/Reha__Bliestal_Kliniken/bilder/Startseite/Bauer_Wiegert_31_1400x590.jpg",
+    "source": "https://www.bliestal-kliniken.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-median-schlangenbad",
+    "phone": "06129410",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-schlangenbad/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-schlangenbad/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mediclin-deister-weser",
+    "phone": "05042 600 0",
+    "email": "info.deister-weser-reha@mediclin.de",
+    "room": null,
+    "photoUrl": "https://www.deister-weser-kliniken.de/fileadmin/_processed_/b/6/csm_lilienbecker_draussen__56066__Web_72dpi__b7c1ca6caa.jpg",
+    "source": "https://www.deister-weser-kliniken.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-oexen",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.oexen.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mediclin-reichshof",
+    "phone": "02265 995 0",
+    "email": "info.reichshof@mediclin.de",
+    "room": null,
+    "photoUrl": "https://www.klinik-reichshof.de/fileadmin/Misch__Klinik_Reichshof/bilder/Startseite/Reichshof_Slogan_3.png",
+    "source": "https://www.klinik-reichshof.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mediclin-seepark",
+    "phone": "05824 21 0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.seepark-klinik.de/fileadmin/_processed_/a/1/csm_Seepark_Neubau_Landingpage_Header-startseite_75b0077adb.png",
+    "source": "https://www.seepark-klinik.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-oberberg-berlin",
+    "phone": "07761 - 9174007",
+    "email": "karriere@oberbergkliniken.de",
+    "room": null,
+    "photoUrl": "https://oberbergkliniken.de/media/pages/mediapool/global/0e65f51a6e-1779271656/csm_weserbergland-header_d3a35f1e33-250x125-crop.webp",
+    "source": "https://oberbergkliniken.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-osterbach",
+    "phone": "05731 159 706",
+    "email": "info@klinik-am-osterbach.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.wicker.de/kliniken/klinik-am-osterbach/ihr-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mediclin-vogelsang",
+    "phone": "0771 851 0",
+    "email": "info.vogelsang@mediclin.de",
+    "room": null,
+    "photoUrl": "https://www.klinik-am-vogelsang.de/fileadmin/_processed_/f/6/csm_mediclin2019118_klinikum_soltau_225_1920x1201_6dabd1a9a2.jpg",
+    "source": "https://www.klinik-am-vogelsang.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-parkklinik-bad-hersfeld",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.parkklinik-bad-hersfeld.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-panorama",
+    "phone": "0 0 8381 802-0",
+    "email": "info@panorama-fachkliniken.de",
+    "room": null,
+    "photoUrl": "https://www.panorama-fachklinik.de/fileadmin/theme/akkut/img/EN_Funded_by_the_European_Union_RGB_POS.png",
+    "source": "https://www.panorama-fachklinik.de/akut/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mediclin-zfpg",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.mediclin.de/kliniken/mediclin-zentrum-fuer-psychische-gesundheit-donaueschingen/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-parkland",
+    "phone": "05621 706-0",
+    "email": "info@parkland-klinik.de",
+    "room": null,
+    "photoUrl": "https://www.parkland-klinik.de/content/cache/slider/1/5c0/7248971f48abaae0/parkland_klinik_webseite_header_c_0.jpg",
+    "source": "https://www.parkland-klinik.de/fur-patienten-angehoerige/vor-dem-aufenthalt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-park-schwalbach",
+    "phone": "06124 517-0",
+    "email": "klinik-am-park@drv-hessen.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.reha-klinik-am-park.de/SharedDocs/Bilder/klinik/rehaampark/bild-klinik-am-park-badschwalbach-zimmer1.jpg?__blob=wide&v=8",
+    "source": "https://www.reha-klinik-am-park.de/klinik/rehaampark/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-ratzeburg",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.muehlenbergklinik.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-passauer-wolf-bad-gogging",
+    "phone": "08532270",
+    "email": "reservierung@passauerwolf.de",
+    "room": null,
+    "photoUrl": "https://www.passauerwolf.de/wp-content/uploads/2025/12/AdobeStock-Baumrinde-268040148_volody10-1600.jpg",
+    "source": "https://www.passauerwolf.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-roswitha",
+    "phone": "Tel: 05382 917-0",
+    "email": "info.roswitha-bad-gandersheim@vitrea.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/e/e/csm_2023_07_Roswithaklinik_Aussen_4_f447074e1d.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/vitrea-roswithaklinik-bad-gandersheim/ihre-reha-bei-uns/ueber-den-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-mittelrhein",
+    "phone": "06742 608-0",
+    "email": "mittelrhein-klinik@drv-rlp.de",
+    "room": null,
+    "photoUrl": "https://www.mittelrhein-klinik.de/SharedDocs/Bilder/klinik/mittelrhein/Aussen_Anlage_Ansicht/Mittelrhein-Klinik_Luftbild.jpg?__blob=wide&amp;v=1",
+    "source": "https://www.mittelrhein-klinik.de/SharedDocs/Bilder/klinik/mittelrhein/Ausstattung/Mittelrhein-Klinik_Lounge-1.jpg?__blob=poster&amp;v=2",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-schlossklinik-buchau",
+    "phone": "07582 807-0",
+    "email": "info@schlossklinik-buchau.de",
+    "room": null,
+    "photoUrl": "https://schlossklinik-buchau.de/imgsrv/deDE/11078/1/3199990472402/SLIDER-STARTSEITE/Schlossklinik-Gebaeude.jpg",
+    "source": "https://schlossklinik-buchau.de/die-schlossklinik/zimmer/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-schwedenstein",
+    "phone": "Tel: 035 95 5 47-0",
+    "email": "info.schwedenstein@vitrea-gesundheit.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/assets-rebrush/img/bg/VITREA-Header-Mobile-05.png",
+    "source": "https://www.vitrea-gesundheit.de/reha/schwedenstein/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-schaufling",
+    "phone": "09904770",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.asklepios.com/.imaging/mte/asklepios/pressReleaseTeaser/dam/klinikbilder/schaufling/Presse/Weihnachtsprogramm0.pdf5/jcr:content/Bild1.png",
+    "source": "https://www.asklepios.com/schaufling/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-st-rochus",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.klinik-st-rochus.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-suderode",
+    "phone": null,
+    "email": "info@pkd.de",
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.paracelsus-kliniken.de/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-rosenberg",
+    "phone": "05253 970-0",
+    "email": "aufnahme@klinik-rosenberg.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.klinik-rosenberg.de/SharedDocs/Bilder/klinik/rosenberg/klinik_aussen_daemmerung.jpg?__blob=normal&amp;v=5",
+    "source": "https://www.klinik-rosenberg.de/klinik/rosenberg/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-park-lippspringe",
+    "phone": "05252 95-00",
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.medizinisches-zentrum.de/kontakt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-uexkuell",
+    "phone": "0761 / 45 39 039",
+    "email": "info@kur.org",
+    "room": "einbett",
+    "photoUrl": "https://www.uexkuell-klinik.de/fileadmin/user_upload/whatsapp_01741747176.png",
+    "source": "https://www.uexkuell-klinik.de/die-klinik/die-ausstattung/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-schoen-bad-arolsen",
+    "phone": "05691 6238-0",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.schoen-klinik.de/Sortiert/%C3%9Cber%20uns/image-thumb__3375__m-stage-slider/bar_header_index_1_20437.jpg",
+    "source": "https://www.schoen-klinik.de/bad-arolsen/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-segeberg-psom",
+    "phone": "04551 802-0",
+    "email": "info@segebergerkliniken.de",
+    "room": null,
+    "photoUrl": "https://www.segebergerkliniken.de/fileadmin/_processed_/e/6/csm_header-parktplatz_40d311baca.jpg",
+    "source": "https://www.segebergerkliniken.de/aufenthalt/anmeldung-und-aufnahme/anfahrt-und-parken/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-schoen-tk-muenchen",
+    "phone": "089 2872410",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.schoen-klinik.de/Sortiert/%C3%9Cber%20uns/image-thumb__3374__c-map-grid-image-bg/aib_header_index_20431.jpg",
+    "source": "https://www.schoen-klinik.de/standorte",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vitrea-hildesheim",
+    "phone": "Tel: 05121 74195-00",
+    "email": "info.vrzh@vitrea-gesundheit.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/assets-rebrush/img/bg/VITREA-Header-Mobile-04.png",
+    "source": "https://www.vitrea-gesundheit.de/reha/hildesheim-rehazentrum/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-wolletzsee",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.klinik-wolletzsee.de/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-park-steben",
+    "phone": "09288 · 730",
+    "email": "m.gaebelein@rehaklinik-am-park.de",
+    "room": null,
+    "photoUrl": "https://ebel-kliniken.com/fileadmin/_processed_/d/4/csm_BadSteben_Startseite_IhreReha_800x600_WD_3178_schaerfe_a562086f79.jpg",
+    "source": "https://ebel-kliniken.com/klinik-am-park-bad-steben/kontakt",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vitrea-damp",
+    "phone": "Tel: 04352 80-8303",
+    "email": "info.rda@vitrea-gesundheit.de",
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/0/a/csm_header_c1f9c1f881.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/damp-rehaklinik/ihre-reha-bei-uns/ueber-den-aufenthalt/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-taunus-nauheim",
+    "phone": "06032 302-0",
+    "email": "reha-klinik.wetterau@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.reha-klinik-wetterau.de/SharedDocs/Bilder/klinik/wetterau/klinik_aussen_bild.jpg?__blob=normal&amp;v=2",
+    "source": "https://www.reha-klinik-wetterau.de/klinik/wetterau/unsere_klinik/ausstattung",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-waldschloss-dd",
+    "phone": "0351 6587770",
+    "email": "veranstaltungen@klinik-waldschloesschen.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.klinik-waldschloesschen.de/files/2015/06/hero-ausstattung-340x151.jpg",
+    "source": "https://www.klinik-waldschloesschen.de/ausstattung/patientenzimmer-verpflegung/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-vitrea-dahlen",
+    "phone": "0Tel: +49 4352 80-1155 Zentrale",
+    "email": null,
+    "room": null,
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/_processed_/d/4/csm_vitrea-Header-staerker-als-gestern_2c296791ad.jpg",
+    "source": "https://www.vitrea-gesundheit.de/impressum",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-teufelsbad",
+    "phone": null,
+    "email": null,
+    "room": null,
+    "photoUrl": null,
+    "source": "https://www.celenus-kliniken.de/blankenburg/",
+    "note": "official-scrape"
+  },
+  {
+    "id": "ck-petersen-rostock",
+    "phone": "0381 / 40 34 - 0",
+    "email": null,
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://friedrich-petersen-rehabilitationszentrum.de/wp-content/uploads/2024/06/Baeckerstrasse-aussen-scaled.jpg",
+    "source": "https://friedrich-petersen-rehabilitationszentrum.de/start/kontakt/",
+    "note": "official-scrape"
+  }
+]

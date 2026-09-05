@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ck-median-hohenfeld",
+    "phone": "+49 6434 29-0",
+    "email": "kontakt.hohenfeld@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/hohenfeld-klinik-bad-camberg/unsere-klinik/kontakt/",
+    "note": "Telefon und E-Mail auf Kontakt/Impressum. Leben-Wohnen nennt kernsanierte Einzelzimmer, ohne klare Aussage zu Doppelzimmern — Zimmerart daher unbekannt. Headerbild ist Therapie, keine Außenansicht."
+  },
+  {
+    "id": "ck-median-kinzigtal-soden",
+    "phone": "+49 6056 7370",
+    "email": "kontakt.kinzigtal@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/kinzigtal-klinik-bad-soden-salmuenster/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Wohnen: „alle Patienten in Einzelzimmern“, 178 EZ; 14 Doppelzimmer nur für Begleitperson. E-Mail im Impressum. Headerbild keine Klinikfassade."
+  },
+  {
+    "id": "ck-median-muehlengrund",
+    "phone": "+49 5621 82-0",
+    "email": "kontakt.badwildungen@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-muehlengrund-bad-wildungen/rechtliches/impressum/",
+    "note": "534 Zimmer; Seite nennt Einzel- und Doppelzimmer ohne Mengenverhältnis. Katalog-Mail kontakt.muehlengrund@ auf der Seite nicht gefunden; Impressum: kontakt.badwildungen@median-kliniken.de."
+  },
+  {
+    "id": "ck-median-psm-duerkheim",
+    "phone": "+49 6322 9340",
+    "email": "duerkheim-kontakt@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-fuer-psychosomatik-bad-duerkheim/unsere-klinik/kontakt/",
+    "note": "Leben-Wohnen: „gemütliches Zimmer“ mit Bad, ohne Einzel/Doppel. E-Mail im Impressum."
+  },
+  {
+    "id": "ck-median-pyrmont-psm",
+    "phone": "+49 5281 6190",
+    "email": "pyrmont-kontakt@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/zentrum-fuer-verhaltensmedizin-bad-pyrmont-klinik-fuer-psychosomatik/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Wohnen: komfortable Einzelzimmer; Klinikangabe 199 Einzelzimmer. E-Mail im Impressum. Headerbild innen."
+  },
+  {
+    "id": "ck-median-rothenfelde",
+    "phone": "+49 5424 648-0",
+    "email": "kontakt.badrothenfelde@median-kliniken.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/parkklinik-bad-rothenfelde/bilder/Header_Unsere_Klinik.jpg",
+    "source": "https://www.median-kliniken.de/de/parkklinik-bad-rothenfelde/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Wohnen: 245 Einzel- und 25 Doppelzimmer. E-Mail im Impressum. Header „Unsere Klinik“ ist Fassade der Parkklinik."
+  },
+  {
+    "id": "ck-median-saale-koesen",
+    "phone": "+49 34463 41-0",
+    "email": "kontakt.vwsk1@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/saale-klinik-bad-koesen-i/unsere-klinik/kontakt/",
+    "note": "Wohnen: 218 Patientenzimmer als „Einzel- und Doppelzimmer“, ohne Mehrheit. E-Mail im Impressum."
+  },
+  {
+    "id": "ck-median-salze",
+    "phone": "+49 5063 47-02",
+    "email": "verwaltung.salze@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/salze-klinik-bad-salzdetfurth/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "194 Betten; „Patientinnen und Patienten wohnen in komfortablen Einzelzimmern“. E-Mail im Impressum. Headerbild keine Fassade."
+  },
+  {
+    "id": "ck-median-schlangenbad",
+    "phone": "+49 6129 410",
+    "email": null,
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-schlangenbad/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "174 Zimmer; Patienten wohnen in Einzelzimmern, 16 Doppelzimmer nur für Begleitperson. Klinik-Impressum 404; keine veröffentlichte Klinik-E-Mail gefunden (nicht erfinden)."
+  },
+  {
+    "id": "ck-median-schoenen-moos",
+    "phone": "+49 7581 507-0",
+    "email": "info@klinik-a-s-moos.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.klinik-a-s-moos.de/images/pics/bildergalerie-klinik/Aussen-1.jpg",
+    "source": "https://www.klinik-a-s-moos.de/home/unsere-klinik.html",
+    "note": "180 Betten, davon 170 Einzelzimmer (inkl. 2 Zwei-Bettzimmer und 8 Appartements). Zentrale 507-0, Aufnahme 507-191. Außenfoto aus der Bildergalerie."
+  },
+  {
+    "id": "ck-median-tennstedt",
+    "phone": "+49 36041 35-0",
+    "email": "rehaklinik.tennstedt@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-bad-tennstedt/bilder/Header_Startseite_Klinik.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-bad-tennstedt/unsere-klinik/kontakt/",
+    "note": "Kontakt zeigt Zentrale +49 36041 35-0 (nicht 57-0). Wohnen: 257 Einzelzimmer. Mail auf Wohnen-Seite. Header ist Luftbild der Klinik."
+  },
+  {
+    "id": "ck-median-wismar",
+    "phone": "+49 3841 646-0",
+    "email": "kontakt.wismar@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-wismar/unsere-klinik/kontakt/",
+    "note": "Wohnen: 200 Einzelzimmer. Klinik-Impressum 404; Mail auf Wohnen-Seite. Headerbild Seebrücke, keine Fassade."
+  },
+  {
+    "id": "ck-mediclin-bad-wildungen",
+    "phone": "+49 5621 796 0",
+    "email": "info.badwildungen@mediclin.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.mediclin-badwildungen.de/impressum/",
+    "note": "Reha-Aufenthalt: 256 Einzelzimmer mit Dusche. Kontakt/Impressum Telefon und Mail. Headerbild Therapie, keine Außenansicht."
+  },
+  {
+    "id": "ck-mediclin-bliestal",
+    "phone": "+49 6842 54 0",
+    "email": "info.bliestal@mediclin.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.bliestal-kliniken.de/impressum/",
+    "note": "Während des Aufenthalts: „Sie wohnen bei uns in einem Einzelzimmer mit eigenem Bad“. Headerbild Gespräch, keine Fassade."
+  },
+  {
+    "id": "ck-mediclin-deister-weser",
+    "phone": "+49 5042 600 0",
+    "email": "info.deister-weser-reha@mediclin.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.deister-weser-kliniken.de/impressum/",
+    "note": "Reha-Aufenthalt: freundlich eingerichtetes Einzelzimmer mit Dusche/WC. Mail aus Impressum (nicht die Katalog-Lücke). Headerbild innen."
+  },
+  {
+    "id": "ck-mediclin-reichshof",
+    "phone": "+49 2265 995 0",
+    "email": "info.reichshof@mediclin.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.klinik-reichshof.de/impressum/",
+    "note": "Während des Aufenthalts: 226 Einzelzimmer für Reha-Patienten. Headerbild Sporttherapie, keine Fassade."
+  },
+  {
+    "id": "ck-mediclin-seepark",
+    "phone": "+49 5824 21 0",
+    "email": "rezeption.seepark@mediclin.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.seepark-klinik.de/impressum/",
+    "note": "Reha-Aufenthalt: modern eingerichtetes Einzelzimmer. Impressum setzt Mail als Rezeption.seepark@mediclin.de (nicht info.seepark@). Headerbild Personen, keine Fassade."
+  },
+  {
+    "id": "ck-mediclin-vogelsang",
+    "phone": "+49 771 851 0",
+    "email": "info.vogelsang@mediclin.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.klinik-am-vogelsang.de/impressum/",
+    "note": "Während des Aufenthalts: ansprechendes Einzelzimmer mit Dusche/WC. Headerbild ist Kunsttherapie (Soltau-Motiv), keine Vogelsang-Fassade."
+  },
+  {
+    "id": "ck-mediclin-zfpg",
+    "phone": "0771 851-700",
+    "email": "psychische-gesundheit@mediclin.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.psychische-gesundheit-donaueschingen.de/fileadmin/_processed_/0/c/csm_DJI_0282_16x8_3fc8c28a8a.jpg",
+    "source": "https://www.psychische-gesundheit-donaueschingen.de/impressum/",
+    "note": "Gelistete URL mediclin.de/.../donaueschingen/ ist 404; offizielle Klinikseite psychische-gesundheit-donaueschingen.de. Keine Zimmerart veröffentlicht. Drohnenfoto der Gebäude auf der Startseite."
+  },
+  {
+    "id": "ck-mittelrhein",
+    "phone": "06742 608-0",
+    "email": "mittelrhein-klinik@drv-rlp.de",
+    "room": "einbett",
+    "photoUrl": "https://www.mittelrhein-klinik.de/SharedDocs/Bilder/klinik/mittelrhein/Aussen_Anlage_Ansicht/Mittelrhein-Klinik_Luftbild.jpg?__blob=normal&v=1",
+    "source": "https://www.mittelrhein-klinik.de/klinik/mittelrhein/unsere_klinik/ausstattung",
+    "note": "FAQ/Start: ausschließlich Einzelzimmer. Ausstattung wiederholt Einzelzimmer mit Bad. Luftbild Außenanlage auf der Startseite."
+  },
+  {
+    "id": "ck-oberberg-berlin",
+    "phone": "033679 134112",
+    "email": "beratung@oberbergkliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://oberbergkliniken.de/fachkliniken/oberberg-fachklinik-berlin-brandenburg",
+    "note": "Klinikseite: Am Glubigsee 46, Wendisch Rietz; Telefon 033679-134112 (nicht 67-0). Nur „Patientenzimmer“, keine Einzel/Doppel-Angabe. OG-Bild der Startseite gehört zu Potsdam, daher kein Foto."
+  },
+  {
+    "id": "ck-oexen",
+    "phone": "05731 537-0",
+    "email": "klinik@badoexen.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.badoexen.de/images/klinik-bad-oexen-top01.jpg",
+    "source": "https://www.badoexen.de/kontakt.html",
+    "note": "www.oexen.de löst nicht auf; offizielle Seite www.badoexen.de. Haupthaus 323 Einzelzimmer, Doppelzimmer auf Wunsch, 8 Penthouse-DZ, Kinderhaus 38 Mehrbettzimmer. Mail klinik@; Aufnahme aufnahme@badoexen.de."
+  },
+  {
+    "id": "ck-osterbach",
+    "phone": "05731 159-0",
+    "email": "info@klinik-am-osterbach.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.wicker.de/kliniken/klinik-am-osterbach/",
+    "note": "Offizielle Seite leitet auf wicker.de. Zentrale 05731 15 90 / 05731 1590; Aufnahme 05731 159 706. „All unsere Zimmer sind Einzelzimmer.“ Klinikfoto liegt auf images.prismic.io, nicht auf Klinikdomain — photoUrl null."
+  },
+  {
+    "id": "ck-panorama",
+    "phone": "+49 8381 802-0",
+    "email": "info@panorama-fachkliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.panorama-fachklinik.de/akut/kontakt-anfahrt/kontakt/",
+    "note": "panorama-fachkliniken.de leitet auf panorama-fachklinik.de/akut/ (Kurstraße 22, nicht Panoramastraße 14; Zentrale 802-0 statt 803-0). Keine Zimmerart auf den Klinikseiten. Kein Klinikdomain-Außenfoto gefunden."
+  },
+  {
+    "id": "ck-park-lippspringe",
+    "phone": "05252 95-2700",
+    "email": "info.kap@medizinisches-zentrum.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.medizinisches-zentrum.de/fileadmin/_processed_/7/3/csm_Klinik_am_Park_2022_aussen_4c6b433826.jpg",
+    "source": "https://www.medizinisches-zentrum.de/einrichtungen/klinik-am-park/psychosomatik/die-klinik/",
+    "note": "Psychosomatik Klinik am Park: Sekretariat 05252 95-2700, info.kap@. Auf der Psychosomatik-Seite keine Zimmerart (Entwöhnung dort „überwiegend Einzelzimmer“, aber andere Abteilung). Außenfoto Klinik am Park auf der Trägerstartseite."
+  }
+]

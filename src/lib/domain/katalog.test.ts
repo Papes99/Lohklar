@@ -5,15 +5,23 @@ import { HOUSES } from "./katalog-houses.ts";
 import { STECKBRIEFE } from "./steckbrief-seed.ts";
 import { coverAuftragTag, coverSubstanceTags } from "./types.ts";
 
-describe("katalog 50 echte Häuser", () => {
-  it("hat genau 50 Häuser, 16 Länder, einzigartige IDs", () => {
-    assert.equal(HOUSES.length, 50);
-    assert.equal(CLINIC_SEED.length, 50);
-    assert.equal(Object.keys(STECKBRIEFE).length, 50);
+describe("katalog 250 echte Häuser", () => {
+  it("hat genau 250 Häuser, 16 Länder, einzigartige IDs", () => {
+    assert.equal(HOUSES.length, 250);
+    assert.equal(CLINIC_SEED.length, 250);
+    assert.equal(Object.keys(STECKBRIEFE).length, 250);
     const ids = new Set(HOUSES.map((h) => h.id));
-    assert.equal(ids.size, 50);
+    assert.equal(ids.size, 250);
     const states = new Set(HOUSES.map((h) => h.stateCode));
     assert.equal(states.size, 16);
+  });
+
+  it("lässt die ursprünglichen 50 Kern-IDs unangetastet", () => {
+    const core = HOUSES.filter((h) => h.sortOrder <= 50);
+    assert.equal(core.length, 50);
+    assert.equal(core[0]?.id, "ck-seewiesen");
+    assert.ok(HOUSES.some((h) => h.id === "ck-nordlicht"));
+    assert.ok(HOUSES.some((h) => h.id === "ck-flechtingen"));
   });
 
   it("enthält keine Muster- oder example.org-Daten", () => {
@@ -77,5 +85,26 @@ describe("katalog 50 echte Häuser", () => {
     assert.equal(coverAuftragTag(hoehenried), "Psychosomatik");
     assert.equal(coverAuftragTag(ratingen), "Suchtreha");
     assert.equal(coverAuftragTag(brilon), "Dualdiagnose");
+  });
+
+  it("hat bei neuen Häusern Website, Adresse, Indikation und vollständige Spec-Felder", () => {
+    const sampleIds = ["ck-aggerblick", "ck-altenkirchen", "ck-kamillushaus", "ck-weihersmuehle", "ck-irmingard"];
+    for (const id of sampleIds) {
+      const house = HOUSES.find((item) => item.id === id);
+      assert.ok(house, `fehlt: ${id}`);
+      assert.ok(house.sortOrder > 50);
+      assert.ok(house.website.startsWith("https://"));
+      assert.ok(house.street.length > 1);
+      assert.match(house.plz, /^\d{5}$/);
+      assert.ok(house.city.length > 1);
+      assert.ok(["sucht", "psychosomatik", "dual"].some((k) => house.indicationAreas.includes(k as typeof house.indicationAreas[0])));
+      assert.equal(house.facts.length, 3);
+      assert.ok(house.fokus.length > 10);
+      assert.ok(house.lage.length > 5);
+      const clinic = CLINIC_SEED.find((item) => item.id === id);
+      assert.ok(clinic);
+      assert.equal(clinic.steckbrief.indikation.bullets.length > 0, true);
+      assert.ok(clinic.address.includes(house.city));
+    }
   });
 });

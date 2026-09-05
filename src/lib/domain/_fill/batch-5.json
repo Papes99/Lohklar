@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ck-db-norddeich",
+    "phone": "04931 985-0",
+    "email": "info.klinik-norddeich@dbkg.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://dbkg.de/kliniken/dr-becker-klinik-norddeich/impressum",
+    "note": "Impressum: Tel. (0 49 31) 9 85-0, info.klinik-norddeich@dbkg.de. Zimmerseite: komfortable Einzelzimmer, alle mit eigenem Bad; keine Zweibett als Regel publiziert."
+  },
+  {
+    "id": "ck-diana",
+    "phone": "05821 80-0",
+    "email": "info@diana-klinik.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.diana-klinik.de/ihr-aufenthalt/komfort-service",
+    "note": "Kontakt/Impressum: 05821 80-0, info(at)diana-klinik.de. Psychosomatik (wie Orthopädie, Neurologie Phase D): Patientenzimmer allesamt Einzelzimmer; Zweibett nur Neurologie Phase C und Geriatrie."
+  },
+  {
+    "id": "ck-diessen",
+    "phone": "08807 2251-0",
+    "email": "info-diessen@artemed.de",
+    "room": "zweibett-plus",
+    "photoUrl": "https://www.psychosomatik-diessen.de/fileadmin/_processed_/9/b/csm_psychosomatische-klinik-kloster-diessen-eingang_6622481653.jpg",
+    "source": "https://www.psychosomatik-diessen.de/aufenthalt/haus-und-umgebung/patientenzimmer",
+    "note": "Gelistete Domain klinik-kloster-diessen.de DNS tot; aktuelle offizielle Seite psychosomatik-diessen.de. Zentrale T 08807 2251-0. Zimmer: 1-, 2- und 3-Bettzimmer."
+  },
+  {
+    "id": "ck-drv-damp-psom",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-baltic.de/",
+    "note": "Offizielle Domain reha-klinik-baltic.de: DNS NXDOMAIN. Keine Nachfolger-Seite der DRV-Klinik Baltic (Seute-Deern-Ring 1) gefunden. Nicht mit VITREA Rehaklinik Damp (Ring 30) vermischen."
+  },
+  {
+    "id": "ck-drv-frankenhausen",
+    "phone": "034671 58-0",
+    "email": "reha-klinik.frankenhausen@drv-bund.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-frankenhausen.de/klinik/frankenhausen/unsere_klinik/ausstattung",
+    "note": "Startseite und Ausstattung: Tel. 034671 58-0, Mail reha-klinik.frankenhausen@drv-bund.de. „verfügt über 196 Einzelzimmer.“ Keine Zweibett als Regel publiziert."
+  },
+  {
+    "id": "ck-drv-friedrichshoehe",
+    "phone": "05281 169-0",
+    "email": "info@rehazentrum-bad-pyrmont.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": null,
+    "source": "https://friedrichshoehe.rehazentrum-badpyrmont.de/ihr-aufenthalt/ihre-rehabilitation-bei-uns/",
+    "note": "www.rehazentrum-bad-pyrmont.de SSL-Hostmismatch; offiziell friedrichshoehe.rehazentrum-badpyrmont.de. Rezeption 05281 169 0, info@rehazentrum-bad-pyrmont.de. „überwiegend in Einzelzimmern, in Ausnahmefällen auch in Doppelzimmern“; Startseite 177 Einzelzimmer."
+  },
+  {
+    "id": "ck-drv-hellbachtal",
+    "phone": "04542 804-0",
+    "email": "reha-klinik.hellbachtal@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-hellbachtal.de/klinik/hellbachtal/unsere_klinik/ausstattung",
+    "note": "Zentrale 04542 804-0, Mail reha-klinik.hellbachtal@drv-bund.de. Ausstattung: 192 Einzelzimmer und Doppelzimmer; FAQ: Einzelzimmer selbstverständlich, Doppelzimmer für Begleitperson/Paare."
+  },
+  {
+    "id": "ck-drv-kurhessen",
+    "phone": "05652 953-0",
+    "email": "klinik-kurhessen@drv-hessen.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.klinik-kurhessen.de/klinik/kurhessen/unsere_klinik/ausstattung",
+    "note": "Tel. 05652 953-0, klinik-kurhessen@drv-hessen.de (Patientenverwaltung auch patdv-klinik-kurhessen@drv-hessen.de). Haus Werra: Unterbringung in Einzelzimmern, begrenzte Anzahl Doppelzimmer für Paare."
+  },
+  {
+    "id": "ck-drv-lipperland",
+    "phone": "05222 62-0",
+    "email": "reha-klinik.lipperland@drv-bund.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-lipperland.de/klinik/lipperland/unsere_klinik/ausstattung",
+    "note": "Tel. 05222 62-0, reha-klinik.lipperland@drv-bund.de. Ausstattung: 166 Einzelzimmer. FAQ: Einzelzimmer selbstverständlich."
+  },
+  {
+    "id": "ck-drv-moelln-helms",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-helms.de/",
+    "note": "Offizielle Domain reha-klinik-helms.de: DNS NXDOMAIN. Reha-Zentrum Mölln führt öffentlich nur Hellbachtal und Föhrenkamp. Keine aktuelle offizielle Seite der Klinik Helms."
+  },
+  {
+    "id": "ck-drv-werra",
+    "phone": "05652 953-0",
+    "email": "klinik-kurhessen@drv-hessen.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.klinik-kurhessen.de/klinik/kurhessen/unsere_klinik/ausstattung",
+    "note": "reha-klinik-werra.de leitet auf Klinik Kurhessen. Seit 01.01.2025 Haus Werra der DRV Hessen. Kontakt der Nachfolgerseite: 05652 953-0, klinik-kurhessen@drv-hessen.de. Zimmer: Einzelzimmer, Doppelzimmer begrenzt für Paare."
+  },
+  {
+    "id": "ck-drv-wingertsberg",
+    "phone": "06172 104-0",
+    "email": "reha-klinik.wingertsberg@drv-bund.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": null,
+    "source": "https://www.reha-klinik-wingertsberg.de/klinik/wingertsberg/unsere_klinik/ausstattung",
+    "note": "Tel. 06172 104-0, reha-klinik.wingertsberg@drv-bund.de. 209 Einzelzimmer und 10 Doppelzimmer. FAQ: Einzelzimmer selbstverständlich, Doppelzimmer für Begleitpersonen."
+  },
+  {
+    "id": "ck-eifelklinik",
+    "phone": "06572 925-01",
+    "email": "redaktion@eifelklinik.de",
+    "room": "einbett",
+    "photoUrl": "https://eifelklinik.de/dw/uploads/sites/5/2024/12/drv-rheinland-klinikkette-headerbild-eifelklinik-startseite-1423x747px-02.webp",
+    "source": "https://eifelklinik.de/aufenthalt/vor-ort/unterbringung-und-verpflegung/",
+    "note": "Zentrale 06572 / 925-01, redaktion@eifelklinik.de. 205 Einzelzimmer; Einladungsbroschüre: Unterbringung im Einzelzimmer garantiert. Keine Begleitperson im Haus."
+  },
+  {
+    "id": "ck-enzensberg",
+    "phone": "08362 12-0",
+    "email": "info@fachklinik-enzensberg.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.fachklinik-enzensberg.de/fur-patienten-angehoerige/waehrend-des-aufenthalts",
+    "note": "Kontakt: 08362 12-0, info@fachklinik-enzensberg.de. Unterbringung: Einzel- oder Zweibettzimmer; Premium-Einzelzimmer als Wahlleistung EnzensbergPLUS."
+  },
+  {
+    "id": "ck-franziska",
+    "phone": "0671 8820-0",
+    "email": "franziska-stift@ctt-reha.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.ctt-reha.de/standorte/st-franziska-stift/",
+    "note": "Standortseite: 0671 8820-0, franziska-stift@ctt-reha.de. Text nennt „einladende Einzelzimmer“, ohne Inventar oder Regel Zweibett/Mehrbett. Deshalb Zimmerart unbekannt."
+  },
+  {
+    "id": "ck-gelderland",
+    "phone": "02831 137-0",
+    "email": "verwaltung@gelderlandklinik.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.gelderlandklinik.de/impressum",
+    "note": "Impressum/Start: 02831 137-0, verwaltung@gelderlandklinik.de. Offizielle Seiten ohne publizierte Zimmerart (Einzel/Zweibett)."
+  },
+  {
+    "id": "ck-ginsterhof",
+    "phone": "04108 598-0",
+    "email": "info@ginsterhof.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://ginsterhof.de/impressum/",
+    "note": "Impressum: 04108 598-0, info@ginsterhof.de. Komfortstation 16 Einzel- und 3 Doppelzimmer; Regelunterbringung der übrigen Stationen auf der offiziellen Seite nicht publiziert."
+  },
+  {
+    "id": "ck-groenenbach",
+    "phone": "08334 981-100",
+    "email": "info.bad-groenenbach@vitrea-gesundheit.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.vitrea-gesundheit.de/fileadmin/Kliniken_Bad-Groenenbach/Startseite/VITREA_Bad_Groenenbach_1920x900px_D__05.jpg",
+    "source": "https://www.vitrea-gesundheit.de/reha/bad-groenenbach/unsere-klinik/impressum",
+    "note": "Redirect von /bad-groenenbach auf /reha/bad-groenenbach/. Impressum: +49 8334 981-100, info.bad-groenenbach@vitrea-gesundheit.de. Ausstattung ohne Einzel-/Zweibett-Regel."
+  },
+  {
+    "id": "ck-hardtwald-i",
+    "phone": "05626 87-0",
+    "email": "info@hardtwaldklinik1.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.wicker.de/kliniken/hardtwaldklinik-i/ihr-aufenthalt/",
+    "note": "vamed-gesundheit.de/…/hardtwaldklinik-i/ 404; offiziell wicker.de. Tel. 05626 870, info@hardtwaldklinik1.de. „verfügt ausschließlich über Einzelzimmer mit Dusche und Toilette.“"
+  },
+  {
+    "id": "ck-hardtwald-ii-psom",
+    "phone": "05626 88-0",
+    "email": "ca_sekretariat_reha@hwk2.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.wicker.de/kliniken/hardtwaldklinik-ii/ihr-aufenthalt/",
+    "note": "vamed-gesundheit.de-URL 404; offiziell wicker.de. tel 05626 880. „All unsere Zimmer sind Einzelzimmer.“ Kein allgemeines info@; Chefarztsekretariat Reha ca_sekretariat_reha@hwk2.de auf der Klinikseite."
+  },
+  {
+    "id": "ck-haussee",
+    "phone": "039831 52-0",
+    "email": "info@klinik-am-haussee.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.klinik-am-haussee.de/files/fotos/slider/klinik_luft.jpg",
+    "source": "https://www.klinik-am-haussee.de/wohlf%C3%BChlaspekte.html",
+    "note": "Impressum 039831 52 0, info@klinik-am-haussee.de. Wohlfühlaspekte: „bieten wir Einzel- und Doppelzimmer“."
+  },
+  {
+    "id": "ck-heilbrunn",
+    "phone": "08046 18-0",
+    "email": "info@fachklinik-bad-heilbrunn.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.fachklinik-bad-heilbrunn.de/kontakt",
+    "note": "Kontakt: 08046 18-0 (nicht 23-0), info@fachklinik-bad-heilbrunn.de. Unterbringung: „Alle unsere Einzel- und Zweibettzimmer“; Premium-Einzelzimmer als Heilbrunn PLUS."
+  },
+  {
+    "id": "ck-heiligenfeld-bad-woerishofen",
+    "phone": "0971 84-0",
+    "email": "info@heiligenfeld.de",
+    "room": "zweibett",
+    "photoUrl": "https://www.heiligenfeld.de/wp-content/uploads/2024/07/211107_bw_aussen-1024x576.jpg",
+    "source": "https://www.heiligenfeld.de/kliniken/heiligenfeld-klinik-bad-woerishofen/haeufig-gestellte-fragen",
+    "note": "Aufnahme 0971 84-0, info@heiligenfeld.de. FAQ: PKV ausschließlich Einbett; GKV-Standard maximal Zweibettzimmer, kein Anspruch auf Einbett."
+  },
+  {
+    "id": "ck-heiligenfeld-berlin",
+    "phone": "0971 84-4444",
+    "email": "berlin@heiligenfeld.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.heiligenfeld.de/kliniken/heiligenfeld-klinik-berlin/haeufig-gestellte-fragen",
+    "note": "Klinik-Mail berlin@heiligenfeld.de; Patientenservice auch 0971 84-0 / info@heiligenfeld.de. FAQ wie Bad Wörishofen: PKV Einbett, GKV-Standard maximal Zweibett."
+  },
+  {
+    "id": "ck-heiligenfeld-familienklinik",
+    "phone": "0971 84-0",
+    "email": "info@heiligenfeld.de",
+    "room": "zweibett-plus",
+    "photoUrl": null,
+    "source": "https://www.heiligenfeld.de/kliniken/familienklinik-bad-woerishofen/haeufig-gestellte-fragen",
+    "note": "0971 84-0, info@heiligenfeld.de. FAQ: Einzel- und Doppelzimmer; Familienzimmer für zwei Eltern mit bis zu drei Kindern; Jugendliche 14–17 im Zweibettzimmer."
+  }
+]

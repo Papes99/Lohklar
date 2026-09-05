@@ -1,0 +1,554 @@
+[
+  {
+    "id": "ck-nordlicht",
+    "phone": "04342 789 112",
+    "email": "fachklinik@landesverein.de",
+    "room": null
+  },
+  {
+    "id": "ck-auwald",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-weserblick",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-bergstrasse",
+    "phone": "06151 999-0",
+    "email": "c.helmes@caritas-darmstadt.de",
+    "room": null
+  },
+  {
+    "id": "ck-rosenhoehe",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-eifelhoehe",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-lichtblick",
+    "phone": "0341-4624320",
+    "email": "info.wiesen@asklepios.com",
+    "room": null
+  },
+  {
+    "id": "ck-haffkueste",
+    "phone": "0 0 38203 440",
+    "email": "info@median-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-isargrund",
+    "phone": null,
+    "email": "elke.basser@hephata.de",
+    "room": "einbett-mehrheit"
+  },
+  {
+    "id": "ck-spreeaue",
+    "phone": "030 365030",
+    "email": "kontakt.berlin-kladow@median-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-teutoburg",
+    "phone": "05241 502-0",
+    "email": "info@lwl-klinik-guetersloh.de",
+    "room": null
+  },
+  {
+    "id": "ck-mainbogen",
+    "phone": "09228-9968-0",
+    "email": "info-immanuel@dgd-stiftung.de",
+    "room": null
+  },
+  {
+    "id": "ck-alsterufer",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-muenchwies",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-berus",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-roseneck",
+    "phone": "08051 68-100299",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-heiligenfeld",
+    "phone": "0971 84-4195",
+    "email": "info@heiligenfeld.de",
+    "room": null
+  },
+  {
+    "id": "ck-glotterbad",
+    "phone": null,
+    "email": "info@rehaklinik-glotterbad.de",
+    "room": null
+  },
+  {
+    "id": "ck-furth",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-seehof",
+    "phone": "03328 345-0",
+    "email": "reha-klinik.seehof@drv-bund.de",
+    "room": null
+  },
+  {
+    "id": "ck-tannenhof",
+    "phone": null,
+    "email": "zentrale@tannenhof.de",
+    "room": null
+  },
+  {
+    "id": "ck-oldenfelde",
+    "phone": "040 200010 1200 /",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-borkum",
+    "phone": "04922 302 - 0",
+    "email": "reha-klinik.borkumriff@drv-bund.de",
+    "room": null
+  },
+  {
+    "id": "ck-erlengrund",
+    "phone": "05331 8852 0",
+    "email": "info@lukas-werk.de",
+    "room": null
+  },
+  {
+    "id": "ck-sonnenberg",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-nauheim",
+    "phone": null,
+    "email": "s.igelmund@salus-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-richelsdorf",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-waren",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-driburg",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-holthausen",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-ratingen",
+    "phone": "02102 443300",
+    "email": "ordenswerke@deutscher-orden.de",
+    "room": null
+  },
+  {
+    "id": "ck-fredeburg",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-thonberg",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-elbingerode",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-bramstedt",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-salza",
+    "phone": "0781-932036-0",
+    "email": "info@celenus-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-burgklinik",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-motzen",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-vitus",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-udersleben",
+    "phone": null,
+    "email": "s.igelmund@salus-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-hainberg",
+    "phone": "0 6621 173-0",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-flechtingen",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-achertal",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-aggerblick",
+    "phone": "02206 95 22 0",
+    "email": "aggerblick@drogenhilfe.koeln",
+    "room": null
+  },
+  {
+    "id": "ck-alpenland",
+    "phone": "08061 28142-0",
+    "email": "ordenswerke@deutscher-orden.de",
+    "room": null
+  },
+  {
+    "id": "ck-altenkirchen",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-altenpost",
+    "phone": "07447 9465 - 0",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-annenhof",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-boeddiger",
+    "phone": "0561 7395039",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-bornheim-schloss",
+    "phone": "09355 97673-0",
+    "email": "soziotherapieverbund-spessart@deutscher-orden.de",
+    "room": null
+  },
+  {
+    "id": "ck-bruderhilfe",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-bussmannshof",
+    "phone": "02327 9754-0",
+    "email": "kordula.schadwell@bussmannshof.de",
+    "room": null
+  },
+  {
+    "id": "ck-doerenhof",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-eichelsdorf",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-eschenberg",
+    "phone": "02242 9498 0",
+    "email": "info@reha-ewk.de",
+    "room": null
+  },
+  {
+    "id": "ck-eschenburg",
+    "phone": "0 0 2774 9134-0",
+    "email": "info@median-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-fachklinik-meckenheim",
+    "phone": null,
+    "email": "fachklinik@vfg-bonn.de",
+    "room": null
+  },
+  {
+    "id": "ck-foursteps",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-freiolsheim",
+    "phone": "0761 21807-0",
+    "email": "info@agj-freiburg.de",
+    "room": null
+  },
+  {
+    "id": "ck-friedrichshof",
+    "phone": "07130 4733 47",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-germerode",
+    "phone": "05657 / 7404",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-grafrath",
+    "phone": "08020 906-0",
+    "email": "ordenswerke@deutscher-orden.de",
+    "room": null
+  },
+  {
+    "id": "ck-haseems",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-heidehof",
+    "phone": "03722 46937 0",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-heimathof",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-heimathof-ge",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-hirtenstein",
+    "phone": "08326 311-0",
+    "email": "ordenswerke@deutscher-orden.de",
+    "room": null
+  },
+  {
+    "id": "ck-hohenfels",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-hohenrodt",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-weitenau",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-johannesbad-adaption-dortmund",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-kamillushaus",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-kraichtal",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-legau",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-liblar",
+    "phone": "02235 92 70 90",
+    "email": "info@fachklinik-liblar.de",
+    "room": null
+  },
+  {
+    "id": "ck-lindenhof",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-loerrach-bwlv",
+    "phone": "07843 949 141",
+    "email": "info@bw-lv.de",
+    "room": null
+  },
+  {
+    "id": "ck-ludwigsmuehle",
+    "phone": "06341 / 5202113",
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-lwl-muensterland",
+    "phone": "0251 91555-0",
+    "email": "lwl-klinik-muenster@lwl.org",
+    "room": null
+  },
+  {
+    "id": "ck-mackenzell",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-marienstift",
+    "phone": "05493-502 0",
+    "email": "info@sucht-fachkliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-martha-stz",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-median-daun-adaption",
+    "phone": null,
+    "email": "daun-kontakt@median-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-median-daun-rosenberg",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-median-mecklenburg",
+    "phone": "0 0 38872 91-0",
+    "email": "info@median-kliniken.de",
+    "room": null
+  },
+  {
+    "id": "ck-median-odenwald",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-median-ptk-liebenwerda",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-median-rhein-haardt",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-median-roemhild",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-median-wied",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-median-wigbertshoehe",
+    "phone": null,
+    "email": null,
+    "room": null
+  },
+  {
+    "id": "ck-ostberge",
+    "phone": "02304-941200",
+    "email": null,
+    "room": null
+  }
+]

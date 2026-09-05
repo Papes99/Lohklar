@@ -1,0 +1,227 @@
+[
+  {
+    "id": "ck-hohenfels",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.salus-kliniken.de/hohenfels/",
+    "note": "Offizielle URL liefert 404. salus-kliniken.de/startseite und /ambulanz/ueber-uns/standorte listen Schloss Hohenfels/Stockach nicht. Keine veröffentlichten Kontakte/Zimmer auf der Trägerseite."
+  },
+  {
+    "id": "ck-hohenrodt",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.fachklinik-hohenrodt.de/",
+    "note": "Offizielle Domain leitet 301 auf https://www.zieglersche.de/suchthilfe/stationaere-therapie-fachkliniken-und-adaption/fachklinik-ringgenhof.html (404). Keine aktuelle Klinikseite, daher keine veröffentlichten Felder."
+  },
+  {
+    "id": "ck-weitenau",
+    "phone": "07627 7085-0",
+    "email": "weitenau@bw-lv.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.bw-lv.de/behandlung/stationaere-angebote-und-fachkliniken/fachklinik-haus-weitenau/",
+    "note": "Zentrale 07627 7085-0, Aufnahme 07627 7085-111, Fax 07627 7085-130. E-Mail auf der Seite als 'weitenau bw-lv de' veröffentlicht. Zimmerart nicht genannt."
+  },
+  {
+    "id": "ck-johannesbad-adaption-dortmund",
+    "phone": "+49 231 7109-5588",
+    "email": "info.dost@johannesbad.com",
+    "room": "einbett",
+    "photoUrl": "https://www.johannesbad-medizin.com/fileadmin/assets_standorte/dortmund/johannesbad-adaption-haus.jpg",
+    "source": "https://www.johannesbad-medizin.com/adaption-dortmund",
+    "note": "Kontaktseite /dortmund-adaption/service/kontakt-anfahrt: Hacheneyer Str. 180, Tel. +49 231 7109 5588, info.dost@johannesbad.com. Zimmerseite: 40 Einzelzimmer / Einzelappartements mit Balkon und Bad."
+  },
+  {
+    "id": "ck-kaisberg",
+    "phone": "02331 3731-501",
+    "email": "kaisberg@awo-ha-mk.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": "https://www.awo-ha-mk.de/fileadmin/_processed_/1/6/csm_klinik-kaisberg_7a89946132.jpg",
+    "source": "https://www.awo-ha-mk.de/sucht-und-straffaelligenhilfe/medizinische-rehabilitation",
+    "note": "Aufnahmebüro 02331 3731-501, kaisberg@awo-ha-mk.de. Stationär: 1-Bett-Zimmer mit eigenem Bad und 2-Bett-Zimmer aus zwei 1-Bett-Wohneinheiten mit gemeinsamem Bad."
+  },
+  {
+    "id": "ck-kamillushaus",
+    "phone": "+49 201 8406-0",
+    "email": "kamillushaus@contilia.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.contilia.de/einrichtungen/fachklinik-kamillushaus-heidhausen.html",
+    "note": "kamillushaus.de ist Domainverkauf ('This domain is for sale'). Kontakte vom Träger Contilia: Tel. +49 201 8406 0, kamillushaus@contilia.de. Aufnahme: aufnahme-he@contilia.de / +49 201 8406 140. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-kraichtal",
+    "phone": "07250 902-0",
+    "email": "info@kraichtal-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.kraichtal-kliniken.de/kliniken/fachklinik-haus-kraichtalblick/",
+    "note": "Haus Kraichtalblick Aufnahmebüro Fon 07250-902-0, info@kraichtal-kliniken.de, Sternackerstraße 46. 'Einzel- und Doppelzimmern mit eigenem Badezimmer' ohne Mehrheitsangabe."
+  },
+  {
+    "id": "ck-legau",
+    "phone": "08330 922-0",
+    "email": "info@fachklinik-legau.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.fachklinik-legau.de/",
+    "note": "Live-TLS aus der Sandbox fehlgeschlagen; Kontakt aus offizieller Seite (Wayback 2026-01/02 und Impressum): AWO-Fachklinik Legau, Leutkircher Str. 32, Tel. 08330/922-0, Fax 08330/922-10, info@fachklinik-legau.de. Zimmerart auf Lage-und-Ausstattung nicht genannt. Katalog-Tel. 08331 43001-0 ist AWO-Schwaben-Zentrale, nicht die Klinik."
+  },
+  {
+    "id": "ck-liblar",
+    "phone": "02235 927090",
+    "email": "info@fachklinik-liblar.de",
+    "room": "einbett-mehrheit",
+    "photoUrl": null,
+    "source": "https://www.telos-fachklinik-liblar.de/",
+    "note": "fachklinik-liblar.de leitet auf telos-fachklinik-liblar.de. Tel. 02235 92 70 90, info@fachklinik-liblar.de. Unterbringung: 48 vollstationäre Einzelzimmer, 6 Doppelzimmer ('größtenteils Einzelzimmer')."
+  },
+  {
+    "id": "ck-lindenhof",
+    "phone": "07664 9711-0",
+    "email": "lindenhof@agj-freiburg.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://agj-fachklinik-lindenhof.de/",
+    "note": "reha-klinik-lindenhof.de DNS unbekannt; rehaklinik-lindenhof.de zeigt auf agj-fachklinik-lindenhof.de. Tel. 07664 9711-0, Reha-Support 07664 9711-11, lindenhof@agj-freiburg.de. Lindenhof-ABC: 'Sie wohnen in einem Einzelzimmer. Mütter wohnen mit ihren Kindern gemeinsam in einem Zimmer.'"
+  },
+  {
+    "id": "ck-loerrach-bwlv",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.bw-lv.de/",
+    "note": "Angegebene URL ist nur die Träger-Startseite. Keine veröffentlichte stationäre Rehabilitationseinrichtung Gretherstraße 34. Fachstelle Sucht Lörrach (Tumringer Str. 229, 07621 162349-0, fs-loerrach@bw-lv.de) ist Beratungsstelle, nicht diese Reha."
+  },
+  {
+    "id": "ck-ludwigsmuehle",
+    "phone": "06349 9969-0",
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.ludwigsmuehle.de/angebote/fachkliniken/fachklinik-villa-maria",
+    "note": "Vogesenstraße 18 / Ingenheim ist auf der Trägerseite Fachklinik Villa Maria, Tel. 06349 9969-0 (Fax 06349 9969-215). E-Mail JS-geschützt, nicht lesbar. Fachklinik Ludwigsmühle selbst steht unter Waldstraße, 67363 Lustadt, Tel. 06347 7009-0. Zimmerart nicht veröffentlicht."
+  },
+  {
+    "id": "ck-lwl-muensterland",
+    "phone": "0251 91555-0",
+    "email": "lwl-klinik-muenster@lwl.org",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.lwl-klinik-muenster.de/de/",
+    "note": "Telefonzentrale und E-Mail der LWL-Klinik Münster. Keine eigene Seite des Rehabilitationszentrums Münsterland mit Zimmerart. Klinikweite Ausstattung nennt Ein-/Zwei-/Drei-Bett-Zimmer, das ist nicht eindeutig dem Rehazentrum zuzuordnen."
+  },
+  {
+    "id": "ck-mackenzell",
+    "phone": null,
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.schloss-mackenzell.de/",
+    "note": "Offizielle Domain TLS-Fehler (tlsv1 alert internal error); Wayback 2025 nur Capture-Hülle. Keine lesbare Veröffentlichung von Telefon, E-Mail oder Zimmerart."
+  },
+  {
+    "id": "ck-marienstift",
+    "phone": "05493 502-0",
+    "email": "info@sucht-fachkliniken.de",
+    "room": "unbekannt",
+    "photoUrl": null,
+    "source": "https://www.sucht-fachkliniken.de/marienstift/kontakt/",
+    "note": "Standort Tel. 05493-502 0, info@sucht-fachkliniken.de. Aufnahmekoordination 05493-502 333, aufnahme@sucht-fachkliniken.de. Zimmerart auf Klinik-/Kontaktseiten nicht genannt."
+  },
+  {
+    "id": "ck-martha-stz",
+    "phone": "040 538077-0",
+    "email": "fachklinik.stz@martha-stiftung.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.martha-stiftung.de/web/pages/suchterkrankungen/stzFachklinik.ftl",
+    "note": "STZ Fachklinik Tel. (040) 53 80 77-0, fachklinik.stz@martha-stiftung.de; Aufnahme 040 538077-13, aufnahme.stz-klinik@martha-stiftung.de. 'Sie haben Einzelzimmer'; Eltern-Kind: große Einzelzimmer bzw. Apartments."
+  },
+  {
+    "id": "ck-median-daun-adaption",
+    "phone": "+49 6592 2010",
+    "email": "daun-kontakt@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/rehazentrum-daun-adaption/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Klinikkontakt +49 6592 2010, daun-kontakt@median-kliniken.de (Klinikstartseite). Leben & Wohnen Adaption: 'Wohnumfeld mit Einzelzimmern und eigenem Bad'."
+  },
+  {
+    "id": "ck-median-daun-rosenberg",
+    "phone": "+49 6592 2010",
+    "email": null,
+    "room": "einbett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/rehazentrum-daun-am-rosenberg/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/rehazentrum-daun-am-rosenberg/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Tel. +49 6592 2010 auf Klinik-/Kontaktseite. Keine E-Mail im HTML der Start-/Kontakt-/Wohnenseite. Leben & Wohnen: 'wohnen Sie in modernen Einzelzimmern mit eigenem Bad'."
+  },
+  {
+    "id": "ck-klosterwald",
+    "phone": "036601 859-0",
+    "email": "info@fachklinik-klosterwald.de",
+    "room": "unbekannt",
+    "photoUrl": "https://fachklinik-klosterwald.de/wp-content/uploads/2024/02/Suchtklinik-Fachklinik-Klosterwald-Bethanien-Bad-Klosterlausnitz-004_Luftaufnahme.jpg",
+    "source": "https://fachklinik-klosterwald.de/",
+    "note": "Tel. 03 66 01 859-0, info@fachklinik-klosterwald.de. Aktuelle Zimmerquote nicht genannt; nur Planung 'Erweiterung für eine 100% Einzelzimmerquote'."
+  },
+  {
+    "id": "ck-median-dormagen",
+    "phone": "+49 2133 266-00",
+    "email": "dormagen-kontakt@median-kliniken.de",
+    "room": "einbett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-dormagen/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Tel. +49 2133 266-00, dormagen-kontakt@median-kliniken.de. 'grundsätzlich einen von unseren 112 Einzelzimmer'."
+  },
+  {
+    "id": "ck-median-mecklenburg",
+    "phone": "+49 38872 91-0",
+    "email": "mecklenburg-kontakt@median-kliniken.de",
+    "room": "unbekannt",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-mecklenburg/bilder/Header_Startseite_01.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-mecklenburg/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Tel. +49 38872 91-0, mecklenburg-kontakt@median-kliniken.de. 'Einzel- und Doppelzimmern mit Dusche und WC' ohne Mehrheitsangabe."
+  },
+  {
+    "id": "ck-median-odenwald",
+    "phone": "+49 6163 74-0",
+    "email": null,
+    "room": "unbekannt",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/klinik-odenwald-rehabilitation/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/klinik-odenwald-rehabilitation/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Tel. +49 6163 740 auf Klinikseite. Keine E-Mail im HTML. 'überwiegend in … Einzelzimmer bzw. Doppelzimmer' ohne Zahlenverhältnis."
+  },
+  {
+    "id": "ck-median-ptk-liebenwerda",
+    "phone": "+49 35341 90-2136",
+    "email": "kontakt.ptk@median-kliniken.de",
+    "room": "kein-einbett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/psychotherapeutische-klinik-bad-liebenwerda/bilder/Header_Startseite.jpg",
+    "source": "https://www.median-kliniken.de/de/psychotherapeutische-klinik-bad-liebenwerda/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Tel. +49 35341 90-2136, kontakt.ptk@median-kliniken.de. Leben & Wohnen: 'Sämtliche Doppelzimmer … Alle verfügen über ein eigenes Bad.' Einbett nicht als Angebot genannt."
+  },
+  {
+    "id": "ck-median-rhein-haardt",
+    "phone": "+49 6322 794-305",
+    "email": null,
+    "room": "zweibett",
+    "photoUrl": "https://www.median-kliniken.de/fileadmin/lokale_dateien/rhein-haardt-klinik-bad-duerkheim/bilder/Startseite_Rhein-Haardt-Klinik.jpg",
+    "source": "https://www.median-kliniken.de/de/rhein-haardt-klinik-bad-duerkheim/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Tel. +49 6322 794-305 auf der Klinikseite (nicht 794-338). Keine E-Mail im HTML. Regel: Zweibettzimmer; Einzelzimmer 'in bestimmten Fällen, z. B. aus medizinischen Gründen oder nach Einzelfallentscheidung'."
+  },
+  {
+    "id": "ck-median-roemhild",
+    "phone": "+49 36948 87-0",
+    "email": "roemhild-kontakt@median-kliniken.de",
+    "room": "zweibett",
+    "photoUrl": null,
+    "source": "https://www.median-kliniken.de/de/klinik-roemhild/ihr-aufenthalt/waehrend-der-reha/leben-wohnen/",
+    "note": "Tel. +49 36948 87-0, roemhild-kontakt@median-kliniken.de. '33 Ein- oder 56 Zweibettzimmern' → Zweibett als Mehrheit, Einbett vorhanden."
+  }
+]
