@@ -1,7 +1,8 @@
 import {
   WAIT_DISCLAIMER,
   bedarfLabel,
-  extraLabel,
+  coverAuftragTag,
+  coverSubstanceTags,
   indicationLabel,
   stateName,
   type Clinic,
@@ -9,7 +10,8 @@ import {
   type MatchSnapshot,
   type SteckbriefKey,
   type WaitEstimate,
-} from "./types";
+} from "./types.ts";
+import { coverageLabel, normalizeAnswers } from "./matching.ts";
 
 export const DOCUMENT_DISCLAIMER =
   "Nur Orientierung für die Fachkraft. Keine Diagnose, keine Therapieentscheidung, keine Aufnahmezusage. Wartezeiten = Schätzung.";
@@ -31,6 +33,8 @@ export type DocumentHouse = {
   hints: string;
   photo: DocumentPhoto | null;
   datenstand: string;
+  auftrag?: string;
+  substances?: string[];
 };
 
 export type DocumentExtra = {
@@ -84,7 +88,8 @@ export function isDocumentBody(value: unknown): value is DocumentBody {
   );
 }
 
-export function formulateNeeds(answers: KlaromatAnswers): string {
+export function formulateNeeds(raw: KlaromatAnswers): string {
+  const answers = normalizeAnswers(raw);
   const parts: string[] = [];
   parts.push(`Die Orientierung gilt ${indicationPhrase(answers.indication)}.`);
 
@@ -98,10 +103,36 @@ export function formulateNeeds(answers: KlaromatAnswers): string {
     );
   }
 
+  if (answers.personGender === "frau") {
+    parts.push("Die Person ist eine Frau — männerspezifische Häuser scheiden aus.");
+  } else if (answers.personGender === "mann") {
+    parts.push("Die Person ist ein Mann — frauenspezifische Häuser scheiden aus.");
+  }
+
+  if (answers.payer === "drv") {
+    parts.push("Kostenträger der Suche: Deutsche Rentenversicherung.");
+  } else if (answers.payer === "gkv") {
+    parts.push("Kostenträger der Suche: gesetzliche Krankenkasse.");
+  }
+
+  if (answers.substitutionNeed === "ja") {
+    parts.push("Substitution muss im Haus weitergeführt werden.");
+  }
+
+  if (answers.traumaNeed === "ja" && !answers.bedarfe.includes("trauma")) {
+    parts.push("Ein ausgewiesener Traumafokus ist gewünscht.");
+  }
+
   if (answers.states.length > 0) {
     parts.push(`Regionale Eingrenzung: ${answers.states.map(stateName).join(", ")}.`);
   } else {
     parts.push("Keine regionale Eingrenzung — bundesweit offen.");
+  }
+
+  if (answers.distancePref === "nah") {
+    parts.push("Wohnortnahe Lage ist gewünscht.");
+  } else if (answers.distancePref === "distanz-ok") {
+    parts.push("Distanz zum gewohnten Milieu ist gewollt.");
   }
 
   const settingBits: string[] = [];
@@ -114,8 +145,35 @@ export function formulateNeeds(answers: KlaromatAnswers): string {
     parts.push(`Gewünschtes Setting: ${settingBits.join(", ")}.`);
   }
 
-  if (answers.ahb) {
+  if (answers.ahb || answers.access === "ahb") {
     parts.push("Anschlussheilbehandlung ist vorgesehen.");
+  } else if (answers.access === "heilverfahren") {
+    parts.push("Heilverfahren nach Kostenzusage ist vorgesehen.");
+  }
+
+  if (answers.roomPref === "einbett") {
+    parts.push("Einbettzimmer ist gewünscht.");
+  } else if (answers.roomPref === "kein-mehrbett") {
+    parts.push("Kein Mehrbettzimmer.");
+  }
+
+  if (answers.mobilityNeed === "ja") {
+    parts.push("Barrierefreiheit ist erforderlich.");
+  }
+  if (answers.childrenNeed === "ja") {
+    parts.push("Kinder sollen mit ins Haus (Eltern-Kind / Mutter-Kind).");
+  }
+  if (answers.familyWorkNeed === "ja") {
+    parts.push("Angehörigenarbeit ist gewünscht.");
+  }
+  if (answers.youngAdultNeed === "ja") {
+    parts.push("Eine Gruppe für junge Erwachsene ist gewünscht.");
+  }
+
+  if (answers.waitPref === "schnell") {
+    parts.push("Eher zeitnahe Aufnahme ist gewünscht. Wartezeiten bleiben Schätzungen.");
+  } else if (answers.waitPref === "passgenau") {
+    parts.push("Passgenaues Haus ist wichtiger als eine kurze Wartezeit.");
   }
 
   if (answers.durationPref === "kurz") {
@@ -124,12 +182,6 @@ export function formulateNeeds(answers: KlaromatAnswers): string {
     parts.push("Die Fachkraft sucht eine mittlere Behandlungsdauer.");
   } else if (answers.durationPref === "lang") {
     parts.push("Die Fachkraft sucht eine längere Behandlungsdauer.");
-  }
-
-  if (answers.extras.length > 0) {
-    parts.push(
-      `Weitere Merkmale der Suche: ${answers.extras.map(extraLabel).join(", ")}.`,
-    );
   }
 
   const note = answers.notes.trim();
@@ -159,8 +211,19 @@ export function formulateFit(
   answers: KlaromatAnswers,
 ): string {
   const place = `${clinic.city}, ${clinic.stateName}`;
+  const blocking = match.blocking ?? [];
+  if (blocking.length > 0) {
+    return `${clinic.name} in ${place} deckt zentrale Anforderungen nicht. ${blocking[0]} Lohklar sagt keine Aufnahme zu.`;
+  }
+  const rank = match.rank ? `Rang ${match.rank}. ` : "";
+  const asked = match.asked ?? 0;
+  if (asked > 0) {
+    const misses = match.reasons.filter((reason) => reason.status === "miss").map((reason) => reason.criterion);
+    const gap = misses.length ? ` Offene Lücken: ${misses.join(", ")}.` : "";
+    return `${rank}${clinic.name} in ${place} deckt ${coverageLabel(match)}.${gap} Lohklar sagt keine Aufnahme zu.`;
+  }
   const hits = match.reasons.filter((reason) => reason.status === "match");
-  const extra = hits.find((reason) => reason.criterion !== "Indikationsbereich");
+  const extra = hits.find((reason) => reason.criterion !== "Indikation" && reason.criterion !== "Indikationsbereich");
   const detail = (extra ?? hits[0])?.detail.replace(/\.$/, "") ??
     `${indicationLabel(answers.indication)} ist im Profil vorgesehen`;
   return `${clinic.name} in ${place} liegt in dieser Rangfolge, weil ${lowerFirst(detail)}.`;
@@ -255,6 +318,8 @@ export function buildHouse(
     hints: houseHints(clinic),
     photo: exteriorPhoto(clinic),
     datenstand: clinic.datenstand.geprueft,
+    auftrag: coverAuftragTag(clinic),
+    substances: coverSubstanceTags(clinic),
   };
 }
 

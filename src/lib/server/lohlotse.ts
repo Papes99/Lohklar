@@ -302,7 +302,7 @@ async function askGrok(args: {
 
 Nur der Arbeitsname ${args.clientName}.
 
-Musterkatalog (ohne Wartezeit-Zahlen — Zahlen gehören nie in den Fließtext):
+Klinikatalog (ohne Wartezeit-Zahlen — Zahlen gehören nie in den Fließtext):
 ${args.catalog}
 
 Aktueller Fallordner:

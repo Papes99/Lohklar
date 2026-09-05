@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Badge } from "@/components/ui/badge";
+import { CoverPhoto, SubstanceTags } from "@/components/clinic/cover-photo";
 import { WartezeitSchaetzung } from "@/components/wait/wartezeit-schaetzung";
 import {
-  indicationLabel,
+  WAIT_UNCERTAINTY_LABEL,
+  clinicCardTags,
+  coverAuftragTag,
   type ClinicWithWait,
 } from "@/lib/domain/types";
 
@@ -15,36 +17,28 @@ export function ClinicCard({ clinic }: { clinic: ClinicWithWait }) {
       params={{ clinicId: clinic.id }}
       className="group flex flex-col overflow-hidden rounded-[var(--radius-xl)] bg-surface shadow-[var(--shadow-border)] transition-shadow duration-150 hover:shadow-[var(--shadow-border-hover)]"
     >
-      {photo?.imagePath ? (
-        <img
-          src={photo.imagePath}
-          alt={photo.alt}
-          className="aspect-photo h-40 w-full object-cover"
-          crossOrigin="anonymous"
-        />
-      ) : (
-        <div className="grid aspect-photo h-40 place-items-center bg-bg-subtle text-sm text-ink-muted">
-          Foto nicht verfügbar
-        </div>
-      )}
-      <div className="flex flex-1 flex-col gap-3 p-4">
-        <div>
+      <CoverPhoto
+        src={photo?.imagePath}
+        alt={photo?.alt ?? clinic.name}
+        className="aspect-photo h-40 w-full"
+      />
+      <div className="flex flex-1 flex-col px-4 pb-4 pt-3">
+        <SubstanceTags accent={coverAuftragTag(clinic)} tags={clinicCardTags(clinic)} />
+        <div className="mt-4">
           <h3 className="font-display text-xl tracking-tight text-ink group-hover:underline">
             {clinic.name}
           </h3>
-          <p className="text-sm text-ink-muted">
+          <p className="mt-1 text-sm text-ink-muted">
             {clinic.city}, {clinic.stateName}
           </p>
         </div>
-        <div className="flex flex-wrap gap-1.5">
-          {clinic.indicationAreas.map((area) => (
-            <Badge key={area} tone="primary">
-              {indicationLabel(area)}
-            </Badge>
-          ))}
-          {clinic.ahb ? <Badge>AHB</Badge> : null}
+        <div className="mt-auto pt-4">
+          <WartezeitSchaetzung estimate={clinic.wait} variant="chip" />
+          <SubstanceTags
+            className="mt-2"
+            tags={[`Unsicherheit ${WAIT_UNCERTAINTY_LABEL[clinic.wait.uncertainty]}`]}
+          />
         </div>
-        <WartezeitSchaetzung estimate={clinic.wait} variant="chip" />
       </div>
     </Link>
   );

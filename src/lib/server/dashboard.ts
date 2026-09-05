@@ -3,45 +3,59 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
 import { CLINIC_SEED } from "@/lib/domain/clinic-seed";
 import {
-  catalogPhotoStats,
-  periodRange,
-  type DashboardPeriod,
+  CATALOG_LOG,
+  catalogLogInRange,
+  housesAt,
+  type CatalogLogEntry,
+} from "@/lib/domain/catalog-log";
+import {
+  berlinTodayYmd,
+  berlinYmd,
+  buildSeries,
+  calendarMonthRange,
+  dashRange,
+  daysInBerlinMonth,
+  formatYmd,
+  parseYmd,
+  type DashView,
+  type SeriesPoint,
 } from "@/lib/domain/usage";
-import { indicationLabel, type Indication, type WaitEstimate } from "@/lib/domain/types";
-import { coerceWaitEstimate, summarizeWaitEstimates } from "@/lib/domain/wait-time";
 
-export type DashboardStats = {
-  period: DashboardPeriod;
+export type DashAction = {
+  at: string;
+  ymd: string;
+  label: string;
+};
+
+export type DashCalendarDay = {
+  ymd: string;
+  day: number;
+  usage: boolean;
+  update: boolean;
+};
+
+export type DashboardBoard = {
+  view: DashView;
+  date: string;
   fromYmd: string;
-  klaromatStarts: number;
-  runsCompleted: number;
-  runsDraft: number;
-  foldersNew: number;
-  runsFollowup: number;
-  documents: number;
-  exports: number;
-  clinicViews: number;
-  topClinics: { id: string; name: string; count: number }[];
-  indications: { id: Indication; label: string; count: number }[];
-  lohlotseChats: number;
-  lohlotseMessages: number;
-  lohlotseThreadsNamed: number;
-  lohlotseThreadsUnnamed: number;
-  steckbriefMerges: number;
-  waitShown: number;
-  waitRechenweg: number;
-  photosWithImage: number;
-  photosPlaceholder: number;
-  regionalSearches: number;
-  sessionsDesktop: number;
-  sessionsMobile: number;
-  sessionsNew: number;
-  sessionsReturning: number;
-  wait: WaitEstimate | null;
+  usersTotal: number;
+  usersActive: number;
+  usersNew: number;
+  me: number;
+  houses: number;
+  updates: number;
+  series: SeriesPoint[];
+  calendar: { year: number; month: number; days: DashCalendarDay[] };
+  actions: DashAction[];
+  log: CatalogLogEntry[];
 };
 
 function n(value: unknown): number {
   return Number(value ?? 0);
+}
+
+function isView(value: unknown): value is DashView {
+  return value === "day" || value === "month" || value === "year";
 }
 
 async function optional<T>(run: () => Promise<T>, fallback: T): Promise<T> {
@@ -52,206 +66,175 @@ async function optional<T>(run: () => Promise<T>, fallback: T): Promise<T> {
   }
 }
 
+function actionLabel(kind: string, clinicName: string | null): string {
+  if (kind === "clinic_view") return clinicName ? `Steckbrief ${clinicName}` : "Steckbrief";
+  if (kind === "wait_shown") return "Wartezeit";
+  if (kind === "wait_rechenweg") return "Rechenweg";
+  if (kind === "document_export") return "Export";
+  if (kind === "regional_search") return "Suche";
+  if (kind === "session") return "Sitzung";
+  if (kind === "run") return "Klar-o-Mat";
+  if (kind === "document") return "Dokument";
+  if (kind === "lohlotse") return "Lohlotse";
+  return "Aktion";
+}
+
+const NAMES = new Map(CLINIC_SEED.map((clinic) => [clinic.id, clinic.shortName]));
+
 export const getDashboard = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
-  .validator((input: { period?: DashboardPeriod } | undefined) => {
-    const period = input?.period;
-    if (period === "woche" || period === "monat" || period === "jahr") return { period };
-    return { period: "woche" as const };
+  .validator((input: { view?: string; date?: string } | undefined) => {
+    const view = isView(input?.view) ? input.view : ("month" as const);
+    const date =
+      typeof input?.date === "string" && parseYmd(input.date) ? input.date : berlinTodayYmd();
+    return { view, date };
   })
-  .handler(async ({ context, data }): Promise<DashboardStats> => {
+  .handler(async ({ context, data }): Promise<DashboardBoard> => {
     const sql = await getSql();
     const userId = context.userId;
-    const period = data.period;
-    const range = periodRange(period);
+    const range = dashRange(data.view, data.date);
+    const cal = calendarMonthRange(data.date);
     const from = range.from.toISOString();
+    const to = range.to.toISOString();
+    const calFrom = cal.from.toISOString();
+    const calTo = cal.to.toISOString();
+    const spanFrom = range.from <= cal.from ? range.from : cal.from;
+    const spanTo = range.to >= cal.to ? range.to : cal.to;
 
-    const counts = await sql<{
-      starts: number;
-      completed: number;
-      drafts: number;
-      folders: number;
-      followup: number;
-      documents: number;
-      regional: number;
-    }>`
-      select
-        (select count(*)::int from runs where user_id = ${userId} and created_at >= ${from}) as starts,
-        (select count(*)::int from runs
-          where user_id = ${userId} and created_at >= ${from}
-            and coalesce(status, 'fertig') in ('fertig', 'exportiert')) as completed,
-        (select count(*)::int from runs
-          where user_id = ${userId} and created_at >= ${from}
-            and coalesce(status, 'fertig') = 'entwurf') as drafts,
-        (select count(*)::int from case_folders
-          where user_id = ${userId} and created_at >= ${from}) as folders,
-        (select count(*)::int from runs
-          where user_id = ${userId} and created_at >= ${from} and run_number > 1) as followup,
-        (select count(*)::int from result_documents d
-          join runs r on r.id = d.run_id
-          where d.user_id = ${userId} and r.created_at >= ${from}) as documents,
-        (select count(*)::int from runs
-          where user_id = ${userId} and created_at >= ${from}
-            and jsonb_typeof(answers->'states') = 'array'
-            and jsonb_array_length(answers->'states') > 0) as regional
-    `;
-
-    const eventCounts = await optional(
+    const people = await optional(
       () =>
-        sql<{
-          clinic_views: number;
-          wait_shown: number;
-          wait_rechenweg: number;
-          exports: number;
-          desktop: number;
-          mobile: number;
-          sess_new: number;
-          sess_ret: number;
-        }>`
+        sql<{ users_total: number; users_new: number }>`
       select
-        count(*) filter (where kind = 'clinic_view')::int as clinic_views,
-        count(*) filter (where kind = 'wait_shown')::int as wait_shown,
-        count(*) filter (where kind = 'wait_rechenweg')::int as wait_rechenweg,
-        count(*) filter (where kind = 'document_export')::int as exports,
-        count(*) filter (where kind = 'session' and meta like 'desktop%')::int as desktop,
-        count(*) filter (where kind = 'session' and meta like 'mobile%')::int as mobile,
-        count(*) filter (where kind = 'session' and meta like '%|new')::int as sess_new,
-        count(*) filter (where kind = 'session' and meta like '%|returning')::int as sess_ret
-      from usage_events
-      where user_id = ${userId} and created_at >= ${from}
+        (select count(*)::int from "user" where "createdAt" < ${to}) as users_total,
+        (select count(*)::int from "user"
+          where "createdAt" >= ${from} and "createdAt" < ${to}) as users_new
     `,
       [],
     );
 
-    const indications = await sql<{ indication: string; n: number }>`
-      select answers->>'indication' as indication, count(*)::int as n
-      from runs
-      where user_id = ${userId} and created_at >= ${from}
-      group by 1
-      order by n desc
-    `;
-
-    const top = await optional(
-      () =>
-        sql<{ clinic_id: string; n: number }>`
-      select clinic_id, count(*)::int as n
-      from usage_events
-      where user_id = ${userId}
-        and kind = 'clinic_view'
-        and created_at >= ${from}
-        and clinic_id is not null
-      group by clinic_id
-      order by n desc
-      limit 5
-    `,
-      [],
-    );
-
-    const lotse = await optional(
-      () =>
-        sql<{
-          chats: number;
-          messages: number;
-          named: number;
-          unnamed: number;
-        }>`
-      select
-        (select count(distinct thread_id)::int from lohlotse_messages
-          where user_id = ${userId} and created_at >= ${from}) as chats,
-        (select count(*)::int from lohlotse_messages
-          where user_id = ${userId} and created_at >= ${from}) as messages,
-        (select count(*)::int from lohlotse_threads t
-          join case_folders f on f.id = t.folder_id
-          where t.user_id = ${userId} and t.created_at >= ${from}
-            and length(trim(f.client_name)) >= 2) as named,
-        (select count(*)::int from lohlotse_threads t
-          join case_folders f on f.id = t.folder_id
-          where t.user_id = ${userId} and t.created_at >= ${from}
-            and length(trim(f.client_name)) < 2) as unnamed
-    `,
-      [],
-    );
-
-    const merges = await optional(
+    const active = await optional(
       () =>
         sql<{ n: number }>`
-      select count(*)::int as n from lohlotse_merges
-      where user_id = ${userId} and created_at >= ${from} and undone = false
-    `,
-      [{ n: 0 }],
-    );
-    const waitRows = await optional(
-      () =>
-        sql<{ wait: unknown }>`
-      select m.value->'wait' as wait
-      from runs r
-      cross join lateral jsonb_array_elements(r.matches) as m(value)
-      where r.user_id = ${userId}
-        and r.created_at >= ${from}
-        and m.value->'wait' is not null
+      select count(distinct uid)::int as n from (
+        select user_id as uid from usage_events
+          where created_at >= ${from} and created_at < ${to}
+        union
+        select user_id from runs
+          where created_at >= ${from} and created_at < ${to}
+      ) s
     `,
       [],
     );
 
-    const photos = catalogPhotoStats(CLINIC_SEED);
-    const names = new Map(CLINIC_SEED.map((clinic) => [clinic.id, clinic.name]));
-    const row = counts[0];
-    const events = eventCounts[0];
-    const lotseRow = lotse[0];
+    const mine = await optional(
+      () =>
+        sql<{ n: number }>`
+      select (
+        (select count(*)::int from usage_events
+          where user_id = ${userId} and created_at >= ${from} and created_at < ${to})
+        +
+        (select count(*)::int from runs
+          where user_id = ${userId} and created_at >= ${from} and created_at < ${to})
+      )::int as n
+    `,
+      [],
+    );
+
+    const spanFromIso = spanFrom.toISOString();
+    const spanToIso = spanTo.toISOString();
+
+    const events = await optional(
+      () =>
+        sql<{ created_at: string | Date; user_id: string }>`
+      select created_at, user_id from usage_events
+        where created_at >= ${spanFromIso} and created_at < ${spanToIso}
+      union all
+      select created_at, user_id from runs
+        where created_at >= ${spanFromIso} and created_at < ${spanToIso}
+    `,
+      [],
+    );
+
+    const actionRows = await optional(
+      () =>
+        sql<{ created_at: string | Date; kind: string; clinic_id: string | null }>`
+      select created_at, kind, clinic_id from usage_events
+        where user_id = ${userId} and created_at >= ${from} and created_at < ${to}
+      union all
+      select created_at, 'run' as kind, null::text as clinic_id from runs
+        where user_id = ${userId} and created_at >= ${from} and created_at < ${to}
+      union all
+      select updated_at as created_at, 'document' as kind, null::text as clinic_id from result_documents
+        where user_id = ${userId} and updated_at >= ${from} and updated_at < ${to}
+      union all
+      select created_at, 'lohlotse' as kind, null::text as clinic_id from lohlotse_messages
+        where user_id = ${userId} and created_at >= ${from} and created_at < ${to}
+    `,
+      [],
+    );
+
+    const parsedEvents = events.map((row) => ({
+      at: new Date(row.created_at),
+      userId: row.user_id,
+    }));
+    const inRange = parsedEvents.filter(
+      (event) => event.at >= range.from && event.at < range.to,
+    );
+    const houseLog = catalogLogInRange(range.from, range.to, CATALOG_LOG);
+    const series = buildSeries(
+      range.view,
+      range.dateYmd,
+      inRange.map((event) => ({ at: event.at, mine: event.userId === userId })),
+      houseLog.filter((entry) => entry.kind === "aufgenommen").map((entry) => new Date(entry.at)),
+    );
+
+    const usageDays = new Set<string>();
+    const updateDays = new Set<string>();
+    for (const event of parsedEvents) {
+      if (event.at >= cal.from && event.at < cal.to) usageDays.add(berlinYmd(event.at));
+    }
+    for (const entry of catalogLogInRange(cal.from, cal.to, CATALOG_LOG)) {
+      updateDays.add(entry.ymd);
+    }
+    const dayCount = daysInBerlinMonth(cal.year, cal.month);
+    const days: DashCalendarDay[] = Array.from({ length: dayCount }, (_, index) => {
+      const day = index + 1;
+      const ymd = formatYmd(cal.year, cal.month, day);
+      return {
+        ymd,
+        day,
+        usage: usageDays.has(ymd),
+        update: updateDays.has(ymd),
+      };
+    });
+
+    const actions: DashAction[] = actionRows
+      .map((row) => {
+        const at = new Date(row.created_at);
+        return {
+          at: at.toISOString(),
+          ymd: berlinYmd(at),
+          label: actionLabel(row.kind, row.clinic_id ? (NAMES.get(row.clinic_id) ?? null) : null),
+          sort: at.getTime(),
+        };
+      })
+      .sort((a, b) => b.sort - a.sort)
+      .slice(0, 5)
+      .map(({ at, ymd, label }) => ({ at, ymd, label }));
 
     return {
-      period,
+      view: range.view,
+      date: range.dateYmd,
       fromYmd: range.fromYmd,
-      klaromatStarts: n(row?.starts),
-      runsCompleted: n(row?.completed),
-      runsDraft: n(row?.drafts),
-      foldersNew: n(row?.folders),
-      runsFollowup: n(row?.followup),
-      documents: n(row?.documents),
-      exports: n(events?.exports),
-      clinicViews: n(events?.clinic_views),
-      topClinics: top.map((item) => ({
-        id: item.clinic_id,
-        name: names.get(item.clinic_id) ?? item.clinic_id,
-        count: n(item.n),
-      })),
-      indications: indications
-        .filter((item) => item.indication)
-        .map((item) => ({
-          id: item.indication as Indication,
-          label: indicationLabel(item.indication as Indication),
-          count: n(item.n),
-        })),
-      lohlotseChats: n(lotseRow?.chats),
-      lohlotseMessages: n(lotseRow?.messages),
-      lohlotseThreadsNamed: n(lotseRow?.named),
-      lohlotseThreadsUnnamed: n(lotseRow?.unnamed),
-      steckbriefMerges: n(merges[0]?.n),
-      waitShown: n(events?.wait_shown),
-      waitRechenweg: n(events?.wait_rechenweg),
-      photosWithImage: photos.withImage,
-      photosPlaceholder: photos.placeholder,
-      regionalSearches: n(row?.regional),
-      sessionsDesktop: n(events?.desktop),
-      sessionsMobile: n(events?.mobile),
-      sessionsNew: n(events?.sess_new),
-      sessionsReturning: n(events?.sess_ret),
-      wait: summarizeWaitEstimates(
-        waitRows
-          .map((item) => coerceWaitEstimate(parseWait(item.wait)))
-          .filter((item): item is WaitEstimate => Boolean(item)),
-      ),
+      usersTotal: n(people[0]?.users_total),
+      usersActive: n(active[0]?.n),
+      usersNew: n(people[0]?.users_new),
+      me: n(mine[0]?.n),
+      houses: housesAt(range.to, CATALOG_LOG),
+      updates: houseLog.length,
+      series,
+      calendar: { year: cal.year, month: cal.month, days },
+      actions,
+      log: houseLog,
     };
   });
-
-function parseWait(value: unknown): WaitEstimate | null {
-  if (!value) return null;
-  if (typeof value === "string") {
-    try {
-      return JSON.parse(value) as WaitEstimate;
-    } catch {
-      return null;
-    }
-  }
-  return value as WaitEstimate;
-}

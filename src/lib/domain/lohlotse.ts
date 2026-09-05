@@ -374,7 +374,7 @@ export function composeLohlotseReply(input: ComposeInput): LohlotsePayload {
       const contra = clinic.steckbrief.kontraindikation?.bullets ?? [];
       for (const line of contra.slice(0, 4)) bullets.push(line);
       if (bullets.length === 0) {
-        bullets.push("Keine gesonderte Kontraindikation im Musterprofil. Haus und Kostenträger entscheiden.");
+        bullets.push("Keine gesonderte Kontraindikation im Klinikprofil. Haus und Kostenträger entscheiden.");
       }
       bullets.push("Lohklar erfindet keine Diagnosen und sagt keine Aufnahme zu.");
     } else if (headingKey === "naechster") {

@@ -23,7 +23,7 @@ const base: WaitClinic = {
   indicationAreas: ["psychosomatik"],
   datenstand: {
     geprueft: "2026-09-01",
-    quellen: "Musterprofil Lohklar",
+    quellen: "Öffentliches Klinikprofil",
   },
 };
 

@@ -38,15 +38,11 @@ export function WartezeitSchaetzung({
   if (variant === "chip") {
     return (
       <span
-        className={cn(
-          "inline-flex max-w-full flex-wrap items-center gap-1.5 text-xs font-medium text-ink-muted",
-          className,
-        )}
+        className={cn("inline-flex max-w-full flex-wrap items-center gap-1.5 text-xs text-ink-muted", className)}
         title={value.disclaimer}
       >
         <span className="tabular-nums text-ink">{value.rangeLabel}</span>
         <span>(Schätzung, Stand {value.asOfLabel})</span>
-        <Badge tone={uncertaintyTone}>Unsicherheit {WAIT_UNCERTAINTY_LABEL[value.uncertainty]}</Badge>
       </span>
     );
   }

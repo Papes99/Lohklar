@@ -124,27 +124,27 @@ function capacityFactor(places: number | undefined): {
   if (places < 40) {
     return {
       factor: 1.18,
-      note: "Muster-Kapazität unter 40 Plätzen (Bandbreite, keine gezählte Belegung)",
+      note: "Orientierungskapazität unter 40 Plätzen (Bandbreite, keine gezählte Belegung)",
       missing: false,
     };
   }
   if (places < 80) {
     return {
       factor: 1.08,
-      note: "Muster-Kapazität 40–80 Plätze (Bandbreite, keine gezählte Belegung)",
+      note: "Orientierungskapazität 40–80 Plätze (Bandbreite, keine gezählte Belegung)",
       missing: false,
     };
   }
   if (places <= 140) {
     return {
       factor: 1,
-      note: "Muster-Kapazität 80–140 Plätze (Bandbreite, keine gezählte Belegung)",
+      note: "Orientierungskapazität 80–140 Plätze (Bandbreite, keine gezählte Belegung)",
       missing: false,
     };
   }
   return {
     factor: 0.94,
-    note: "Muster-Kapazität über 140 Plätze (Bandbreite, keine gezählte Belegung)",
+    note: "Orientierungskapazität über 140 Plätze (Bandbreite, keine gezählte Belegung)",
     missing: false,
   };
 }
@@ -362,10 +362,10 @@ export function computeWaitEstimate(
   const sources = [
     baseMissing
       ? "Keine letzte bekannte Klinikangabe — Anker aus Regionalprior"
-      : `Letzte bekannte Musterangabe der Klinik: ${clinicBase} Tage (Muster-Eintrag, kein Live-Abruf)`,
+      : `Letzte bekannte Klinikangabe: ${clinicBase} Tage (Orientierung, kein Live-Abruf)`,
     clinic.datenstand?.quellen
       ? `Quelle Klinikprofil: ${clinic.datenstand.quellen}`
-      : "Quelle: Orientierungsprofil Lohklar (Musterkatalog)",
+      : "Quelle: öffentliches Klinikprofil (Lohklar-Katalog)",
     `Stand Klinikprofil: ${clinic.datenstand?.geprueft ? formatAsOf(clinic.datenstand.geprueft) : "unbekannt"}`,
     `Stand der Schätzung: ${formatAsOf(asOfIso)}`,
     prior.n >= 2
@@ -378,7 +378,7 @@ export function computeWaitEstimate(
     fresh.note,
     occupancyMissing
       ? "Regionale Auslastung fehlt — Faktor 1,00, Unsicherheit steigt"
-      : "Auslastung ist eine Musterkennzahl, keine gemeldete Belegung",
+      : "Auslastung ist eine Orientierungskennzahl, keine gemeldete Belegung",
     cap.missing
       ? "Kapazität fehlt — keine Betten erfunden"
       : "Platzzahl nur als Bandbreite, nicht als gezählte Betten",
@@ -390,10 +390,10 @@ export function computeWaitEstimate(
       "1",
       "Letzte bekannte Angabe der Klinik",
       baseMissing ? "ersetzt durch Prior" : "1,00 (Anker)",
-      baseMissing ? `T0 ← Prior ${caDays(tKlinik)}` : `T_Klinik = ${clinicBase} Tage (Muster-Eintrag)`,
+      baseMissing ? `T0 ← Prior ${caDays(tKlinik)}` : `T_Klinik = ${clinicBase} Tage (Orientierung)`,
       baseMissing
         ? "Klinikangabe fehlt. Anker aus Vergleichshäusern, Unsicherheit steigt."
-        : `Muster-Eintrag ${clinicBase} Tage, nicht live abgefragt.`,
+        : `Klinikangabe ${clinicBase} Tage, nicht live abgefragt.`,
     ),
     factor(
       "2",
@@ -402,7 +402,7 @@ export function computeWaitEstimate(
       `f_Nachfrage = ${de(occupancy)}; f_Indikation = ${de(indication.factor)}`,
       occupancyMissing
         ? `Auslastung unbekannt, Faktor 1,00. Indikationsgewicht ${de(indication.factor)}.`
-        : `Auslastungskennzahl ${de(occupancy)} (Muster). Indikationsgewicht ${de(indication.factor)}.`,
+        : `Auslastungskennzahl ${de(occupancy)} (Orientierung). Indikationsgewicht ${de(indication.factor)}.`,
     ),
     factor(
       "3",

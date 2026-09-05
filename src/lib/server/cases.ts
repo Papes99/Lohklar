@@ -8,7 +8,7 @@ import {
   type DocumentBody,
   type DocumentVersionMeta,
 } from "@/lib/domain/document";
-import { emptyAnswers, rankClinics } from "@/lib/domain/matching";
+import { emptyAnswers, hydrateMatch, isBlocked, normalizeAnswers, rankClinics } from "@/lib/domain/matching";
 import {
   indicationLabel,
   type KlaromatAnswers,
@@ -99,6 +99,16 @@ function asIso(value: string | Date): string {
 function parseJson<T>(value: T | string): T {
   if (typeof value === "string") return JSON.parse(value) as T;
   return value;
+}
+
+function matchesInDocumentOrder(all: MatchSnapshot[], clinicIds?: string[]): MatchSnapshot[] {
+  if (clinicIds?.length) {
+    const map = new Map(all.map((item) => [item.clinicId, item]));
+    return clinicIds
+      .map((id) => map.get(id))
+      .filter((item): item is MatchSnapshot => Boolean(item));
+  }
+  return all.filter((item) => !isBlocked(hydrateMatch(item))).slice(0, 10);
 }
 
 function parseStatus(value: string | null | undefined): RunStatus {
@@ -207,10 +217,11 @@ function seedFromName(name: string): Omit<PersonalSteckbrief, "folderId" | "upda
   };
 }
 
-function prefillSteckbrief(answers: KlaromatAnswers): Omit<
+function prefillSteckbrief(raw: KlaromatAnswers): Omit<
   PersonalSteckbrief,
   "folderId" | "updatedAt"
 > {
+  const answers = normalizeAnswers(raw);
   const extras = answers.extras.length
     ? answers.extras.join(", ")
     : "keine weiteren Filter";
@@ -436,13 +447,13 @@ export const getFolder = createServerFn({ method: "GET" })
         runNumber: row.run_number,
         label: row.label ?? "",
         status: parseStatus(row.status),
-        answers: parseJson(row.answers),
+        answers: normalizeAnswers({ ...emptyAnswers(), ...parseJson(row.answers) }),
         matches: parseJson(row.matches),
         createdAt: asIso(row.created_at),
         document: doc
           ? mapDocument(
               doc,
-              { answers: parseJson(row.answers), matches: parseJson(row.matches) },
+              { answers: normalizeAnswers({ ...emptyAnswers(), ...parseJson(row.answers) }), matches: parseJson(row.matches) },
               clinics,
               versionsByDoc.get(doc.id) ?? [],
             )
@@ -511,7 +522,7 @@ export const getRun = createServerFn({ method: "GET" })
       runNumber: row.run_number,
       label: row.label ?? "",
       status: parseStatus(row.status),
-      answers: parseJson(row.answers),
+      answers: normalizeAnswers({ ...emptyAnswers(), ...parseJson(row.answers) }),
       matches: parseJson(row.matches ?? []),
       createdAt: asIso(row.created_at),
       documentId: row.document_id,
@@ -610,7 +621,7 @@ export const saveDraft = createServerFn({ method: "POST" })
     if (parseStatus(row.status) !== "entwurf") {
       throw new Error("Nur Entwürfe können fortgesetzt werden.");
     }
-    const answers = { ...data.answers, clientName: row.client_name };
+    const answers = normalizeAnswers({ ...data.answers, clientName: row.client_name });
     await sql.query(
       `update runs set answers = $1::jsonb where id = $2 and user_id = $3`,
       [JSON.stringify(answers), data.runId, context.userId],
@@ -647,7 +658,7 @@ export const completeRun = createServerFn({ method: "POST" })
       throw new Error("Dieser Durchlauf ist bereits abgeschlossen.");
     }
 
-    const answers = { ...data.answers, clientName: row.client_name };
+    const answers = normalizeAnswers({ ...data.answers, clientName: row.client_name });
     if (!["sucht", "psychosomatik", "dual"].includes(answers.indication)) {
       throw new Error("Unbekannter Indikationsbereich.");
     }
@@ -724,11 +735,9 @@ export const createDraftDocument = createServerFn({ method: "POST" })
       return { folderId: row.folder_id, runId: data.runId, documentId: existing[0].id };
     }
 
-    const answers = parseJson(row.answers);
+    const answers = normalizeAnswers({ ...emptyAnswers(), ...parseJson(row.answers) });
     const allMatches = parseJson<MatchSnapshot[]>(row.matches ?? []);
-    const selected = data.clinicIds?.length
-      ? allMatches.filter((item) => data.clinicIds!.includes(item.clinicId))
-      : allMatches;
+    const selected = matchesInDocumentOrder(allMatches, data.clinicIds);
     const now = new Date().toISOString();
     await insertResultDocument(sql, {
       runId: data.runId,
@@ -794,7 +803,7 @@ export const claimGuestRun = createServerFn({ method: "POST" })
     const sql = await getSql();
     const now = new Date().toISOString();
     const clinics = await loadClinics();
-    const matches = rankClinics(clinics, data.answers);
+    const matches = rankClinics(clinics, normalizeAnswers(data.answers));
 
     if (data.folderId) {
       const existing = await sql<{ id: string; client_name: string }>`
@@ -813,7 +822,7 @@ export const claimGuestRun = createServerFn({ method: "POST" })
       }
       const runNumber = previous + 1;
       const runId = crypto.randomUUID();
-      const answers = { ...data.answers, clientName: folder.client_name };
+      const answers = normalizeAnswers({ ...data.answers, clientName: folder.client_name });
       await sql.query(
         `insert into runs (id, folder_id, user_id, run_number, answers, matches, created_at, label, status)
          values ($1,$2,$3,$4,$5::jsonb,$6::jsonb,$7,$8,'entwurf')`,
@@ -847,7 +856,7 @@ export const claimGuestRun = createServerFn({ method: "POST" })
     }
 
     const clientName = requireName(data.clientName ?? "");
-    const answers = { ...data.answers, clientName };
+    const answers = normalizeAnswers({ ...data.answers, clientName });
     if (!["sucht", "psychosomatik", "dual"].includes(answers.indication)) {
       throw new Error("Unbekannter Indikationsbereich.");
     }

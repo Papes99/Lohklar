@@ -20,10 +20,21 @@ function Home() {
             </h1>
             <FoundedLine className="mt-3" />
             <p className="mt-5 max-w-xl text-ink-muted">
-              Als Gast ein Durchlauf möglich. Speichern erst nach Registrierung und Zuordnung
-              zu einem Namen.
+              Klinik-Steckbriefe sind ohne Konto lesbar. Der Klar-o-Mat geht als Gast. Speichern
+              erst nach Registrierung und Zuordnung zu einem Namen.
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
+              <SignInGate
+                fallback={
+                  <Button variant="secondary" asChild>
+                    <Link to="/kliniken">Steckbriefe ohne Konto</Link>
+                  </Button>
+                }
+              >
+                <Button variant="secondary" asChild>
+                  <Link to="/kliniken">Klinik-Steckbriefe</Link>
+                </Button>
+              </SignInGate>
               <SignInGate
                 fallback={
                   <Button asChild>
@@ -58,12 +69,12 @@ function Home() {
           <figure className="overflow-hidden rounded-[var(--radius-xl)] shadow-[var(--shadow-border)]">
             <img
               src="/clinics/aussen-see.jpg"
-              alt="Musteransicht einer Rehaklinik am See, ohne Personen"
+              alt="Ansicht einer Rehaklinik am See, ohne Personen"
               className="aspect-photo w-full object-cover"
               crossOrigin="anonymous"
             />
             <figcaption className="bg-surface px-4 py-3 text-sm text-ink-muted">
-              Musterkatalog zur Orientierung — keine verbindliche Klinikzusage.
+              Klinikatalog zur Orientierung — keine verbindliche Klinikzusage.
             </figcaption>
           </figure>
         </section>
@@ -72,12 +83,12 @@ function Home() {
           <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
             {[
               {
-                title: "Klar-o-Mat",
-                text: "Jeder Start erzeugt einen Lauf. Ein Fallordner entsteht erst mit Lauf 1.",
+                title: "Steckbriefe",
+                text: "50 Häuser, dieselbe Vorlage. Ohne Konto lesbar, inklusive Suche und Filter.",
               },
               {
-                title: "Fallordner",
-                text: "Je Klient:in ein Arbeitsname, mehrere Durchläufe, getrennte Daten.",
+                title: "Klar-o-Mat",
+                text: "Jeder Start erzeugt einen Lauf. Ein Fallordner entsteht erst mit Lauf 1.",
               },
               {
                 title: "Wartezeit-Schätzung",

@@ -80,9 +80,9 @@ export const BEDARFE: { id: string; label: string; areas: Indication[] }[] = [
   { id: "depression", label: "Depressive Symptomatik", areas: ["psychosomatik", "dual"] },
   { id: "angst", label: "Angst / Panik", areas: ["psychosomatik", "dual"] },
   { id: "trauma", label: "Trauma-Folgen", areas: ["psychosomatik", "dual"] },
-  { id: "erschopfung", label: "Erschöpfung", areas: ["psychosomatik"] },
-  { id: "schmerz", label: "Chronischer Schmerz", areas: ["psychosomatik"] },
-  { id: "ess", label: "Essverhalten", areas: ["psychosomatik"] },
+  { id: "erschopfung", label: "Erschöpfung", areas: ["psychosomatik", "dual"] },
+  { id: "schmerz", label: "Chronischer Schmerz", areas: ["psychosomatik", "dual"] },
+  { id: "ess", label: "Essverhalten", areas: ["psychosomatik", "dual"] },
 ];
 
 export const EXTRAS: { id: string; label: string }[] = [
@@ -95,11 +95,24 @@ export const EXTRAS: { id: string; label: string }[] = [
   { id: "junge", label: "Junge Erwachsene" },
 ];
 
+export const HOUSE_EXTRAS: { id: string; label: string }[] = [
+  { id: "angehoerige", label: "Angehörigenarbeit" },
+  { id: "barrierefrei", label: "Barrierefreiheit" },
+  { id: "kinder", label: "Kinder / Eltern-Kind" },
+  { id: "junge", label: "Junge Erwachsene" },
+];
+
 export const GENDER_FILTERS: { id: "egal" | GenderSetting; label: string }[] = [
   { id: "egal", label: "Keine Vorgabe" },
   { id: "gemischt", label: "Gemischt" },
   { id: "frauen", label: "Frauenspezifisch" },
   { id: "maenner", label: "Männerspezifisch" },
+];
+
+export const PERSON_GENDER_FILTERS: { id: "egal" | "frau" | "mann"; label: string }[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "frau", label: "Frau" },
+  { id: "mann", label: "Mann" },
 ];
 
 export const SETTING_FILTERS: {
@@ -121,6 +134,41 @@ export const DURATION_FILTERS: {
   { id: "lang", label: "Länger (ab ca. 10 Wochen)" },
 ];
 
+export const ROOM_FILTERS: { id: "egal" | "einbett" | "kein-mehrbett"; label: string }[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "einbett", label: "Einbett bevorzugt" },
+  { id: "kein-mehrbett", label: "Kein Mehrbettzimmer" },
+];
+
+export const ACCESS_FILTERS: { id: "egal" | "ahb" | "heilverfahren"; label: string }[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "ahb", label: "AHB" },
+  { id: "heilverfahren", label: "Heilverfahren" },
+];
+
+export const WAIT_FILTERS: { id: "egal" | "schnell" | "passgenau"; label: string }[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "schnell", label: "Eher zeitnah" },
+  { id: "passgenau", label: "Passgenaues Haus wichtiger als Wartezeit" },
+];
+
+export const PAYER_FILTERS: { id: "egal" | "drv" | "gkv"; label: string }[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "drv", label: "DRV / Rentenversicherung" },
+  { id: "gkv", label: "GKV / Krankenkasse" },
+];
+
+export const YES_FILTERS: { id: "egal" | "ja"; label: string }[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "ja", label: "Muss vorhanden sein" },
+];
+
+export const DISTANCE_FILTERS: { id: "egal" | "nah" | "distanz-ok"; label: string }[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "nah", label: "Wohnortnah (Nachsorge, Kinder, Arbeit)" },
+  { id: "distanz-ok", label: "Distanz zum Milieu ist gewollt" },
+];
+
 export type RunStatus = "entwurf" | "fertig" | "exportiert";
 
 export const RUN_STATUS_LABEL: Record<RunStatus, string> = {
@@ -140,6 +188,19 @@ export type KlaromatAnswers = {
   durationPref: "egal" | "kurz" | "mittel" | "lang";
   extras: string[];
   notes: string;
+  personGender: "egal" | "frau" | "mann";
+  roomPref: "egal" | "einbett" | "kein-mehrbett";
+  substitutionNeed: "egal" | "ja" | "nein";
+  waitPref: "egal" | "schnell" | "passgenau";
+  nearbyStatesOk: boolean;
+  access: "egal" | "ahb" | "heilverfahren";
+  payer: "egal" | "drv" | "gkv";
+  childrenNeed: "egal" | "ja";
+  mobilityNeed: "egal" | "ja";
+  youngAdultNeed: "egal" | "ja";
+  familyWorkNeed: "egal" | "ja";
+  traumaNeed: "egal" | "ja";
+  distancePref: "egal" | "nah" | "distanz-ok";
 };
 
 export type CriterionStatus = "match" | "partial" | "miss";
@@ -192,6 +253,10 @@ export type MatchSnapshot = {
   score: number;
   reasons: MatchReason[];
   wait: WaitEstimate;
+  covered: number;
+  asked: number;
+  blocking: string[];
+  rank: number;
 };
 
 export type ClinicPhoto = {
@@ -255,7 +320,7 @@ export const STECKBRIEF_BLOCKS: {
     key: "wohnenAlltag",
     nr: "04",
     title: "Wohnen und Alltag",
-    lead: "Zimmer, Regeln und Tagesstruktur.",
+    lead: "Einzel- oder Mehrbettzimmer, Regeln und Tagesstruktur.",
   },
   {
     key: "kinderFamilie",
@@ -285,7 +350,7 @@ export const STECKBRIEF_BLOCKS: {
     key: "kostentraeger",
     nr: "09",
     title: "Kostenträger und Zugang",
-    lead: "Wer zahlt und welche Voraussetzungen belegt sind.",
+    lead: "Wer zahlt, Zuzahlung, Wahlleistungen und Preise.",
   },
   {
     key: "besonderheiten",
@@ -369,6 +434,50 @@ export const PHOTO_SOURCE_LABEL: Record<PhotoSource, string> = {
 
 export function indicationLabel(id: Indication): string {
   return INDICATIONS.find((item) => item.id === id)?.label ?? id;
+}
+
+/** Tags under the clinic title image: only admitted substances. */
+export function coverSubstanceTags(clinic: Pick<Clinic, "steckbrief">): string[] {
+  const tags: string[] = [];
+  for (const label of ["Alkohol", "Drogen", "Medikamente"] as const) {
+    const chip = clinic.steckbrief.indikation.chips.find((item) => item.label === label);
+    if (chip?.status === "vorhanden") tags.push(label);
+  }
+  return tags;
+}
+
+/** Overlay on the clinic title image: the rehab mandate, not substances. */
+export function coverAuftragTag(clinic: Pick<Clinic, "indicationAreas">): string {
+  if (clinic.indicationAreas.includes("dual")) return "Dualdiagnose";
+  if (clinic.indicationAreas.includes("sucht")) return "Suchtreha";
+  if (clinic.indicationAreas.includes("psychosomatik")) return "Psychosomatik";
+  return "Reha";
+}
+
+/** Gray tags under the name: substances, then rarer extras. Mandate stays on the photo. */
+export function clinicCardTags(
+  clinic: Pick<
+    Clinic,
+    | "steckbrief"
+    | "indicationAreas"
+    | "genderSetting"
+    | "kinderbetreuung"
+    | "substitution"
+  >,
+): string[] {
+  const tags: string[] = [];
+  const indikation = clinic.steckbrief.indikation.chips;
+  const has = (label: string) =>
+    indikation.some((chip) => chip.label === label && chip.status === "vorhanden");
+  if (has("Alkohol")) tags.push("Alkohol");
+  if (has("Drogen") || has("Medikamente")) tags.push("Drogen / Medikamente");
+  const einbett = clinic.steckbrief.wohnenAlltag.chips.find((chip) => chip.label === "Einbettzimmer");
+  if (einbett?.status === "vorhanden") tags.push("Einzelzimmer");
+  if (clinic.genderSetting === "frauen") tags.push("Frauen");
+  if (clinic.genderSetting === "maenner") tags.push("Männer");
+  if (clinic.kinderbetreuung) tags.push("Eltern-Kind");
+  if (clinic.substitution) tags.push("Substitution");
+  return tags;
 }
 
 export function stateName(code: string): string {

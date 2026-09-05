@@ -72,7 +72,7 @@ export function LohlotseRail({
               ))}
             </optgroup>
           ) : null}
-          <optgroup label="Musterkatalog">
+          <optgroup label="Klinikatalog">
             {clinics.map((item) => (
               <option key={item.id} value={item.id}>
                 {item.name}

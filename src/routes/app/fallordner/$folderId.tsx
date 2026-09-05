@@ -78,7 +78,7 @@ function FolderPage() {
 
   return (
     <div className="space-y-6">
-      <header className="flex flex-wrap items-start justify-between gap-4">
+      <header className="no-print flex flex-wrap items-start justify-between gap-4">
         <div>
           <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">
             Fallordner
@@ -104,9 +104,13 @@ function FolderPage() {
           </Button>
         </div>
       </header>
-      {topWait ? <WartezeitSchaetzung estimate={topWait} variant="chip" /> : null}
+      {topWait ? (
+        <div className="no-print">
+          <WartezeitSchaetzung estimate={topWait} variant="chip" />
+        </div>
+      ) : null}
 
-      <div role="tablist" aria-label="Fallordner" className="flex flex-wrap gap-1 rounded-[var(--radius-lg)] bg-bg-subtle p-1">
+      <div role="tablist" aria-label="Fallordner" className="no-print flex flex-wrap gap-1 rounded-[var(--radius-lg)] bg-bg-subtle p-1">
         {tabs.map((item) => (
           <button
             key={item.id}

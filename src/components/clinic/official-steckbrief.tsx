@@ -4,6 +4,8 @@ import { HighlightedText, isHighlightHit } from "@/components/lohlotse/highlight
 import { WartezeitSchaetzung } from "@/components/wait/wartezeit-schaetzung";
 import {
   STECKBRIEF_BLOCKS,
+  coverAuftragTag,
+  coverSubstanceTags,
   genderSettingLabel,
   settingKindLabel,
   type ChipStatus,
@@ -60,13 +62,26 @@ export function OfficialSteckbrief({
   highlightBlocks?: string[];
 }) {
   const rail = variant === "rail";
+  const auftrag = coverAuftragTag(clinic);
+  const substances = coverSubstanceTags(clinic);
   return (
     <article className={cn("flex flex-col gap-8", rail && "gap-5")}>
       {rail ? (
-        <PhotoStrip photos={clinic.photos} clinicName={clinic.name} variant="aside" />
+        <PhotoStrip
+          photos={clinic.photos}
+          clinicName={clinic.name}
+          variant="aside"
+          auftrag={auftrag}
+          substances={substances}
+        />
       ) : (
         <div className="lg:hidden">
-          <PhotoStrip photos={clinic.photos} clinicName={clinic.name} />
+          <PhotoStrip
+            photos={clinic.photos}
+            clinicName={clinic.name}
+            auftrag={auftrag}
+            substances={substances}
+          />
         </div>
       )}
 
@@ -119,7 +134,13 @@ export function OfficialSteckbrief({
 
         {rail ? null : (
           <aside className="hidden lg:sticky lg:top-4 lg:block lg:space-y-6">
-            <PhotoStrip photos={clinic.photos} clinicName={clinic.name} variant="aside" />
+            <PhotoStrip
+              photos={clinic.photos}
+              clinicName={clinic.name}
+              variant="aside"
+              auftrag={auftrag}
+              substances={substances}
+            />
             <Kontakt clinic={clinic} />
             <WaitSlot estimate={clinic.wait} marked={highlightBlocks.includes("wartezeit")} />
             <Datenstand clinic={clinic} />
@@ -301,7 +322,7 @@ function Kontakt({ clinic }: { clinic: ClinicWithWait }) {
         </li>
       </ul>
       <p className="mt-3 text-xs text-ink-muted">
-        Musterprofil. Keine erfundenen Durchwahlen. Lohklar vermittelt nicht.
+        Öffentliches Klinikprofil. Nur veröffentlichte Kontakte. Lohklar vermittelt nicht.
       </p>
     </section>
   );
@@ -333,7 +354,7 @@ function Datenstand({ clinic }: { clinic: ClinicWithWait }) {
         </li>
       </ul>
       <div className="mt-3">
-        <StatusChip label="Musterkatalog" status="vorhanden" />
+        <StatusChip label="Klinikatalog" status="vorhanden" />
       </div>
     </section>
   );

@@ -109,6 +109,25 @@
   }
 }
 
+.dash {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+}
+
+.dash h1,
+.dash h2,
+.dash h3 {
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+  font-weight: 600;
+}
+
+.auftrag-chip {
+  box-shadow:
+    0 1px 3px color-mix(in oklab, var(--color-ink) 55%, transparent),
+    0 0 0 1px color-mix(in oklab, var(--color-ink) 18%, transparent);
+}
+
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -145,9 +164,16 @@
     display: none !important;
   }
 
-  body {
-    background: white;
-    color: #111;
+  html,
+  body,
+  #app {
+    background: #f3f0e8 !important;
+    color: #1a2420 !important;
+  }
+
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
   }
 
   a[href]::after {
@@ -174,7 +200,187 @@
 
   @page {
     size: A4;
-    margin: 14mm;
+    margin: 16mm 16mm 18mm;
+  }
+
+  .print-sheet {
+    color: #1a2420;
+    font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+  }
+
+  .print-cover {
+    break-after: page;
+    min-height: 240mm;
+    display: flex;
+    flex-direction: column;
+    padding-top: 8mm;
+  }
+
+  .print-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .print-kicker {
+    margin-top: 28mm;
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5c6661;
+  }
+
+  .print-title {
+    margin-top: 0.4rem;
+    font-family: Fraunces, ui-serif, Georgia, serif;
+    font-size: 2.6rem;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.1;
+    color: #1a2420;
+  }
+
+  .print-meta {
+    margin-top: 0.6rem;
+    color: #5c6661;
+  }
+
+  .print-need,
+  .print-toc {
+    margin-top: 12mm;
+  }
+
+  .print-need h2,
+  .print-toc h2,
+  .print-house h3,
+  .print-extras h2,
+  .print-notes h2 {
+    font-family: Fraunces, ui-serif, Georgia, serif;
+    font-size: 1.15rem;
+    letter-spacing: -0.02em;
+    margin-bottom: 0.4rem;
+  }
+
+  .print-need p,
+  .print-fit,
+  .print-house p,
+  .print-notes p,
+  .print-extras p {
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  .print-toc ol {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .print-toc li {
+    display: flex;
+    gap: 0.8rem;
+    align-items: baseline;
+    padding: 0.45rem 0;
+    border-bottom: 1px solid #d9d3c6;
+  }
+
+  .print-toc-rank {
+    font-family: Fraunces, ui-serif, Georgia, serif;
+    font-size: 1.35rem;
+    color: #245c4a;
+    width: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .print-disclaimer {
+    margin-top: auto;
+    padding-top: 16mm;
+    font-size: 0.8rem;
+    color: #5c6661;
+  }
+
+  .print-house {
+    break-after: page;
+    break-inside: avoid;
+    padding-top: 6mm;
+    border-top: 4px solid #245c4a;
+  }
+
+  .print-house-head {
+    display: flex;
+    gap: 8mm;
+    align-items: flex-start;
+    margin-bottom: 6mm;
+  }
+
+  .print-house-copy {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .print-house-rank {
+    font-family: Fraunces, ui-serif, Georgia, serif;
+    font-size: 2.6rem;
+    line-height: 1;
+    color: #245c4a;
+    margin: 0;
+  }
+
+  .print-house h2 {
+    font-family: Fraunces, ui-serif, Georgia, serif;
+    font-size: 1.55rem;
+    letter-spacing: -0.03em;
+    margin: 0.3rem 0 0;
+  }
+
+  .print-house-photo {
+    width: 62mm;
+    height: 39mm;
+    flex-shrink: 0;
+    border-radius: 8px;
+  }
+
+  .print-muted {
+    color: #5c6661;
+  }
+
+  .print-fit {
+    margin-top: 3mm;
+  }
+
+  .print-substances {
+    margin-top: 3mm;
+  }
+
+  .print-features {
+    margin: 0 0 4mm;
+    padding-left: 1.1rem;
+  }
+
+  .print-house section {
+    margin-top: 4mm;
+  }
+
+  .print-extras,
+  .print-notes,
+  .print-end {
+    break-inside: avoid;
+    margin-top: 8mm;
+  }
+
+  .print-end {
+    border-top: 1px solid #d9d3c6;
+    padding-top: 6mm;
+    font-size: 0.8rem;
+    color: #5c6661;
+  }
+
+  .print-brand-end {
+    margin-top: 4mm;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    font-size: 0.7rem;
   }
 }
 

@@ -29,7 +29,7 @@ const wait = {
   factors: [],
   formula: "gespeichert",
   formulaFilled: formatWaitLabel(8, 11, "2026-09-03"),
-  sources: ["Muster"],
+  sources: ["Öffentliches Klinikprofil"],
   uncertain: ["Keine Live-Liste"],
   notMeaning: ["keine Aufnahmezusage"],
 };
@@ -40,7 +40,7 @@ const eifel: LohlotseClinic = {
   shortName: "Eifelhöhe",
   city: "Daun",
   stateName: "Rheinland-Pfalz",
-  traeger: "Musterträger",
+  traeger: "MEDIAN Kliniken",
   wait,
   steckbrief: {
     indikation: { bullets: ["Sucht / Entwöhnung im stationären Setting."], chips: [] },

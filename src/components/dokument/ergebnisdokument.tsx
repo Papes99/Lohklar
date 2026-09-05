@@ -4,6 +4,7 @@ import { toast } from "sonner";
 import { CheckSquare, ChevronDown, ChevronUp, FileDown, Plus, Printer } from "lucide-react";
 import { FoundedLine } from "@/components/brand/wordmark";
 import { HouseBlock, ParkedHouse } from "@/components/dokument/house-block";
+import { DokumentPrintSheet } from "@/components/dokument/print-sheet";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -161,16 +162,10 @@ export function Ergebnisdokument({
   }
 
   return (
-    <article id="ergebnisdokument" className="dokument space-y-8">
-      <div className="print-only space-y-3">
-        <FoundedLine />
-        <h1 className="font-display text-4xl">Ergebnisdokument</h1>
-        <p className="text-lg">
-          {clientName} · {label} · {formatDeDate(run.createdAt)}
-        </p>
-      </div>
-
-      <header className="no-print space-y-4">
+    <>
+      <DokumentPrintSheet body={body} clientName={clientName} label={label} dateIso={run.createdAt} />
+      <article id="ergebnisdokument" className="dokument no-print space-y-8">
+      <header className="space-y-4">
         <FoundedLine />
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
@@ -196,7 +191,7 @@ export function Ergebnisdokument({
           </Button>
           <Button id="dokument-export-pdf" type="button" onClick={() => void onExportPdf()}>
             <Printer className="size-4" aria-hidden="true" />
-            PDF
+            Als PDF drucken
           </Button>
           <Button
             id="dokument-export-docx"
@@ -401,6 +396,7 @@ export function Ergebnisdokument({
         <FoundedLine className="pt-2" />
       </footer>
     </article>
+    </>
   );
 }
 

@@ -38,7 +38,7 @@ function Privacy() {
         <p>
           Kontodaten und Fallordner bleiben, bis die Fachkraft den Ordner oder das
           Konto löscht. Offizielle Klinik-Steckbriefe sind ein gemeinsamer
-          Musterkatalog ohne Personenbezug.
+          Klinikatalog ohne Personenbezug.
         </p>
         <h2>Rechte</h2>
         <p>

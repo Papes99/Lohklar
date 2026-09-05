@@ -34,8 +34,8 @@ function About() {
         <h2>Klinik-Steckbriefe</h2>
         <p>
           Die offiziellen Steckbriefe in dieser Version sind strukturierte
-          Orientierungsprofile (Musterdaten). Sie folgen einer festen Vorlage mit
-          Fotoleiste. Persönliche Arbeitsnotizen entstehen nur im Fallordner und
+          Orientierungsprofile aus öffentlichen Klinikangaben. Sie folgen einer festen Vorlage mit
+          Fotoleiste und sind ohne Konto lesbar. Persönliche Arbeitsnotizen entstehen nur im Fallordner und
           erst mit Lauf 1.
         </p>
         <h2>Kerlwerk</h2>

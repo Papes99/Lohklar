@@ -19,6 +19,7 @@ Lohklar **orientiert**. Es diagnostiziert nicht, trifft keine Therapieentscheidu
 Wartezeiten sind **Schätzungen**. Genau eine Wartezeit-Komponente (Agent C). Keine zweite Formel, keine Zahl/Spanne/Tages-Hausnummer im Fließtext von Chat oder Dokument — Zahlen nur in der Komponente inkl. „Rechenweg ansehen“.
 
 Offizielle Kliniktexte werden **niemals** überschrieben. Ergänzungen nur in Chat und persönlichem Steckbrief.
+Katalog: 50 echte, öffentlich belegte Häuser in src/lib/domain/katalog-houses.ts (Agent E). Keine Musterdaten. Jedes Haus hat die 13-Block-Vorlage inkl. Zimmerart, Substanzen, Substitution und Wahlleistungen. Wartezeiten bleiben Schätzungen.
 
 DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistiken. Dashboard zählt nur Vorgänge, keine Namen.
 
@@ -35,7 +36,7 @@ DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistik
 | Lohlotse | Eigene Navigation. Ein Thread pro Fallordner-Name. Leiste Pflicht (offiziell + persönlich). |
 | Offizieller Steckbrief | Einheitliche 13-Block-Vorlage inkl. Fotos. Owner: Agent E. |
 | Persönlicher Steckbrief | Genau 4 Felder: `passt` / `passtNicht` / `offeneFragen` / `rueckmeldungen`. |
-| Dashboard | Nur angemeldet. Woche / Monat / Jahr (Europe/Berlin, Woche ab Montag). Nur Zahlen. |
+| Dashboard | Nur angemeldet. Tag / Monat / Jahr (Europe/Berlin). URL `?view=&date=`. Nur Zahlen, plus Katalog-Log (aufgenommen / aktualisiert / entfernt). |
 
 Navigation: Dashboard, Klar-o-Mat, Fälle, Lohlotse, Steckbriefe.
 
@@ -51,7 +52,7 @@ Lauf-Status: `entwurf` | `fertig` | `exportiert`.
 | **B** | Ergebnisdokument + Editor + PDF/DOCX | `src/components/dokument/*`, `src/lib/domain/document.ts`, `src/lib/domain/document-export.ts`, `migrations/0004_result_document.sql` |
 | **C** | Wartezeit-Komponente | `src/components/wait/wartezeit-schaetzung.tsx`, `src/lib/domain/wait-time.ts` |
 | **D** | Lohlotse | `src/components/lohlotse/*`, `src/routes/app/lohlotse.tsx`, `src/lib/domain/lohlotse.ts`, `src/lib/server/lohlotse.ts`, `migrations/0005_lohlotse.sql` |
-| **E** | Offizieller Steckbrief + Fotos, persönlicher Steckbrief | `src/components/clinic/*`, `src/routes/kliniken/*`, `src/lib/domain/clinic-seed.ts`, `src/lib/domain/steckbrief-seed.ts`, `src/lib/server/clinics.ts` |
+| **E** | Offizieller Steckbrief + Fotos, persönlicher Steckbrief | `src/components/clinic/*`, `src/routes/kliniken/*`, `src/lib/domain/clinic-seed.ts`, `src/lib/domain/steckbrief-seed.ts`, `src/lib/domain/katalog.ts`, `src/lib/domain/katalog-houses.ts`, `src/lib/server/clinics.ts` |
 | **F** | Dashboard + Nutzungszahlen | `src/routes/app/index.tsx`, `src/lib/server/dashboard.ts`, `src/lib/domain/usage.ts`, `src/lib/server/usage.ts`, `src/components/usage/beacon.tsx`, `migrations/0006_usage_events.sql` |
 | **G** | Markenzeile, Masthead, Typografie | `src/components/brand/*`, `src/components/layout/public-header.tsx`, `src/styles.css`, `src/lib/og/site.json` |
 
@@ -82,12 +83,12 @@ Niemand erfindet eine zweite Vorlage. Fehlende Angabe: „Angabe liegt nicht vor
 | 01 | Indikation | Für wen das Haus vorrangig arbeitet. |
 | 02 | Kontraindikation | Was die Aufnahme ausschließt oder verzögert. |
 | 03 | Setting und Dauer | In welcher Form und wie lange behandelt wird. |
-| 04 | Wohnen und Alltag | Zimmer, Regeln und Tagesstruktur. |
+| 04 | Wohnen und Alltag | Einzel- oder Mehrbettzimmer, Regeln und Tagesstruktur. Immer: Zimmerart und ob Einbett im Regelsatz liegt. |
 | 05 | Kinder, Familie, Geschlecht | Für wen das Haus familiär und geschlechtsspezifisch ausgelegt ist. |
 | 06 | Therapie und Konzept | Welche Verfahren das Haus vorhält. Lohklar wählt keine Therapie. |
 | 07 | Medizin, Pflege, Mitbehandlung | Ärztliche Besetzung, Medikation und pflegerische Grenzen. |
 | 08 | Sozialdienst und Nachsorge | Was der Klinik-Sozialdienst konkret tut. |
-| 09 | Kostenträger und Zugang | Wer zahlt und welche Voraussetzungen belegt sind. |
+| 09 | Kostenträger und Zugang | Wer zahlt, gesetzliche Zuzahlung, Wahlleistungen und Preise. Immer: ob und was zusätzlich kaufbar ist. |
 | 10 | Besonderheiten | Nur belegte Alleinsteller, ohne Superlative. |
 | 11 | Kontakt | Erreichbarkeit, wie belegt. |
 | 12 | Fotos | Fotoleiste (Außen, Zimmer/Bad, Umgebung, Besonderheit). |
@@ -135,8 +136,10 @@ App-Steckbrief sticht Web. Ein Faden, ein Name. Keine Diagnosen, keine Betten, k
 
 ## Dashboard (Agent F)
 
-Nur angemeldet. Zeiträume: Woche, Monat, Jahr — Europe/Berlin, Woche ab Montag.  
-Nur Zähler, keine Klientennamen. Nicht zählen: Dokument-Edit-Protokolle, Chat-Inhalte, Rohgesundheitsdaten.
+Nur angemeldet. Zeiträume: Tag, Monat, Jahr — Europe/Berlin. URL `?view=month&date=YYYY-MM-DD`.
+Nur Zähler, keine Klientennamen. Offizielle Kliniktexte nicht umschreiben — nur zählen und loggen.
+Katalog-Log: aufgenommen | aktualisiert | entfernt.
+Nicht zählen: Dokument-Edit-Protokolle, Chat-Inhalte, Rohgesundheitsdaten.
 
 ---
 
