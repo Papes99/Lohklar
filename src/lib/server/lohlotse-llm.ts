@@ -1,8 +1,4 @@
-import {
-  parseLohlotsePayload,
-  type LohlotseClinic,
-  type LohlotsePayload,
-} from "@/lib/domain/lohlotse";
+import { type LohlotseClinic } from "@/lib/domain/lohlotse";
 import { STECKBRIEF_BLOCKS } from "@/lib/domain/types";
 
 export function officialDump(clinic: LohlotseClinic): string {
