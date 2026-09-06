@@ -118,7 +118,7 @@ export function LohlotseWorkspace({
     );
   }
   if (workspaceQuery.isPending || !workspace) {
-    return <p className="text-ink-muted">Lohlotse wird geladen…</p>;
+    return <p className="text-ink-muted">LohklarAI wird geladen…</p>;
   }
 
   const rail = (
@@ -137,7 +137,7 @@ export function LohlotseWorkspace({
     <div className="space-y-4">
       <header className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">Lohlotse</p>
+          <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">LohklarAI</p>
           <h1 className="mt-1 font-display text-3xl tracking-tight">{workspace.clientName}</h1>
           <p className="mt-1 text-sm text-ink-muted">
             Ein Faden, ein Name. Keine Diagnose, keine Therapieentscheidung, keine Aufnahmezusage.
@@ -176,7 +176,7 @@ export function LohlotseWorkspace({
       <div className="grid items-start gap-4 lg:grid-cols-[minmax(0,1fr)_26rem]">
         <section
           className="flex min-h-[32rem] flex-col rounded-[var(--radius-xl)] bg-surface shadow-[var(--shadow-border)]"
-          aria-label="Chat mit dem Lohlotsen"
+          aria-label="Chat mit LohklarAI"
         >
           <div className="flex-1 space-y-4 overflow-y-auto p-4">
             {messages.length === 0 ? (
@@ -197,7 +197,7 @@ export function LohlotseWorkspace({
               ))
             )}
             {send.isPending ? (
-              <p className="text-sm text-ink-muted">Lohlotse formuliert…</p>
+              <p className="text-sm text-ink-muted">LohklarAI formuliert…</p>
             ) : null}
             <div ref={endRef} />
           </div>
@@ -210,7 +210,7 @@ export function LohlotseWorkspace({
             }}
           >
             <label htmlFor="lohlotse-input" className="sr-only">
-              Nachricht an den Lohlotsen
+              Nachricht an LohklarAI
             </label>
             <Textarea
               id="lohlotse-input"
@@ -218,7 +218,7 @@ export function LohlotseWorkspace({
               className="min-h-24 text-base"
               value={draft}
               onChange={(event) => setDraft(event.target.value)}
-              placeholder={`Frage zu ${workspace.clientName}…`}
+              placeholder="Fragen Sie frei zu diesem Fall … Keine Diagnosen."
             />
             <Button type="submit" className="mt-2 w-full" disabled={send.isPending}>
               Senden
@@ -246,15 +246,21 @@ function Intro({
 }) {
   const note = splitUnits(personal.passt)[0];
   return (
-    <AssistantFrame heading="🧭 Überblick">
-      <li>Weiter mit {name}?</li>
-      {note ? <li>Persönlich notiert: {note}</li> : <li>Der persönliche Steckbrief ist angelegt und wartet auf Kriterien.</li>}
-      <li>
-        {hasClinic
-          ? "Offiziellen Steckbrief gegen die Wahlkriterien halten."
-          : "Klinik wählen oder nennen, dann öffnet die Leiste den offiziellen Steckbrief."}
-      </li>
-    </AssistantFrame>
+    <AssistantFrame
+      prose={
+        note
+          ? `Weiter mit ${name}? Persönlich notiert: ${note}. ${
+              hasClinic
+                ? "Offiziellen Steckbrief gegen die Wahlkriterien halten."
+                : "Klinik wählen oder nennen, dann öffnet die Leiste den offiziellen Steckbrief."
+            }`
+          : `Weiter mit ${name}? Der persönliche Steckbrief ist angelegt und wartet auf Kriterien. ${
+              hasClinic
+                ? "Offiziellen Steckbrief gegen die Wahlkriterien halten."
+                : "Klinik wählen oder nennen, dann öffnet die Leiste den offiziellen Steckbrief."
+            }`
+      }
+    />
   );
 }
 
@@ -288,18 +294,21 @@ function Bubble({
     );
   }
   const payload = message.payload;
-  const heading = payload?.heading ?? "🧭 Überblick";
+  const heading = payload?.heading?.trim() ? payload.heading : "";
+  const prose = payload?.prose?.trim() || "";
   const bullets = payload?.bullets?.length
     ? payload.bullets
-    : message.content
-        .split("\n")
-        .map((line) => line.replace(/^[-•–]\s*/, "").trim())
-        .filter((line) => line && !line.startsWith("🧭") && !line.startsWith("🏥") && !line.startsWith("⏳") && !line.startsWith("📋") && !line.startsWith("⚠️") && !line.startsWith("Quellen:"));
+    : !prose
+      ? message.content
+          .split("\n")
+          .map((line) => line.replace(/^[-•–]\s*/, "").trim())
+          .filter((line) => line && !line.startsWith("🧭") && !line.startsWith("🏥") && !line.startsWith("⏳") && !line.startsWith("📋") && !line.startsWith("⚠️") && !line.startsWith("Quellen:"))
+      : [];
   const waitClinic =
     clinics.find((item) => item.id === payload?.clinicId) ?? clinic;
   return (
     <div className="mr-4 space-y-3">
-      <AssistantFrame heading={heading}>
+      <AssistantFrame heading={heading || undefined} prose={prose || undefined}>
         {bullets.map((item) => (
           <li key={item}>{item}</li>
         ))}
@@ -328,15 +337,31 @@ function Bubble({
   );
 }
 
-function AssistantFrame({ heading, children }: { heading: string; children: ReactNode }) {
+function AssistantFrame({
+  heading,
+  prose,
+  children,
+}: {
+  heading?: string;
+  prose?: string;
+  children?: ReactNode;
+}) {
+  const hasList = Array.isArray(children)
+    ? children.length > 0
+    : Boolean(children);
   return (
     <div>
-      <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">Lohlotse</p>
+      <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">LohklarAI</p>
       <div className="mt-1 rounded-[var(--radius-md)] bg-bg-subtle px-3 py-3 text-ink">
-        <p className="font-display text-xl tracking-tight" data-lohlotse-heading={heading}>
-          {heading}
-        </p>
-        <ul className="mt-2 space-y-1.5 text-base">{children}</ul>
+        {heading ? (
+          <p className="font-display text-xl tracking-tight" data-lohlotse-heading={heading}>
+            {heading}
+          </p>
+        ) : null}
+        {prose ? (
+          <p className={heading ? "mt-2 text-base leading-relaxed" : "text-base leading-relaxed"}>{prose}</p>
+        ) : null}
+        {hasList ? <ul className={heading || prose ? "mt-2 space-y-1.5 text-base" : "space-y-1.5 text-base"}>{children}</ul> : null}
       </div>
     </div>
   );
