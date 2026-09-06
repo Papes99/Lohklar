@@ -5,7 +5,7 @@ import {
   Folder,
   LayoutDashboard,
   Map,
-  MessageCircle,
+  Sparkles,
 } from "lucide-react";
 import { Wordmark } from "@/components/brand/wordmark";
 import { RedirectToSignIn, UserButton } from "@/lib/auth/gates";
@@ -16,7 +16,7 @@ const NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard },
   { to: "/app/klar-o-mat", label: "Klar-o-Mat", icon: Compass },
   { to: "/app/fallordner", label: "Fälle", icon: Folder },
-  { to: "/app/lohlotse", label: "Lohlotse", icon: MessageCircle },
+  { to: "/app/lohlotse", label: "LohklarAI", icon: Sparkles },
   { to: "/kliniken", label: "Steckbriefe", icon: Map },
 ] as const;
 

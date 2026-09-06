@@ -22,7 +22,7 @@ function About() {
           Ein Werkzeug für Sozialarbeiter:innen, Beratungsstellen,
           Klinik-Sozialdienste und Angehörige. Der Klar-o-Mat gleicht beschriebene
           Bedarfe mit Klinikprofilen ab. Fallordner halten Läufe, Ergebnisdokumente
-          und den Lohlotsen getrennt je Arbeitsname.
+          und LohklarAI getrennt je Arbeitsname.
         </p>
         <h2>Was Lohklar nicht ist</h2>
         <ul>
