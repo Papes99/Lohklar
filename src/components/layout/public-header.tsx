@@ -1,5 +1,6 @@
 import { Link } from "@tanstack/react-router";
 import { Wordmark } from "@/components/brand/wordmark";
+import { useCurrentUserState } from "@/lib/auth/use-current-user";
 import { AuthSlot } from "./auth-slot";
 
 const LINKS = [
@@ -9,6 +10,9 @@ const LINKS = [
 ];
 
 export function PublicHeader() {
+  const { user, isPending } = useCurrentUserState();
+  const signedIn = Boolean(user) && !isPending;
+
   return (
     <header className="no-print border-b border-line bg-surface">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
@@ -22,20 +26,23 @@ export function PublicHeader() {
         </nav>
         <AuthSlot />
       </div>
-      <nav
-        aria-label="Hauptnavigation mobil"
-        className="flex gap-1 overflow-x-auto border-t border-line px-2 py-1 sm:hidden"
-      >
-        {LINKS.map((item) => (
-          <Link
-            key={item.to}
-            to={item.to}
-            className="inline-flex min-h-11 shrink-0 items-center px-3 text-sm text-ink hover:underline"
-          >
-            {item.label}
-          </Link>
-        ))}
-      </nav>
+      {/* Mobile marketing strip only for guests — signed-in users get Fallarbeit bottom tabs. */}
+      {!signedIn ? (
+        <nav
+          aria-label="Hauptnavigation mobil"
+          className="flex gap-1 overflow-x-auto border-t border-line px-2 py-1 sm:hidden"
+        >
+          {LINKS.map((item) => (
+            <Link
+              key={item.to}
+              to={item.to}
+              className="inline-flex min-h-11 shrink-0 items-center px-3 text-sm text-ink hover:underline"
+            >
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+      ) : null}
     </header>
   );
 }
