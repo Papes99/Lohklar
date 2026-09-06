@@ -33,12 +33,12 @@ DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistik
 | Fallordner | Arbeitsname sitzt am Ordner, nicht am Konto. Entwürfe erlaubt. Gast: ein Lauf + Claim. |
 | Ergebnisdokument | Nur nach Lauf. Wartezeit von C, offizielle Fakten von E. Editor: umordnen, streichen, umschreiben, Autosave, PDF/DOCX. |
 | Wartezeit-Schätzung | Einzige Anzeige. 8-Signal-Modell, Unsicherheit, Rechenweg. Keine Garantiesprache. |
-| Lohlotse | Eigene Navigation. Ein Thread pro Fallordner-Name. Leiste Pflicht (offiziell + persönlich). |
+| Lohlotse (UI: LohklarAI) | Eigene Navigation. Ein Thread pro Fallordner-Name. Leiste Pflicht (offiziell + persönlich). Freie Prosa via LLM (`XAI_API_KEY`) mit lokalem Fallback. |
 | Offizieller Steckbrief | Einheitliche 13-Block-Vorlage inkl. Fotos. Owner: Agent E. |
 | Persönlicher Steckbrief | Genau 4 Felder: `passt` / `passtNicht` / `offeneFragen` / `rueckmeldungen`. |
 | Dashboard | Nur angemeldet. Tag / Monat / Jahr (Europe/Berlin). URL `?view=&date=`. Nur Zahlen, plus Katalog-Log (aufgenommen / aktualisiert / entfernt). |
 
-Navigation: Dashboard, Klar-o-Mat, Fälle, Lohlotse, Steckbriefe.
+Navigation: Dashboard, Klar-o-Mat, Fälle, LohklarAI, Steckbriefe.
 
 Lauf-Status: `entwurf` | `fertig` | `exportiert`.
 
@@ -66,7 +66,7 @@ Shared shell (nicht owner-spezifisch): `src/components/layout/app-shell.tsx`, `s
 2. Trefferliste speichert Match + **C**-Snapshot. **B** erzeugt das Ergebnisdokument nur aus diesem Lauf.
 3. **E** liefert offizielle Fakten und Fotos. **B** und **D** lesen sie, schreiben sie nicht.
 4. **D** arbeitet im Faden des Ordnernamens. Persönliche Ergänzungen nur in die 4 Felder von **E**.
-5. **C** bleibt die einzige Wartezeit-Anzeige — in Trefferliste, Dokument, Steckbrief, Lohlotse.
+5. **C** bleibt die einzige Wartezeit-Anzeige — in Trefferliste, Dokument, Steckbrief, LohklarAI (Lohlotse).
 6. **F** zählt Vorgänge, keine Namen.
 7. **G** bleibt unverändert, solange niemand die Marke anfasst.
 
@@ -109,19 +109,26 @@ Merge: Vorschau → Übernehmen / Verwerfen → Undo. Ton der Nachbarzeilen. Dup
 
 ---
 
-## Lohlotse — Goldrunden (bindend)
+## Lohlotse / LohklarAI — Soft-Leitplanken + LLM
 
-Genau **eine** Emoji-Überschrift pro Antwort: 🧭 Überblick · 🏥 Klinik · ⏳ Wartezeit · 📋 Nächster Schritt · ⚠️ Wichtig.
+**UI-Name:** LohklarAI (Sparkles-Icon). Route/Code intern weiter `lohlotse` / `/app/lohlotse`.
 
-**TURN A — kein Name:** 🧭 Überblick, drei Stichpunkte „für welche Person?“. Aktion: Name erfragen. Wartezeit: keine. Ohne Namen kein Thread, kein persönlicher Steckbrief.
+**LLM-Pfad:** `askGrok` → xAI (`grok-4.5`, `XAI_API_KEY`). Ohne Key oder bei Parse-Fail: lokaler Fallback `composeLohlotseReply` (eher `mode: "free"` + Prosa).
 
-**TURN B — Name + Klinik, Kinder + Wartezeit kombiniert:** genau **eine** Überschrift 🏥 Klinik (nicht ⏳). Stichpunkte zur Kinderregel aus dem App-Steckbrief. Letzter Stichpunkt: *„Wartezeit nicht selbst geschätzt. Es gilt die Anzeige der Wartezeit-Komponente inkl. ‚Rechenweg ansehen‘. Das ist keine Aufnahmezusage.“* Keine Wartezahl im Fließtext. `showWait=true`. Markierung: Kinder/Familie/Geschlecht + Wartezeit (offiziell) + Wahlkriterien/`passt` (persönlich). Kein Merge-Angebot.
+Goldrunden (🧭 Überblick · 🏥 Klinik · ⏳ Wartezeit · 📋 Nächster Schritt · ⚠️ Wichtig) sind **Soft-Leitplanken**, kein Schablonen-Zwang. Standardantworten: freie Prosa (`mode: "free"`, Feld `prose`). Heading/Bullets optional.
 
-**TURN B2 — nur Wartezeit:** ⏳ Wartezeit. Stichpunkte zeigen auf die Komponente. **Keine Zahl im Fließtext.**
+**Hard-Rules (unverändert):**
+- Ein Thread pro Fallordner-Name. Leiste Pflicht (offiziell + persönlich).
+- Keine Diagnose, keine Therapieentscheidung, keine Betten, keine Garantie, keine Aufnahmezusage.
+- Wartezeit nur über die Wartezeit-Komponente (`showWait`); **keine Zahl/Spanne/Wochen/Tage im Fließtext**.
+- Persönliche Notizen nur als `offer` → 4 Felder. Offiziellen Steckbrief nie überschreiben.
+- App-Steckbrief sticht Web.
 
-**TURN C — fehlende offizielle Angabe** (z. B. Speisesaal): 🏥 Klinik, „Angabe liegt nicht vor“. Zusatzinfos nur als Chat-Stichpunkte mit öffentlicher Quelle, nie in den offiziellen Text. Merge-Vorschau auf `passt` („Passung, die wir prüfen“). Nach Übernehmen: 📋 Nächster Schritt, persönliche Markierung, Undo.
-
-App-Steckbrief sticht Web. Ein Faden, ein Name. Keine Diagnosen, keine Betten, keine Garantie, keine zweite Warteformel.
+**Soft-Beispiele (nicht bindend):**
+- Ohne Namen: nach der Person fragen; ohne Namen kein Thread.
+- Kinder + Wartezeit: Klinikbezug + `showWait=true`, Verweis auf Komponente.
+- Nur Wartezeit: `showWait=true`, Text zeigt auf die Komponente.
+- Fehlende offizielle Angabe: „Angabe liegt nicht vor.“; Zusatz nur im Chat; Merge auf `passt` möglich.
 
 ---
 
