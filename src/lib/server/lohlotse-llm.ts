@@ -1,10 +1,7 @@
 import {
   parseLohlotsePayload,
-  payloadToContent,
-  sanitizeLohlotsePayload,
   type LohlotseClinic,
   type LohlotsePayload,
-  type PersonalDraft,
 } from "@/lib/domain/lohlotse";
 import { STECKBRIEF_BLOCKS } from "@/lib/domain/types";
 
@@ -100,18 +97,7 @@ export async function askGrok(args: {
 }): Promise<string | null> {
   const apiKey = process.env.XAI_API_KEY;
   if (!apiKey) return null;
-  const system = `${GROK_SYSTEM}
-
-Nur der Arbeitsname ${args.clientName}.
-
-Klinikatalog (ohne Wartezeit-Zahlen — Zahlen gehören nie in den Fließtext):
-${args.catalog}
-
-Aktueller Fallordner:
-${args.folderContext}
-
-Offizieller Steckbrief des besprochenen Hauses (Vorrang):
-${args.official || "Noch kein Hausbezug. Hinweis: Klinik wählen oder nennen."}`;
+  const system = `${GROK_SYSTEM}\n\nNur der Arbeitsname ${args.clientName}.\n\nKlinikatalog (ohne Wartezeit-Zahlen — Zahlen gehören nie in den Fließtext):\n${args.catalog}\n\nAktueller Fallordner:\n${args.folderContext}\n\nOffizieller Steckbrief des besprochenen Hauses (Vorrang):\n${args.official || "Noch kein Hausbezug. Hinweis: Klinik wählen oder nennen."}`;
 
   const body: Record<string, unknown> = {
     model: "grok-4.5",
