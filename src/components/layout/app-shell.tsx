@@ -30,7 +30,7 @@ export function AppShell() {
   return (
     <div className={cn("min-h-screen bg-bg pb-20 lg:pb-0", dashboard && "bg-white lg:bg-bg")}>
       <aside className="no-print hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-line lg:bg-surface lg:p-5">
-        <Wordmark size="sm" to="/app" />
+        <Wordmark size="sm" to="/" />
         <nav aria-label="Fallarbeit" className="mt-8 flex flex-col gap-1">
           {FALLARBEIT_NAV.map((item) => (
             <FallarbeitNavLink key={item.to} {...item} />
@@ -41,7 +41,7 @@ export function AppShell() {
         </div>
       </aside>
       <header className="no-print flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
-        <Wordmark size="sm" to="/app" stacked={false} />
+        <Wordmark size="sm" to="/" stacked={false} />
         <UserButton />
       </header>
       <div className={cn("lg:pl-64", dashboard && "bg-white")}>
