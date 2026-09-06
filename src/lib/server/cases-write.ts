@@ -10,7 +10,6 @@ import { emptyAnswers, normalizeAnswers, rankClinics } from "@/lib/domain/matchi
 import { type KlaromatAnswers, type MatchSnapshot } from "@/lib/domain/types";
 import { loadClinics } from "./clinics";
 import { insertUsageEvent } from "./usage";
-import { seedAntragswegForFolder } from "./antragsweg";
 import {
   asIso,
   parseJson,
@@ -195,7 +194,6 @@ export const claimGuestRun = createServerFn({ method: "POST" })
       `insert into lohlotse_threads (id, folder_id, user_id, created_at) values ($1,$2,$3,$4)`,
       [crypto.randomUUID(), folderId, context.userId, now],
     );
-    await seedAntragswegForFolder(sql, folderId, context.userId, now);
     await sql.query(
       `insert into runs (id, folder_id, user_id, run_number, answers, matches, created_at, label, status)
        values ($1,$2,$3,1,$4::jsonb,$5::jsonb,$6,'Gastlauf','entwurf')`,

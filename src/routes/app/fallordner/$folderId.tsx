@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { AntragswegPanel } from "@/components/antragsweg/antragsweg-panel";
 import { Ergebnisdokument } from "@/components/dokument/ergebnisdokument";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -29,15 +28,14 @@ export const Route = createFileRoute("/app/fallordner/$folderId")({
       search.tab === "laeufe" ||
       search.tab === "dokumente" ||
       search.tab === "steckbrief" ||
-      search.tab === "lohlotse" ||
-      search.tab === "antragsweg"
+      search.tab === "lohlotse"
         ? search.tab
         : undefined,
   }),
   component: FolderPage,
 });
 
-type Tab = "laeufe" | "dokumente" | "steckbrief" | "lohlotse" | "antragsweg";
+type Tab = "laeufe" | "dokumente" | "steckbrief" | "lohlotse";
 
 function FolderPage() {
   const { folderId } = Route.useParams();
@@ -74,7 +72,6 @@ function FolderPage() {
   const tabs: { id: Tab; label: string }[] = [
     { id: "laeufe", label: "Durchläufe" },
     { id: "dokumente", label: "Dokumente" },
-    { id: "antragsweg", label: "Antragsweg" },
     { id: "steckbrief", label: "Persönlicher Steckbrief" },
     { id: "lohlotse", label: "Lohlotse" },
   ];
@@ -228,10 +225,6 @@ function FolderPage() {
             </Button>
           </div>
         )
-      ) : null}
-
-      {tab === "antragsweg" ? (
-        <AntragswegPanel folderId={folder.id} clientName={folder.clientName} />
       ) : null}
 
       {tab === "steckbrief" ? (
