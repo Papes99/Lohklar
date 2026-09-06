@@ -6,8 +6,9 @@ import {
   type DocumentBody,
   type DocumentVersionMeta,
 } from "@/lib/domain/document";
-import { emptyAnswers, normalizeAnswers } from "@/lib/domain/matching";
+import { emptyAnswers, normalizeAnswers, rankClinics } from "@/lib/domain/matching";
 import { type KlaromatAnswers, type MatchSnapshot } from "@/lib/domain/types";
+import { loadClinics } from "./clinics";
 import { insertUsageEvent } from "./usage";
 import { seedAntragswegForFolder } from "./antragsweg";
 import {

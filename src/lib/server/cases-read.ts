@@ -3,6 +3,7 @@ import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
 import { emptyAnswers, normalizeAnswers, rankClinics } from "@/lib/domain/matching";
 import { type KlaromatAnswers, type MatchSnapshot } from "@/lib/domain/types";
+import type { DocumentVersionMeta } from "@/lib/domain/document";
 import { loadClinics } from "./clinics";
 import { seedAntragswegForFolder } from "./antragsweg";
 import {
