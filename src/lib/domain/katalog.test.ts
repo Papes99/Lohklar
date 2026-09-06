@@ -5,13 +5,13 @@ import { HOUSES } from "./katalog-houses.ts";
 import { STECKBRIEFE } from "./steckbrief-seed.ts";
 import { coverAuftragTag, coverSubstanceTags } from "./types.ts";
 
-describe("katalog 250 echte Häuser", () => {
-  it("hat genau 250 Häuser, 16 Länder, einzigartige IDs", () => {
-    assert.equal(HOUSES.length, 250);
-    assert.equal(CLINIC_SEED.length, 250);
-    assert.equal(Object.keys(STECKBRIEFE).length, 250);
+describe("katalog echte Häuser", () => {
+  it("hat 16 Länder, einzigartige IDs und vollständige Seeds", () => {
+    assert.equal(HOUSES.length, CLINIC_SEED.length);
+    assert.equal(Object.keys(STECKBRIEFE).length, HOUSES.length);
+    assert.ok(HOUSES.length >= 250);
     const ids = new Set(HOUSES.map((h) => h.id));
-    assert.equal(ids.size, 250);
+    assert.equal(ids.size, HOUSES.length);
     const states = new Set(HOUSES.map((h) => h.stateCode));
     assert.equal(states.size, 16);
   });

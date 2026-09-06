@@ -1,5 +1,6 @@
 import type { GenderSetting, Indication, SettingKind } from "./types.ts";
 import { HOUSES_EXTRA } from "./katalog-houses-extra.ts";
+import { HOUSES_WAVE3 } from "./katalog-houses-wave3.ts";
 
 export type RoomKind =
   | "einbett"
@@ -2623,4 +2624,4 @@ const HOUSES_CORE: HouseSpec[] = [
   },
 ];
 
-export const HOUSES: HouseSpec[] = [...HOUSES_CORE, ...HOUSES_EXTRA];
+export const HOUSES: HouseSpec[] = [...HOUSES_CORE, ...HOUSES_EXTRA, ...HOUSES_WAVE3];

@@ -33,7 +33,7 @@ describe("catalog completeness", () => {
 describe("catalog filter", () => {
   it("returns all houses for an empty filter", () => {
     const rows = filterClinics(CLINIC_SEED, emptyCatalogFilter());
-    assert.equal(rows.length, 250);
+    assert.equal(rows.length, 327);
     assert.equal(catalogFilterActive(emptyCatalogFilter()), false);
   });
 
@@ -86,15 +86,15 @@ describe("clinicCardTags", () => {
 describe("catalog pulse", () => {
   it("covers 16 Länder and records the September 2026 editions", () => {
     const pulse = catalogPulse(CLINIC_SEED, "2026-08-31");
-    assert.equal(pulse.houses, 250);
+    assert.equal(pulse.houses, 327);
     assert.equal(pulse.statesCovered, 16);
-    assert.equal(pulse.addedInPeriod, 250);
-    assert.equal(pulse.pruefungenInPeriod, 250);
-    assert.equal(pulse.complete + pulse.incomplete, 250);
+    assert.equal(pulse.addedInPeriod, 327);
+    assert.equal(pulse.pruefungenInPeriod, 327);
+    assert.equal(pulse.complete + pulse.incomplete, 327);
     assert.ok(pulse.topGaps.length >= 1);
-    assert.equal(CATALOG_EDITIONS.length, 4);
+    assert.equal(CATALOG_EDITIONS.length, 6);
     const mid = catalogPulse(CLINIC_SEED, "2026-09-02");
-    assert.equal(mid.addedInPeriod, 200);
+    assert.equal(mid.addedInPeriod, 277);
     const before = catalogPulse(CLINIC_SEED, "2026-09-06");
     assert.equal(before.addedInPeriod, 0);
   });
