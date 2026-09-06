@@ -9,6 +9,7 @@ import {
   parseLohlotsePayload,
   resolveClinicMention,
   sanitizeLohlotsePayload,
+  stripWaitNumbersFromText,
   type LohlotseClinic,
 } from "./lohlotse.ts";
 import { formatWaitLabel } from "./wait-time.ts";
@@ -176,7 +177,8 @@ describe("composeLohlotseReply", () => {
       matches: [{ clinicId: eifel.id, score: 82, wait }],
       currentClinicId: "ck-eifelhoehe",
     });
-    assert.equal(reply.headingKey, "klinik");
+    assert.equal(reply.mode, "free");
+    assert.ok(reply.prose && /Kinderbetreuung|Steckbrief/.test(reply.prose));
     assert.ok(reply.highlights.some((item) => /Kinderbetreuung/.test(item.quote)));
     assert.equal(reply.clinicId, "ck-eifelhoehe");
     assert.equal(reply.showWait, false);
@@ -208,9 +210,10 @@ describe("composeLohlotseReply", () => {
       matches: [{ clinicId: eifel.id, score: 82, wait }],
       currentClinicId: null,
     });
-    assert.ok(reply.bullets.some((item) => item.includes("Schmidt, Lea")));
-    assert.ok(reply.bullets.some((item) => /Klinik wählen oder nennen/i.test(item)));
-    assert.equal(reply.bullets.some((item) => item.includes(wait.label)), false);
+    assert.equal(reply.mode, "free");
+    assert.ok(reply.prose?.includes("Schmidt, Lea"));
+    assert.match(reply.prose ?? "", /Klinik wählen oder nennen/i);
+    assert.equal(hasWaitNumber(reply.prose ?? ""), false);
   });
 });
 
@@ -305,5 +308,77 @@ describe("parseLohlotsePayload", () => {
     assert.equal(parsed.offer?.field, "passt");
     assert.match(parsed.offer?.text ?? "", /Speiseraum/);
     assert.ok(parsed.highlights.some((item) => item.block === "wohnenAlltag"));
+  });
+});
+
+describe("free mode parse and wait-strip", () => {
+  it("parses free JSON with prose and optional heading", () => {
+    const parsed = parseLohlotsePayload(
+      JSON.stringify({
+        mode: "free",
+        prose:
+          "Für Schmidt, Lea bleibt der Faden an diesem Ordner. Die Leiste zeigt den offiziellen Steckbrief, sobald ein Haus gewählt ist.",
+        headingKey: null,
+        bullets: [],
+        sources: ["App-Steckbrief"],
+        clinicId: null,
+        highlights: [],
+        showWait: false,
+        offer: null,
+      }),
+    );
+    assert.ok(parsed);
+    assert.equal(parsed.mode, "free");
+    assert.match(parsed.prose ?? "", /Schmidt, Lea/);
+    assert.equal(parsed.headingKey, null);
+    assert.equal(parsed.heading, "");
+    assert.equal(parsed.bullets.length, 0);
+  });
+
+  it("strips wait spans from free prose via sanitize", () => {
+    const dirty = {
+      mode: "free" as const,
+      prose: "Die Wartezeit liegt bei ca. 8–11 Wochen. Bitte die Komponente nutzen.",
+      headingKey: null as null,
+      heading: "",
+      bullets: [] as string[],
+      sources: [] as string[],
+      clinicId: "ck-eifelhoehe",
+      highlights: [],
+      showWait: true,
+      offer: null,
+    };
+    const clean = sanitizeLohlotsePayload(
+      dirty,
+      "Wie lange ist die Wartezeit in der Eifelhöhe?",
+      null,
+    );
+    assert.equal(clean.showWait, true);
+    assert.equal(hasWaitNumber(clean.prose ?? ""), false);
+    assert.equal(clean.prose?.includes("8–11"), false);
+    assert.match(clean.prose ?? "", /Wartezeit-Komponente|Rechenweg/i);
+    assert.equal(stripWaitNumbersFromText("ca. 8–11 Wochen Pause").includes("Wochen"), false);
+  });
+
+  it("keeps guided backward compat without prose", () => {
+    const parsed = parseLohlotsePayload({
+      headingKey: "wartezeit",
+      bullets: [
+        "Es gilt die Schätzung der Wartezeit-Komponente, Stand laut Komponente.",
+        "Rechenweg über „Rechenweg ansehen“.",
+        "Das ist keine Aufnahmezusage und keine individuelle Vorfahrt.",
+      ],
+      sources: [],
+      clinicId: "ck-eifelhoehe",
+      highlights: [{ surface: "official", block: "wartezeit", quote: "Wartezeit-Schätzung" }],
+      showWait: true,
+      offer: null,
+    });
+    assert.ok(parsed);
+    assert.equal(parsed.mode, "guided");
+    assert.equal(parsed.prose, undefined);
+    assert.equal(parsed.headingKey, "wartezeit");
+    assert.equal(parsed.heading, "⏳ Wartezeit");
+    assert.ok(parsed.bullets.length >= 2);
   });
 });
