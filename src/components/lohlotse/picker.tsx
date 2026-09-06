@@ -16,10 +16,10 @@ export function LohlotsePicker({
   return (
     <div className="mx-auto max-w-xl space-y-6">
       <header>
-        <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">Lohlotse</p>
+        <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">LohklarAI</p>
         <h1 className="mt-1 font-display text-3xl tracking-tight">Für welche Person?</h1>
         <p className="mt-2 text-ink-muted">
-          Der Faden hängt an genau einem Arbeitsnamen. Ohne Namen speichert Lohlotse keinen
+          Der Faden hängt an genau einem Arbeitsnamen. Ohne Namen speichert LohklarAI keinen
           Thread und keinen persönlichen Steckbrief.
         </p>
       </header>
@@ -29,7 +29,7 @@ export function LohlotsePicker({
         aria-label="🧭 Überblick"
       >
         <p className="font-display text-2xl tracking-tight">🧭 Überblick</p>
-        <ul className="mt-3 space-y-2 text-ink">
+        <ul className="mt:3 space-y-2 text-ink">
           <li className="flex gap-2">
             <span aria-hidden="true" className="text-ink-subtle">
               –

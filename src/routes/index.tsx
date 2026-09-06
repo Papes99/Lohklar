@@ -95,8 +95,8 @@ function Home() {
                 text: "Eine Komponente überall. Rechenweg aufklappbar. Keine Garantie.",
               },
               {
-                title: "Lohlotse",
-                text: "Chat mit Gedächtnis je Arbeitsname. Steckbrief-Leiste bleibt sichtbar.",
+                title: "LohklarAI",
+                text: "Freier Chat mit Gedächtnis je Arbeitsname. Steckbrief-Leiste bleibt sichtbar.",
               },
             ].map((item) => (
               <div key={item.title}>
