@@ -1,7 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/brand/site-footer";
 import { FoundedLine, Wordmark } from "@/components/brand/wordmark";
-import { PublicHeader } from "@/components/layout/public-header";
+import { PublicLayout } from "@/components/layout/public-layout";
 import { Button } from "@/components/ui/button";
 import { SignInGate } from "@/lib/auth/gates";
 
@@ -9,8 +8,7 @@ export const Route = createFileRoute("/")({ component: Home });
 
 function Home() {
   return (
-    <div className="min-h-screen bg-bg">
-      <PublicHeader />
+    <PublicLayout>
       <main id="inhalt">
         <section className="mx-auto grid max-w-6xl gap-10 px-4 py-12 lg:grid-cols-2 lg:items-center lg:py-20">
           <div>
@@ -107,7 +105,6 @@ function Home() {
           </div>
         </section>
       </main>
-      <SiteFooter />
-    </div>
+    </PublicLayout>
   );
 }

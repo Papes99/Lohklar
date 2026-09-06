@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { createFileRoute, Link, Navigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { SiteFooter } from "@/components/brand/site-footer";
 import { MatchHitList } from "@/components/klaromat/hit-list";
 import { KlaromatWizard } from "@/components/klaromat/wizard";
-import { PublicHeader } from "@/components/layout/public-header";
+import { PublicLayout } from "@/components/layout/public-layout";
 import { Button } from "@/components/ui/button";
 import { Modal } from "@/components/ui/modal";
 import { rankClinics } from "@/lib/domain/matching";
@@ -30,8 +29,7 @@ function GuestKlaromatPage() {
   }
 
   return (
-    <div className="min-h-screen bg-bg">
-      <PublicHeader />
+    <PublicLayout>
       <main id="inhalt" className="mx-auto max-w-3xl px-4 py-10">
         {guest ? (
           <div className="space-y-6">
@@ -84,7 +82,6 @@ function GuestKlaromatPage() {
           </Modal>
         )}
       </main>
-      <SiteFooter />
-    </div>
+    </PublicLayout>
   );
 }

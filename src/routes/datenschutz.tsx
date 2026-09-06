@@ -1,14 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/brand/site-footer";
 import { FoundedLine } from "@/components/brand/wordmark";
-import { PublicHeader } from "@/components/layout/public-header";
+import { PublicLayout } from "@/components/layout/public-layout";
 
 export const Route = createFileRoute("/datenschutz")({ component: Privacy });
 
 function Privacy() {
   return (
-    <div className="min-h-screen bg-bg">
-      <PublicHeader />
+    <PublicLayout>
       <main id="inhalt" className="prose-legal mx-auto max-w-3xl px-4 py-12">
         <FoundedLine />
         <h1 className="mt-3 font-display text-4xl tracking-tight">Datenschutz</h1>
@@ -47,7 +45,6 @@ function Privacy() {
           automatisierte Entscheidung mit Rechtswirkung.
         </p>
       </main>
-      <SiteFooter />
-    </div>
+    </PublicLayout>
   );
 }
