@@ -4,7 +4,7 @@ import {
   Folder,
   LayoutDashboard,
   Map,
-  MessageCircle,
+  Sparkles,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -13,7 +13,7 @@ export const FALLARBEIT_NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard },
   { to: "/app/klar-o-mat", label: "Klar-o-Mat", icon: Compass },
   { to: "/app/fallordner", label: "Fälle", icon: Folder },
-  { to: "/app/lohlotse", label: "Lohlotse", icon: MessageCircle },
+  { to: "/app/lohlotse", label: "LohklarAI", icon: Sparkles },
   { to: "/kliniken", label: "Steckbriefe", icon: Map },
 ] as const;
 
