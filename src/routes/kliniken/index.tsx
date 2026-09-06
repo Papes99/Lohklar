@@ -1,8 +1,7 @@
 import { useMemo, useState, type ReactNode } from "react";
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/brand/site-footer";
 import { ClinicCard } from "@/components/clinic/clinic-card";
-import { PublicHeader } from "@/components/layout/public-header";
+import { PublicLayout } from "@/components/layout/public-layout";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -41,8 +40,7 @@ function ClinicsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-bg">
-      <PublicHeader />
+    <PublicLayout>
       <main id="inhalt" className="mx-auto max-w-6xl px-4 py-10">
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">
           Offizielle Steckbriefe · ohne Konto
@@ -217,8 +215,7 @@ function ClinicsPage() {
         </p>
         <Badge className="mt-2">Klinikatalog</Badge>
       </main>
-      <SiteFooter />
-    </div>
+    </PublicLayout>
   );
 }
 

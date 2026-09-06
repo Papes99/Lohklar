@@ -1,8 +1,7 @@
 import { useEffect } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { SiteFooter } from "@/components/brand/site-footer";
 import { OfficialSteckbrief } from "@/components/clinic/official-steckbrief";
-import { PublicHeader } from "@/components/layout/public-header";
+import { PublicLayout } from "@/components/layout/public-layout";
 import { emitUsage } from "@/lib/domain/usage";
 import { getClinic } from "@/lib/server/clinics";
 
@@ -18,8 +17,7 @@ function ClinicDetailPage() {
   }, [clinic?.id]);
 
   return (
-    <div className="min-h-screen bg-bg">
-      <PublicHeader />
+    <PublicLayout>
       <main id="inhalt" className="mx-auto max-w-6xl px-4 py-10">
         <p className="no-print mb-6">
           <Link to="/kliniken" className="text-sm font-medium text-primary hover:underline">
@@ -32,7 +30,6 @@ function ClinicDetailPage() {
           <p>Dieser Steckbrief ist nicht vorhanden.</p>
         )}
       </main>
-      <SiteFooter />
-    </div>
+    </PublicLayout>
   );
 }
