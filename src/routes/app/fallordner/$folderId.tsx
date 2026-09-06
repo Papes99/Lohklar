@@ -73,7 +73,7 @@ function FolderPage() {
     { id: "laeufe", label: "Durchläufe" },
     { id: "dokumente", label: "Dokumente" },
     { id: "steckbrief", label: "Persönlicher Steckbrief" },
-    { id: "lohlotse", label: "Lohlotse" },
+    { id: "lohlotse", label: "LohklarAI" },
   ];
 
   return (
@@ -233,13 +233,13 @@ function FolderPage() {
 
       {tab === "lohlotse" ? (
         <div className="rounded-[var(--radius-xl)] bg-surface p-6 shadow-[var(--shadow-border)]">
-          <h2 className="font-display text-2xl tracking-tight">Lohlotse</h2>
+          <h2 className="font-display text-2xl tracking-tight">LohklarAI</h2>
           <p className="mt-2 text-ink-muted">
-            Der Lohlotse hat einen eigenen Menüpunkt. Der Faden bleibt bei {folder.clientName}.
+            LohklarAI hat einen eigenen Menüpunkt. Der Faden bleibt bei {folder.clientName}.
           </p>
           <Button className="mt-4" asChild>
             <Link to="/app/lohlotse" search={{ folder: folderId }}>
-              Zum Lohlotse für {folder.clientName}
+              Zu LohklarAI für {folder.clientName}
             </Link>
           </Button>
         </div>
@@ -283,7 +283,7 @@ function RenameModal({
   return (
     <Modal titleId="rename-title" title="Ordner umbenennen">
       <p className="mt-2 text-sm text-ink-muted">
-        Der Name steht auf Dokumenten und im Lohlotse.
+        Der Name steht auf Dokumenten und in LohklarAI.
       </p>
       <div className="mt-4 space-y-2">
         <label htmlFor="rename-name" className="text-sm font-medium">
@@ -363,7 +363,7 @@ function PersonalEditor({
         </Button>
         <Button type="button" variant="ghost" asChild>
           <Link to="/app/lohlotse" search={{ folder: folder.id }}>
-            Im Lohlotse ergänzen
+            In LohklarAI ergänzen
           </Link>
         </Button>
       </div>
