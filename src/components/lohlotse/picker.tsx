@@ -29,7 +29,7 @@ export function LohlotsePicker({
         aria-label="🧭 Überblick"
       >
         <p className="font-display text-2xl tracking-tight">🧭 Überblick</p>
-        <ul className="mt:3 space-y-2 text-ink">
+        <ul className="mt-3 space-y-2 text-ink">
           <li className="flex gap-2">
             <span aria-hidden="true" className="text-ink-subtle">
               –
