@@ -1,3 +1,5 @@
+import { AUFNAHME_EXTRA_BY_ID } from "./katalog-aufnahme-extra.ts";
+
 /**
  * Block 14 — Aufnahmeunterlagen & Fristen.
  * Nur öffentlich belegte Klinik-/Trägerseiten und Merkblätter, Stand 2026-09-07.
@@ -1755,5 +1757,13 @@ export const AUFNAHME_BY_ID: Record<string, AufnahmeAngabe> = {
 };
 
 export function aufnahmeAngabe(id: string): AufnahmeAngabe | undefined {
-  return AUFNAHME_BY_ID[id];
+  const base = AUFNAHME_BY_ID[id];
+  const extra = AUFNAHME_EXTRA_BY_ID[id];
+  if (!base && !extra) return undefined;
+  return {
+    unterlagen: base?.unterlagen?.length ? base.unterlagen : extra?.unterlagen,
+    entgiftungspflicht:
+      base?.entgiftungspflicht !== undefined ? base.entgiftungspflicht : extra?.entgiftungspflicht,
+    bearbeitungszeitHinweis: base?.bearbeitungszeitHinweis ?? extra?.bearbeitungszeitHinweis,
+  };
 }

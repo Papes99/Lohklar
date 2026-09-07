@@ -167,8 +167,12 @@ describe("katalog echte Häuser", () => {
     }
     const seewiesen = CLINIC_SEED.find((item) => item.id === "ck-seewiesen");
     assert.ok(seewiesen);
-    assert.ok(seewiesen.steckbrief.aufnahmeunterlagen.chips.every((chip) => chip.status === "unbekannt"));
-    assert.match(seewiesen.steckbrief.aufnahmeunterlagen.bullets.join(" "), /Angabe liegt nicht vor/);
+    assert.equal(
+      seewiesen.steckbrief.aufnahmeunterlagen.chips.find((chip) => chip.label === "Unterlagenliste")?.status,
+      "vorhanden",
+    );
+    assert.match(seewiesen.steckbrief.aufnahmeunterlagen.bullets.join(" "), /Kostenzusage|Befund|Medikament/);
+    assert.match(seewiesen.steckbrief.aufnahmeunterlagen.bullets.join(" "), /Keine Aufnahmezusage/);
 
     const richelsdorf = CLINIC_SEED.find((item) => item.id === "ck-richelsdorf");
     assert.ok(richelsdorf);
@@ -197,6 +201,46 @@ describe("katalog echte Häuser", () => {
     assert.ok(Object.keys(AUFNAHME_BY_ID).length >= 150);
     for (const id of Object.keys(AUFNAHME_BY_ID)) {
       assert.ok(CLINIC_SEED.some((clinic) => clinic.id === id), id);
+    }
+  });
+
+  it("füllt Blöcke 01–10 mit Träger und ohne leere Stichpunkte, höchstens 8", () => {
+    for (const clinic of CLINIC_SEED) {
+      for (const item of STECKBRIEF_BLOCKS.filter((block) => block.countsForComplete)) {
+        const bullets = clinic.steckbrief[item.key].bullets;
+        assert.ok(bullets.length >= 1 && bullets.length <= 8, clinic.id + " " + item.key);
+        for (const bullet of bullets) {
+          assert.ok(bullet.trim().length > 0, clinic.id);
+          assert.doesNotMatch(bullet, /^\s*$/);
+        }
+      }
+      assert.match(clinic.steckbrief.kostentraeger.bullets.join(" "), /Träger laut öffentlicher Angabe/);
+      assert.match(clinic.steckbrief.therapie.bullets.join(" "), /Verfahren im Haus|Therapieverfahren/);
+    }
+    const seewiesen = CLINIC_SEED.find((item) => item.id === "ck-seewiesen");
+    assert.ok(seewiesen);
+    assert.match(seewiesen.steckbrief.indikation.bullets.join(" "), /Psychosomatische Rehabilitation/);
+    assert.match(seewiesen.steckbrief.kostentraeger.bullets.join(" "), /Bayern Süd/);
+    assert.match(seewiesen.steckbrief.besonderheiten.bullets.join(" "), /Starnberger See/);
+  });
+
+  it("zieht öffentlich belegte Overlay-Stichpunkte in Kontraindikation, Alltag und Therapie", () => {
+    const seewiesen = CLINIC_SEED.find((item) => item.id === "ck-seewiesen");
+    const wilhelmsheim = CLINIC_SEED.find((item) => item.id === "ck-auwald");
+    assert.ok(seewiesen && wilhelmsheim);
+    const contra = seewiesen.steckbrief.kontraindikation.bullets.join(" ");
+    assert.match(contra, /Suizidalität|Psychosen/);
+    assert.ok(seewiesen.steckbrief.therapie.bullets.length >= 2);
+    assert.match(wilhelmsheim.steckbrief.therapie.bullets.join(" "), /Glücksspiel|Verfahren/);
+    const aggerblick = CLINIC_SEED.find((item) => item.id === "ck-aggerblick");
+    const wied = CLINIC_SEED.find((item) => item.id === "ck-median-wied");
+    assert.ok(aggerblick && wied);
+    assert.match(aggerblick.steckbrief.therapie.bullets.join(" "), /Kurzzeittherapie|22 Wochen/);
+    assert.match(wied.steckbrief.wohnenAlltag.bullets.join(" "), /WLAN|Doppelzimmer/);
+    for (const clinic of [seewiesen, wilhelmsheim, aggerblick, wied]) {
+      for (const item of STECKBRIEF_BLOCKS.filter((block) => block.countsForComplete)) {
+        assert.ok(clinic.steckbrief[item.key].bullets.length <= 8, clinic.id + " " + item.key);
+      }
     }
   });
 

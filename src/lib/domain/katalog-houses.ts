@@ -60,6 +60,16 @@ export type HouseSpec = {
   lage: string;
   fokus: string;
   facts: string[];
+  /** Öffentlich belegte Ausschlussgründe. Nie raten. */
+  kontraindikationen?: string[];
+  /** Öffentlich belegter Alltag / Hausregeln, ohne Diagnose. */
+  alltag?: string[];
+  /** Was der Klinik-Sozialdienst laut Quelle konkret tut. */
+  sozialdienstLeistungen?: string[];
+  /** Wahlleistungen / Zuschläge, soweit öffentlich genannt. */
+  wahlleistungenHinweis?: string;
+  /** Somatische Mitbehandlung / Pflegegrenzen, soweit öffentlich genannt. */
+  mitbehandlungHinweis?: string;
   /** Öffentlich belegte Unterlagen vor der Aufnahme. Nie raten. */
   aufnahmeUnterlagen?: string[];
   /** true = Entgiftungsnachweis öffentlich gefordert, false = öffentlich nicht gefordert. */
