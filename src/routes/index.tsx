@@ -95,8 +95,8 @@ function Home() {
                 text: "Eine Komponente überall. Rechenweg aufklappbar. Keine Garantie.",
               },
               {
-                title: "Lohlotse",
-                text: "Chat mit Gedächtnis je Arbeitsname. Steckbrief-Leiste bleibt sichtbar.",
+                title: "Lohklar KI",
+                text: "Fallunabhängige Orientierungshilfe. Freie Fragen zu Katalog, Klar-o-Mat und App.",
               },
             ].map((item) => (
               <div key={item.title}>
