@@ -5,7 +5,7 @@ import {
   Folder,
   LayoutDashboard,
   Map,
-  MessageCircle,
+  Sparkles,
 } from "lucide-react";
 import { Wordmark } from "@/components/brand/wordmark";
 import { RedirectToSignIn, UserButton } from "@/lib/auth/gates";
@@ -16,14 +16,14 @@ const NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard },
   { to: "/app/klar-o-mat", label: "Klar-o-Mat", icon: Compass },
   { to: "/app/fallordner", label: "Fälle", icon: Folder },
-  { to: "/app/lohlotse", label: "Lohlotse", icon: MessageCircle },
+  { to: "/app/ki", label: "Lohklar KI", icon: Sparkles },
   { to: "/kliniken", label: "Steckbriefe", icon: Map },
 ] as const;
 
 export function AppShell() {
   const { user, isPending } = useCurrentUserState();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const wide = pathname.startsWith("/app/lohlotse");
+  const wide = pathname.startsWith("/app/ki");
   const dashboard = pathname === "/app";
   if (isPending) {
     return (
