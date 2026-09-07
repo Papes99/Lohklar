@@ -19,7 +19,7 @@ Lohklar **orientiert**. Es diagnostiziert nicht, trifft keine Therapieentscheidu
 Wartezeiten sind **Schätzungen**. Genau eine Wartezeit-Komponente (Agent C). Keine zweite Formel, keine Zahl/Spanne/Tages-Hausnummer im Fließtext von Chat oder Dokument — Zahlen nur in der Komponente inkl. „Rechenweg ansehen“.
 
 Offizielle Kliniktexte werden **niemals** überschrieben. Ergänzungen nur in Chat und persönlichem Steckbrief.
-Katalog: 327 echte, öffentlich belegte Häuser in src/lib/domain/katalog-houses.ts (Agent E). Keine Musterdaten. Jedes Haus hat die 13-Block-Vorlage inkl. Zimmerart, Substanzen, Substitution und Wahlleistungen. Wartezeiten bleiben Schätzungen.
+Katalog: echte, öffentlich belegte Häuser in `src/lib/domain/katalog-houses.ts` (Agent E). Keine Musterdaten. Jedes Haus hat die 14-Block-Vorlage inkl. Zimmerart, Substanzen, Substitution, Wahlleistungen und Aufnahmeunterlagen. Wartezeiten bleiben Schätzungen.
 
 DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistiken. Dashboard zählt nur Vorgänge, keine Namen.
 
@@ -34,7 +34,7 @@ DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistik
 | Ergebnisdokument | Nur nach Lauf. Wartezeit von C, offizielle Fakten von E. Editor: umordnen, streichen, umschreiben, Autosave, PDF/DOCX. |
 | Wartezeit-Schätzung | Einzige Anzeige. 8-Signal-Modell, Unsicherheit, Rechenweg. Keine Garantiesprache. |
 | Lohlotse | Eigene Navigation. Ein Thread pro Fallordner-Name. Leiste Pflicht (offiziell + persönlich). |
-| Offizieller Steckbrief | Einheitliche 13-Block-Vorlage inkl. Fotos. Owner: Agent E. |
+| Offizieller Steckbrief | Einheitliche 14-Block-Vorlage inkl. Fotos. Owner: Agent E. |
 | Persönlicher Steckbrief | Genau 4 Felder: `passt` / `passtNicht` / `offeneFragen` / `rueckmeldungen`. |
 | Dashboard | Nur angemeldet. Tag / Monat / Jahr (Europe/Berlin). URL `?view=&date=`. Nur Zahlen, plus Katalog-Log (aufgenommen / aktualisiert / entfernt). |
 
@@ -74,7 +74,7 @@ Konflikt: die Owner-Datei gilt.
 
 ---
 
-## Offizieller Steckbrief — 13 Blöcke (Agent E)
+## Offizieller Steckbrief — 14 Blöcke (Agent E)
 
 Niemand erfindet eine zweite Vorlage. Fehlende Angabe: „Angabe liegt nicht vor.“
 
@@ -93,6 +93,36 @@ Niemand erfindet eine zweite Vorlage. Fehlende Angabe: „Angabe liegt nicht vor
 | 11 | Kontakt | Erreichbarkeit, wie belegt. |
 | 12 | Fotos | Fotoleiste (Außen, Zimmer/Bad, Umgebung, Besonderheit). |
 | 13 | Datenstand | Geprüft am, Quellen. |
+| 14 | Aufnahmeunterlagen & Fristen | Was das Haus vor der Aufnahme konkret braucht — und wie lange die Prüfung üblicherweise dauert. |
+
+### Block 14 — Aufnahmeunterlagen & Fristen (bindend)
+
+Zweck: Sozialarbeiter:innen können im Telefonat / bei der Antragsvorbereitung sehen, welche Unterlagen das Haus fordert, ohne eine Aufnahmezusage oder eine zweite Warteformel zu erzeugen.
+
+**Nur öffentlich Belegtes** (Klinikwebsite, Trägerseite, Merkblatt). Keine erfundenen Checklisten. Fehlendes: „Angabe liegt nicht vor.“
+
+**Stichpunkte (max. 8), typische Inhalte:**
+- ärztliche Unterlagen (was genau, soweit belegbar)
+- Sozialbericht / sozialmedizinische Unterlagen
+- Kostenzusage / Kostenträgernachweis
+- Entgiftungsnachweis ja/nein bzw. wann gefordert
+- sonstige Haus-spezifische Unterlagen
+- übliche Bearbeitungs- / Prüfungsdauer, wenn öffentlich genannt (keine Garantie, keine Tages-Hausnummer im Sinne einer Aufnahmezusage)
+
+**Chips (Status wie üblich: `vorhanden` | `eingeschraenkt` | `nicht_angeboten` | `unbekannt`):**
+- `Unterlagenliste`
+- `Entgiftungspflicht`
+- `Bearbeitungszeit`
+
+**Abgrenzung:**
+- Keine Diagnosen, keine Klientendaten, keine „Sie müssen…“-Sprache.
+- Keine Live-Warteliste und keine zweite Wartezeit — Wartezeit bleibt allein bei Agent C.
+- Keine Aufnahmezusage. Formulierung: Orientierung, Stand der öffentlichen Quelle.
+- Block 09 (Kostenträger) bleibt für Zahlung/Zuzahlung/Wahlleistungen; Block 14 ist die Unterlagen-/Fristen-Sicht davor bzw. parallel.
+
+**Owner:** Agent E (`OfficialSteckbrief`, Katalog-Builder, Steckbrief-UI, Ergebnisdokument-Anzeige, Filter „Nur vollständige“ falls Block 14 zur Vollständigkeit zählt).
+
+**Umsetzung:** Spez hier verbindlich. Code-Typen, `katalog.ts` / Häuser, UI und „vollständig“-Definition in einem Folge-PR nachziehen (Issue verlinken).
 
 ---
 
