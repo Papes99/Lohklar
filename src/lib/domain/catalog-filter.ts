@@ -31,6 +31,8 @@ export type CatalogFilter = {
   gluecksspiel: boolean;
   trauma: boolean;
   junge: boolean;
+  mpu: boolean;
+  klinikStattStrafe: boolean;
   lage: "egal" | LageKind;
   vollstaendig: boolean;
 };
@@ -52,6 +54,8 @@ export function emptyCatalogFilter(): CatalogFilter {
     gluecksspiel: false,
     trauma: false,
     junge: false,
+    mpu: false,
+    klinikStattStrafe: false,
     lage: "egal",
     vollstaendig: false,
   };
@@ -191,6 +195,18 @@ function clinicSearchIndex(clinic: Clinic): SearchField[] {
   if (clinic.substitution) add("profil", "Substitution", "Methadon");
   if (clinic.kinderbetreuung) add("profil", "Kinder", "Eltern-Kind", "Mutter-Kind");
   if (clinic.jungeErwachsene) add("profil", "Junge Erwachsene", "U27");
+  if (clinic.mpu) add("profil", "MPU", "MPU-Vorbereitung", "Führerschein", "Fahreignung");
+  if (clinic.klinikStattStrafe) {
+    add(
+      "profil",
+      "Klinik statt Strafe",
+      "Therapie statt Strafe",
+      "BtMG",
+      "§35",
+      "§ 35 BtMG",
+      "Zurückstellung",
+    );
+  }
   if (clinic.ahb) add("profil", "AHB", "Anschlussheilbehandlung");
   if (clinic.heilverfahren) add("profil", "Heilverfahren");
   if (clinic.genderSetting === "frauen") add("profil", "Frauen", "frauenspezifisch", "Frauenklinik");
@@ -361,6 +377,8 @@ export function filterClinics<T extends Clinic>(clinics: T[], filter: CatalogFil
       if (filter.gluecksspiel && !clinic.gluecksspiel) return false;
       if (filter.trauma && !clinic.trauma) return false;
       if (filter.junge && !clinic.jungeErwachsene) return false;
+      if (filter.mpu && !clinic.mpu) return false;
+      if (filter.klinikStattStrafe && !clinic.klinikStattStrafe) return false;
       if (filter.lage !== "egal" && !clinicHasLage(clinic, filter.lage)) return false;
       if (filter.vollstaendig && !isClinicComplete(clinic)) return false;
       return true;
@@ -431,6 +449,30 @@ export const CATALOG_EDITIONS: CatalogEdition[] = [
     kind: "pruefung",
     houses: 441,
     note: "Vollprüfung aller Steckbriefe auf Echtheit. Geschlossene und fachfremde Häuser entfernt.",
+  },
+  {
+    ymd: "2026-09-07",
+    kind: "aufnahme",
+    houses: 6,
+    note: "Katalog um belegte Suchthäuser mit Anerkennung nach §§ 35/36 BtMG ergänzt.",
+  },
+  {
+    ymd: "2026-09-07",
+    kind: "pruefung",
+    houses: 90,
+    note: "Kennzeichnung MPU-Vorbereitung und Klinik statt Strafe nach öffentlichen Trägerangaben und Landeslisten.",
+  },
+  {
+    ymd: "2026-09-07",
+    kind: "pruefung",
+    houses: 6,
+    note: "Zimmerart der am 07.09. aufgenommenen Suchthäuser nach öffentlichen Trägerangaben.",
+  },
+  {
+    ymd: "2026-09-07",
+    kind: "pruefung",
+    houses: 6,
+    note: "Außenfotos der am 07.09. aufgenommenen Suchthäuser nach öffentlichen Trägerangaben.",
   },
 ];
 

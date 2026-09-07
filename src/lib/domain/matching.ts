@@ -69,6 +69,8 @@ export function emptyAnswers(): KlaromatAnswers {
     youngAdultNeed: "egal",
     familyWorkNeed: "egal",
     traumaNeed: "egal",
+    mpuNeed: "egal",
+    klinikStattStrafeNeed: "egal",
     distancePref: "egal",
     lagePref: "egal",
   };
@@ -92,6 +94,11 @@ export function normalizeAnswers(
   const traumaNeed = resolveFlag(
     input.traumaNeed,
     extrasIn.includes("trauma") || Boolean(input.bedarfe?.includes("trauma")),
+  );
+  const mpuNeed = resolveFlag(input.mpuNeed, extrasIn.includes("mpu"));
+  const klinikStattStrafeNeed = resolveFlag(
+    input.klinikStattStrafeNeed,
+    extrasIn.includes("klinikStattStrafe"),
   );
   const childrenNeed = resolveFlag(input.childrenNeed, extrasIn.includes("kinder"));
   const mobilityNeed = resolveFlag(input.mobilityNeed, extrasIn.includes("barrierefrei"));
@@ -118,6 +125,8 @@ export function normalizeAnswers(
     youngAdultNeed,
     familyWorkNeed,
     traumaNeed,
+    mpuNeed,
+    klinikStattStrafeNeed,
     distancePref: input.distancePref ?? "egal",
     lagePref: input.lagePref ?? "egal",
     extras: [],
@@ -135,6 +144,8 @@ function deriveExtras(answers: KlaromatAnswers): string[] {
   if (answers.traumaNeed === "ja" || answers.bedarfe.includes("trauma")) extras.push("trauma");
   if (answers.substitutionNeed === "ja") extras.push("substitution");
   if (answers.bedarfe.includes("gluecksspiel")) extras.push("gluecksspiel");
+  if (answers.mpuNeed === "ja") extras.push("mpu");
+  if (answers.klinikStattStrafeNeed === "ja") extras.push("klinikStattStrafe");
   return extras;
 }
 
@@ -167,6 +178,12 @@ export function listedNeeds(raw: KlaromatAnswers): ListedNeed[] {
   }
   if (answers.traumaNeed === "ja" && !answers.bedarfe.includes("trauma")) {
     items.push({ criterion: "Traumafokus", value: "Muss ausgewiesen sein" });
+  }
+  if (answers.mpuNeed === "ja") {
+    items.push({ criterion: "MPU-Vorbereitung", value: "Fahreignung im Haus" });
+  }
+  if (answers.klinikStattStrafeNeed === "ja") {
+    items.push({ criterion: "Klinik statt Strafe", value: "Anerkennung § 35 BtMG" });
   }
   if (answers.setting !== "egal") {
     items.push({
@@ -327,6 +344,8 @@ function scoreClinic(clinic: Clinic, answers: KlaromatAnswers, wait: MatchSnapsh
 
   rows.push(substitutionRow(clinic, answers.substitutionNeed));
   rows.push(traumaRow(clinic, answers));
+  rows.push(mpuRow(clinic, answers.mpuNeed));
+  rows.push(klinikStattStrafeRow(clinic, answers.klinikStattStrafeNeed));
   rows.push(settingRow(clinic, answers.setting));
   rows.push(accessRow(clinic, answers.access));
   rows.push(payerRow(clinic, answers.payer));
@@ -470,6 +489,47 @@ function traumaRow(clinic: Clinic, answers: KlaromatAnswers): Scored {
   return clinic.trauma
     ? row("Traumafokus", "match", "Traumafokus ist im Steckbrief ausgewiesen.", 14, false)
     : row("Traumafokus", "miss", "Kein ausgewiesener Traumaschwerpunkt.", 14, false);
+}
+
+function mpuRow(clinic: Clinic, need: KlaromatAnswers["mpuNeed"]): Scored {
+  if (need !== "ja") return skip("MPU-Vorbereitung");
+  return clinic.mpu
+    ? row(
+        "MPU-Vorbereitung",
+        "match",
+        "MPU-Vorbereitung / Fahreignung ist im Steckbrief vorgesehen.",
+        12,
+        false,
+      )
+    : row(
+        "MPU-Vorbereitung",
+        "miss",
+        "Keine ausgewiesene MPU-Vorbereitung im Haus. Die Entwöhnung bleibt möglich — den Kurs vor Antrag klären.",
+        12,
+        false,
+      );
+}
+
+function klinikStattStrafeRow(
+  clinic: Clinic,
+  need: KlaromatAnswers["klinikStattStrafeNeed"],
+): Scored {
+  if (need !== "ja") return skip("Klinik statt Strafe");
+  return clinic.klinikStattStrafe
+    ? row(
+        "Klinik statt Strafe",
+        "match",
+        "Anerkennung nach §§ 35/36 BtMG ist ausgewiesen. Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar.",
+        18,
+        false,
+      )
+    : row(
+        "Klinik statt Strafe",
+        "miss",
+        "Keine ausgewiesene Anerkennung nach § 35 BtMG. Für Therapie statt Strafe nicht vorgesehen.",
+        18,
+        true,
+      );
 }
 
 function regionRow(clinic: Clinic, answers: KlaromatAnswers): Scored {

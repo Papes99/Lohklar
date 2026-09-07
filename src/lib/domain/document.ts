@@ -123,6 +123,14 @@ export function formulateNeeds(raw: KlaromatAnswers): string {
     parts.push("Ein ausgewiesener Traumafokus ist gewünscht.");
   }
 
+  if (answers.mpuNeed === "ja") {
+    parts.push("MPU-Vorbereitung / Fahreignung muss im Haus ausgewiesen sein.");
+  }
+
+  if (answers.klinikStattStrafeNeed === "ja") {
+    parts.push("Klinik statt Strafe: Anerkennung nach § 35 BtMG muss ausgewiesen sein.");
+  }
+
   if (answers.states.length > 0) {
     parts.push(`Regionale Eingrenzung: ${answers.states.map(stateName).join(", ")}.`);
   } else {

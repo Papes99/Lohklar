@@ -1,5 +1,6 @@
 import type { HouseSpec } from "./katalog-houses.ts";
 import { COVER_PHOTO_IDS } from "./katalog-cover-ids.ts";
+import { houseOffersKlinikStattStrafe, houseOffersMpu } from "./katalog-programme.ts";
 import type {
   ChipStatus,
   Clinic,
@@ -237,6 +238,32 @@ const PHOTO_UNIQUE: Partial<Record<string, { file: string; slot: PhotoSlot; labe
   "ck-isargrund": [{ file: "aussen.jpg", slot: "aussen", label: "Außenansicht" }],
   "ck-salza": [{ file: "aussen.jpg", slot: "aussen", label: "Außenansicht" }],
   "ck-udersleben": [{ file: "aussen.jpg", slot: "aussen", label: "Außenansicht" }],
+  "ck-fehmarn": [
+    { file: "aussen.jpg", slot: "aussen", label: "Außenansicht" },
+    { file: "umgebung.jpg", slot: "umgebung", label: "Umgebung / Lage" },
+  ],
+  "ck-kieferngarten": [
+    { file: "aussen.jpg", slot: "aussen", label: "Außenansicht" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", label: "Zimmer / Bad" },
+  ],
+  "ck-kompass-hof": [
+    { file: "aussen.jpg", slot: "aussen", label: "Außenansicht" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", label: "Zimmer / Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", label: "Umgebung / Lage" },
+  ],
+  "ck-prop-laim": [
+    { file: "aussen.jpg", slot: "aussen", label: "Außenansicht" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", label: "Zimmer / Bad" },
+  ],
+  "ck-suedergellersen": [
+    { file: "aussen.jpg", slot: "aussen", label: "Außenansicht" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", label: "Zimmer / Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", label: "Umgebung / Lage" },
+  ],
+  "ck-wolkersdorf": [
+    { file: "aussen.jpg", slot: "aussen", label: "Außenansicht" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", label: "Zimmer / Bad" },
+  ],
 };
 
 export type ClinicDraft = Omit<
@@ -473,6 +500,8 @@ export function toDraft(spec: HouseSpec): ClinicDraft {
     gluecksspiel: spec.gluecksspiel,
     trauma: spec.trauma,
     jungeErwachsene: spec.jungeErwachsene,
+    mpu: houseOffersMpu(spec.id),
+    klinikStattStrafe: houseOffersKlinikStattStrafe(spec.id),
     placesEstimate: spec.placesEstimate,
     occupancyIndex: spec.occupancyIndex,
     waitBaseDays: spec.waitBaseDays,
@@ -486,6 +515,8 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
   const psycho = spec.indicationAreas.includes("psychosomatik");
   const dual = spec.indicationAreas.includes("dual");
   const room = roomCopy(spec);
+  const mpu = houseOffersMpu(spec.id);
+  const klinikStattStrafe = houseOffersKlinikStattStrafe(spec.id);
   const dauer =
     spec.durationWeeksMin === spec.durationWeeksMax
       ? `${spec.durationWeeksMin} Wochen`
@@ -598,7 +629,13 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
       [
         "Klinik-Sozialdienst: Kostenzusage, Entlassplanung, weiterführende Hilfen.",
         "Lohklar vermittelt nicht und schreibt nicht an den Kostenträger.",
-      ],
+        mpu
+          ? "MPU-Vorbereitung / Fahreignung ist im Haus vorgesehen. Die MPU selbst führt Lohklar nicht durch."
+          : "",
+        klinikStattStrafe
+          ? "Anerkennung nach §§ 35/36 BtMG (Klinik statt Strafe / Therapie statt Strafe). Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar."
+          : "",
+      ].filter(Boolean),
       [
         ["Sozialdienst", "vorhanden"],
         ["Nachsorgeplanung", "vorhanden"],
@@ -628,6 +665,8 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
         [spec.stateName, "vorhanden"],
         ["Junge Erwachsene", spec.jungeErwachsene ? "vorhanden" : "nicht_angeboten"],
         ["Barrierefrei", spec.barrierefrei ? "vorhanden" : "unbekannt"],
+        ["MPU-Vorbereitung", mpu ? "vorhanden" : "nicht_angeboten"],
+        ["Klinik statt Strafe", klinikStattStrafe ? "vorhanden" : "nicht_angeboten"],
       ],
     ),
   });

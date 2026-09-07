@@ -68,13 +68,15 @@ async function emitSessionCookie(
   // Primary path: TanStack Start's response cookie store (reaches the browser).
   try {
     const { setCookie } = await import("@tanstack/react-start/server");
+    // `__Host-` cookies are rejected by the browser if they carry Domain.
+    const isHostCookie = sessionTokenName.startsWith("__Host-");
     setCookie(sessionTokenName, sessionValue, {
       path: cookieOptions.path ?? "/",
       httpOnly: cookieOptions.httpOnly ?? true,
       secure: cookieOptions.secure ?? true,
       sameSite: (cookieOptions.sameSite as "lax" | "strict" | "none") ?? "lax",
       maxAge: typeof maxAge === "number" ? maxAge : undefined,
-      domain: cookieOptions.domain,
+      ...(isHostCookie || !cookieOptions.domain ? {} : { domain: cookieOptions.domain }),
     });
   } catch (err) {
     console.error(`${LOG} TanStack setCookie failed`, err);

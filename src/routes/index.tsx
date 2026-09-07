@@ -80,7 +80,7 @@ function Home() {
             {[
               {
                 title: "Steckbriefe",
-                text: "380 Häuser, dieselbe Vorlage. Ohne Konto lesbar, inklusive Suche und Filter.",
+                text: "386 Häuser, dieselbe Vorlage. Ohne Konto lesbar, inklusive Suche und Filter.",
               },
               {
                 title: "Klar-o-Mat",

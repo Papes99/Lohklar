@@ -204,6 +204,15 @@ function ClinicsPage() {
             >
               Junge Erwachsene
             </FilterChip>
+            <FilterChip active={filter.mpu} onClick={() => patch({ mpu: !filter.mpu })}>
+              MPU-Vorbereitung
+            </FilterChip>
+            <FilterChip
+              active={filter.klinikStattStrafe}
+              onClick={() => patch({ klinikStattStrafe: !filter.klinikStattStrafe })}
+            >
+              Klinik statt Strafe
+            </FilterChip>
             <FilterChip
               active={filter.vollstaendig}
               onClick={() => patch({ vollstaendig: !filter.vollstaendig })}

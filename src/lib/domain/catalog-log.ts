@@ -1,4 +1,5 @@
 import { HOUSES } from "./katalog-houses.ts";
+import { houseOffersKlinikStattStrafe, houseOffersMpu } from "./katalog-programme.ts";
 
 export const CATALOG_CHANGE_KINDS = ["aufgenommen", "aktualisiert", "entfernt"] as const;
 export type CatalogChangeKind = (typeof CATALOG_CHANGE_KINDS)[number];
@@ -17,26 +18,58 @@ function pad(n: number): string {
   return String(n).padStart(2, "0");
 }
 
-/** Per-house official catalog log. Core 50: 2026-09-01. Erweiterung: 2026-09-05. Welle 4: 2026-09-06. */
-export const CATALOG_LOG: CatalogLogEntry[] = HOUSES.map((house) => {
-  const ymd =
-    house.sortOrder <= 50 ? "2026-09-01" : house.sortOrder <= 327 ? "2026-09-05" : "2026-09-06";
-  const minute =
-    house.sortOrder <= 50
-      ? Math.max(0, house.sortOrder - 1)
-      : house.sortOrder <= 327
-        ? house.sortOrder - 51
-        : house.sortOrder - 328;
-  const hour = 8 + Math.floor(minute / 60);
-  const min = minute % 60;
-  return {
-    at: `${ymd}T${pad(hour)}:${pad(min)}:00+02:00`,
-    ymd,
+/** Per-house official catalog log. Core 50: 2026-09-01. Erweiterung: 2026-09-05. Welle 4: 2026-09-06. Programm-Kennzeichnung: 2026-09-07. */
+export const CATALOG_LOG: CatalogLogEntry[] = [
+  ...HOUSES.map((house) => {
+    const ymd =
+      house.sortOrder <= 50
+        ? "2026-09-01"
+        : house.sortOrder <= 327
+          ? "2026-09-05"
+          : house.sortOrder <= 435
+            ? "2026-09-06"
+            : "2026-09-07";
+    const minute =
+      house.sortOrder <= 50
+        ? Math.max(0, house.sortOrder - 1)
+        : house.sortOrder <= 327
+          ? house.sortOrder - 51
+          : house.sortOrder <= 435
+            ? house.sortOrder - 328
+            : house.sortOrder - 436;
+    const hour = 8 + Math.floor(minute / 60);
+    const min = minute % 60;
+    return {
+      at: `${ymd}T${pad(hour)}:${pad(min)}:00+02:00`,
+      ymd,
+      clinicId: house.id,
+      clinicName: house.shortName,
+      kind: "aufgenommen" as const,
+    };
+  }),
+  ...HOUSES.filter(
+    (house) =>
+      house.sortOrder <= 435 &&
+      (houseOffersMpu(house.id) || houseOffersKlinikStattStrafe(house.id)),
+  ).map((house, index) => {
+    const hour = 14 + Math.floor(index / 60);
+    const min = index % 60;
+    return {
+      at: `2026-09-07T${pad(hour)}:${pad(min)}:00+02:00`,
+      ymd: "2026-09-07",
+      clinicId: house.id,
+      clinicName: house.shortName,
+      kind: "aktualisiert" as const,
+    };
+  }),
+  ...HOUSES.filter((house) => house.sortOrder > 435).map((house, index) => ({
+    at: `2026-09-07T16:${pad(index)}:00+02:00`,
+    ymd: "2026-09-07",
     clinicId: house.id,
     clinicName: house.shortName,
-    kind: "aufgenommen" as const,
-  };
-});
+    kind: "aktualisiert" as const,
+  })),
+];
 
 export function catalogLogInRange(
   from: Date,

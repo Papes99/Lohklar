@@ -78,6 +78,77 @@ describe("katalog echte Häuser", () => {
     assert.deepEqual(coverSubstanceTags(wilhelmsheim), ["Alkohol", "Medikamente"]);
   });
 
+  it("setzt MPU-Vorbereitung und Klinik statt Strafe nur bei belegten Häusern", () => {
+    const castrop = CLINIC_SEED.find((c) => c.id === "ck-salus-castrop");
+    const friedberg = CLINIC_SEED.find((c) => c.id === "ck-salus-friedberg");
+    const eusserthal = CLINIC_SEED.find((c) => c.id === "ck-eusserthal");
+    const suedergellersen = CLINIC_SEED.find((c) => c.id === "ck-suedergellersen");
+    const fehmarn = CLINIC_SEED.find((c) => c.id === "ck-fehmarn");
+    const eichelsdorf = CLINIC_SEED.find((c) => c.id === "ck-eichelsdorf");
+    const waldsee = CLINIC_SEED.find((c) => c.id === "ck-median-waldsee");
+    const ratingen = CLINIC_SEED.find((c) => c.id === "ck-ratingen");
+    assert.ok(castrop && friedberg && eusserthal && suedergellersen && fehmarn);
+    assert.ok(eichelsdorf && waldsee && ratingen);
+    assert.equal(castrop.mpu, true);
+    assert.equal(eichelsdorf.mpu, true);
+    assert.equal(eichelsdorf.klinikStattStrafe, true);
+    assert.equal(castrop.klinikStattStrafe, false);
+    assert.equal(friedberg.klinikStattStrafe, true);
+    assert.equal(ratingen.klinikStattStrafe, true);
+    assert.equal(eusserthal.klinikStattStrafe, false);
+    assert.equal(waldsee.klinikStattStrafe, false);
+    assert.equal(suedergellersen.klinikStattStrafe, true);
+    assert.equal(fehmarn.klinikStattStrafe, true);
+    assert.match(suedergellersen.steckbrief.sozialdienst.bullets.join(" "), /§§ 35\/36 BtMG/);
+    assert.match(castrop.steckbrief.sozialdienst.bullets.join(" "), /MPU-Vorbereitung/);
+  });
+
+  it("setzt belegte Zimmerart bei den am 07.09. aufgenommenen Suchthäusern", () => {
+    const hof = CLINIC_SEED.find((c) => c.id === "ck-kompass-hof");
+    const wolkersdorf = CLINIC_SEED.find((c) => c.id === "ck-wolkersdorf");
+    const fehmarn = CLINIC_SEED.find((c) => c.id === "ck-fehmarn");
+    const kieferngarten = CLINIC_SEED.find((c) => c.id === "ck-kieferngarten");
+    const laim = CLINIC_SEED.find((c) => c.id === "ck-prop-laim");
+    const suedergellersen = CLINIC_SEED.find((c) => c.id === "ck-suedergellersen");
+    assert.ok(hof && wolkersdorf && fehmarn && kieferngarten && laim && suedergellersen);
+    assert.ok(
+      hof.steckbrief.wohnenAlltag.chips.some(
+        (chip) => chip.label === "Einbettzimmer" && chip.status === "vorhanden",
+      ),
+    );
+    assert.ok(
+      wolkersdorf.steckbrief.wohnenAlltag.chips.some(
+        (chip) => chip.label === "Zweibettzimmer" && chip.status === "vorhanden",
+      ),
+    );
+    assert.ok(
+      fehmarn.steckbrief.wohnenAlltag.chips.some(
+        (chip) => chip.label === "Einbettzimmer" && chip.status === "vorhanden",
+      ),
+    );
+    assert.ok(
+      kieferngarten.steckbrief.wohnenAlltag.chips.some(
+        (chip) => chip.label === "Einbettzimmer" && chip.status === "vorhanden",
+      ),
+    );
+    assert.ok(
+      laim.steckbrief.wohnenAlltag.chips.some(
+        (chip) => chip.label === "Einbettzimmer" && chip.status === "vorhanden",
+      ),
+    );
+    assert.ok(
+      suedergellersen.steckbrief.wohnenAlltag.chips.some(
+        (chip) => chip.label === "Zweibettzimmer" && chip.status === "vorhanden",
+      ),
+    );
+    assert.ok(hof.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
+    assert.ok(wolkersdorf.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
+    assert.ok(fehmarn.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
+    assert.ok(kieferngarten.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
+    assert.ok(laim.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
+    assert.ok(suedergellersen.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
+  });
+
   it("setzt den Auftrag als Tag, nicht als Substanz", () => {
     const hoehenried = CLINIC_SEED.find((c) => c.id === "ck-seewiesen");
     const ratingen = CLINIC_SEED.find((c) => c.id === "ck-ratingen");

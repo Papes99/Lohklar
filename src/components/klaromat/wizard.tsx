@@ -322,6 +322,26 @@ export function KlaromatWizard({
                 onChange={(traumaNeed) => setAnswers((prev) => ({ ...prev, traumaNeed }))}
               />
             ) : null}
+            {answers.indication !== "psychosomatik" ? (
+              <Choice
+                legend="MPU-Vorbereitung"
+                hint="Nur setzen, wenn das Haus eine ausgewiesene MPU-Vorbereitung (Fahreignung) vorhalten muss. Die MPU selbst macht Lohklar nicht."
+                options={YES_FILTERS}
+                value={answers.mpuNeed}
+                onChange={(mpuNeed) => setAnswers((prev) => ({ ...prev, mpuNeed }))}
+              />
+            ) : null}
+            {answers.indication !== "psychosomatik" ? (
+              <Choice
+                legend="Klinik statt Strafe"
+                hint="§ 35 BtMG, Therapie statt Strafe. Nur Häuser mit ausgewiesener Anerkennung, vorrangig bei illegalen Drogen. Nicht für reine Alkoholabhängigkeit. Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar."
+                options={YES_FILTERS}
+                value={answers.klinikStattStrafeNeed}
+                onChange={(klinikStattStrafeNeed) =>
+                  setAnswers((prev) => ({ ...prev, klinikStattStrafeNeed }))
+                }
+              />
+            ) : null}
             <div className="rounded-[var(--radius-lg)] bg-surface p-4 text-sm shadow-[var(--shadow-border)]">
               <p className="font-medium">Vor der Reha klären, nicht hier setzen</p>
               <ul className="mt-2 list-disc space-y-1 pl-5 text-ink-muted">

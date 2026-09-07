@@ -93,6 +93,8 @@ export const EXTRAS: { id: string; label: string }[] = [
   { id: "substitution", label: "Substitutionsbegleitung" },
   { id: "kinder", label: "Kinderbetreuung" },
   { id: "junge", label: "Junge Erwachsene" },
+  { id: "mpu", label: "MPU-Vorbereitung" },
+  { id: "klinikStattStrafe", label: "Klinik statt Strafe" },
 ];
 
 export const HOUSE_EXTRAS: { id: string; label: string }[] = [
@@ -214,6 +216,8 @@ export type KlaromatAnswers = {
   youngAdultNeed: "egal" | "ja";
   familyWorkNeed: "egal" | "ja";
   traumaNeed: "egal" | "ja";
+  mpuNeed: "egal" | "ja";
+  klinikStattStrafeNeed: "egal" | "ja";
   distancePref: "egal" | "nah" | "distanz-ok";
   lagePref: "egal" | "wasser" | "insel" | "laendlich" | "stadt" | "kurort" | "gebirge";
 };
@@ -418,6 +422,8 @@ export type Clinic = {
   gluecksspiel: boolean;
   trauma: boolean;
   jungeErwachsene: boolean;
+  mpu: boolean;
+  klinikStattStrafe: boolean;
   placesEstimate: number;
   occupancyIndex: number;
   waitBaseDays: number;
@@ -478,6 +484,8 @@ export function clinicCardTags(
     | "genderSetting"
     | "kinderbetreuung"
     | "substitution"
+    | "mpu"
+    | "klinikStattStrafe"
   >,
 ): string[] {
   const tags: string[] = [];
@@ -492,6 +500,8 @@ export function clinicCardTags(
   if (clinic.genderSetting === "maenner") tags.push("Männer");
   if (clinic.kinderbetreuung) tags.push("Eltern-Kind");
   if (clinic.substitution) tags.push("Substitution");
+  if (clinic.mpu) tags.push("MPU-Vorbereitung");
+  if (clinic.klinikStattStrafe) tags.push("Klinik statt Strafe");
   return tags;
 }
 

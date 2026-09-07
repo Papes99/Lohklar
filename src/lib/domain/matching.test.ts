@@ -231,6 +231,50 @@ describe("rankClinics", () => {
     assert.ok(island.reasons.some((reason) => reason.criterion === "Umgebung" && reason.status === "match"));
     assert.ok((island.rank ?? 99) < (inland.rank ?? 0));
   });
+
+  it("hebt MPU-Häuser und blockt Klinik statt Strafe nur ohne Anerkennung", () => {
+    const mpuMatches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      bedarfe: ["drogen"],
+      mpuNeed: "ja",
+    });
+    const castrop = mpuMatches.find((item) => item.clinicId === "ck-salus-castrop");
+    const ratingen = mpuMatches.find((item) => item.clinicId === "ck-ratingen");
+    assert.ok(castrop && ratingen);
+    assert.equal(isBlocked(castrop), false);
+    assert.equal(isBlocked(ratingen), false);
+    assert.ok(
+      castrop.reasons.some((reason) => reason.criterion === "MPU-Vorbereitung" && reason.status === "match"),
+    );
+    assert.ok(
+      ratingen.reasons.some((reason) => reason.criterion === "MPU-Vorbereitung" && reason.status === "miss"),
+    );
+    assert.ok((castrop.rank ?? 99) < (ratingen.rank ?? 0));
+
+    const kssMatches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      bedarfe: ["drogen"],
+      klinikStattStrafeNeed: "ja",
+    });
+    const friedberg = kssMatches.find((item) => item.clinicId === "ck-salus-friedberg");
+    const eusserthal = kssMatches.find((item) => item.clinicId === "ck-eusserthal");
+    const suedergellersen = kssMatches.find((item) => item.clinicId === "ck-suedergellersen");
+    const ratingenKss = kssMatches.find((item) => item.clinicId === "ck-ratingen");
+    const huerthKss = kssMatches.find((item) => item.clinicId === "ck-elbmarsch");
+    assert.ok(friedberg && eusserthal && suedergellersen && ratingenKss && huerthKss);
+    assert.equal(isBlocked(friedberg), false);
+    assert.equal(isBlocked(suedergellersen), false);
+    assert.equal(isBlocked(ratingenKss), false);
+    assert.equal(isBlocked(eusserthal), true);
+    assert.equal(isBlocked(huerthKss), true);
+    assert.ok(
+      friedberg.reasons.some(
+        (reason) => reason.criterion === "Klinik statt Strafe" && reason.status === "match",
+      ),
+    );
+  });
 });
 
 describe("normalizeAnswers und listedNeeds", () => {
@@ -294,5 +338,16 @@ describe("normalizeAnswers und listedNeeds", () => {
       lagePref: "insel",
     });
     assert.ok(needs.some((item) => item.criterion === "Umgebung" && item.value === "Insel"));
+  });
+
+  it("führt MPU-Vorbereitung und Klinik statt Strafe als gesetzte Anforderungen", () => {
+    const needs = listedNeeds({
+      ...emptyAnswers(),
+      indication: "sucht",
+      mpuNeed: "ja",
+      klinikStattStrafeNeed: "ja",
+    });
+    assert.ok(needs.some((item) => item.criterion === "MPU-Vorbereitung"));
+    assert.ok(needs.some((item) => item.criterion === "Klinik statt Strafe"));
   });
 });

@@ -19,7 +19,7 @@ describe("catalog completeness", () => {
     const complete = CLINIC_SEED.filter(isClinicComplete);
     assert.ok(complete.length >= 1);
     assert.ok(complete.length <= CLINIC_SEED.length);
-    assert.equal(CLINIC_SEED.length, 380);
+    assert.equal(CLINIC_SEED.length, 386);
     for (const clinic of complete) {
       assert.ok(clinic.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
       assert.ok(clinic.website.startsWith("https://"));
@@ -44,7 +44,7 @@ describe("catalog completeness", () => {
 describe("catalog filter", () => {
   it("returns all houses for an empty filter", () => {
     const rows = filterClinics(CLINIC_SEED, emptyCatalogFilter());
-    assert.equal(rows.length, 380);
+    assert.equal(rows.length, 386);
     assert.equal(catalogFilterActive(emptyCatalogFilter()), false);
   });
 
@@ -91,7 +91,7 @@ describe("catalog filter", () => {
     assert.equal(rows[0]?.id, "ck-seewiesen");
   });
 
-  it("filters Adaption, Glücksspiel, Traumafokus and junge Erwachsene", () => {
+  it("filters Adaption, Glücksspiel, Traumafokus, junge Erwachsene, MPU and Klinik statt Strafe", () => {
     const adaption = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), setting: "adaption" });
     assert.ok(adaption.length >= 1);
     assert.ok(adaption.every((clinic) => clinic.setting === "adaption"));
@@ -106,6 +106,16 @@ describe("catalog filter", () => {
     const junge = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), junge: true });
     assert.ok(junge.length >= 1);
     assert.ok(junge.every((clinic) => clinic.jungeErwachsene));
+    const mpu = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), mpu: true });
+    assert.ok(mpu.length >= 1);
+    assert.ok(mpu.every((clinic) => clinic.mpu));
+    assert.ok(mpu.some((clinic) => clinic.id === "ck-salus-castrop"));
+    const kss = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), klinikStattStrafe: true });
+    assert.ok(kss.length >= 1);
+    assert.ok(kss.every((clinic) => clinic.klinikStattStrafe));
+    assert.ok(kss.some((clinic) => clinic.id === "ck-salus-friedberg"));
+    assert.ok(kss.some((clinic) => clinic.id === "ck-suedergellersen"));
+    assert.equal(kss.some((clinic) => clinic.id === "ck-eusserthal"), false);
   });
 
   it("ranks multi-token queries by how many facts fit", () => {
@@ -120,6 +130,17 @@ describe("catalog filter", () => {
 
     const hoehenried = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Höhenried Trauma" });
     assert.equal(hoehenried[0]?.id, "ck-seewiesen");
+
+    const mpu = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "MPU" });
+    assert.ok(mpu.length >= 1);
+    assert.ok(mpu.every((clinic) => clinic.mpu));
+    assert.ok(mpu.some((clinic) => clinic.id === "ck-salus-castrop"));
+    assert.ok(mpu.some((clinic) => clinic.id === "ck-eichelsdorf"));
+
+    const btmg = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "BtMG" });
+    assert.ok(btmg.length >= 1);
+    assert.ok(btmg.some((clinic) => clinic.klinikStattStrafe));
+    assert.ok(btmg.some((clinic) => clinic.id === "ck-salus-friedberg"));
   });
 
   it("understands Fachsprache: NRW, PTBS, TK, Einzelzimmer, Mutter-Kind", () => {
@@ -194,22 +215,30 @@ describe("clinicCardTags", () => {
     assert.equal(clinicCardTags(brilon).includes("Dualdiagnose"), false);
     assert.ok(clinicCardTags(brilon).includes("Alkohol"));
     assert.ok(clinicCardTags(CLINIC_SEED.find((c) => c.id === "ck-elbmarsch")!).includes("Frauen"));
+    const castrop = CLINIC_SEED.find((c) => c.id === "ck-salus-castrop");
+    const friedberg = CLINIC_SEED.find((c) => c.id === "ck-salus-friedberg");
+    assert.ok(castrop && friedberg);
+    assert.ok(clinicCardTags(castrop).includes("MPU-Vorbereitung"));
+    assert.ok(clinicCardTags(friedberg).includes("Klinik statt Strafe"));
+    assert.equal(clinicCardTags(castrop).includes("Klinik statt Strafe"), false);
   });
 });
 
 describe("catalog pulse", () => {
   it("covers 16 Länder and records the September 2026 editions", () => {
     const pulse = catalogPulse(CLINIC_SEED, "2026-08-31");
-    assert.equal(pulse.houses, 380);
+    assert.equal(pulse.houses, 386);
     assert.equal(pulse.statesCovered, 16);
-    assert.equal(pulse.addedInPeriod, 441);
-    assert.equal(pulse.pruefungenInPeriod, 882);
-    assert.equal(pulse.complete + pulse.incomplete, 380);
+    assert.equal(pulse.addedInPeriod, 447);
+    assert.equal(pulse.pruefungenInPeriod, 984);
+    assert.equal(pulse.complete + pulse.incomplete, 386);
+    assert.equal(pulse.complete, 386);
+    assert.equal(pulse.incomplete, 0);
     assert.ok(pulse.topGaps.length >= 1);
-    assert.equal(CATALOG_EDITIONS.length, 9);
+    assert.equal(CATALOG_EDITIONS.length, 13);
     const mid = catalogPulse(CLINIC_SEED, "2026-09-02");
-    assert.equal(mid.addedInPeriod, 391);
-    const before = catalogPulse(CLINIC_SEED, "2026-09-07");
+    assert.equal(mid.addedInPeriod, 397);
+    const before = catalogPulse(CLINIC_SEED, "2026-09-08");
     assert.equal(before.addedInPeriod, 0);
   });
 });
