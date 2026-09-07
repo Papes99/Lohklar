@@ -1,12 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { X } from "lucide-react";
-import { AuftragChip, SubstanceTags } from "@/components/clinic/cover-photo";
+import { SubstanceTags } from "@/components/clinic/cover-photo";
 import {
   PHOTO_SLOTS,
   PHOTO_SOURCE_LABEL,
   type ClinicPhoto,
   type PhotoSlot,
 } from "@/lib/domain/types";
+import { cn } from "@/lib/utils";
 
 type Tile = {
   key: string;
@@ -44,7 +45,7 @@ export function PhotoStrip({
 
   return (
     <>
-      <ul className="grid grid-cols-2 gap-2">
+      <ul className={cn("steckbrief-photos grid gap-3", compact ? "grid-cols-1" : "grid-cols-2")}>
         {tiles.map((tile, index) => (
           <li
             key={tile.key}
@@ -63,25 +64,25 @@ export function PhotoStrip({
       </ul>
       {open ? (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4"
+          className="no-print fixed inset-0 z-50 flex items-center justify-center bg-ink/70 p-4"
           role="dialog"
           aria-modal="true"
           aria-label={open.photo?.alt ?? open.label}
           onClick={() => setOpen(null)}
         >
           <div
-            className="relative max-h-[90vh] w-full max-w-4xl overflow-hidden rounded-[var(--radius-lg)] bg-surface"
+            className="relative max-h-[92vh] w-full max-w-6xl overflow-auto rounded-[var(--radius-lg)] bg-surface"
             onClick={(event) => event.stopPropagation()}
           >
             {open.photo?.imagePath ? (
               <img
                 src={open.photo.imagePath}
                 alt={open.photo.alt}
-                className="max-h-[78vh] w-full object-contain"
+                className="mx-auto max-h-[86vh] w-auto max-w-full object-contain"
                 crossOrigin="anonymous"
               />
             ) : (
-              <div className="grid aspect-photo place-items-center bg-bg-subtle text-ink-muted">
+              <div className="grid min-h-48 place-items-center bg-bg-subtle text-ink-muted">
                 Foto nicht verfügbar
               </div>
             )}
@@ -118,11 +119,6 @@ function PhotoTile({
 }) {
   const missing = !tile.photo?.imagePath;
   const hero = !compact && tile.slot === "aussen";
-  const frame = hero
-    ? "aspect-photo h-40 w-full object-cover sm:h-44"
-    : compact
-      ? "aspect-photo h-24 w-full object-cover"
-      : "aspect-photo h-28 w-full object-cover";
   const label = tile.photo?.caption ?? tile.label;
   return (
     <figure className="overflow-hidden rounded-[var(--radius-md)] bg-bg-subtle">
@@ -134,7 +130,10 @@ function PhotoTile({
       >
         {missing ? (
           <div
-            className={`grid place-items-center bg-bg-subtle ${hero ? "aspect-photo h-40 sm:h-44" : compact ? "aspect-photo h-24" : "aspect-photo h-28"}`}
+            className={cn(
+              "grid place-items-center bg-bg-subtle",
+              hero ? "min-h-48 lg:min-h-72" : compact ? "min-h-40" : "min-h-36 lg:min-h-44",
+            )}
           >
             <p className="px-2 text-center text-xs text-ink-muted">
               Foto nicht verfügbar
@@ -145,15 +144,21 @@ function PhotoTile({
           <img
             src={tile.photo!.imagePath!}
             alt={tile.photo!.alt}
-            className={frame}
+            className={cn(
+              "w-full bg-bg-subtle object-contain",
+              hero
+                ? "max-h-[22rem] lg:max-h-[32rem]"
+                : compact
+                  ? "max-h-56"
+                  : "max-h-48 lg:max-h-64",
+            )}
             crossOrigin="anonymous"
           />
         )}
-        {auftrag ? <AuftragChip>{auftrag}</AuftragChip> : null}
       </button>
-      {substances.length > 0 ? (
+      {auftrag || substances.length > 0 ? (
         <div className="px-2 pt-2">
-          <SubstanceTags tags={substances} />
+          <SubstanceTags accent={auftrag} tags={substances} />
         </div>
       ) : null}
       <figcaption className="px-2 py-1.5 text-xs text-ink-muted">{label}</figcaption>

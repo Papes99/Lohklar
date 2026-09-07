@@ -3,12 +3,10 @@ import { cn } from "@/lib/utils";
 export function CoverPhoto({
   src,
   alt,
-  auftrag,
   className,
 }: {
   src: string | null | undefined;
   alt: string;
-  auftrag?: string | null;
   className?: string;
 }) {
   return (
@@ -18,17 +16,16 @@ export function CoverPhoto({
       ) : (
         <div className="grid h-full min-h-full place-items-center text-sm text-ink-muted">Foto nicht verfügbar</div>
       )}
-      {auftrag ? <AuftragChip>{auftrag}</AuftragChip> : null}
     </div>
   );
 }
 
-/** Green on the photo: house type only. Shadow keeps it readable on light image areas. */
+/** Green mandate chip in the tag row under the photo. */
 export function AuftragChip({ children, className }: { children: string; className?: string }) {
   return (
     <span
       className={cn(
-        "auftrag-chip absolute bottom-3 left-3 inline-flex items-center rounded-full bg-primary px-2.5 py-1 text-xs font-medium text-primary-fg",
+        "inline-flex items-center rounded-full bg-primary px-2.5 py-1 text-xs font-medium text-primary-fg",
         className,
       )}
     >
@@ -53,9 +50,7 @@ export function SubstanceTags({
     <ul className={cn("flex flex-wrap gap-1.5", className)}>
       {accent ? (
         <li>
-          <span className="inline-flex items-center rounded-full bg-primary px-2.5 py-1 text-xs font-medium text-primary-fg">
-            {accent}
-          </span>
+          <AuftragChip>{accent}</AuftragChip>
         </li>
       ) : null}
       {tags.map((tag) => (

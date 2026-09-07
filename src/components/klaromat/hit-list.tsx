@@ -64,15 +64,10 @@ export function MatchHitList({
     setSelected((prev) => moveIds(prev, from, to));
   }
 
-  const visibleViable = showAllViable ? viable : viable.slice(0, 10);
-  const selectedHouses = selected
-    .map((id) => {
-      const match = ranked.find((item) => item.clinicId === id);
-      const clinic = clinicMap.get(id);
-      if (!match || !clinic) return null;
-      return { match, clinic };
-    })
-    .filter((item): item is { match: MatchSnapshot; clinic: Clinic } => Boolean(item));
+  const selectedSet = useMemo(() => (guest ? new Set<string>() : new Set(selected)), [guest, selected]);
+  const pool = showAllViable ? viable : viable.slice(0, 10);
+  const unselected = pool.filter((item) => !selectedSet.has(item.clinicId));
+  const hiddenUnselected = Math.max(0, viable.length - pool.length);
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
@@ -113,32 +108,127 @@ export function MatchHitList({
             </Button>
           </div>
         </div>
-      ) : (
+      ) : null}
+
+      {viable.length > 0 && !guest ? (
+        <section className="rounded-[var(--radius-xl)] bg-surface p-5 shadow-[var(--shadow-border)]">
+          <h2 className="font-display text-xl tracking-tight">Zusammenstellung</h2>
+          <p className="mt-2 text-sm text-ink-muted">
+            Reihenfolge mit Auf und Ab an den Karten. Texte schreiben Sie danach, das PDF drucken Sie
+            aus dem Dokument.
+          </p>
+          <fieldset className="mt-4">
+            <legend className="mb-2 text-sm font-medium">Anzahl</legend>
+            <div className="flex flex-wrap gap-2">
+              {COUNT_PRESETS.map((count) => (
+                <button
+                  key={count}
+                  type="button"
+                  onClick={() => setCount(Math.min(count, viable.length))}
+                  className={cn(
+                    "min-h-11 rounded-full px-3 text-sm",
+                    selected.length === Math.min(count, viable.length)
+                      ? "bg-primary text-primary-fg"
+                      : "bg-bg-subtle text-ink",
+                  )}
+                >
+                  {count}
+                </button>
+              ))}
+              <button
+                type="button"
+                onClick={() => setCount(viable.length)}
+                className={cn(
+                  "min-h-11 rounded-full px-3 text-sm",
+                  selected.length === viable.length ? "bg-primary text-primary-fg" : "bg-bg-subtle text-ink",
+                )}
+              >
+                Alle ohne Ausschluss ({viable.length})
+              </button>
+            </div>
+          </fieldset>
+        </section>
+      ) : null}
+
+      {viable.length > 0 && !guest && selected.length === 0 ? (
+        <p className="text-sm text-ink-muted">Noch kein Haus aufgenommen.</p>
+      ) : null}
+
+      {viable.length > 0 && !guest && selected.length > 0 ? (
         <ol className="space-y-4">
-          {visibleViable.map((match) => {
-            const clinic = clinicMap.get(match.clinicId);
-            if (!clinic) return null;
-            const place = selected.indexOf(clinic.id);
+          {selected.map((id, index) => {
+            const clinic = clinicMap.get(id);
+            const match = ranked.find((item) => item.clinicId === id);
+            if (!clinic || !match) return null;
             return (
               <RankCard
                 key={clinic.id}
                 rank={match.rank}
-                place={place >= 0 ? place + 1 : null}
+                place={index + 1}
                 clinic={clinic}
                 match={match}
                 answers={answers}
-                selected={place >= 0}
-                guest={guest}
+                selected
+                guest={false}
+                canMoveUp={index > 0}
+                canMoveDown={index < selected.length - 1}
                 onToggle={() => toggle(clinic.id)}
+                onMoveUp={() => moveSelected(index, index - 1)}
+                onMoveDown={() => moveSelected(index, index + 1)}
               />
             );
           })}
         </ol>
-      )}
+      ) : null}
 
-      {viable.length > 10 && !showAllViable ? (
+      {viable.length > 0 && !guest ? (
+        <div className="flex flex-wrap gap-3">
+          <Button variant="secondary" type="button" onClick={onAdjustNeed}>
+            Bedarf ändern
+          </Button>
+          <Button
+            id="klaromat-create-document"
+            type="button"
+            disabled={creating || selected.length === 0}
+            onClick={() => onCreateDocument(selected)}
+          >
+            {creating ? "Dokument entsteht…" : `Dokument erzeugen (${selected.length})`}
+          </Button>
+        </div>
+      ) : null}
+
+      {viable.length > 0 && unselected.length > 0 ? (
+        <section className="space-y-4">
+          {guest ? null : (
+            <h2 className="font-display text-xl tracking-tight">Weitere Häuser</h2>
+          )}
+          <ol className="space-y-4">
+            {unselected.map((match) => {
+              const clinic = clinicMap.get(match.clinicId);
+              if (!clinic) return null;
+              return (
+                <RankCard
+                  key={clinic.id}
+                  rank={match.rank}
+                  place={null}
+                  clinic={clinic}
+                  match={match}
+                  answers={answers}
+                  selected={false}
+                  guest={guest}
+                  canMoveUp={false}
+                  canMoveDown={false}
+                  onToggle={() => toggle(clinic.id)}
+                />
+              );
+            })}
+          </ol>
+        </section>
+      ) : null}
+
+      {hiddenUnselected > 0 ? (
         <Button variant="secondary" type="button" onClick={() => setShowAllViable(true)}>
-          Weitere {viable.length - 10} Häuser in der Rangliste
+          Weitere {hiddenUnselected} Häuser in der Rangliste
         </Button>
       ) : null}
 
@@ -183,123 +273,10 @@ export function MatchHitList({
       ) : null}
 
       {guest ? (
-        <p className="text-sm text-ink-muted">
-          Zusammenstellung, Dokument und PDF nach Konto und Namenszuordnung.
-        </p>
-      ) : viable.length > 0 ? (
-        <section className="rounded-[var(--radius-xl)] bg-surface p-5 shadow-[var(--shadow-border)]">
-          <h2 className="font-display text-2xl tracking-tight">Zusammenstellung</h2>
-          <p className="mt-2 text-sm text-ink-muted">
-            Anzahl, Auswahl und Platz für das Dokument. Texte schreiben Sie danach, das PDF drucken
-            Sie aus dem Dokument.
-          </p>
-          <fieldset className="mt-4">
-            <legend className="mb-2 text-sm font-medium">Anzahl</legend>
-            <div className="flex flex-wrap gap-2">
-              {COUNT_PRESETS.map((count) => (
-                <button
-                  key={count}
-                  type="button"
-                  onClick={() => setCount(Math.min(count, viable.length))}
-                  className={cn(
-                    "min-h-11 rounded-full px-3 text-sm",
-                    selected.length === Math.min(count, viable.length)
-                      ? "bg-primary text-primary-fg"
-                      : "bg-bg-subtle text-ink",
-                  )}
-                >
-                  {count}
-                </button>
-              ))}
-              <button
-                type="button"
-                onClick={() => setCount(viable.length)}
-                className={cn(
-                  "min-h-11 rounded-full px-3 text-sm",
-                  selected.length === viable.length ? "bg-primary text-primary-fg" : "bg-bg-subtle text-ink",
-                )}
-              >
-                Alle ohne Ausschluss ({viable.length})
-              </button>
-            </div>
-          </fieldset>
-          {selectedHouses.length === 0 ? (
-            <p className="mt-4 text-sm text-ink-muted">Noch kein Haus ausgewählt.</p>
-          ) : (
-            <ol className="mt-4 space-y-2">
-              {selectedHouses.map((item, index) => (
-                <li
-                  key={item.clinic.id}
-                  className="flex flex-wrap items-center gap-2 rounded-[var(--radius-md)] bg-bg-subtle px-3 py-2"
-                >
-                  <span className="font-display text-xl tabular-nums text-primary" aria-label={`Platz ${index + 1}`}>
-                    {index + 1}
-                  </span>
-                  <span className="min-w-0 flex-1 text-sm">
-                    <span className="font-medium">{item.clinic.name}</span>
-                    <span className="text-ink-muted">
-                      {" "}
-                      · {item.clinic.city} · Katalograng {item.match.rank}
-                    </span>
-                  </span>
-                  <div className="flex gap-1">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      type="button"
-                      aria-label={`${item.clinic.name} nach oben`}
-                      disabled={index === 0}
-                      onClick={() => moveSelected(index, index - 1)}
-                    >
-                      <ChevronUp className="size-4" aria-hidden="true" />
-                      Auf
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      type="button"
-                      aria-label={`${item.clinic.name} nach unten`}
-                      disabled={index === selectedHouses.length - 1}
-                      onClick={() => moveSelected(index, index + 1)}
-                    >
-                      <ChevronDown className="size-4" aria-hidden="true" />
-                      Ab
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      type="button"
-                      aria-label={`${item.clinic.name} entfernen`}
-                      onClick={() => toggle(item.clinic.id)}
-                    >
-                      <X className="size-4" aria-hidden="true" />
-                      Weg
-                    </Button>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          )}
-          <div className="mt-5 flex flex-wrap gap-3">
-            <Button variant="secondary" type="button" onClick={onAdjustNeed}>
-              Bedarf ändern
-            </Button>
-            <Button
-              id="klaromat-create-document"
-              type="button"
-              disabled={creating || selected.length === 0}
-              onClick={() => onCreateDocument(selected)}
-            >
-              {creating
-                ? "Dokument entsteht…"
-                : `Dokument erzeugen (${selected.length})`}
-            </Button>
-          </div>
-        </section>
-      ) : null}
-
-      {guest || viable.length === 0 ? (
         <div className="flex flex-wrap gap-3">
+          <p className="w-full text-sm text-ink-muted">
+            Zusammenstellung, Dokument und PDF nach Konto und Namenszuordnung.
+          </p>
           <Button variant="secondary" type="button" onClick={onAdjustNeed}>
             Bedarf ändern
           </Button>
@@ -317,7 +294,11 @@ function RankCard({
   answers,
   selected,
   guest,
+  canMoveUp,
+  canMoveDown,
   onToggle,
+  onMoveUp,
+  onMoveDown,
 }: {
   rank: number;
   place: number | null;
@@ -326,43 +307,77 @@ function RankCard({
   answers: KlaromatAnswers;
   selected: boolean;
   guest: boolean;
+  canMoveUp: boolean;
+  canMoveDown: boolean;
   onToggle: () => void;
+  onMoveUp?: () => void;
+  onMoveDown?: () => void;
 }) {
   const photo = clinic.photos.find((item) => item.slot === "aussen") ?? clinic.photos[0];
   const hits = match.reasons.filter((reason) => reason.status === "match");
   const partials = match.reasons.filter((reason) => reason.status === "partial");
   const misses = match.reasons.filter((reason) => reason.status === "miss");
+  const hero = selected && place ? place : rank;
   return (
     <li className="overflow-hidden rounded-[var(--radius-xl)] bg-surface shadow-[var(--shadow-border)]">
       <div className="flex flex-col sm:flex-row">
-        <div className="sm:w-44">
-          <CoverPhoto
-            src={photo?.imagePath}
-            alt={photo?.alt ?? clinic.name}
-            auftrag={coverAuftragTag(clinic)}
-            className="aspect-photo h-36 w-full sm:h-40 sm:w-44"
-          />
-          <div className="px-3 py-2 sm:px-2">
-            <SubstanceTags
-              tags={[
-                ...coverSubstanceTags(clinic),
-                `Unsicherheit ${WAIT_UNCERTAINTY_LABEL[match.wait.uncertainty]}`,
-              ]}
+        <div className="flex sm:w-auto">
+          {selected && !guest ? (
+            <div className="flex shrink-0 flex-col items-center justify-center gap-1 bg-bg-subtle px-1 py-2">
+              <button
+                type="button"
+                className="grid size-11 place-items-center rounded-[var(--radius-sm)] text-ink hover:bg-surface disabled:opacity-40"
+                aria-label={`${clinic.name} nach oben`}
+                disabled={!canMoveUp}
+                onClick={onMoveUp}
+              >
+                <ChevronUp className="size-5" aria-hidden="true" />
+              </button>
+              <span className="font-display text-lg tabular-nums text-primary" aria-label={`Platz ${place}`}>
+                {place}
+              </span>
+              <button
+                type="button"
+                className="grid size-11 place-items-center rounded-[var(--radius-sm)] text-ink hover:bg-surface disabled:opacity-40"
+                aria-label={`${clinic.name} nach unten`}
+                disabled={!canMoveDown}
+                onClick={onMoveDown}
+              >
+                <ChevronDown className="size-5" aria-hidden="true" />
+              </button>
+            </div>
+          ) : null}
+          <div className="min-w-0 flex-1 sm:w-44 sm:flex-none">
+            <CoverPhoto
+              src={photo?.imagePath}
+              alt={photo?.alt ?? clinic.name}
+              className="aspect-photo h-36 w-full sm:h-40 sm:w-44"
             />
+            <div className="px-3 py-2 sm:px-2">
+              <SubstanceTags
+                accent={coverAuftragTag(clinic)}
+                tags={[
+                  ...coverSubstanceTags(clinic),
+                  `Unsicherheit ${WAIT_UNCERTAINTY_LABEL[match.wait.uncertainty]}`,
+                ]}
+              />
+            </div>
           </div>
         </div>
         <div className="flex min-w-0 flex-1 flex-col gap-3 p-4">
           <div className="flex items-start gap-3">
-            <p className="font-display text-3xl leading-none tracking-tight text-primary" aria-label={`Rang ${rank}`}>
-              {rank}
-            </p>
+            {selected ? null : (
+              <p className="font-display text-3xl leading-none tracking-tight text-primary" aria-label={`Rang ${rank}`}>
+                {hero}
+              </p>
+            )}
             <div className="min-w-0 flex-1">
               <h2 className="font-display text-xl tracking-tight">{clinic.name}</h2>
               <p className="text-sm text-ink-muted">
                 {clinic.city}, {clinic.stateName}
                 {" · "}
                 {coverageLabel(match)}
-                {place ? ` · Platz ${place} im Dokument` : ""}
+                {selected ? ` · Katalograng ${rank}` : ""}
               </p>
               <div className="mt-2 h-1.5 overflow-hidden rounded-full bg-bg-subtle" aria-hidden="true">
                 <div className="h-full rounded-full bg-primary" style={{ width: `${match.score}%` }} />
@@ -406,15 +421,20 @@ function RankCard({
                 Steckbrief
               </Link>
             </Button>
-            {guest ? null : (
+            {guest ? null : selected ? (
               <Button
-                variant={selected ? "primary" : "ghost"}
+                variant="ghost"
                 size="sm"
                 type="button"
-                aria-pressed={selected}
+                aria-label={`${clinic.name} entfernen`}
                 onClick={onToggle}
               >
-                {selected ? `Platz ${place}` : "Aufnehmen"}
+                <X className="size-4" aria-hidden="true" />
+                Weg
+              </Button>
+            ) : (
+              <Button variant="ghost" size="sm" type="button" aria-pressed={false} onClick={onToggle}>
+                Aufnehmen
               </Button>
             )}
           </div>

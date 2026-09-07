@@ -122,12 +122,6 @@
   font-weight: 600;
 }
 
-.auftrag-chip {
-  box-shadow:
-    0 1px 3px color-mix(in oklab, var(--color-ink) 55%, transparent),
-    0 0 0 1px color-mix(in oklab, var(--color-ink) 18%, transparent);
-}
-
 .skip-link {
   position: absolute;
   left: 1rem;
@@ -169,6 +163,9 @@
   #app {
     background: #f3f0e8 !important;
     color: #1a2420 !important;
+    height: auto !important;
+    min-height: 0 !important;
+    overflow: visible !important;
   }
 
   * {
@@ -201,6 +198,11 @@
   @page {
     size: A4;
     margin: 16mm 16mm 18mm;
+  }
+
+  @page steckbrief {
+    size: A4;
+    margin: 8mm 9mm;
   }
 
   .print-sheet {
@@ -381,6 +383,167 @@
     letter-spacing: 0.14em;
     text-transform: uppercase;
     font-size: 0.7rem;
+  }
+
+  .official-steckbrief {
+    display: none !important;
+  }
+
+  .steckbrief-page {
+    page: steckbrief;
+    padding: 0 !important;
+    max-width: none !important;
+    margin: 0 !important;
+  }
+
+  .steckbrief-print {
+    display: block !important;
+    color: #1a2420;
+    font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    font-size: 8.4pt;
+    line-height: 1.32;
+  }
+
+  .steckbrief-print-kicker {
+    margin: 0 0 2.5mm;
+    font-size: 7pt;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #5c6661;
+  }
+
+  .steckbrief-print-hero {
+    display: flex;
+    gap: 4mm;
+    align-items: flex-start;
+    margin: 0 0 2.5mm;
+  }
+
+  .steckbrief-print-photo {
+    width: 42mm;
+    height: 28mm;
+    flex-shrink: 0;
+    object-fit: contain;
+    object-position: center;
+    background: #eae6db;
+    border-radius: 3px;
+  }
+
+  .steckbrief-print-copy {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .steckbrief-print-auftrag {
+    display: inline-block;
+    margin: 0 0 1mm;
+    padding: 0.4mm 2mm;
+    border-radius: 999px;
+    background: #245c4a;
+    color: #f7f3ea;
+    font-size: 7.5pt;
+    font-weight: 600;
+  }
+
+  .steckbrief-print h1 {
+    font-family: Fraunces, ui-serif, Georgia, serif;
+    font-size: 16pt;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    line-height: 1.15;
+    margin: 0 0 1mm;
+  }
+
+  .steckbrief-print-copy p {
+    margin: 0 0 0.6mm;
+  }
+
+  .steckbrief-print-wait {
+    font-weight: 600;
+  }
+
+  .steckbrief-print-wait span {
+    font-weight: 400;
+    color: #5c6661;
+  }
+
+  .steckbrief-print-contact {
+    margin: 0 0 3mm;
+    padding: 1.6mm 0;
+    border-top: 0.4pt solid #d9d3c6;
+    border-bottom: 0.4pt solid #d9d3c6;
+    color: #1a2420;
+  }
+
+  .steckbrief-print-blocks {
+    column-count: 2;
+    column-gap: 5.5mm;
+    column-fill: balance;
+  }
+
+  .steckbrief-print-block {
+    break-inside: avoid;
+    page-break-inside: avoid;
+    -webkit-column-break-inside: avoid;
+    padding: 2mm 0;
+    border-bottom: 0.3pt solid #e4dfd4;
+  }
+
+  .steckbrief-print-block h2 {
+    font-family: Fraunces, ui-serif, Georgia, serif;
+    font-size: 9.5pt;
+    letter-spacing: -0.02em;
+    margin: 0 0 1mm;
+  }
+
+  .steckbrief-print-block h2 span {
+    margin-right: 1.5mm;
+    font-family: "Source Sans 3", ui-sans-serif, system-ui, sans-serif;
+    font-size: 7pt;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: #245c4a;
+  }
+
+  .steckbrief-print-block ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .steckbrief-print-block li {
+    padding-left: 2.5mm;
+    text-indent: -2.5mm;
+  }
+
+  .steckbrief-print-block li::before {
+    content: "– ";
+  }
+
+  .steckbrief-print-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8mm 2.5mm;
+    margin: 1mm 0 0 !important;
+    color: #5c6661;
+    font-size: 7.2pt;
+  }
+
+  .steckbrief-print-chips [data-status="vorhanden"] {
+    color: #2a5c45;
+  }
+
+  .steckbrief-print-chips [data-status="eingeschraenkt"] {
+    color: #8a5a2a;
+  }
+
+  .steckbrief-print-end {
+    margin-top: 3mm;
+    padding-top: 2mm;
+    border-top: 0.4pt solid #d9d3c6;
+    font-size: 7pt;
+    color: #5c6661;
   }
 }
 

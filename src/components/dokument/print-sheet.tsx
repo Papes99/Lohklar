@@ -65,13 +65,16 @@ export function DokumentPrintSheet({
               <h2>{house.clinicName}</h2>
               <p className="print-muted">{house.location}</p>
               <p className="print-fit">{house.fitSentence}</p>
-              <SubstanceTags tags={house.substances ?? []} className="print-substances" />
+              <SubstanceTags
+                accent={house.auftrag}
+                tags={house.substances ?? []}
+                className="print-substances"
+              />
             </div>
             {house.photo ? (
               <CoverPhoto
                 src={house.photo.path}
                 alt={house.photo.alt}
-                auftrag={house.auftrag}
                 className="print-house-photo"
               />
             ) : null}

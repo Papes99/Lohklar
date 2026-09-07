@@ -461,7 +461,7 @@ export function coverSubstanceTags(clinic: Pick<Clinic, "steckbrief">): string[]
   return tags;
 }
 
-/** Overlay on the clinic title image: the rehab mandate, not substances. */
+/** Green chip in the tag row under the photo: rehab mandate, not substances. */
 export function coverAuftragTag(clinic: Pick<Clinic, "indicationAreas">): string {
   if (clinic.indicationAreas.includes("dual")) return "Dualdiagnose";
   if (clinic.indicationAreas.includes("sucht")) return "Suchtreha";
@@ -469,7 +469,7 @@ export function coverAuftragTag(clinic: Pick<Clinic, "indicationAreas">): string
   return "Reha";
 }
 
-/** Gray tags under the name: substances, then rarer extras. Mandate stays on the photo. */
+/** Gray tags after the mandate chip: substances, then rarer extras. */
 export function clinicCardTags(
   clinic: Pick<
     Clinic,

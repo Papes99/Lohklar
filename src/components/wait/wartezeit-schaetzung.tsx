@@ -96,9 +96,6 @@ export function WartezeitSchaetzung({
           <Rechenweg estimate={value} id={panelId} />
         </div>
       ) : null}
-      <div className="print-only">
-        <Rechenweg estimate={value} />
-      </div>
     </section>
   );
 }

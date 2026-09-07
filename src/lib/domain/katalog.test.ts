@@ -78,7 +78,7 @@ describe("katalog echte Häuser", () => {
     assert.deepEqual(coverSubstanceTags(wilhelmsheim), ["Alkohol", "Medikamente"]);
   });
 
-  it("setzt auf dem Titelbild den Auftrag, nicht die Substanzen", () => {
+  it("setzt den Auftrag als Tag, nicht als Substanz", () => {
     const hoehenried = CLINIC_SEED.find((c) => c.id === "ck-seewiesen");
     const ratingen = CLINIC_SEED.find((c) => c.id === "ck-ratingen");
     const brilon = CLINIC_SEED.find((c) => c.id === "ck-rothaar");

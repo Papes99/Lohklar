@@ -65,7 +65,10 @@ export function OfficialSteckbrief({
   const auftrag = coverAuftragTag(clinic);
   const substances = coverSubstanceTags(clinic);
   return (
-    <article className={cn("flex flex-col gap-8", rail && "gap-5")}>
+    <article className={cn("official-steckbrief flex flex-col gap-8", rail && "gap-5")}>
+      <p className="print-only text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">
+        Lohklar · Offizieller Steckbrief · {formatDeDate(clinic.datenstand.geprueft)}
+      </p>
       {rail ? (
         <PhotoStrip
           photos={clinic.photos}
@@ -75,14 +78,12 @@ export function OfficialSteckbrief({
           substances={substances}
         />
       ) : (
-        <div className="lg:hidden">
-          <PhotoStrip
-            photos={clinic.photos}
-            clinicName={clinic.name}
-            auftrag={auftrag}
-            substances={substances}
-          />
-        </div>
+        <PhotoStrip
+          photos={clinic.photos}
+          clinicName={clinic.name}
+          auftrag={auftrag}
+          substances={substances}
+        />
       )}
 
       <div
@@ -97,7 +98,7 @@ export function OfficialSteckbrief({
           {rail ? (
             <WaitSlot estimate={clinic.wait} marked={highlightBlocks.includes("wartezeit")} />
           ) : (
-            <div className="lg:hidden">
+            <div className="lg:hidden print:hidden">
               <WaitSlot estimate={clinic.wait} marked={highlightBlocks.includes("wartezeit")} />
             </div>
           )}
@@ -125,7 +126,7 @@ export function OfficialSteckbrief({
               <Datenstand clinic={clinic} />
             </div>
           ) : (
-            <div className="space-y-6 lg:hidden">
+            <div className="space-y-6 lg:hidden print:hidden">
               <Kontakt clinic={clinic} />
               <Datenstand clinic={clinic} />
             </div>
@@ -133,14 +134,7 @@ export function OfficialSteckbrief({
         </div>
 
         {rail ? null : (
-          <aside className="hidden lg:sticky lg:top-4 lg:block lg:space-y-6">
-            <PhotoStrip
-              photos={clinic.photos}
-              clinicName={clinic.name}
-              variant="aside"
-              auftrag={auftrag}
-              substances={substances}
-            />
+          <aside className="hidden lg:sticky lg:top-4 lg:block lg:space-y-6 print:static print:block print:space-y-6">
             <Kontakt clinic={clinic} />
             <WaitSlot estimate={clinic.wait} marked={highlightBlocks.includes("wartezeit")} />
             <Datenstand clinic={clinic} />
@@ -179,7 +173,7 @@ function Steckkopf({ clinic, compact }: { clinic: ClinicWithWait; compact?: bool
 
   return (
     <header className="space-y-3">
-      <p className="text-xs font-medium uppercase tracking-caps text-ink-muted">
+      <p className="no-print text-xs font-medium uppercase tracking-caps text-ink-muted">
         Offizieller Steckbrief
       </p>
       {compact ? (
@@ -244,7 +238,7 @@ function SteckBlockView({
     >
       <div>
         <BlockTitle nr={nr} title={title} size={compact ? "aside" : "block"} />
-        <p className="mt-1 text-sm text-ink-muted">{lead}</p>
+        <p className="steckbrief-lead mt-1 text-sm text-ink-muted">{lead}</p>
         <ul className="mt-3 space-y-1.5 text-ink">
           {lines.map((line) => (
             <li key={line} className="flex gap-2">
