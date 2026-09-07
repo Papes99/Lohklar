@@ -1,6 +1,6 @@
 import { PhotoStrip } from "@/components/clinic/photo-strip";
 import { StatusChip } from "@/components/clinic/status-chip";
-import { HighlightedText, isHighlightHit } from "@/components/lohlotse/highlight-text";
+import { HighlightedText, isHighlightHit } from "@/components/clinic/highlight-text";
 import { WartezeitSchaetzung } from "@/components/wait/wartezeit-schaetzung";
 import {
   STECKBRIEF_BLOCKS,

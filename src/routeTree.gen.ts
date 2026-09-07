@@ -17,6 +17,7 @@ import { Route as KlarOMatRouteImport } from './routes/klar-o-mat'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as UeberRouteImport } from './routes/ueber'
 import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppKiRouteImport } from './routes/app/ki'
 import { Route as AppKlarOMatRouteImport } from './routes/app/klar-o-mat'
 import { Route as AppLohlotseRouteImport } from './routes/app/lohlotse'
 import { Route as KlinikenIndexRouteImport } from './routes/kliniken/index'
@@ -65,6 +66,11 @@ const AppIndexRoute = AppIndexRouteImport.update({
   path: '/',
   getParentRoute: () => AppRoute,
 } as any)
+const AppKiRoute = AppKiRouteImport.update({
+  id: '/ki',
+  path: '/ki',
+  getParentRoute: () => AppRoute,
+} as any)
 const AppKlarOMatRoute = AppKlarOMatRouteImport.update({
   id: '/klar-o-mat',
   path: '/klar-o-mat',
@@ -109,6 +115,7 @@ export interface FileRoutesByFullPath {
   '/klar-o-mat': typeof KlarOMatRoute
   '/login': typeof LoginRoute
   '/ueber': typeof UeberRoute
+  '/app/ki': typeof AppKiRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/lohlotse': typeof AppLohlotseRoute
   '/kliniken/$clinicId': typeof KlinikenClinicIdRoute
@@ -125,6 +132,7 @@ export interface FileRoutesByTo {
   '/klar-o-mat': typeof KlarOMatRoute
   '/login': typeof LoginRoute
   '/ueber': typeof UeberRoute
+  '/app/ki': typeof AppKiRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/lohlotse': typeof AppLohlotseRoute
   '/kliniken/$clinicId': typeof KlinikenClinicIdRoute
@@ -143,6 +151,7 @@ export interface FileRoutesById {
   '/klar-o-mat': typeof KlarOMatRoute
   '/login': typeof LoginRoute
   '/ueber': typeof UeberRoute
+  '/app/ki': typeof AppKiRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/lohlotse': typeof AppLohlotseRoute
   '/kliniken/$clinicId': typeof KlinikenClinicIdRoute
@@ -162,6 +171,7 @@ export interface FileRouteTypes {
     | '/klar-o-mat'
     | '/login'
     | '/ueber'
+    | '/app/ki'
     | '/app/klar-o-mat'
     | '/app/lohlotse'
     | '/kliniken/$clinicId'
@@ -178,6 +188,7 @@ export interface FileRouteTypes {
     | '/klar-o-mat'
     | '/login'
     | '/ueber'
+    | '/app/ki'
     | '/app/klar-o-mat'
     | '/app/lohlotse'
     | '/kliniken/$clinicId'
@@ -195,6 +206,7 @@ export interface FileRouteTypes {
     | '/klar-o-mat'
     | '/login'
     | '/ueber'
+    | '/app/ki'
     | '/app/klar-o-mat'
     | '/app/lohlotse'
     | '/kliniken/$clinicId'
@@ -276,6 +288,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/ki': {
+      id: '/app/ki'
+      path: '/ki'
+      fullPath: '/app/ki'
+      preLoaderRoute: typeof AppKiRouteImport
+      parentRoute: typeof AppRoute
+    }
     '/app/klar-o-mat': {
       id: '/app/klar-o-mat'
       path: '/klar-o-mat'
@@ -329,6 +348,7 @@ declare module '@tanstack/react-router' {
 }
 
 interface AppRouteChildren {
+  AppKiRoute: typeof AppKiRoute
   AppKlarOMatRoute: typeof AppKlarOMatRoute
   AppLohlotseRoute: typeof AppLohlotseRoute
   AppIndexRoute: typeof AppIndexRoute
@@ -337,6 +357,7 @@ interface AppRouteChildren {
 }
 
 const AppRouteChildren: AppRouteChildren = {
+  AppKiRoute: AppKiRoute,
   AppKlarOMatRoute: AppKlarOMatRoute,
   AppLohlotseRoute: AppLohlotseRoute,
   AppIndexRoute: AppIndexRoute,

@@ -75,7 +75,7 @@ function actionLabel(kind: string, clinicName: string | null): string {
   if (kind === "session") return "Sitzung";
   if (kind === "run") return "Klar-o-Mat";
   if (kind === "document") return "Dokument";
-  if (kind === "lohlotse") return "Lohlotse";
+  if (kind === "ki" || kind === "lohlotse") return "Lohklar KI";
   return "Aktion";
 }
 
@@ -167,7 +167,7 @@ export const getDashboard = createServerFn({ method: "POST" })
       select updated_at as created_at, 'document' as kind, null::text as clinic_id from result_documents
         where user_id = ${userId} and updated_at >= ${from} and updated_at < ${to}
       union all
-      select created_at, 'lohlotse' as kind, null::text as clinic_id from lohlotse_messages
+      select created_at, 'ki' as kind, null::text as clinic_id from ki_messages
         where user_id = ${userId} and created_at >= ${from} and created_at < ${to}
     `,
       [],

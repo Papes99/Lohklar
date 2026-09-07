@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { AntragswegPanel } from "@/components/antragsweg/antragsweg-panel";
 import { Ergebnisdokument } from "@/components/dokument/ergebnisdokument";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -28,14 +29,14 @@ export const Route = createFileRoute("/app/fallordner/$folderId")({
       search.tab === "laeufe" ||
       search.tab === "dokumente" ||
       search.tab === "steckbrief" ||
-      search.tab === "lohlotse"
+      search.tab === "antragsweg"
         ? search.tab
         : undefined,
   }),
   component: FolderPage,
 });
 
-type Tab = "laeufe" | "dokumente" | "steckbrief" | "lohlotse";
+type Tab = "laeufe" | "dokumente" | "steckbrief" | "antragsweg";
 
 function FolderPage() {
   const { folderId } = Route.useParams();
@@ -72,8 +73,8 @@ function FolderPage() {
   const tabs: { id: Tab; label: string }[] = [
     { id: "laeufe", label: "Durchläufe" },
     { id: "dokumente", label: "Dokumente" },
+    { id: "antragsweg", label: "Antragsweg" },
     { id: "steckbrief", label: "Persönlicher Steckbrief" },
-    { id: "lohlotse", label: "Lohlotse" },
   ];
 
   return (
@@ -227,22 +228,12 @@ function FolderPage() {
         )
       ) : null}
 
-      {tab === "steckbrief" ? (
-        <PersonalEditor folder={folder} />
+      {tab === "antragsweg" ? (
+        <AntragswegPanel folderId={folder.id} clientName={folder.clientName} />
       ) : null}
 
-      {tab === "lohlotse" ? (
-        <div className="rounded-[var(--radius-xl)] bg-surface p-6 shadow-[var(--shadow-border)]">
-          <h2 className="font-display text-2xl tracking-tight">Lohlotse</h2>
-          <p className="mt-2 text-ink-muted">
-            Der Lohlotse hat einen eigenen Menüpunkt. Der Faden bleibt bei {folder.clientName}.
-          </p>
-          <Button className="mt-4" asChild>
-            <Link to="/app/lohlotse" search={{ folder: folderId }}>
-              Zum Lohlotse für {folder.clientName}
-            </Link>
-          </Button>
-        </div>
+      {tab === "steckbrief" ? (
+        <PersonalEditor folder={folder} />
       ) : null}
 
       {renameOpen ? (
@@ -283,7 +274,7 @@ function RenameModal({
   return (
     <Modal titleId="rename-title" title="Ordner umbenennen">
       <p className="mt-2 text-sm text-ink-muted">
-        Der Name steht auf Dokumenten und im Lohlotse.
+        Der Name steht auf Dokumenten und im Fallordner.
       </p>
       <div className="mt-4 space-y-2">
         <label htmlFor="rename-name" className="text-sm font-medium">
@@ -360,11 +351,6 @@ function PersonalEditor({
         />
         <Button type="button" variant="secondary" onClick={addCriterion}>
           Wahlkriterium hinzufügen
-        </Button>
-        <Button type="button" variant="ghost" asChild>
-          <Link to="/app/lohlotse" search={{ folder: folder.id }}>
-            Im Lohlotse ergänzen
-          </Link>
         </Button>
       </div>
       <Field id="passt-nicht" label="Was nicht passt" value={passtNicht} onChange={setPasstNicht} />

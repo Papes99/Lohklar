@@ -205,6 +205,24 @@ export const CATALOG_EDITIONS: CatalogEdition[] = [
     houses: 77,
     note: "Erstprüfung der dritten Katalogwelle.",
   },
+  {
+    ymd: "2026-09-06",
+    kind: "aufnahme",
+    houses: 114,
+    note: "Katalog um weitere belegte Reha-Häuser ergänzt.",
+  },
+  {
+    ymd: "2026-09-06",
+    kind: "pruefung",
+    houses: 114,
+    note: "Erstprüfung der vierten Katalogwelle.",
+  },
+  {
+    ymd: "2026-09-06",
+    kind: "pruefung",
+    houses: 441,
+    note: "Vollprüfung aller Steckbriefe auf Echtheit. Geschlossene und fachfremde Häuser entfernt.",
+  },
 ];
 
 export function editionsInRange(

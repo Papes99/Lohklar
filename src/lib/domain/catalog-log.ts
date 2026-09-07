@@ -17,11 +17,16 @@ function pad(n: number): string {
   return String(n).padStart(2, "0");
 }
 
-/** Per-house official catalog log. Core 50: 2026-09-01. Erweiterung: 2026-09-05. */
+/** Per-house official catalog log. Core 50: 2026-09-01. Erweiterung: 2026-09-05. Welle 4: 2026-09-06. */
 export const CATALOG_LOG: CatalogLogEntry[] = HOUSES.map((house) => {
-  const isNew = house.sortOrder > 50;
-  const ymd = isNew ? "2026-09-05" : "2026-09-01";
-  const minute = isNew ? house.sortOrder - 51 : Math.max(0, house.sortOrder - 1);
+  const ymd =
+    house.sortOrder <= 50 ? "2026-09-01" : house.sortOrder <= 327 ? "2026-09-05" : "2026-09-06";
+  const minute =
+    house.sortOrder <= 50
+      ? Math.max(0, house.sortOrder - 1)
+      : house.sortOrder <= 327
+        ? house.sortOrder - 51
+        : house.sortOrder - 328;
   const hour = 8 + Math.floor(minute / 60);
   const min = minute % 60;
   return {

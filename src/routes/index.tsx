@@ -82,7 +82,7 @@ function Home() {
             {[
               {
                 title: "Steckbriefe",
-                text: "327 Häuser, dieselbe Vorlage. Ohne Konto lesbar, inklusive Suche und Filter.",
+                text: "380 Häuser, dieselbe Vorlage. Ohne Konto lesbar, inklusive Suche und Filter.",
               },
               {
                 title: "Klar-o-Mat",
@@ -93,8 +93,8 @@ function Home() {
                 text: "Eine Komponente überall. Rechenweg aufklappbar. Keine Garantie.",
               },
               {
-                title: "Lohlotse",
-                text: "Chat mit Gedächtnis je Arbeitsname. Steckbrief-Leiste bleibt sichtbar.",
+                title: "Lohklar KI",
+                text: "Fallunabhängiger Chat zur Orientierung. Ein Thread pro Konto, ohne Fallordner.",
               },
             ].map((item) => (
               <div key={item.title}>

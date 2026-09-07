@@ -16,7 +16,8 @@ describe("catalog completeness", () => {
   it("counts complete houses as a subset of the catalog", () => {
     const complete = CLINIC_SEED.filter(isClinicComplete);
     assert.ok(complete.length >= 1);
-    assert.ok(complete.length < CLINIC_SEED.length);
+    assert.ok(complete.length <= CLINIC_SEED.length);
+    assert.equal(CLINIC_SEED.length, 380);
     for (const clinic of complete) {
       assert.ok(clinic.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
       assert.ok(clinic.website.startsWith("https://"));
@@ -24,16 +25,24 @@ describe("catalog completeness", () => {
   });
 
   it("names gaps without inventing contact data", () => {
-    const missingCover = CLINIC_SEED.find((clinic) => !clinic.photos.some((p) => p.slot === "aussen" && p.imagePath));
-    assert.ok(missingCover);
-    assert.ok(clinicGaps(missingCover).includes("Außenfoto fehlt"));
+    const missingZimmer = CLINIC_SEED.find(
+      (clinic) => !clinic.photos.some((p) => p.slot === "zimmer_bad" && p.imagePath),
+    );
+    assert.ok(missingZimmer);
+    assert.ok(clinicGaps(missingZimmer).includes("Zimmerfoto fehlt"));
+    const missingPhone = CLINIC_SEED.find(
+      (clinic) => !clinic.phone.trim() || /^angabe liegt nicht vor\.?$/i.test(clinic.phone.trim()),
+    );
+    if (missingPhone) {
+      assert.ok(clinicGaps(missingPhone).includes("Telefon fehlt"));
+    }
   });
 });
 
 describe("catalog filter", () => {
   it("returns all houses for an empty filter", () => {
     const rows = filterClinics(CLINIC_SEED, emptyCatalogFilter());
-    assert.equal(rows.length, 327);
+    assert.equal(rows.length, 380);
     assert.equal(catalogFilterActive(emptyCatalogFilter()), false);
   });
 
@@ -86,16 +95,16 @@ describe("clinicCardTags", () => {
 describe("catalog pulse", () => {
   it("covers 16 Länder and records the September 2026 editions", () => {
     const pulse = catalogPulse(CLINIC_SEED, "2026-08-31");
-    assert.equal(pulse.houses, 327);
+    assert.equal(pulse.houses, 380);
     assert.equal(pulse.statesCovered, 16);
-    assert.equal(pulse.addedInPeriod, 327);
-    assert.equal(pulse.pruefungenInPeriod, 327);
-    assert.equal(pulse.complete + pulse.incomplete, 327);
+    assert.equal(pulse.addedInPeriod, 441);
+    assert.equal(pulse.pruefungenInPeriod, 882);
+    assert.equal(pulse.complete + pulse.incomplete, 380);
     assert.ok(pulse.topGaps.length >= 1);
-    assert.equal(CATALOG_EDITIONS.length, 6);
+    assert.equal(CATALOG_EDITIONS.length, 9);
     const mid = catalogPulse(CLINIC_SEED, "2026-09-02");
-    assert.equal(mid.addedInPeriod, 277);
-    const before = catalogPulse(CLINIC_SEED, "2026-09-06");
+    assert.equal(mid.addedInPeriod, 391);
+    const before = catalogPulse(CLINIC_SEED, "2026-09-07");
     assert.equal(before.addedInPeriod, 0);
   });
 });

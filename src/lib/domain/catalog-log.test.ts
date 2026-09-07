@@ -11,14 +11,16 @@ import { berlinMidnight, dashRange } from "./usage.ts";
 
 describe("catalog log", () => {
   it("records all houses as aufgenommen, Kern am 01.09., Erweiterung am 05.09.", () => {
-    assert.equal(CATALOG_LOG.length, 327);
+    assert.equal(CATALOG_LOG.length, 380);
     assert.ok(CATALOG_LOG.every((entry) => entry.kind === "aufgenommen"));
     const ids = new Set(CATALOG_LOG.map((entry) => entry.clinicId));
-    assert.equal(ids.size, 327);
+    assert.equal(ids.size, 380);
     const core = CATALOG_LOG.filter((entry) => entry.ymd === "2026-09-01");
     const extra = CATALOG_LOG.filter((entry) => entry.ymd === "2026-09-05");
-    assert.equal(core.length, 50);
-    assert.equal(extra.length, 277);
+    const wave4 = CATALOG_LOG.filter((entry) => entry.ymd === "2026-09-06");
+    assert.equal(core.length, 45);
+    assert.equal(extra.length, 227);
+    assert.equal(wave4.length, 108);
   });
 
   it("formats the changelog line", () => {
@@ -29,22 +31,23 @@ describe("catalog log", () => {
 
   it("counts stock at the selected instant", () => {
     assert.equal(housesAt(berlinMidnight(2026, 8, 31)), 0);
-    assert.equal(housesAt(berlinMidnight(2026, 9, 2)), 50);
-    assert.equal(housesAt(berlinMidnight(2026, 9, 5)), 50);
-    assert.equal(housesAt(berlinMidnight(2026, 9, 6)), 327);
+    assert.equal(housesAt(berlinMidnight(2026, 9, 2)), 45);
+    assert.equal(housesAt(berlinMidnight(2026, 9, 5)), 45);
+    assert.equal(housesAt(berlinMidnight(2026, 9, 6)), 272);
+    assert.equal(housesAt(berlinMidnight(2026, 9, 7)), 380);
   });
 
   it("scopes the log to Tag / Monat / Jahr", () => {
     const day = dashRange("day", "2026-09-04", new Date("2026-09-05T12:00:00+02:00"));
     assert.equal(catalogLogInRange(day.from, day.to).length, 0);
     const opened = dashRange("day", "2026-09-01", new Date("2026-09-05T12:00:00+02:00"));
-    assert.equal(catalogLogInRange(opened.from, opened.to).length, 50);
+    assert.equal(catalogLogInRange(opened.from, opened.to).length, 45);
     const extraDay = dashRange("day", "2026-09-05", new Date("2026-09-05T18:00:00+02:00"));
-    assert.equal(catalogLogInRange(extraDay.from, extraDay.to).length, 277);
+    assert.equal(catalogLogInRange(extraDay.from, extraDay.to).length, 227);
     const month = dashRange("month", "2026-09-05", new Date("2026-09-05T18:00:00+02:00"));
-    assert.equal(catalogLogInRange(month.from, month.to).length, 327);
+    assert.equal(catalogLogInRange(month.from, month.to).length, 380);
     const year = dashRange("year", "2026-09-05", new Date("2026-09-05T18:00:00+02:00"));
-    assert.equal(catalogLogInRange(year.from, year.to).length, 327);
+    assert.equal(catalogLogInRange(year.from, year.to).length, 380);
     const lastYear = dashRange("year", "2025-12-01", new Date("2026-09-05T18:00:00+02:00"));
     assert.equal(catalogLogInRange(lastYear.from, lastYear.to).length, 0);
   });
@@ -52,9 +55,9 @@ describe("catalog log", () => {
   it("filters Neu vs Geändert without rewriting official text", () => {
     const month = dashRange("month", "2026-09-05", new Date("2026-09-05T18:00:00+02:00"));
     const rows = catalogLogInRange(month.from, month.to);
-    assert.equal(filterCatalogLog(rows, "neu").length, 327);
+    assert.equal(filterCatalogLog(rows, "neu").length, 380);
     assert.equal(filterCatalogLog(rows, "geaendert").length, 0);
-    assert.equal(filterCatalogLog(rows, "alle").length, 327);
+    assert.equal(filterCatalogLog(rows, "alle").length, 380);
     assert.equal(rows[0]?.at >= rows[1]?.at, true);
   });
 });

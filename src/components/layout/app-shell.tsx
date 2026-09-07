@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 export function AppShell() {
   const { user, isPending } = useCurrentUserState();
   const pathname = useRouterState({ select: (s) => s.location.pathname });
-  const wide = pathname.startsWith("/app/lohlotse");
+  const wide = pathname.startsWith("/app/ki");
   const dashboard = pathname === "/app";
   if (isPending) {
     return (

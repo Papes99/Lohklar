@@ -18,7 +18,8 @@ function Privacy() {
         <ul>
           <li>Konto der Fachkraft (Anmeldung)</li>
           <li>Fallarbeit: Arbeitsname, Klar-o-Mat-Läufe, Ergebnisdokumente</li>
-          <li>Persönlicher Steckbrief und Lohlotse je Fallordner</li>
+          <li>Persönlicher Steckbrief je Fallordner</li>
+          <li>Lohklar KI (ein Chat-Thread pro Konto, ohne Fallbezug)</li>
         </ul>
         <h2>Klientendaten</h2>
         <p>

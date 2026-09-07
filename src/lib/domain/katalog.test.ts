@@ -16,12 +16,13 @@ describe("katalog echte Häuser", () => {
     assert.equal(states.size, 16);
   });
 
-  it("lässt die ursprünglichen 50 Kern-IDs unangetastet", () => {
+  it("lässt die ursprünglichen Kern-IDs unangetastet, soweit sie noch im Universum liegen", () => {
     const core = HOUSES.filter((h) => h.sortOrder <= 50);
-    assert.equal(core.length, 50);
+    assert.equal(core.length, 45);
     assert.equal(core[0]?.id, "ck-seewiesen");
     assert.ok(HOUSES.some((h) => h.id === "ck-nordlicht"));
-    assert.ok(HOUSES.some((h) => h.id === "ck-flechtingen"));
+    assert.ok(HOUSES.some((h) => h.id === "ck-ratingen"));
+    assert.equal(HOUSES.some((h) => h.id === "ck-flechtingen"), false);
   });
 
   it("enthält keine Muster- oder example.org-Daten", () => {

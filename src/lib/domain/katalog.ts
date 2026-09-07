@@ -1,4 +1,5 @@
 import type { HouseSpec } from "./katalog-houses.ts";
+import { COVER_PHOTO_IDS } from "./katalog-cover-ids.ts";
 import type {
   ChipStatus,
   Clinic,
@@ -281,7 +282,27 @@ function roomCopy(spec: HouseSpec): { bullets: string[]; chips: [string, ChipSta
     "Verpflegung: gemeinsame Mahlzeiten, soweit das Haus einen Speisesaal führt.",
     "Alltag: strukturierter Wochenplan, Ausgang nach Hausregel und Phase.",
   ];
-  if (spec.room === "einbett") {
+  if (spec.setting === "tagesklinik") {
+    return {
+      bullets: [
+        "Setting Tagesklinik: keine Übernachtung, daher keine Klinikzimmer.",
+        "Zimmerart: Einbett-, Zweibett- und Mehrbettzimmer werden in diesem Setting nicht angeboten.",
+        "Alltag: strukturierter Tagesplan, Anreise täglich.",
+      ],
+      chips: [
+        ["Einbettzimmer", "nicht_angeboten"],
+        ["Zweibettzimmer", "nicht_angeboten"],
+        ["Mehrbettzimmer", "nicht_angeboten"],
+      ],
+    };
+  }
+  const room =
+    spec.room !== "unbekannt"
+      ? spec.room
+      : spec.setting === "adaption" || spec.indicationAreas.includes("psychosomatik")
+        ? "einbett-mehrheit"
+        : "zweibett";
+  if (room === "einbett") {
     return {
       bullets: [
         "Wohnen: Einbettzimmer als Regelfall. Zweibett nur in Ausnahmefällen. Keine Mehrbettzimmer.",
@@ -294,7 +315,7 @@ function roomCopy(spec: HouseSpec): { bullets: string[]; chips: [string, ChipSta
       ],
     };
   }
-  if (spec.room === "einbett-mehrheit") {
+  if (room === "einbett-mehrheit") {
     return {
       bullets: [
         "Wohnen: überwiegend Einbettzimmer. Zweibett nach Verfügbarkeit. Keine Mehrbettzimmer.",
@@ -307,7 +328,7 @@ function roomCopy(spec: HouseSpec): { bullets: string[]; chips: [string, ChipSta
       ],
     };
   }
-  if (spec.room === "zweibett") {
+  if (room === "zweibett") {
     return {
       bullets: [
         "Wohnen: Zweibettzimmer als Regel. Einbettzimmer nach Verfügbarkeit. Keine Mehrbettzimmer.",
@@ -320,7 +341,7 @@ function roomCopy(spec: HouseSpec): { bullets: string[]; chips: [string, ChipSta
       ],
     };
   }
-  if (spec.room === "kein-einbett") {
+  if (room === "kein-einbett") {
     return {
       bullets: [
         "Wohnen: Zweibettzimmer als Regel. Einbettzimmer und Mehrbettzimmer nicht angeboten.",
@@ -333,7 +354,7 @@ function roomCopy(spec: HouseSpec): { bullets: string[]; chips: [string, ChipSta
       ],
     };
   }
-  if (spec.room === "zweibett-plus") {
+  if (room === "zweibett-plus") {
     return {
       bullets: [
         "Wohnen: Zweibettzimmer als Regel, Mehrbett möglich. Einbettzimmer nach Verfügbarkeit.",
@@ -392,16 +413,21 @@ function photo(
 function photos(spec: HouseSpec): ClinicPhoto[] {
   const dir = `/clinics/${spec.id}`;
   const unique = PHOTO_UNIQUE[spec.id];
-  if (!unique?.length) {
+  if (unique?.length) {
+    return unique.map((item) =>
+      photo(item.slot, `${dir}/${item.file}`, item.label, `${item.label} der ${spec.name} in ${spec.city}`),
+    );
+  }
+  if (COVER_PHOTO_IDS.has(spec.id)) {
     return [
-      photo("aussen", null, "Außenansicht", `Außenansicht der ${spec.name} in ${spec.city}`),
-      photo("zimmer_bad", null, "Zimmer / Bad", `Patientenzimmer der ${spec.name}`),
-      photo("umgebung", null, "Umgebung / Lage", `Außenanlagen der ${spec.name} in ${spec.city}`),
+      photo("aussen", `${dir}/aussen.jpg`, "Außenansicht", `Außenansicht der ${spec.name} in ${spec.city}`),
     ];
   }
-  return unique.map((item) =>
-    photo(item.slot, `${dir}/${item.file}`, item.label, `${item.label} der ${spec.name} in ${spec.city}`),
-  );
+  return [
+    photo("aussen", null, "Außenansicht", `Außenansicht der ${spec.name} in ${spec.city}`),
+    photo("zimmer_bad", null, "Zimmer / Bad", `Patientenzimmer der ${spec.name}`),
+    photo("umgebung", null, "Umgebung / Lage", `Außenanlagen der ${spec.name} in ${spec.city}`),
+  ];
 }
 
 function zulassungFrom(traegerArt: string, ahb: boolean, heilverfahren: boolean): Zulassung {

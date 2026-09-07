@@ -5,6 +5,7 @@ import { emptyAnswers, normalizeAnswers, rankClinics } from "@/lib/domain/matchi
 import { type KlaromatAnswers, type MatchSnapshot } from "@/lib/domain/types";
 import type { DocumentVersionMeta } from "@/lib/domain/document";
 import { loadClinics } from "./clinics";
+import { seedAntragswegForFolder } from "./antragsweg";
 import {
   asIso,
   parseJson,
@@ -325,10 +326,7 @@ export const startNewPerson = createServerFn({ method: "POST" })
       ) values ($1,$2,$3,$4,$5,$6,$7)`,
       [folderId, context.userId, seed.passt, seed.passtNicht, seed.offeneFragen, seed.rueckmeldungen, now],
     );
-    await sql.query(
-      `insert into lohlotse_threads (id, folder_id, user_id, created_at) values ($1,$2,$3,$4)`,
-      [crypto.randomUUID(), folderId, context.userId, now],
-    );
+    await seedAntragswegForFolder(sql, folderId, context.userId, now);
     await sql.query(
       `insert into runs (id, folder_id, user_id, run_number, answers, matches, created_at, label, status)
        values ($1,$2,$3,1,$4::jsonb,'[]'::jsonb,$5,'','entwurf')`,
