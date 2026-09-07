@@ -10,14 +10,12 @@ import { emptyAnswers, normalizeAnswers, rankClinics } from "@/lib/domain/matchi
 import { type KlaromatAnswers, type MatchSnapshot } from "@/lib/domain/types";
 import { loadClinics } from "./clinics";
 import { insertUsageEvent } from "./usage";
-import { seedAntragswegForFolder } from "./antragsweg";
 import {
   asIso,
   parseJson,
   matchesInDocumentOrder,
   insertResultDocument,
   requireName,
-  prefillSteckbrief,
 } from "./cases-shared";
 
 export const createDraftDocument = createServerFn({ method: "POST" })
@@ -178,20 +176,12 @@ export const claimGuestRun = createServerFn({ method: "POST" })
     }
     const folderId = crypto.randomUUID();
     const runId = crypto.randomUUID();
-    const prefill = prefillSteckbrief(answers);
 
     await sql.query(
       `insert into case_folders (id, user_id, client_name, file_ref, internal_note, created_at, updated_at)
        values ($1,$2,$3,$4,$5,$6,$6)`,
       [folderId, context.userId, clientName, data.fileRef?.trim() ?? "", data.internalNote?.trim() ?? "", now],
     );
-    await sql.query(
-      `insert into personal_steckbriefe (
-        folder_id, user_id, passt, passt_nicht, offene_fragen, rueckmeldungen, updated_at
-      ) values ($1,$2,$3,$4,$5,$6,$7)`,
-      [folderId, context.userId, prefill.passt, prefill.passtNicht, prefill.offeneFragen, prefill.rueckmeldungen, now],
-    );
-    await seedAntragswegForFolder(sql, folderId, context.userId, now);
     await sql.query(
       `insert into runs (id, folder_id, user_id, run_number, answers, matches, created_at, label, status)
        values ($1,$2,$3,1,$4::jsonb,$5::jsonb,$6,'Gastlauf','entwurf')`,
@@ -228,39 +218,6 @@ export const renameFolder = createServerFn({ method: "POST" })
     `;
     if (!check[0]) throw new Error("Fallordner nicht gefunden.");
     return { ok: true as const, clientName };
-  });
-
-export const updateSteckbrief = createServerFn({ method: "POST" })
-  .middleware([authMiddleware])
-  .validator(
-    (input: {
-      folderId: string;
-      passt: string;
-      passtNicht: string;
-      offeneFragen: string;
-      rueckmeldungen: string;
-    }) => input,
-  )
-  .handler(async ({ context, data }) => {
-    const sql = await getSql();
-    await sql.query(
-      `update personal_steckbriefe
-       set passt = $1, passt_nicht = $2, offene_fragen = $3, rueckmeldungen = $4, updated_at = now()
-       where folder_id = $5 and user_id = $6`,
-      [
-        data.passt,
-        data.passtNicht,
-        data.offeneFragen,
-        data.rueckmeldungen,
-        data.folderId,
-        context.userId,
-      ],
-    );
-    await sql.query(
-      `update case_folders set updated_at = now() where id = $1 and user_id = $2`,
-      [data.folderId, context.userId],
-    );
-    return { ok: true as const };
   });
 
 export const updateResultDocument = createServerFn({ method: "POST" })

@@ -2,13 +2,11 @@ import { getSql } from "@/lib/db";
 import {
   buildResultDocument,
   ensureDocumentBody,
-  isDocumentBody,
   type DocumentBody,
   type DocumentVersionMeta,
 } from "@/lib/domain/document";
 import { hydrateMatch, isBlocked, normalizeAnswers } from "@/lib/domain/matching";
 import {
-  indicationLabel,
   type KlaromatAnswers,
   type MatchSnapshot,
   type RunStatus,
@@ -28,15 +26,6 @@ export type FolderSummary = {
   lastStatus: RunStatus | null;
   lastRunAt: string | null;
   topClinicName: string | null;
-};
-
-export type PersonalSteckbrief = {
-  folderId: string;
-  passt: string;
-  passtNicht: string;
-  offeneFragen: string;
-  rueckmeldungen: string;
-  updatedAt: string;
 };
 
 export type ResultDocument = {
@@ -71,7 +60,6 @@ export type FolderDetail = {
   internalNote: string;
   createdAt: string;
   updatedAt: string;
-  steckbrief: PersonalSteckbrief;
   runs: RunRecord[];
 };
 
@@ -202,39 +190,6 @@ export function requireName(raw: string): string {
     throw new Error("Bitte einen Namen vergeben. Der Name gehört zum Ordner.");
   }
   return clientName;
-}
-
-
-export function seedFromName(name: string): Omit<PersonalSteckbrief, "folderId" | "updatedAt"> {
-  return {
-    passt: `Samen für ${name}. Wird mit Durchlauf 1 ergänzt.`,
-    passtNicht: "",
-    offeneFragen: "",
-    rueckmeldungen: "",
-  };
-}
-
-export function prefillSteckbrief(raw: KlaromatAnswers): Omit<
-  PersonalSteckbrief,
-  "folderId" | "updatedAt"
-> {
-  const answers = normalizeAnswers(raw);
-  const extras = answers.extras.length
-    ? answers.extras.join(", ")
-    : "keine weiteren Filter";
-  const region = answers.states.length
-    ? answers.states.join(", ")
-    : "bundesweit offen";
-  return {
-    passt: `Arbeitsnotiz aus Lauf 1: ${indicationLabel(answers.indication)}. Region ${region}. Setting ${answers.genderSetting}, ${answers.setting}. Weitere Kriterien: ${extras}.`,
-    passtNicht:
-      "Noch offen — bitte nach Rücksprache mit der Klient:in ergänzen, was nicht in Frage kommt.",
-    offeneFragen: answers.notes.trim()
-      ? answers.notes.trim()
-      : "Kostenträger, Mobilität, Mitnahme von Medikation, Besuchsmöglichkeiten.",
-    rueckmeldungen:
-      "Noch keine Rückmeldung der Klient:in dokumentiert. Lohklar stellt keine Diagnose und trifft keine Therapieentscheidung.",
-  };
 }
 
 export async function clinicNameMap() {

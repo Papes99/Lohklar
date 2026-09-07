@@ -12,7 +12,8 @@ import {
   filterClinics,
   type CatalogFilter,
 } from "@/lib/domain/catalog-filter";
-import { STATES, type Indication } from "@/lib/domain/types";
+import { LAGE_FILTERS, STATES, type Indication } from "@/lib/domain/types";
+import { lageLabel } from "@/lib/domain/lage";
 import { listClinics } from "@/lib/server/clinics";
 import { cn } from "@/lib/utils";
 
@@ -74,7 +75,7 @@ function ClinicsPage() {
                 type="search"
                 value={filter.q}
                 onChange={(event) => patch({ q: event.target.value })}
-                placeholder="Name, Ort, Träger…"
+                placeholder="Name, Ort, PLZ, Setting, Schwerpunkt…"
                 autoComplete="off"
                 className="mt-1 bg-bg"
               />
@@ -162,6 +163,14 @@ function ClinicsPage() {
               Barrierearm
             </FilterChip>
             <FilterChip
+              active={filter.setting === "stationaer"}
+              onClick={() =>
+                patch({ setting: filter.setting === "stationaer" ? "egal" : "stationaer" })
+              }
+            >
+              Stationär
+            </FilterChip>
+            <FilterChip
               active={filter.setting === "tagesklinik"}
               onClick={() =>
                 patch({ setting: filter.setting === "tagesklinik" ? "egal" : "tagesklinik" })
@@ -170,11 +179,49 @@ function ClinicsPage() {
               Tagesklinik
             </FilterChip>
             <FilterChip
+              active={filter.setting === "adaption"}
+              onClick={() =>
+                patch({ setting: filter.setting === "adaption" ? "egal" : "adaption" })
+              }
+            >
+              Adaption
+            </FilterChip>
+            <FilterChip
+              active={filter.gluecksspiel}
+              onClick={() => patch({ gluecksspiel: !filter.gluecksspiel })}
+            >
+              Glücksspiel
+            </FilterChip>
+            <FilterChip
+              active={filter.trauma}
+              onClick={() => patch({ trauma: !filter.trauma })}
+            >
+              Traumafokus
+            </FilterChip>
+            <FilterChip
+              active={filter.junge}
+              onClick={() => patch({ junge: !filter.junge })}
+            >
+              Junge Erwachsene
+            </FilterChip>
+            <FilterChip
               active={filter.vollstaendig}
               onClick={() => patch({ vollstaendig: !filter.vollstaendig })}
             >
               Nur vollständige
             </FilterChip>
+          </FilterGroup>
+
+          <FilterGroup legend="Umgebung">
+            {LAGE_FILTERS.filter((item) => item.id !== "egal").map((item) => (
+              <FilterChip
+                key={item.id}
+                active={filter.lage === item.id}
+                onClick={() => patch({ lage: filter.lage === item.id ? "egal" : item.id })}
+              >
+                {item.label}
+              </FilterChip>
+            ))}
           </FilterGroup>
 
           {active ? (
@@ -204,14 +251,19 @@ function ClinicsPage() {
         ) : (
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {clinics.map((clinic) => (
-              <ClinicCard key={clinic.id} clinic={clinic} />
+              <ClinicCard
+                key={clinic.id}
+                clinic={clinic}
+                query={filter.q.trim() || (filter.lage !== "egal" ? lageLabel(filter.lage) : undefined)}
+              />
             ))}
           </div>
         )}
 
         <p className="mt-10 text-sm text-ink-muted">
-          {clinics.length} von {pulse.houses} Häusern · {pulse.complete} vollständig · Wartezeit-Schätzung
-          ohne Garantie
+          {filter.q.trim()
+            ? `${clinics.length} Häuser · nach Passung zur Suche`
+            : `${clinics.length} von ${pulse.houses} Häusern · ${pulse.complete} vollständig · Wartezeit-Schätzung ohne Garantie`}
         </p>
         <Badge className="mt-2">Klinikatalog</Badge>
       </main>

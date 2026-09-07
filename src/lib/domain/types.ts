@@ -116,12 +116,13 @@ export const PERSON_GENDER_FILTERS: { id: "egal" | "frau" | "mann"; label: strin
 ];
 
 export const SETTING_FILTERS: {
-  id: "egal" | "stationaer" | "tagesklinik";
+  id: "egal" | "stationaer" | "tagesklinik" | "adaption";
   label: string;
 }[] = [
   { id: "egal", label: "Keine Vorgabe" },
   { id: "stationaer", label: "Stationär" },
   { id: "tagesklinik", label: "Tagesklinik" },
+  { id: "adaption", label: "Adaption" },
 ];
 
 export const DURATION_FILTERS: {
@@ -169,6 +170,19 @@ export const DISTANCE_FILTERS: { id: "egal" | "nah" | "distanz-ok"; label: strin
   { id: "distanz-ok", label: "Distanz zum Milieu ist gewollt" },
 ];
 
+export const LAGE_FILTERS: {
+  id: "egal" | "wasser" | "insel" | "laendlich" | "stadt" | "kurort" | "gebirge";
+  label: string;
+}[] = [
+  { id: "egal", label: "Keine Vorgabe" },
+  { id: "wasser", label: "Am Wasser" },
+  { id: "insel", label: "Insel" },
+  { id: "laendlich", label: "Ländlich / Wald" },
+  { id: "stadt", label: "Städtisch" },
+  { id: "kurort", label: "Kurort / Heilklima" },
+  { id: "gebirge", label: "Mittelgebirge / Alpenrand" },
+];
+
 export type RunStatus = "entwurf" | "fertig" | "exportiert";
 
 export const RUN_STATUS_LABEL: Record<RunStatus, string> = {
@@ -183,7 +197,7 @@ export type KlaromatAnswers = {
   bedarfe: string[];
   states: string[];
   genderSetting: "egal" | GenderSetting;
-  setting: "egal" | "stationaer" | "tagesklinik";
+  setting: "egal" | "stationaer" | "tagesklinik" | "adaption";
   ahb: boolean;
   durationPref: "egal" | "kurz" | "mittel" | "lang";
   extras: string[];
@@ -201,6 +215,7 @@ export type KlaromatAnswers = {
   familyWorkNeed: "egal" | "ja";
   traumaNeed: "egal" | "ja";
   distancePref: "egal" | "nah" | "distanz-ok";
+  lagePref: "egal" | "wasser" | "insel" | "laendlich" | "stadt" | "kurort" | "gebirge";
 };
 
 export type CriterionStatus = "match" | "partial" | "miss";

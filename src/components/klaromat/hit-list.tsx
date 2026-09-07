@@ -80,7 +80,8 @@ export function MatchHitList({
         <p className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">Klar-o-Mat</p>
         <h1 className="mt-1 font-display text-3xl tracking-tight">Rangliste für {clientName}</h1>
         <p className="mt-2 text-ink-muted">
-          Die ersten zehn Häuser ohne Ausschluss. Orientierung, keine Aufnahmezusage.
+          Die ersten zehn ohne Ausschluss, Rangfolge über alle {clinics.length} Kataloghäuser.
+          Orientierung, keine Aufnahmezusage.
         </p>
       </header>
 

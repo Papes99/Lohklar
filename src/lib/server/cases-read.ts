@@ -5,20 +5,15 @@ import { emptyAnswers, normalizeAnswers, rankClinics } from "@/lib/domain/matchi
 import { type KlaromatAnswers, type MatchSnapshot } from "@/lib/domain/types";
 import type { DocumentVersionMeta } from "@/lib/domain/document";
 import { loadClinics } from "./clinics";
-import { seedAntragswegForFolder } from "./antragsweg";
 import {
   asIso,
   parseJson,
   parseStatus,
   mapDocument,
   requireName,
-  seedFromName,
-  prefillSteckbrief,
   clinicNameMap,
   topClinicName,
   type FolderSummary,
-  type PersonalSteckbrief,
-  type ResultDocument,
   type RunRecord,
   type FolderDetail,
   type RunDetail,
@@ -135,21 +130,6 @@ export const getFolder = createServerFn({ method: "GET" })
     const folder = folders[0];
     if (!folder) return null;
 
-    const stecks = await sql<{
-      folder_id: string;
-      passt: string;
-      passt_nicht: string;
-      offene_fragen: string;
-      rueckmeldungen: string;
-      updated_at: string;
-    }>`
-      select folder_id, passt, passt_nicht, offene_fragen, rueckmeldungen, updated_at
-      from personal_steckbriefe
-      where folder_id = ${id} and user_id = ${context.userId}
-    `;
-    const steck = stecks[0];
-    if (!steck) return null;
-
     const runRows = await sql<{
       id: string;
       folder_id: string;
@@ -237,14 +217,6 @@ export const getFolder = createServerFn({ method: "GET" })
       internalNote: folder.internal_note ?? "",
       createdAt: asIso(folder.created_at),
       updatedAt: asIso(folder.updated_at),
-      steckbrief: {
-        folderId: steck.folder_id,
-        passt: steck.passt,
-        passtNicht: steck.passt_nicht,
-        offeneFragen: steck.offene_fragen,
-        rueckmeldungen: steck.rueckmeldungen,
-        updatedAt: asIso(steck.updated_at),
-      },
       runs,
     };
   });
@@ -312,7 +284,6 @@ export const startNewPerson = createServerFn({ method: "POST" })
     const now = new Date().toISOString();
     const folderId = crypto.randomUUID();
     const runId = crypto.randomUUID();
-    const seed = seedFromName(clientName);
     const answers = { ...emptyAnswers(), clientName };
 
     await sql.query(
@@ -320,13 +291,6 @@ export const startNewPerson = createServerFn({ method: "POST" })
        values ($1,$2,$3,$4,$5,$6,$6)`,
       [folderId, context.userId, clientName, data.fileRef?.trim() ?? "", data.internalNote?.trim() ?? "", now],
     );
-    await sql.query(
-      `insert into personal_steckbriefe (
-        folder_id, user_id, passt, passt_nicht, offene_fragen, rueckmeldungen, updated_at
-      ) values ($1,$2,$3,$4,$5,$6,$7)`,
-      [folderId, context.userId, seed.passt, seed.passtNicht, seed.offeneFragen, seed.rueckmeldungen, now],
-    );
-    await seedAntragswegForFolder(sql, folderId, context.userId, now);
     await sql.query(
       `insert into runs (id, folder_id, user_id, run_number, answers, matches, created_at, label, status)
        values ($1,$2,$3,1,$4::jsonb,'[]'::jsonb,$5,'','entwurf')`,
@@ -438,24 +402,6 @@ export const completeRun = createServerFn({ method: "POST" })
        where id = $3 and user_id = $4`,
       [JSON.stringify(answers), JSON.stringify(matches), data.runId, context.userId],
     );
-
-    if (row.run_number === 1) {
-      const prefill = prefillSteckbrief(answers);
-      await sql.query(
-        `update personal_steckbriefe
-         set passt = $1, passt_nicht = $2, offene_fragen = $3, rueckmeldungen = $4, updated_at = $5
-         where folder_id = $6 and user_id = $7`,
-        [
-          prefill.passt,
-          prefill.passtNicht,
-          prefill.offeneFragen,
-          prefill.rueckmeldungen,
-          now,
-          row.folder_id,
-          context.userId,
-        ],
-      );
-    }
 
     await sql.query(
       `update case_folders set updated_at = $1 where id = $2 and user_id = $3`,

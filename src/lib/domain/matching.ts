@@ -1,4 +1,5 @@
 import { computeWaitEstimate } from "./wait-time.ts";
+import { clinicHasLage, clinicLageLine, lageLabel } from "./lage.ts";
 import {
   bedarfLabel,
   extraLabel,
@@ -69,6 +70,7 @@ export function emptyAnswers(): KlaromatAnswers {
     familyWorkNeed: "egal",
     traumaNeed: "egal",
     distancePref: "egal",
+    lagePref: "egal",
   };
 }
 
@@ -117,6 +119,7 @@ export function normalizeAnswers(
     familyWorkNeed,
     traumaNeed,
     distancePref: input.distancePref ?? "egal",
+    lagePref: input.lagePref ?? "egal",
     extras: [],
   };
   answers.extras = deriveExtras(answers);
@@ -168,7 +171,12 @@ export function listedNeeds(raw: KlaromatAnswers): ListedNeed[] {
   if (answers.setting !== "egal") {
     items.push({
       criterion: "Behandlungssetting",
-      value: answers.setting === "tagesklinik" ? "Tagesklinik" : "Stationär",
+      value:
+        answers.setting === "tagesklinik"
+          ? "Tagesklinik"
+          : answers.setting === "adaption"
+            ? "Adaption"
+            : "Stationär",
     });
   }
   if (answers.access === "ahb") items.push({ criterion: "Zugang", value: "AHB" });
@@ -203,6 +211,9 @@ export function listedNeeds(raw: KlaromatAnswers): ListedNeed[] {
   }
   if (answers.distancePref === "nah") items.push({ criterion: "Lage", value: "wohnortnah" });
   if (answers.distancePref === "distanz-ok") items.push({ criterion: "Lage", value: "Distanz zum Milieu gewollt" });
+  if (answers.lagePref !== "egal") {
+    items.push({ criterion: "Umgebung", value: lageLabel(answers.lagePref) });
+  }
   if (answers.waitPref === "schnell") items.push({ criterion: "Wartezeit", value: "eher zeitnah" });
   if (answers.waitPref === "passgenau") items.push({ criterion: "Wartezeit", value: "Passung vor Tempo" });
   return items;
@@ -328,6 +339,7 @@ function scoreClinic(clinic: Clinic, answers: KlaromatAnswers, wait: MatchSnapsh
   rows.push(houseGenderRow(clinic, answers.genderSetting));
   rows.push(regionRow(clinic, answers));
   rows.push(distanceRow(clinic, answers));
+  rows.push(lagePrefRow(clinic, answers.lagePref));
   rows.push(waitRow(wait, answers.waitPref));
 
   return rows.filter((row) => row.weight > 0);
@@ -492,6 +504,22 @@ function distanceRow(clinic: Clinic, answers: KlaromatAnswers): Scored {
   return row("Lage", "partial", "Kein Inselsetting. Distanz zum Milieu hängt von der Entfernung zum Wohnort ab.", 10, false);
 }
 
+function lagePrefRow(clinic: Clinic, wanted: KlaromatAnswers["lagePref"]): Scored {
+  if (wanted === "egal") return skip("Umgebung");
+  const label = lageLabel(wanted);
+  if (clinicHasLage(clinic, wanted)) {
+    const line = clinicLageLine(clinic);
+    return row("Umgebung", "match", `${label} — ${line}`, 10, false);
+  }
+  return row(
+    "Umgebung",
+    "partial",
+    `${label} ist im Steckbrief nicht ausgewiesen. Vor Antrag den Ort prüfen — kein Ausschluss.`,
+    10,
+    false,
+  );
+}
+
 function isRemoteClinic(clinic: Clinic): boolean {
   const blob = `${clinic.city} ${clinic.steckbrief.besonderheiten.bullets.join(" ")}`;
   return /insel|borkum/i.test(blob);
@@ -516,8 +544,29 @@ function houseGenderRow(clinic: Clinic, wanted: KlaromatAnswers["genderSetting"]
 
 function settingRow(clinic: Clinic, wanted: KlaromatAnswers["setting"]): Scored {
   if (wanted === "egal") return skip("Behandlungssetting");
+  if (wanted === "adaption") {
+    if (clinic.setting === "adaption") {
+      return row("Behandlungssetting", "match", "Adaption nach der Entwöhnung ist das Setting dieses Hauses.", 16, false);
+    }
+    return row(
+      "Behandlungssetting",
+      "miss",
+      `Klinik bietet ${settingLabel(clinic.setting)} — keine Adaptionseinrichtung.`,
+      16,
+      true,
+    );
+  }
   if (clinic.setting === "beides" || clinic.setting === wanted) {
     return row("Behandlungssetting", "match", `${settingLabel(clinic.setting)} deckt die Anfrage ab.`, 16, false);
+  }
+  if (wanted === "stationaer" && clinic.setting === "adaption") {
+    return row(
+      "Behandlungssetting",
+      "partial",
+      "Adaption nach der Entwöhnung — nicht die Entwöhnungsphase selbst. Nachsorgeweg prüfen.",
+      16,
+      false,
+    );
   }
   if (wanted === "tagesklinik") {
     return row(

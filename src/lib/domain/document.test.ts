@@ -46,6 +46,15 @@ describe("formulateNeeds", () => {
     assert.equal(text.includes("?"), false);
     assert.match(text, /keine engeren Arbeitsschwerpunkte/);
   });
+
+  it("schreibt Umgebung nur wenn gesetzt", () => {
+    const none = formulateNeeds(sampleAnswers());
+    assert.equal(/Umgebung am Wasser|Insel-Lage|Ländliche bzw/.test(none), false);
+    const water = formulateNeeds(sampleAnswers({ lagePref: "wasser" }));
+    assert.match(water, /Umgebung am Wasser/);
+    const island = formulateNeeds(sampleAnswers({ lagePref: "insel" }));
+    assert.match(island, /Insel-Lage/);
+  });
 });
 
 describe("buildResultDocument", () => {

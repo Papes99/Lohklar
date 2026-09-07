@@ -2,22 +2,15 @@ import { useEffect, useState } from "react";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
-import { AntragswegPanel } from "@/components/antragsweg/antragsweg-panel";
 import { Ergebnisdokument } from "@/components/dokument/ergebnisdokument";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Modal } from "@/components/ui/modal";
-import { Textarea } from "@/components/ui/textarea";
 import { WartezeitSchaetzung } from "@/components/wait/wartezeit-schaetzung";
 import { formatDeDate, formatRunStatus } from "@/lib/format";
 import { indicationLabel } from "@/lib/domain/types";
-import {
-  getFolder,
-  renameFolder,
-  updateSteckbrief,
-  type FolderDetail,
-} from "@/lib/server/cases";
+import { getFolder, renameFolder, type FolderDetail } from "@/lib/server/cases";
 import { listClinics } from "@/lib/server/clinics";
 import { cn } from "@/lib/utils";
 
@@ -25,18 +18,12 @@ type FolderSearch = { tab?: Tab };
 
 export const Route = createFileRoute("/app/fallordner/$folderId")({
   validateSearch: (search: Record<string, unknown>): FolderSearch => ({
-    tab:
-      search.tab === "laeufe" ||
-      search.tab === "dokumente" ||
-      search.tab === "steckbrief" ||
-      search.tab === "antragsweg"
-        ? search.tab
-        : undefined,
+    tab: search.tab === "laeufe" || search.tab === "dokumente" ? search.tab : undefined,
   }),
   component: FolderPage,
 });
 
-type Tab = "laeufe" | "dokumente" | "steckbrief" | "antragsweg";
+type Tab = "laeufe" | "dokumente";
 
 function FolderPage() {
   const { folderId } = Route.useParams();
@@ -73,8 +60,6 @@ function FolderPage() {
   const tabs: { id: Tab; label: string }[] = [
     { id: "laeufe", label: "Durchläufe" },
     { id: "dokumente", label: "Dokumente" },
-    { id: "antragsweg", label: "Antragsweg" },
-    { id: "steckbrief", label: "Persönlicher Steckbrief" },
   ];
 
   return (
@@ -228,14 +213,6 @@ function FolderPage() {
         )
       ) : null}
 
-      {tab === "antragsweg" ? (
-        <AntragswegPanel folderId={folder.id} clientName={folder.clientName} />
-      ) : null}
-
-      {tab === "steckbrief" ? (
-        <PersonalEditor folder={folder} />
-      ) : null}
-
       {renameOpen ? (
         <RenameModal
           folder={folder}
@@ -291,100 +268,5 @@ function RenameModal({
         </Button>
       </div>
     </Modal>
-  );
-}
-
-function PersonalEditor({
-  folder,
-}: {
-  folder: FolderDetail;
-}) {
-  const [passt, setPasst] = useState(folder.steckbrief.passt);
-  const [passtNicht, setPasstNicht] = useState(folder.steckbrief.passtNicht);
-  const [offeneFragen, setOffeneFragen] = useState(folder.steckbrief.offeneFragen);
-  const [rueckmeldungen, setRueckmeldungen] = useState(folder.steckbrief.rueckmeldungen);
-  const [criterion, setCriterion] = useState("");
-  const [saving, setSaving] = useState(false);
-
-  async function save(nextPasst = passt) {
-    setSaving(true);
-    try {
-      await updateSteckbrief({
-        data: {
-          folderId: folder.id,
-          passt: nextPasst,
-          passtNicht,
-          offeneFragen,
-          rueckmeldungen,
-        },
-      });
-      toast.success("Persönlicher Steckbrief gespeichert.");
-    } catch (error) {
-      toast.error(error instanceof Error ? error.message : "Speichern fehlgeschlagen.");
-    } finally {
-      setSaving(false);
-    }
-  }
-
-  function addCriterion() {
-    const text = criterion.trim();
-    if (!text) return;
-    const next = passt.trim() ? `${passt.trim()}\n${text}` : text;
-    setPasst(next);
-    setCriterion("");
-    void save(next);
-  }
-
-  return (
-    <section className="space-y-4">
-      <h2 className="font-display text-2xl tracking-tight">Persönlich für {folder.clientName}</h2>
-      <p className="text-sm text-ink-muted">
-        Samen sichtbar, nicht leer. Arbeitsnotizen nur in diesem Fallordner.
-      </p>
-      <Field id="passt" label="Was passt" value={passt} onChange={setPasst} />
-      <div className="flex flex-wrap gap-2">
-        <Input
-          value={criterion}
-          placeholder="Wahlkriterium"
-          aria-label="Wahlkriterium"
-          onChange={(event) => setCriterion(event.target.value)}
-        />
-        <Button type="button" variant="secondary" onClick={addCriterion}>
-          Wahlkriterium hinzufügen
-        </Button>
-      </div>
-      <Field id="passt-nicht" label="Was nicht passt" value={passtNicht} onChange={setPasstNicht} />
-      <Field id="fragen" label="Offene Fragen" value={offeneFragen} onChange={setOffeneFragen} />
-      <Field
-        id="rueck"
-        label="Rückmeldungen der Klient:in"
-        value={rueckmeldungen}
-        onChange={setRueckmeldungen}
-      />
-      <Button type="button" disabled={saving} onClick={() => void save()}>
-        {saving ? "Speichert…" : "Speichern"}
-      </Button>
-    </section>
-  );
-}
-
-function Field({
-  id,
-  label,
-  value,
-  onChange,
-}: {
-  id: string;
-  label: string;
-  value: string;
-  onChange: (value: string) => void;
-}) {
-  return (
-    <div className="space-y-2">
-      <label htmlFor={id} className="text-sm font-medium">
-        {label}
-      </label>
-      <Textarea id={id} value={value} onChange={(event) => onChange(event.target.value)} />
-    </div>
   );
 }

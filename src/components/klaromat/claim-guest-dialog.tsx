@@ -73,7 +73,7 @@ export function ClaimGuestDialog() {
   return (
     <Modal titleId="claim-title" title="Diesen Durchlauf einem Namen zuordnen" className="max-w-xl">
       <p className="mt-2 text-sm text-ink-muted">
-        Erst jetzt entstehen Fallordner, Run und persönlicher Steckbrief-Samen.
+        Erst jetzt entstehen Fallordner und Durchlauf.
       </p>
       <fieldset className="mt-5 space-y-3">
         <legend className="sr-only">Zuordnung</legend>

@@ -1,3 +1,4 @@
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { berlinMidnight, berlinParts, type DashView } from "@/lib/domain/usage";
 import type { DashCalendarDay } from "@/lib/server/dashboard";
 import { cn } from "@/lib/utils";
@@ -45,33 +46,28 @@ export function DashCalendar({
 
   return (
     <div className="flex h-full min-h-0 flex-col">
-      <div className="flex items-center justify-between gap-2">
-        <p className="text-[11px] font-medium uppercase tracking-[0.12em] text-ink-muted">
-          Kalender
+      <div className="flex items-center justify-between gap-1">
+        <button
+          type="button"
+          className="grid size-11 place-items-center rounded-[var(--radius-md)] text-ink-muted hover:bg-bg-subtle hover:text-ink"
+          aria-label="Vorheriger Monat"
+          onClick={() => onShiftMonth(-1)}
+        >
+          <ChevronLeft className="size-4" aria-hidden="true" />
+        </button>
+        <p className="min-w-0 text-center font-display text-xl tracking-tight">
+          {MONTHS[month - 1]} {year}
         </p>
-        <div className="flex items-center gap-1">
-          <button
-            type="button"
-            className="grid size-8 place-items-center rounded-[var(--radius-sm)] text-ink-muted hover:bg-bg-subtle hover:text-ink"
-            aria-label="Vorheriger Monat"
-            onClick={() => onShiftMonth(-1)}
-          >
-            ‹
-          </button>
-          <p className="min-w-28 text-center text-sm tabular-nums">
-            {MONTHS[month - 1]} {year}
-          </p>
-          <button
-            type="button"
-            className="grid size-8 place-items-center rounded-[var(--radius-sm)] text-ink-muted hover:bg-bg-subtle hover:text-ink"
-            aria-label="Nächster Monat"
-            onClick={() => onShiftMonth(1)}
-          >
-            ›
-          </button>
-        </div>
+        <button
+          type="button"
+          className="grid size-11 place-items-center rounded-[var(--radius-md)] text-ink-muted hover:bg-bg-subtle hover:text-ink"
+          aria-label="Nächster Monat"
+          onClick={() => onShiftMonth(1)}
+        >
+          <ChevronRight className="size-4" aria-hidden="true" />
+        </button>
       </div>
-      <div className="mt-2 grid grid-cols-7 text-center text-[11px] text-ink-muted">
+      <div className="mt-3 grid grid-cols-7 text-center text-xs text-ink-muted">
         {WEEKDAYS.map((day) => (
           <span key={day} className="py-1">
             {day}
@@ -80,7 +76,7 @@ export function DashCalendar({
       </div>
       <div className="grid grid-cols-7">
         {cells.map((cell, index) => {
-          if (!cell) return <span key={`e-${index}`} className="h-10" />;
+          if (!cell) return <span key={`e-${index}`} className="min-h-11" />;
           const isSelected = cell.ymd === selected && view === "day";
           const label = [
             `${cell.day}. ${MONTHS[month - 1]} ${year}`,
@@ -97,18 +93,11 @@ export function DashCalendar({
               aria-current={isSelected ? "date" : undefined}
               onClick={() => onSelectDay(cell.ymd)}
               className={cn(
-                "flex h-10 flex-col items-center justify-center rounded-[var(--radius-sm)] text-sm tabular-nums",
-                isSelected ? "text-primary" : "text-ink hover:bg-bg-subtle",
+                "flex min-h-11 flex-col items-center justify-center rounded-[var(--radius-sm)] text-sm tabular-nums",
+                isSelected ? "bg-primary-soft text-primary" : "text-ink hover:bg-bg-subtle",
               )}
             >
-              <span
-                className={cn(
-                  "leading-none",
-                  isSelected && "border-b border-primary pb-px",
-                )}
-              >
-                {cell.day}
-              </span>
+              <span className="leading-none">{cell.day}</span>
               <span className="mt-1 flex h-2 items-center gap-0.5" aria-hidden="true">
                 {cell.usage ? <span className="size-1 rounded-full bg-primary" /> : null}
                 {cell.update ? <span className="size-1 bg-primary" /> : null}
@@ -117,7 +106,7 @@ export function DashCalendar({
           );
         })}
       </div>
-      <p className="mt-auto flex gap-4 pt-2 text-[11px] text-ink-muted">
+      <p className="mt-3 flex gap-4 text-xs text-ink-muted">
         <span className="inline-flex items-center gap-1.5">
           <span className="size-1 rounded-full bg-primary" aria-hidden="true" />
           Nutzung

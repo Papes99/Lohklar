@@ -15,18 +15,22 @@ export function PublicHeader() {
 
   return (
     <header className="no-print border-b border-line bg-surface">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3">
-        <Wordmark size="sm" />
-        <nav aria-label="Hauptnavigation" className="hidden items-center gap-5 text-sm sm:flex">
+      <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
+        <Wordmark size="sm" stacked={false} />
+        <nav
+          aria-label="Hauptnavigation"
+          className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm sm:flex"
+        >
           {LINKS.map((item) => (
             <Link key={item.to} to={item.to} className="text-ink hover:underline">
               {item.label}
             </Link>
           ))}
         </nav>
-        <AuthSlot />
+        <div className="ml-auto sm:ml-0">
+          <AuthSlot />
+        </div>
       </div>
-      {/* Mobile marketing strip only for guests — signed-in users get Fallarbeit bottom tabs. */}
       {!signedIn ? (
         <nav
           aria-label="Hauptnavigation mobil"

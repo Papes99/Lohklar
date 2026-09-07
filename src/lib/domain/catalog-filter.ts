@@ -1,8 +1,12 @@
-import { scoreName } from "./folder-search.ts";
+import { normalizeName, scoreName } from "./folder-search.ts";
+import { clinicHasLage, clinicLageTags, lageSearchLabels, type LageKind } from "./lage.ts";
 import {
   PHOTO_SLOTS,
   STATES,
   STECKBRIEF_BLOCKS,
+  bedarfLabel,
+  indicationLabel,
+  settingKindLabel,
   type Clinic,
   type GenderSetting,
   type Indication,
@@ -18,12 +22,16 @@ export type CatalogFilter = {
   drogenMedikamente: boolean;
   state: string;
   gender: "egal" | GenderSetting;
-  setting: "egal" | "stationaer" | "tagesklinik";
+  setting: "egal" | "stationaer" | "tagesklinik" | "adaption";
   ahb: boolean;
   substitution: boolean;
   einzelzimmer: boolean;
   kinder: boolean;
   barriere: boolean;
+  gluecksspiel: boolean;
+  trauma: boolean;
+  junge: boolean;
+  lage: "egal" | LageKind;
   vollstaendig: boolean;
 };
 
@@ -41,6 +49,10 @@ export function emptyCatalogFilter(): CatalogFilter {
     einzelzimmer: false,
     kinder: false,
     barriere: false,
+    gluecksspiel: false,
+    trauma: false,
+    junge: false,
+    lage: "egal",
     vollstaendig: false,
   };
 }
@@ -112,15 +124,205 @@ export function clinicGaps(clinic: Clinic): string[] {
   return gaps;
 }
 
+type SearchBucket = "identity" | "land" | "profil" | "text";
+
+type SearchField = {
+  text: string;
+  bucket: SearchBucket;
+};
+
+const BUCKET_BONUS: Record<SearchBucket, number> = {
+  identity: 28,
+  land: 22,
+  profil: 12,
+  text: 4,
+};
+
+const STATE_ALIASES: Record<string, string[]> = {
+  NW: ["NRW"],
+  RP: ["RLP"],
+  BW: ["BaWü", "Bawue"],
+  NI: ["NDS"],
+};
+
+function clinicSearchIndex(clinic: Clinic): SearchField[] {
+  const rows: SearchField[] = [];
+  const add = (bucket: SearchBucket, ...values: string[]) => {
+    for (const value of values) {
+      const text = value.trim();
+      if (!text || MISSING.test(text)) continue;
+      rows.push({ text, bucket });
+    }
+  };
+
+  add("identity", clinic.name, clinic.shortName, clinic.city, clinic.address);
+  add("land", clinic.stateName, clinic.stateCode);
+  add("land", ...(STATE_ALIASES[clinic.stateCode] ?? []));
+  add("profil", clinic.traeger);
+
+  add("profil", settingKindLabel(clinic.setting));
+  if (clinic.setting === "adaption") add("profil", "Adaption", "Adaptionseinrichtung");
+  if (clinic.setting === "tagesklinik" || clinic.setting === "beides") {
+    add("profil", "Tagesklinik", "ganztägig ambulant", "TK");
+  }
+  if (clinic.setting === "stationaer" || clinic.setting === "beides") {
+    add("profil", "Stationär", "vollstationär");
+  }
+
+  for (const area of clinic.indicationAreas) {
+    add("profil", indicationLabel(area));
+    if (area === "sucht") add("profil", "Suchtreha", "Entwöhnung", "Sucht");
+    if (area === "dual") add("profil", "Dualdiagnose", "Doppeldiagnose");
+    if (area === "psychosomatik") add("profil", "Psychosomatik");
+  }
+
+  if (chipVorhanden(clinic, "indikation", "Alkohol")) add("profil", "Alkohol");
+  if (chipVorhanden(clinic, "indikation", "Drogen")) add("profil", "Drogen", "Illegale Drogen");
+  if (chipVorhanden(clinic, "indikation", "Medikamente")) add("profil", "Medikamente");
+  for (const substance of clinic.substances) {
+    if (substance === "alkohol" || substance === "drogen" || substance === "medikamente") continue;
+    if (substance === "gluecksspiel" && !clinic.gluecksspiel) continue;
+    if (substance === "trauma" && !clinic.trauma) continue;
+    add("profil", bedarfLabel(substance));
+  }
+
+  if (clinic.gluecksspiel) add("profil", "Glücksspiel", "Medien", "Spielsucht");
+  if (clinic.trauma) add("profil", "Trauma", "Traumafokus", "PTBS", "Traumafolgen");
+  if (clinic.substitution) add("profil", "Substitution", "Methadon");
+  if (clinic.kinderbetreuung) add("profil", "Kinder", "Eltern-Kind", "Mutter-Kind");
+  if (clinic.jungeErwachsene) add("profil", "Junge Erwachsene", "U27");
+  if (clinic.ahb) add("profil", "AHB", "Anschlussheilbehandlung");
+  if (clinic.heilverfahren) add("profil", "Heilverfahren");
+  if (clinic.genderSetting === "frauen") add("profil", "Frauen", "frauenspezifisch", "Frauenklinik");
+  if (clinic.genderSetting === "maenner") add("profil", "Männer", "männerspezifisch", "Männerhaus");
+  if (clinic.barrierefrei) add("profil", "Barrierefrei", "barrierearm");
+  if (clinic.angehoerigenarbeit) add("profil", "Angehörigenarbeit", "Angehörige");
+  if (chipVorhanden(clinic, "wohnenAlltag", "Einbettzimmer")) {
+    add("profil", "Einzelzimmer", "Einbettzimmer", "Einbett");
+  }
+  for (const tag of clinicLageTags(clinic)) add("profil", ...lageSearchLabels(tag));
+
+  const plz = clinic.address.match(/\b(\d{5})\b/);
+  if (plz) add("identity", plz[1]);
+  for (const form of clinic.therapyForms) add("profil", form);
+  if (clinic.zulassung.drv === "vorhanden") add("profil", "DRV", "Rentenversicherung");
+  if (clinic.zulassung.gkv === "vorhanden") add("profil", "GKV", "Krankenkasse");
+
+  const fokus = clinic.steckbrief.indikation.bullets[0];
+  if (fokus && !/nicht der Aufnahmeauftrag/i.test(fokus)) add("text", fokus);
+  for (const bullet of clinic.steckbrief.besonderheiten.bullets) {
+    if (bullet && !MISSING.test(bullet)) add("text", bullet);
+  }
+
+  return rows;
+}
+
+function scoreClinicField(token: string, field: SearchField): number {
+  const q = normalizeName(token);
+  const n = normalizeName(field.text);
+  if (!q || !n) return 0;
+  if (q.length <= 2) {
+    return n === q || n.split(" ").includes(q) ? 100 : 0;
+  }
+  const parts = n.split(" ").filter(Boolean);
+  if (field.bucket === "text") {
+    if (q.length < 5) return 0;
+    if (n === q) return 100;
+    if (parts.includes(q)) return 80;
+    if (parts.some((part) => part.startsWith(q))) return 50;
+    return 0;
+  }
+  if (field.bucket === "land" || field.bucket === "profil") {
+    if (n === q) return 100;
+    if (q.length >= 4 && n.includes(q)) return 80;
+    if (q.length >= 4 && parts.some((part) => part.startsWith(q) || (part.length >= 4 && q.startsWith(part)))) {
+      return 70;
+    }
+    return 0;
+  }
+  return scoreName(token, field.text);
+}
+
+function bestTokenHit(
+  token: string,
+  index: SearchField[],
+): { raw: number; bonus: number; field: SearchField } | null {
+  const rank: Record<SearchBucket, number> = { identity: 4, land: 3, profil: 2, text: 1 };
+  let bestRaw = 0;
+  let bestBonus = 0;
+  let bestField: SearchField | null = null;
+  for (const field of index) {
+    const raw = scoreClinicField(token, field);
+    if (raw <= 0) continue;
+    const bonus = BUCKET_BONUS[field.bucket];
+    const better =
+      !bestField ||
+      raw > bestRaw ||
+      (raw === bestRaw && bonus > bestBonus) ||
+      (raw === bestRaw && bonus === bestBonus && rank[field.bucket] > rank[bestField.bucket]);
+    if (better) {
+      bestRaw = raw;
+      bestBonus = bonus;
+      bestField = field;
+    }
+  }
+  return bestField ? { raw: bestRaw, bonus: bestBonus, field: bestField } : null;
+}
+
+function hitLabel(field: SearchField): string | null {
+  if (field.bucket === "text") return null;
+  const text = field.text.trim();
+  if (text.length < 2 || text.length > 36) return null;
+  return text;
+}
+
+/** Katalogfakten, die die Suchwörter treffen — für die Karten-Passung. */
+export function clinicSearchHits(query: string, clinic: Clinic): string[] {
+  const q = normalizeName(query);
+  if (!q) return [];
+  const index = clinicSearchIndex(clinic);
+  const tokens = q.split(" ").filter((token) => token.length >= 2);
+  const seen = new Set<string>();
+  const hits: string[] = [];
+  for (const token of tokens) {
+    const hit = bestTokenHit(token, index);
+    if (!hit) continue;
+    const label = hitLabel(hit.field);
+    if (!label) continue;
+    const key = normalizeName(label);
+    if (seen.has(key)) continue;
+    seen.add(key);
+    hits.push(label);
+    if (hits.length >= 5) break;
+  }
+  return hits;
+}
+
 function clinicSearchScore(query: string, clinic: Clinic): number {
-  return Math.max(
-    scoreName(query, clinic.name),
-    scoreName(query, clinic.shortName),
-    scoreName(query, clinic.city),
-    scoreName(query, clinic.traeger),
-    scoreName(query, clinic.stateName),
-    scoreName(query, clinic.address),
-  );
+  const q = normalizeName(query);
+  if (!q) return 1;
+  const index = clinicSearchIndex(clinic);
+  const tokens = q.split(" ").filter((token) => token.length >= 2);
+  if (!tokens.length) return 0;
+
+  let phrase = 0;
+  for (const field of index) {
+    const raw = scoreClinicField(query, field);
+    if (raw > 0) phrase = Math.max(phrase, raw + BUCKET_BONUS[field.bucket]);
+  }
+
+  if (tokens.length <= 1) return phrase;
+
+  const found: number[] = [];
+  for (const token of tokens) {
+    const hit = bestTokenHit(token, index);
+    if (hit) found.push(hit.raw + hit.bonus);
+  }
+  const minHits = tokens.length <= 2 ? tokens.length : tokens.length - 1;
+  if (found.length < minHits) return 0;
+  const coverage = found.reduce((sum, value) => sum + value, 0);
+  const ratio = found.length / tokens.length;
+  return Math.round(coverage * ratio + phrase / 2);
 }
 
 export function filterClinics<T extends Clinic>(clinics: T[], filter: CatalogFilter): T[] {
@@ -148,11 +350,18 @@ export function filterClinics<T extends Clinic>(clinics: T[], filter: CatalogFil
       if (filter.setting === "tagesklinik" && clinic.setting !== "tagesklinik" && clinic.setting !== "beides") {
         return false;
       }
+      if (filter.setting === "adaption" && clinic.setting !== "adaption") {
+        return false;
+      }
       if (filter.ahb && !clinic.ahb) return false;
       if (filter.substitution && !clinic.substitution) return false;
       if (filter.einzelzimmer && !chipVorhanden(clinic, "wohnenAlltag", "Einbettzimmer")) return false;
       if (filter.kinder && !clinic.kinderbetreuung) return false;
       if (filter.barriere && !clinic.barrierefrei) return false;
+      if (filter.gluecksspiel && !clinic.gluecksspiel) return false;
+      if (filter.trauma && !clinic.trauma) return false;
+      if (filter.junge && !clinic.jungeErwachsene) return false;
+      if (filter.lage !== "egal" && !clinicHasLage(clinic, filter.lage)) return false;
       if (filter.vollstaendig && !isClinicComplete(clinic)) return false;
       return true;
     })

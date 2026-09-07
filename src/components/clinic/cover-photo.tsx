@@ -41,10 +41,12 @@ export function SubstanceTags({
   tags,
   accent,
   className,
+  matched = false,
 }: {
   tags: string[];
   accent?: string | null;
   className?: string;
+  matched?: boolean;
 }) {
   if (!accent && tags.length === 0) return null;
   return (
@@ -58,7 +60,12 @@ export function SubstanceTags({
       ) : null}
       {tags.map((tag) => (
         <li key={tag}>
-          <span className="inline-flex items-center rounded-full bg-bg-subtle px-2.5 py-1 text-xs font-medium text-ink-muted">
+          <span
+            className={cn(
+              "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium",
+              matched ? "bg-primary-soft text-primary" : "bg-bg-subtle text-ink-muted",
+            )}
+          >
             {tag}
           </span>
         </li>

@@ -1,6 +1,6 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
-import { filterFolders, normalizeName, scoreName } from "./folder-search.ts";
+import { filterFolders, normalizeName, scoreAcrossFields, scoreName } from "./folder-search.ts";
 
 const folders = [
   { id: "1", clientName: "Müller, Anna" },
@@ -36,5 +36,23 @@ describe("folder-search", () => {
 
   it("does not invent a match", () => {
     assert.equal(filterFolders(folders, "xyzzy").length, 0);
+  });
+
+  it("requires every token to hit somewhere across fields", () => {
+    assert.ok(scoreAcrossFields("Adaption Dortmund", ["Adaption", "Dortmund", "Johannesbad"]) >= 64);
+    assert.equal(scoreAcrossFields("Adaption Dortmund", ["Adaption", "Kerpen"]), 0);
+    assert.ok(scoreAcrossFields("82347", ["Höhenried 40, 82347 Bernried"]) > 0);
+  });
+
+  it("does not treat two-letter codes as a prefix of a longer query", () => {
+    assert.equal(scoreName("Bernrid", "BE"), 0);
+    assert.equal(scoreAcrossFields("Bernrid", ["BE", "Berlin", "Hartmut-Spittler-Fachklinik"]), 0);
+    assert.ok(scoreName("Bernrid", "Bernried") > 0);
+  });
+
+  it("does not fuzzy-match short codes onto unrelated tokens", () => {
+    assert.equal(scoreName("NRW", "Dr. Becker Burg-Klinik"), 0);
+    assert.equal(scoreName("NRW", "NRW"), 100);
+    assert.equal(scoreName("TK", "Thüringen"), 0);
   });
 });

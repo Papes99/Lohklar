@@ -135,12 +135,20 @@ export function formulateNeeds(raw: KlaromatAnswers): string {
     parts.push("Distanz zum gewohnten Milieu ist gewollt.");
   }
 
+  if (answers.lagePref === "wasser") parts.push("Umgebung am Wasser, soweit der Steckbrief das ausweist.");
+  else if (answers.lagePref === "insel") parts.push("Insel-Lage, soweit der Steckbrief das ausweist.");
+  else if (answers.lagePref === "laendlich") parts.push("Ländliche bzw. Waldlage, soweit der Steckbrief das ausweist.");
+  else if (answers.lagePref === "stadt") parts.push("Städtische Lage, soweit der Steckbrief das ausweist.");
+  else if (answers.lagePref === "kurort") parts.push("Kurort oder Heilklima, soweit der Steckbrief das ausweist.");
+  else if (answers.lagePref === "gebirge") parts.push("Mittelgebirge oder Alpenrand, soweit der Steckbrief das ausweist.");
+
   const settingBits: string[] = [];
   if (answers.genderSetting === "frauen") settingBits.push("frauenspezifisch");
   if (answers.genderSetting === "maenner") settingBits.push("männerspezifisch");
   if (answers.genderSetting === "gemischt") settingBits.push("gemischt");
   if (answers.setting === "stationaer") settingBits.push("stationär");
   if (answers.setting === "tagesklinik") settingBits.push("ganztägig ambulant");
+  if (answers.setting === "adaption") settingBits.push("Adaption");
   if (settingBits.length > 0) {
     parts.push(`Gewünschtes Setting: ${settingBits.join(", ")}.`);
   }

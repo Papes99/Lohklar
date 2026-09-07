@@ -33,8 +33,20 @@ function levenshtein(a: string, b: string): number {
 
 function tokenHits(queryToken: string, nameToken: string): boolean {
   if (!queryToken || !nameToken) return false;
-  if (nameToken.startsWith(queryToken) || queryToken.startsWith(nameToken)) return true;
-  return levenshtein(queryToken, nameToken) <= 2;
+  if (nameToken.startsWith(queryToken)) return true;
+  if (nameToken.length >= 3 && queryToken.startsWith(nameToken)) return true;
+  return fuzzyDistance(queryToken, nameToken) !== null;
+}
+
+function fuzzyDistance(a: string, b: string): number | null {
+  const shortest = Math.min(a.length, b.length);
+  if (shortest < 4) return null;
+  const dist = levenshtein(a, b);
+  const max = shortest <= 4 ? 1 : 2;
+  if (dist <= max) return dist;
+  const longest = Math.max(a.length, b.length);
+  if (shortest >= 5 && dist / longest <= 0.34) return dist;
+  return null;
 }
 
 export function scoreName(query: string, name: string): number {
@@ -51,18 +63,41 @@ export function scoreName(query: string, name: string): number {
     const allHit = queryTokens.every((qt) => nameTokens.some((nt) => tokenHits(qt, nt)));
     if (allHit) return 52;
   }
-  if (nameTokens.some((token) => token.startsWith(q) || q.startsWith(token))) return 55;
+  if (nameTokens.some((token) => token.startsWith(q) || (token.length >= 3 && q.startsWith(token)))) return 55;
   for (const token of nameTokens) {
-    const tokenDistance = levenshtein(q, token);
-    if (tokenDistance <= 2) return Math.max(12, 48 - tokenDistance * 8);
+    const tokenDistance = fuzzyDistance(q, token);
+    if (tokenDistance !== null) return Math.max(12, 48 - tokenDistance * 8);
   }
   const compact = n.replace(/\s+/g, "");
-  const compactDistance = levenshtein(q, compact);
-  if (compactDistance <= 2) return Math.max(12, 40 - compactDistance * 8);
-  const distance = levenshtein(q, n);
-  const longest = Math.max(q.length, n.length);
-  if (distance <= 2 || distance / longest <= 0.34) return Math.max(10, 50 - distance * 8);
+  const compactDistance = fuzzyDistance(q, compact);
+  if (compactDistance !== null) return Math.max(12, 40 - compactDistance * 8);
+  const distance = fuzzyDistance(q, n);
+  if (distance !== null) return Math.max(10, 50 - distance * 8);
   return 0;
+}
+
+/** Tippfehler-tolerant über mehrere Felder. Alle Query-Tokens müssen irgendwo treffen. */
+export function scoreAcrossFields(query: string, fields: string[]): number {
+  const q = normalizeName(query);
+  if (!q) return 1;
+  let best = 0;
+  for (const field of fields) {
+    best = Math.max(best, scoreName(query, field));
+  }
+  const tokens = q.split(" ").filter(Boolean);
+  if (tokens.length > 1) {
+    const norms = fields.map((field) => normalizeName(field)).filter(Boolean);
+    const allHit = tokens.every((token) =>
+      norms.some(
+        (norm) =>
+          norm.includes(token) ||
+          norm.split(" ").some((part) => tokenHits(token, part)),
+      ),
+    );
+    if (!allHit) return 0;
+    best = Math.max(best, 64);
+  }
+  return best;
 }
 
 export function filterFolders<T extends { clientName: string }>(

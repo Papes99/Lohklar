@@ -137,6 +137,100 @@ describe("rankClinics", () => {
     assert.ok(hoehenried.reasons.some((reason) => reason.criterion === "Essverhalten" && reason.status === "partial"));
     assert.ok((roseneck.rank ?? 99) < (hoehenried.rank ?? 0));
   });
+
+  it("blockt Adaptionshäuser nicht, wenn Stationär gesetzt ist — stuft sie als Teilpassung", () => {
+    const matches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      setting: "stationaer",
+    });
+    const adaption = matches.find((item) => item.clinicId === "ck-johannesbad-adaption-dortmund");
+    const tagesklinik = CLINIC_SEED.find(
+      (clinic) => clinic.setting === "tagesklinik" && clinic.indicationAreas.includes("sucht"),
+    );
+    assert.ok(adaption);
+    assert.equal(isBlocked(adaption), false);
+    assert.ok(
+      adaption.reasons.some(
+        (reason) => reason.criterion === "Behandlungssetting" && reason.status === "partial",
+      ),
+    );
+    if (tagesklinik) {
+      const row = matches.find((item) => item.clinicId === tagesklinik.id);
+      assert.ok(row);
+      assert.equal(isBlocked(row), true);
+    }
+  });
+
+  it("nimmt bei Setting Adaption nur Adaptionshäuser, ohne die übrigen zu rangieren", () => {
+    const matches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      setting: "adaption",
+    });
+    const dortmund = matches.find((item) => item.clinicId === "ck-johannesbad-adaption-dortmund");
+    const ratingen = matches.find((item) => item.clinicId === "ck-ratingen");
+    assert.ok(dortmund && ratingen);
+    assert.equal(isBlocked(dortmund), false);
+    assert.equal(isBlocked(ratingen), true);
+    assert.ok(
+      dortmund.reasons.some(
+        (reason) => reason.criterion === "Behandlungssetting" && reason.status === "match",
+      ),
+    );
+    assert.ok((dortmund.rank ?? 99) < (ratingen.rank ?? 0));
+    const viable = matches.filter((item) => !isBlocked(item));
+    assert.ok(viable.length >= 1);
+    for (const row of viable) {
+      const clinic = CLINIC_SEED.find((item) => item.id === row.clinicId);
+      assert.equal(clinic?.setting, "adaption");
+    }
+  });
+
+  it("blockt Drogenhäuser ohne Alkohol-Auftrag, wenn Alkohol gesetzt ist", () => {
+    const matches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      bedarfe: ["alkohol"],
+    });
+    const prowo = matches.find((item) => item.clinicId === "ck-prowo");
+    assert.ok(prowo);
+    assert.equal(isBlocked(prowo), true);
+    assert.ok(prowo.reasons.some((reason) => reason.criterion === "Alkohol" && reason.status === "miss"));
+  });
+
+  it("hebt Häuser am Wasser, ohne die übrigen auszuschließen", () => {
+    const matches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "psychosomatik",
+      lagePref: "wasser",
+    });
+    const see = matches.find((item) => item.clinicId === "ck-seewiesen");
+    const inland = matches.find((item) => item.clinicId === "ck-sonnenberg");
+    assert.ok(see);
+    assert.ok(inland);
+    assert.equal(isBlocked(see), false);
+    assert.equal(isBlocked(inland), false);
+    assert.ok(see.reasons.some((reason) => reason.criterion === "Umgebung" && reason.status === "match"));
+    assert.ok(inland.reasons.some((reason) => reason.criterion === "Umgebung" && reason.status === "partial"));
+    assert.ok((see.rank ?? 99) < (inland.rank ?? 0));
+  });
+
+  it("hebt Inselhäuser, ohne Binnenlage auszuschließen", () => {
+    const matches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "psychosomatik",
+      lagePref: "insel",
+    });
+    const island = matches.find((item) => item.clinicId === "ck-borkum");
+    const inland = matches.find((item) => item.clinicId === "ck-sonnenberg");
+    assert.ok(island);
+    assert.ok(inland);
+    assert.equal(isBlocked(island), false);
+    assert.equal(isBlocked(inland), false);
+    assert.ok(island.reasons.some((reason) => reason.criterion === "Umgebung" && reason.status === "match"));
+    assert.ok((island.rank ?? 99) < (inland.rank ?? 0));
+  });
 });
 
 describe("normalizeAnswers und listedNeeds", () => {
@@ -171,5 +265,34 @@ describe("normalizeAnswers und listedNeeds", () => {
     assert.ok(criteria.includes("Kinder / Eltern-Kind"));
     assert.ok(criteria.includes("Region"));
     assert.equal(criteria.includes("Barrierefreiheit"), false);
+  });
+
+  it("führt Adaption als eigenes Setting", () => {
+    const needs = listedNeeds({
+      ...emptyAnswers(),
+      indication: "sucht",
+      setting: "adaption",
+    });
+    assert.ok(
+      needs.some((item) => item.criterion === "Behandlungssetting" && item.value === "Adaption"),
+    );
+  });
+
+  it("führt Umgebung Am Wasser als gesetzte Anforderung", () => {
+    const needs = listedNeeds({
+      ...emptyAnswers(),
+      indication: "sucht",
+      lagePref: "wasser",
+    });
+    assert.ok(needs.some((item) => item.criterion === "Umgebung" && item.value === "Am Wasser"));
+  });
+
+  it("führt Umgebung Insel als gesetzte Anforderung", () => {
+    const needs = listedNeeds({
+      ...emptyAnswers(),
+      indication: "sucht",
+      lagePref: "insel",
+    });
+    assert.ok(needs.some((item) => item.criterion === "Umgebung" && item.value === "Insel"));
   });
 });

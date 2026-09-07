@@ -12,6 +12,7 @@ import {
   DURATION_FILTERS,
   GENDER_FILTERS,
   INDICATIONS,
+  LAGE_FILTERS,
   PAYER_FILTERS,
   PERSON_GENDER_FILTERS,
   ROOM_FILTERS,
@@ -335,7 +336,7 @@ export function KlaromatWizard({
           <div className="space-y-6">
             <Choice
               legend="Behandlungssetting"
-              hint="Tagesklinik nur, wenn die Person vor Ort wohnen und täglich kommen kann. Sonst stationär. Adaption ist ein eigenes Setting nach der Entwöhnung und im Katalog nicht getrennt geführt."
+              hint="Tagesklinik nur, wenn die Person vor Ort wohnen und täglich kommen kann. Stationär: Wohnen im Haus. Adaption: eigene Häuser nach der Entwöhnung."
               options={SETTING_FILTERS}
               value={answers.setting}
               onChange={(setting) => setAnswers((prev) => ({ ...prev, setting }))}
@@ -440,11 +441,18 @@ export function KlaromatWizard({
               </label>
             </fieldset>
             <Choice
-              legend="Lage"
+              legend="Wohnortnähe"
               hint="Insel- oder Reizklima (etwa Borkum) trennt vom Milieu, erschwert aber Besuch und Nachsorge."
               options={DISTANCE_FILTERS}
               value={answers.distancePref}
               onChange={(distancePref) => setAnswers((prev) => ({ ...prev, distancePref }))}
+            />
+            <Choice
+              legend="Umgebung"
+              hint="Am Wasser, Insel, ländlich, städtisch, Kurort oder Mittelgebirge — nur soweit der Steckbrief die Lage ausweist. Fehlt die Angabe, rangiert das Haus nicht vorne, es fällt nicht raus."
+              options={LAGE_FILTERS}
+              value={answers.lagePref}
+              onChange={(lagePref) => setAnswers((prev) => ({ ...prev, lagePref }))}
             />
             <Choice
               legend="Wartezeit"

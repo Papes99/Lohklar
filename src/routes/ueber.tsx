@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { KerlwerkXCard } from "@/components/brand/kerlwerk-x";
 import { FoundedLine } from "@/components/brand/wordmark";
 import { PublicLayout } from "@/components/layout/public-layout";
 
@@ -19,9 +20,8 @@ function About() {
         <p>
           Ein Werkzeug für Sozialarbeiter:innen, Beratungsstellen,
           Klinik-Sozialdienste und Angehörige. Der Klar-o-Mat gleicht beschriebene
-          Bedarfe mit Klinikprofilen ab. Fallordner halten Läufe, Ergebnisdokumente
-          und den persönlichen Steckbrief getrennt je Arbeitsname. Lohklar KI beantwortet
-          allgemeine Orientierungsfragen — ohne Fallbezug.
+          Bedarfe mit Klinikprofilen ab. Fallordner halten Läufe und Ergebnisdokumente
+          getrennt je Arbeitsname.
         </p>
         <h2>Was Lohklar nicht ist</h2>
         <ul>
@@ -34,14 +34,19 @@ function About() {
         <p>
           Die offiziellen Steckbriefe in dieser Version sind strukturierte
           Orientierungsprofile aus öffentlichen Klinikangaben. Sie folgen einer festen Vorlage mit
-          Fotoleiste und sind ohne Konto lesbar. Persönliche Arbeitsnotizen entstehen nur im Fallordner und
-          erst mit Lauf 1.
+          Fotoleiste und sind ohne Konto lesbar.
         </p>
-        <h2>Kerlwerk</h2>
+        <h2>Zwei Seiten, ein starkes Ergebnis</h2>
         <p>
-          Kerlwerk ist die Entwicklerfirma. Die Wortmarke lautet Lohklar, dezent
-          darunter: founded by Kerlwerk.
+          Aus einer produktiven Zusammenarbeit heraus ist Lohklar ab sofort offiziell
+          verfügbar.
         </p>
+        <p>
+          Die technische Konzeption und Entwicklung stammt aus dem Hause Kerlwerk.
+          Durch gebündeltes Know-how und partnerschaftliche Umsetzung ist eine moderne
+          Anwendung entstanden, die ab sofort einsatzbereit ist.
+        </p>
+        <KerlwerkXCard />
       </main>
     </PublicLayout>
   );

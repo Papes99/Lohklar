@@ -58,9 +58,7 @@ function Home() {
                   </>
                 }
               >
-                <Button variant="secondary" asChild>
-                  <Link to="/app/fallordner">Alle Fälle</Link>
-                </Button>
+                {null}
               </SignInGate>
             </div>
           </div>
@@ -78,7 +76,7 @@ function Home() {
         </section>
 
         <section className="border-t border-line bg-surface">
-          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="mx-auto grid max-w-6xl gap-8 px-4 py-16 sm:grid-cols-3">
             {[
               {
                 title: "Steckbriefe",
@@ -91,10 +89,6 @@ function Home() {
               {
                 title: "Wartezeit-Schätzung",
                 text: "Eine Komponente überall. Rechenweg aufklappbar. Keine Garantie.",
-              },
-              {
-                title: "Lohklar KI",
-                text: "Fallunabhängiger Chat zur Orientierung. Ein Thread pro Konto, ohne Fallordner.",
               },
             ].map((item) => (
               <div key={item.title}>

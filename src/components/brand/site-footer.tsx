@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { KerlwerkXLink } from "./kerlwerk-x";
 import { FoundedLine } from "./wordmark";
 
 export function SiteFooter() {
@@ -13,13 +14,14 @@ export function SiteFooter() {
           </p>
         </div>
         <nav aria-label="Rechtliches" className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-          <Link to="/ueber" className="text-ink hover:underline">
+          <Link to="/ueber" className="inline-flex min-h-11 items-center text-ink hover:underline">
             Über Lohklar
           </Link>
-          <Link to="/impressum" className="text-ink hover:underline">
+          <KerlwerkXLink />
+          <Link to="/impressum" className="inline-flex min-h-11 items-center text-ink hover:underline">
             Impressum
           </Link>
-          <Link to="/datenschutz" className="text-ink hover:underline">
+          <Link to="/datenschutz" className="inline-flex min-h-11 items-center text-ink hover:underline">
             Datenschutz
           </Link>
         </nav>

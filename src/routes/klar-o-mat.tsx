@@ -68,8 +68,8 @@ function GuestKlaromatPage() {
         ) : (
           <Modal titleId="guest-start-title" title="Gast-Durchlauf">
             <p className="mt-2 text-sm text-ink-muted">
-              Sie können den Klar-o-Mat einmal durchlaufen. Speichern, Fallordner und
-              persönlicher Steckbrief erst nach Konto und Namen.
+              Sie können den Klar-o-Mat einmal durchlaufen. Speichern und Fallordner
+              erst nach Konto und Namen.
             </p>
             <div className="mt-5 flex flex-wrap gap-3">
               <Button type="button" onClick={() => setAccepted(true)}>

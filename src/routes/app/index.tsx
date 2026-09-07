@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useQuery } from "@tanstack/react-query";
-import { DashBoard, type DashSearch } from "@/components/dashboard/dash-board";
+import { DashBoard, DashBoardSkeleton, type DashSearch } from "@/components/dashboard/dash-board";
 import { isCatalogLogFilter } from "@/lib/domain/catalog-log";
 import { berlinTodayYmd, parseYmd, type DashView } from "@/lib/domain/usage";
 import { getDashboard } from "@/lib/server/dashboard";
@@ -56,7 +56,7 @@ function DashboardPage() {
     return <p className="text-sm text-ink-muted">Die Übersicht konnte nicht geladen werden.</p>;
   }
   if (query.isPending || !query.data) {
-    return <p className="text-sm text-ink-muted">Zahlen werden geladen…</p>;
+    return <DashBoardSkeleton />;
   }
 
   return (

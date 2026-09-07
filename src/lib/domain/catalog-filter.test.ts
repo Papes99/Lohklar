@@ -6,10 +6,12 @@ import {
   catalogFilterActive,
   catalogPulse,
   clinicGaps,
+  clinicSearchHits,
   emptyCatalogFilter,
   filterClinics,
   isClinicComplete,
 } from "./catalog-filter.ts";
+import { clinicHasLage } from "./lage.ts";
 import { clinicCardTags } from "./types.ts";
 
 describe("catalog completeness", () => {
@@ -70,6 +72,109 @@ describe("catalog filter", () => {
     const rows = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), vollstaendig: true });
     assert.ok(rows.length >= 1);
     assert.ok(rows.every(isClinicComplete));
+  });
+
+  it("finds Adaption Dortmund across name and city", () => {
+    const rows = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Adaption Dortmund" });
+    assert.ok(rows.length >= 1);
+    assert.equal(rows[0]?.city, "Dortmund");
+    assert.equal(rows[0]?.setting, "adaption");
+    assert.ok(rows.some((clinic) => clinic.id === "ck-johannesbad-adaption-dortmund"));
+    assert.equal(
+      rows.some((clinic) => clinic.city === "Kerpen"),
+      false,
+    );
+  });
+
+  it("finds a house by PLZ", () => {
+    const rows = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "82347" });
+    assert.equal(rows[0]?.id, "ck-seewiesen");
+  });
+
+  it("filters Adaption, Glücksspiel, Traumafokus and junge Erwachsene", () => {
+    const adaption = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), setting: "adaption" });
+    assert.ok(adaption.length >= 1);
+    assert.ok(adaption.every((clinic) => clinic.setting === "adaption"));
+    const stationaer = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), setting: "stationaer" });
+    assert.ok(stationaer.every((clinic) => clinic.setting === "stationaer" || clinic.setting === "beides"));
+    const glueck = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), gluecksspiel: true });
+    assert.ok(glueck.length >= 1);
+    assert.ok(glueck.every((clinic) => clinic.gluecksspiel));
+    const trauma = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), trauma: true });
+    assert.ok(trauma.length >= 1);
+    assert.ok(trauma.every((clinic) => clinic.trauma));
+    const junge = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), junge: true });
+    assert.ok(junge.length >= 1);
+    assert.ok(junge.every((clinic) => clinic.jungeErwachsene));
+  });
+
+  it("ranks multi-token queries by how many facts fit", () => {
+    const glueckNrw = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Glücksspiel NRW" });
+    assert.ok(glueckNrw.length >= 1);
+    assert.ok(glueckNrw.every((clinic) => clinic.gluecksspiel && clinic.stateCode === "NW"));
+
+    const traumaBayern = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Trauma Bayern" });
+    assert.ok(traumaBayern.length >= 1);
+    assert.ok(traumaBayern.every((clinic) => clinic.trauma && clinic.stateCode === "BY"));
+    assert.equal(traumaBayern.some((clinic) => clinic.stateCode === "NW"), false);
+
+    const hoehenried = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Höhenried Trauma" });
+    assert.equal(hoehenried[0]?.id, "ck-seewiesen");
+  });
+
+  it("understands Fachsprache: NRW, PTBS, TK, Einzelzimmer, Mutter-Kind", () => {
+    const nrw = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "NRW" });
+    assert.ok(nrw.length >= 1);
+    assert.ok(nrw.every((clinic) => clinic.stateCode === "NW"));
+
+    const ptbs = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "PTBS" });
+    assert.ok(ptbs.length >= 1);
+    assert.ok(ptbs.every((clinic) => clinic.trauma));
+
+    const tk = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "TK" });
+    assert.ok(tk.length >= 1);
+    assert.ok(tk.every((clinic) => clinic.setting === "tagesklinik" || clinic.setting === "beides"));
+    assert.equal(
+      tk.some((clinic) => clinic.stateCode === "TH" && clinic.setting !== "tagesklinik" && clinic.setting !== "beides"),
+      false,
+    );
+
+    const einzel = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Einzelzimmer Bayern" });
+    assert.ok(einzel.length >= 1);
+    assert.ok(einzel.every((clinic) => clinic.stateCode === "BY"));
+    assert.ok(
+      einzel.some((clinic) =>
+        clinic.steckbrief.wohnenAlltag.chips.some(
+          (chip) => chip.label === "Einbettzimmer" && chip.status === "vorhanden",
+        ),
+      ),
+    );
+
+    const mutter = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Mutter-Kind" });
+    assert.ok(mutter.length >= 1);
+    assert.ok(mutter.every((clinic) => clinic.kinderbetreuung));
+  });
+
+  it("filters Umgebung from the official lage line", () => {
+    const wasser = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), lage: "wasser" });
+    assert.ok(wasser.length >= 1);
+    assert.ok(wasser.some((clinic) => clinic.id === "ck-seewiesen"));
+    assert.ok(wasser.every((clinic) => clinicHasLage(clinic, "wasser")));
+    assert.equal(wasser.some((clinic) => clinic.id === "ck-sonnenberg"), false);
+
+    const qWasser = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Am Wasser" });
+    assert.ok(qWasser.length >= 1);
+    assert.ok(qWasser.some((clinic) => clinic.id === "ck-seewiesen"));
+
+    const rural = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), lage: "laendlich" });
+    assert.ok(rural.length >= 1);
+    assert.ok(rural.some((clinic) => clinic.id === "ck-rothaar"));
+    assert.ok(rural.every((clinic) => clinicHasLage(clinic, "laendlich")));
+    assert.equal(rural.some((clinic) => clinic.id === "ck-oldenfelde"), false);
+
+    const insel = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), lage: "insel" });
+    assert.ok(insel.some((clinic) => clinic.id === "ck-borkum"));
+    assert.ok(insel.every((clinic) => clinicHasLage(clinic, "insel")));
   });
 });
 

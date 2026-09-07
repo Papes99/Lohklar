@@ -1,6 +1,5 @@
 export type {
   FolderSummary,
-  PersonalSteckbrief,
   ResultDocument,
   RunRecord,
   FolderDetail,
@@ -22,7 +21,6 @@ export {
   markRunFertig,
   claimGuestRun,
   renameFolder,
-  updateSteckbrief,
   updateResultDocument,
   restoreDocumentVersion,
   deleteFolder,

@@ -18,7 +18,7 @@ Lohklar **orientiert**. Es diagnostiziert nicht, trifft keine Therapieentscheidu
 
 Wartezeiten sind **Schätzungen**. Genau eine Wartezeit-Komponente (Agent C). Keine zweite Formel, keine Zahl/Spanne/Tages-Hausnummer im Fließtext von Chat oder Dokument — Zahlen nur in der Komponente inkl. „Rechenweg ansehen“.
 
-Offizielle Kliniktexte werden **niemals** überschrieben. Ergänzungen nur im persönlichen Steckbrief (Fallordner); Lohklar KI bleibt fallunabhängig.
+Offizielle Kliniktexte werden **niemals** überschrieben.
 Katalog: 380 echte, öffentlich belegte Häuser in src/lib/domain/katalog-houses.ts (Agent E). Keine Musterdaten. Jedes Haus hat die 13-Block-Vorlage inkl. Zimmerart, Substanzen, Substitution und Wahlleistungen. Wartezeiten bleiben Schätzungen.
 
 DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistiken. Dashboard zählt nur Vorgänge, keine Namen.
@@ -30,16 +30,16 @@ DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistik
 | Modul | Zweck |
 |---|---|
 | Klar-o-Mat | Dialog vor jedem Lauf. Kein Fallordner ohne Durchlauf 1. |
-| Fallordner | Arbeitsname sitzt am Ordner, nicht am Konto. Entwürfe erlaubt. Gast: ein Lauf + Claim. |
+| Fallordner | Arbeitsname sitzt am Ordner, nicht am Konto. Entwürfe erlaubt. Gast: ein Lauf + Claim. Tabs: Durchläufe, Dokumente. |
 | Ergebnisdokument | Nur nach Lauf. Wartezeit von C, offizielle Fakten von E. Editor: umordnen, streichen, umschreiben, Autosave, PDF/DOCX. |
 | Wartezeit-Schätzung | Einzige Anzeige. 8-Signal-Modell, Unsicherheit, Rechenweg. Keine Garantiesprache. |
-| Lohklar KI | Fallunabhängige Orientierungshilfe. Ein Thread pro Nutzer. Kein Fallordner-Picker, keine Steckbrief-Leiste, kein Merge. |
 | Offizieller Steckbrief | Einheitliche 13-Block-Vorlage inkl. Fotos. Owner: Agent E. |
-| Persönlicher Steckbrief | Genau 4 Felder: `passt` / `passtNicht` / `offeneFragen` / `rueckmeldungen`. |
 | Dashboard | Nur angemeldet. Tag / Monat / Jahr (Europe/Berlin). URL `?view=&date=`. Nur Zahlen, plus Katalog-Log (aufgenommen / aktualisiert / entfernt). |
-| Antragsweg | Unterlagen- und Fristen-Checkliste am Fallordner. Keine Dokumentinhalte, keine Diagnosen. |
+| Profil | Konto der Fachkraft unter `/app/profil`. Name am Konto, keine Fallnamen. Abmelden. |
 
-Navigation: Dashboard, Klar-o-Mat, Fälle, Lohklar KI, Steckbriefe. Fallordner-Tabs inkl. Antragsweg.
+**Entfernt, nicht wieder einbauen:** Antragsweg, persönlicher Steckbrief, Lohklar KI / Lohlotse.
+
+Navigation: Dashboard, Klar-o-Mat, Fälle, Steckbriefe.
 
 Lauf-Status: `entwurf` | `fertig` | `exportiert`.
 
@@ -49,11 +49,10 @@ Lauf-Status: `entwurf` | `fertig` | `exportiert`.
 
 | Owner | Objekt | Dateien |
 |---|---|---|
-| **A** | Klar-o-Mat, Fallordner, Arbeitsname, Gastlauf + Claim, Antragsweg | `src/components/klaromat/*`, `src/components/antragsweg/*`, `src/routes/klar-o-mat.tsx`, `src/routes/app/klar-o-mat.tsx`, `src/routes/app/fallordner/*`, `src/lib/server/cases.ts`, `src/lib/server/cases-read.ts`, `src/lib/server/cases-write.ts`, `src/lib/server/cases-shared.ts`, `src/lib/server/antragsweg.ts`, `src/lib/domain/folder-search.ts`, `src/lib/domain/matching.ts`, `src/lib/domain/antragsweg.ts`, `src/lib/guest-run.ts`, `migrations/0002_schema.sql`, `migrations/0003_case_runs.sql`, `migrations/0007_antragsweg.sql`, `migrations/0009_antragsweg.sql` |
+| **A** | Klar-o-Mat, Fallordner, Arbeitsname, Gastlauf + Claim | `src/components/klaromat/*`, `src/routes/klar-o-mat.tsx`, `src/routes/app/klar-o-mat.tsx`, `src/routes/app/fallordner/*`, `src/lib/server/cases.ts`, `src/lib/server/cases-read.ts`, `src/lib/server/cases-write.ts`, `src/lib/server/cases-shared.ts`, `src/lib/domain/folder-search.ts`, `src/lib/domain/matching.ts`, `src/lib/guest-run.ts`, `migrations/0002_schema.sql`, `migrations/0003_case_runs.sql` |
 | **B** | Ergebnisdokument + Editor + PDF/DOCX | `src/components/dokument/*`, `src/lib/domain/document.ts`, `src/lib/domain/document-export.ts`, `migrations/0004_result_document.sql` |
 | **C** | Wartezeit-Komponente | `src/components/wait/wartezeit-schaetzung.tsx`, `src/lib/domain/wait-time.ts` |
-| **D** | Lohklar KI | `src/components/ki/*`, `src/routes/app/ki.tsx`, `src/routes/app/lohlotse.tsx` (Redirect), `src/lib/domain/ki.ts`, `src/lib/server/ki.ts`, `migrations/0010_ki_messages.sql`, `migrations/0011_drop_lohlotse.sql` |
-| **E** | Offizieller Steckbrief + Fotos, persönlicher Steckbrief | `src/components/clinic/*`, `src/routes/kliniken/*`, `src/lib/domain/clinic-seed.ts`, `src/lib/domain/steckbrief-seed.ts`, `src/lib/domain/katalog.ts`, `src/lib/domain/katalog-houses.ts`, `src/lib/domain/katalog-houses-extra.ts`, `src/lib/domain/katalog-houses-wave3.ts`, `src/lib/domain/katalog-houses-wave4.ts`, `src/lib/server/clinics.ts` |
+| **E** | Offizieller Steckbrief + Fotos | `src/components/clinic/*`, `src/routes/kliniken/*`, `src/lib/domain/clinic-seed.ts`, `src/lib/domain/steckbrief-seed.ts`, `src/lib/domain/katalog.ts`, `src/lib/domain/katalog-houses.ts`, `src/lib/domain/katalog-houses-extra.ts`, `src/lib/domain/katalog-houses-wave3.ts`, `src/lib/domain/katalog-houses-wave4.ts`, `src/lib/server/clinics.ts` |
 | **F** | Dashboard + Nutzungszahlen | `src/routes/app/index.tsx`, `src/lib/server/dashboard.ts`, `src/lib/domain/usage.ts`, `src/lib/server/usage.ts`, `src/components/usage/beacon.tsx`, `migrations/0006_usage_events.sql` |
 | **G** | Markenzeile, Masthead, Typografie | `src/components/brand/*`, `src/components/layout/public-header.tsx`, `src/styles.css`, `src/lib/og/site.json` |
 
@@ -65,11 +64,10 @@ Shared shell (nicht owner-spezifisch): `src/components/layout/app-shell.tsx`, `s
 
 1. **A** startet mit Dialog und Namen. Ohne Durchlauf 1 kein Ordner.
 2. Trefferliste speichert Match + **C**-Snapshot. **B** erzeugt das Ergebnisdokument nur aus diesem Lauf.
-3. **E** liefert offizielle Fakten und Fotos. **B** liest sie, schreibt sie nicht. **D** (Lohklar KI) verweist darauf, ohne Fallbezug.
-4. Persönliche Ergänzungen nur in die 4 Felder von **E** im Fallordner — nicht über Lohklar KI.
-5. **C** bleibt die einzige Wartezeit-Anzeige — in Trefferliste, Dokument, Steckbrief; Lohklar KI nennt keine Wartezahlen.
-6. **F** zählt Vorgänge, keine Namen.
-7. **G** bleibt unverändert, solange niemand die Marke anfasst.
+3. **E** liefert offizielle Fakten und Fotos. **B** liest sie, schreibt sie nicht.
+4. **C** bleibt die einzige Wartezeit-Anzeige — in Trefferliste, Dokument, Steckbrief.
+5. **F** zählt Vorgänge, keine Namen.
+6. **G** bleibt unverändert, solange niemand die Marke anfasst.
 
 Konflikt: die Owner-Datei gilt.
 
@@ -97,31 +95,6 @@ Niemand erfindet eine zweite Vorlage. Fehlende Angabe: „Angabe liegt nicht vor
 
 ---
 
-## Persönlicher Steckbrief
-
-Keine 6 H2-Samenüberschriften erfinden. Mapping:
-
-- „Passung, die wir prüfen“ / „Wahlkriterien“ / „Was passt“ → `passt`
-- „Was nicht passt“ → `passtNicht`
-- „Offene Fragen“ → `offeneFragen`
-- „Rückmeldungen der Klient:in“ → `rueckmeldungen`
-
-Merge: Vorschau → Übernehmen / Verwerfen → Undo. Ton der Nachbarzeilen. Duplikate überspringen. Offizieller Kliniktext unangetastet.
-
----
-
-## Lohklar KI (bindend)
-
-Route `/app/ki`. Display-Name **Lohklar KI**, Icon Sparkles. **Kein** Fallordner, kein Picker, keine Steckbrief-Leiste, kein Merge in persönliche Felder.
-
-Antworten in **Prosa** (Sie-Form). Persistenz: ein Thread pro Nutzer (`ki_messages`). LLM: xAI/`XAI_API_KEY`, Modell `grok-4.5`, temperature ~0.3–0.5. Ohne Key: lokale FAQ-Fallbacks.
-
-HARTE GRENZEN wie Produkt: keine Diagnose, keine Therapieentscheidung, keine Betten, keine Garantie/Aufnahmezusage. Keine Wartezahl im Fließtext — bei Wartezeit auf die Wartezeit-Komponente in den Steckbriefen verweisen. Keine erfundenen Klinikfakten — bei Unsicherheit Steckbriefe.
-
-`/app/lohlotse` redirected nach `/app/ki`. Alte Lohlotse-Tabellen werden per Migration gedroppt.
-
----
-
 ## Wartezeit (Agent C)
 
 - `computeWaitEstimate` / gespeicherter Snapshot ist die einzige Quelle.
@@ -136,7 +109,8 @@ HARTE GRENZEN wie Produkt: keine Diagnose, keine Therapieentscheidung, keine Bet
 Nur angemeldet. Zeiträume: Tag, Monat, Jahr — Europe/Berlin. URL `?view=month&date=YYYY-MM-DD`.
 Nur Zähler, keine Klientennamen. Offizielle Kliniktexte nicht umschreiben — nur zählen und loggen.
 Katalog-Log: aufgenommen | aktualisiert | entfernt.
-Nicht zählen: Dokument-Edit-Protokolle, Chat-Inhalte, Rohgesundheitsdaten.
+Nutzung (Konten, Aktiv, Neu, alle Vorgänge) nur Admin: Google juliankerl1999@gmail.com oder X @Kerlwerk. Andere sehen nur eigene Schritte und den Katalog.
+Nicht zählen: Dokument-Edit-Protokolle, Rohgesundheitsdaten.
 
 ---
 

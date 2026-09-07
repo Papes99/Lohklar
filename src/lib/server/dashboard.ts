@@ -1,6 +1,7 @@
 import { createServerFn } from "@tanstack/react-start";
 import { authMiddleware } from "@/lib/auth/middleware";
 import { getSql } from "@/lib/db";
+import { isAdminIdentity } from "@/lib/domain/admin";
 import { CLINIC_SEED } from "@/lib/domain/clinic-seed";
 import {
   CATALOG_LOG,
@@ -35,6 +36,7 @@ export type DashCalendarDay = {
 };
 
 export type DashboardBoard = {
+  admin: boolean;
   view: DashView;
   date: string;
   fromYmd: string;
@@ -75,11 +77,35 @@ function actionLabel(kind: string, clinicName: string | null): string {
   if (kind === "session") return "Sitzung";
   if (kind === "run") return "Klar-o-Mat";
   if (kind === "document") return "Dokument";
-  if (kind === "ki" || kind === "lohlotse") return "Lohklar KI";
   return "Aktion";
 }
 
 const NAMES = new Map(CLINIC_SEED.map((clinic) => [clinic.id, clinic.shortName]));
+
+async function resolveAdmin(
+  sql: Awaited<ReturnType<typeof getSql>>,
+  userId: string,
+): Promise<boolean> {
+  const users = await optional(
+    () =>
+      sql<{ email: string; name: string }>`
+        select email, name from "user" where id = ${userId}
+      `,
+    [],
+  );
+  const accounts = await optional(
+    () =>
+      sql<{ providerId: string; accountId: string }>`
+        select "providerId", "accountId" from "account" where "userId" = ${userId}
+      `,
+    [],
+  );
+  return isAdminIdentity({
+    email: users[0]?.email,
+    name: users[0]?.name,
+    accounts,
+  });
+}
 
 export const getDashboard = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
@@ -92,6 +118,7 @@ export const getDashboard = createServerFn({ method: "POST" })
   .handler(async ({ context, data }): Promise<DashboardBoard> => {
     const sql = await getSql();
     const userId = context.userId;
+    const admin = await resolveAdmin(sql, userId);
     const range = dashRange(data.view, data.date);
     const cal = calendarMonthRange(data.date);
     const from = range.from.toISOString();
@@ -101,20 +128,23 @@ export const getDashboard = createServerFn({ method: "POST" })
     const spanFrom = range.from <= cal.from ? range.from : cal.from;
     const spanTo = range.to >= cal.to ? range.to : cal.to;
 
-    const people = await optional(
-      () =>
-        sql<{ users_total: number; users_new: number }>`
+    const people = admin
+      ? await optional(
+          () =>
+            sql<{ users_total: number; users_new: number }>`
       select
         (select count(*)::int from "user" where "createdAt" < ${to}) as users_total,
         (select count(*)::int from "user"
           where "createdAt" >= ${from} and "createdAt" < ${to}) as users_new
     `,
-      [],
-    );
+          [],
+        )
+      : [];
 
-    const active = await optional(
-      () =>
-        sql<{ n: number }>`
+    const active = admin
+      ? await optional(
+          () =>
+            sql<{ n: number }>`
       select count(distinct uid)::int as n from (
         select user_id as uid from usage_events
           where created_at >= ${from} and created_at < ${to}
@@ -123,8 +153,9 @@ export const getDashboard = createServerFn({ method: "POST" })
           where created_at >= ${from} and created_at < ${to}
       ) s
     `,
-      [],
-    );
+          [],
+        )
+      : [];
 
     const mine = await optional(
       () =>
@@ -143,17 +174,29 @@ export const getDashboard = createServerFn({ method: "POST" })
     const spanFromIso = spanFrom.toISOString();
     const spanToIso = spanTo.toISOString();
 
-    const events = await optional(
-      () =>
-        sql<{ created_at: string | Date; user_id: string }>`
+    const events = admin
+      ? await optional(
+          () =>
+            sql<{ created_at: string | Date; user_id: string }>`
       select created_at, user_id from usage_events
         where created_at >= ${spanFromIso} and created_at < ${spanToIso}
       union all
       select created_at, user_id from runs
         where created_at >= ${spanFromIso} and created_at < ${spanToIso}
     `,
-      [],
-    );
+          [],
+        )
+      : await optional(
+          () =>
+            sql<{ created_at: string | Date; user_id: string }>`
+      select created_at, user_id from usage_events
+        where user_id = ${userId} and created_at >= ${spanFromIso} and created_at < ${spanToIso}
+      union all
+      select created_at, user_id from runs
+        where user_id = ${userId} and created_at >= ${spanFromIso} and created_at < ${spanToIso}
+    `,
+          [],
+        );
 
     const actionRows = await optional(
       () =>
@@ -166,9 +209,6 @@ export const getDashboard = createServerFn({ method: "POST" })
       union all
       select updated_at as created_at, 'document' as kind, null::text as clinic_id from result_documents
         where user_id = ${userId} and updated_at >= ${from} and updated_at < ${to}
-      union all
-      select created_at, 'ki' as kind, null::text as clinic_id from ki_messages
-        where user_id = ${userId} and created_at >= ${from} and created_at < ${to}
     `,
       [],
     );
@@ -187,6 +227,9 @@ export const getDashboard = createServerFn({ method: "POST" })
       inRange.map((event) => ({ at: event.at, mine: event.userId === userId })),
       houseLog.filter((entry) => entry.kind === "aufgenommen").map((entry) => new Date(entry.at)),
     );
+    if (!admin) {
+      for (const point of series) point.all = 0;
+    }
 
     const usageDays = new Set<string>();
     const updateDays = new Set<string>();
@@ -219,16 +262,17 @@ export const getDashboard = createServerFn({ method: "POST" })
         };
       })
       .sort((a, b) => b.sort - a.sort)
-      .slice(0, 5)
+      .slice(0, 12)
       .map(({ at, ymd, label }) => ({ at, ymd, label }));
 
     return {
+      admin,
       view: range.view,
       date: range.dateYmd,
       fromYmd: range.fromYmd,
-      usersTotal: n(people[0]?.users_total),
-      usersActive: n(active[0]?.n),
-      usersNew: n(people[0]?.users_new),
+      usersTotal: admin ? n(people[0]?.users_total) : 0,
+      usersActive: admin ? n(active[0]?.n) : 0,
+      usersNew: admin ? n(people[0]?.users_new) : 0,
       me: n(mine[0]?.n),
       houses: housesAt(range.to, CATALOG_LOG),
       updates: houseLog.length,
