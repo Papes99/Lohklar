@@ -2,6 +2,7 @@ import type { HouseSpec } from "./katalog-houses.ts";
 import { COVER_PHOTO_IDS } from "./katalog-cover-ids.ts";
 import { houseOffersKlinikStattStrafe, houseOffersMpu } from "./katalog-programme.ts";
 import { aufnahmeAngabe } from "./katalog-aufnahme.ts";
+import { steckExtra } from "./katalog-steck-extra.ts";
 import type {
   ChipStatus,
   Clinic,
@@ -276,12 +277,48 @@ export type ClinicDraft = Omit<
 };
 
 function block(bullets: string[], chips: [string, ChipStatus][]): SteckBlock {
+  const cleaned = lines(bullets);
   return {
-    bullets: bullets.length ? bullets.slice(0, 8) : ["Angabe liegt nicht vor."],
+    bullets: cleaned.length ? cleaned.slice(0, 8) : ["Angabe liegt nicht vor."],
     chips: chips.length
       ? chips.map(([label, status]) => ({ label, status }))
       : [{ label: "Angabe", status: "unbekannt" }],
   };
+}
+
+/** Leere und doppelte Stichpunkte streichen; Punkt nur ergänzen, wo er fehlt. */
+function lines(...parts: Array<string | string[] | false | null | undefined>): string[] {
+  const out: { text: string; tokens: Set<string> }[] = [];
+  for (const part of parts) {
+    if (!part) continue;
+    const items = Array.isArray(part) ? part : [part];
+    for (const raw of items) {
+      const text = raw.replace(/\s+/g, " ").trim();
+      if (!text) continue;
+      const closed = /[.!?]$/.test(text) ? text : `${text}.`;
+      const tokens = new Set(
+        closed
+          .toLowerCase()
+          .replace(/[^a-zäöüß0-9]+/g, " ")
+          .split(" ")
+          .filter((word) => word.length > 3),
+      );
+      const idx = out.findIndex((item) => tokenSubset(item.tokens, tokens));
+      if (idx >= 0) {
+        if (closed.length > out[idx].text.length) out[idx] = { text: closed, tokens };
+        continue;
+      }
+      out.push({ text: closed, tokens });
+    }
+  }
+  return out.map((item) => item.text);
+}
+
+function tokenSubset(a: Set<string>, b: Set<string>): boolean {
+  if (!a.size || !b.size) return false;
+  const [smaller, larger] = a.size <= b.size ? [a, b] : [b, a];
+  for (const token of smaller) if (!larger.has(token)) return false;
+  return true;
 }
 
 function profile(partial: Partial<OfficialSteckbrief>): OfficialSteckbrief {
@@ -348,11 +385,11 @@ function flag(value: boolean | null, ja: string, nein: string): string {
   return value ? ja : nein;
 }
 
-function roomCopy(spec: HouseSpec): { bullets: string[]; chips: [string, ChipStatus][] } {
-  const extra = [
-    "Verpflegung: gemeinsame Mahlzeiten, soweit das Haus einen Speisesaal führt.",
-    "Alltag: strukturierter Wochenplan, Ausgang nach Hausregel und Phase.",
-  ];
+function roomCopy(
+  spec: HouseSpec,
+  alltag?: string[],
+): { bullets: string[]; chips: [string, ChipStatus][] } {
+  const extra = alltag?.length ? alltag : ["Alltag und Hausregeln: Angabe liegt nicht vor."];
   if (spec.setting === "tagesklinik") {
     return {
       bullets: [
@@ -556,9 +593,15 @@ export function toDraft(spec: HouseSpec): ClinicDraft {
 }
 
 export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
+  const extra = steckExtra(spec.id);
   const psycho = spec.indicationAreas.includes("psychosomatik");
   const dual = spec.indicationAreas.includes("dual");
-  const room = roomCopy(spec);
+  const alltag = spec.alltag ?? extra?.alltag;
+  const contra = spec.kontraindikationen ?? extra?.kontraindikationen;
+  const sozial = spec.sozialdienstLeistungen ?? extra?.sozialdienstLeistungen;
+  const wahl = spec.wahlleistungenHinweis ?? extra?.wahlleistungenHinweis;
+  const mitbehandlung = spec.mitbehandlungHinweis ?? extra?.mitbehandlungHinweis;
+  const room = roomCopy(spec, alltag);
   const mpu = houseOffersMpu(spec.id);
   const klinikStattStrafe = houseOffersKlinikStattStrafe(spec.id);
   const dauer =
@@ -566,8 +609,17 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
       ? `${spec.durationWeeksMin} Wochen`
       : `${spec.durationWeeksMin}–${spec.durationWeeksMax} Wochen`;
 
-  const indikationBullets = [
+  const verfahren = spec.therapyForms.map((item) => item.trim()).filter(Boolean);
+  const verfahrenLine =
+    verfahren.length > 0
+      ? `Verfahren im Haus: ${verfahren.join(", ")}.`
+      : "Therapieverfahren: Angabe liegt nicht vor.";
+
+  const indikationBullets = lines(
     spec.fokus,
+    psycho ? "Auftrag: psychosomatische Rehabilitation." : null,
+    spec.indicationAreas.includes("sucht") ? "Auftrag: medizinische Rehabilitation Abhängigkeit." : null,
+    dual ? "Auftrag: Dualdiagnose, soweit das Haus das öffentlich führt." : null,
     flag(spec.alkohol, "Alkohol: Aufnahme vorgesehen.", "Alkohol: nicht der Aufnahmeauftrag."),
     flag(spec.drogen, "Illegale Drogen: Aufnahme vorgesehen.", "Illegale Drogen: nicht der Aufnahmeauftrag."),
     flag(
@@ -575,7 +627,8 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
       "Medikamente: Aufnahme bei Medikamentenabhängigkeit vorgesehen.",
       "Medikamente: nicht der Aufnahmeauftrag.",
     ),
-  ];
+    spec.gluecksspiel ? "Glücksspiel / nicht stoffgebundene Sucht: im Auftrag vorgesehen." : null,
+  );
 
   return profile({
     indikation: block(indikationBullets, [
@@ -589,27 +642,31 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
       ],
     ]),
     kontraindikation: block(
-      [
-        "Akute Selbst- oder Fremdgefährdung, unbehandelter Entzug und fehlende Kostenzusage schließen die Aufnahme aus.",
+      lines(
+        contra,
+        contra?.length
+          ? null
+          : "Akute Selbst- oder Fremdgefährdung, unbehandelter Entzug und fehlende Kostenzusage schließen die Aufnahme aus.",
         "Das Haus entscheidet nach den vorliegenden Unterlagen, nicht Lohklar.",
         spec.genderSetting === "frauen"
           ? "Männer werden nicht aufgenommen."
           : spec.genderSetting === "maenner"
             ? "Frauen werden nicht aufgenommen."
             : "Keine geschlechtsspezifische Aufnahmesperre.",
-      ],
+      ),
       [
         ["Offener Entzug", "nicht_angeboten"],
         ["Akute Krise", "nicht_angeboten"],
       ],
     ),
     settingDauer: block(
-      [
+      lines(
         settingLine(spec),
         `Regeldauer: ${dauer}, nach Kostenzusage.`,
         spec.ahb ? "AHB ist vorgesehen." : "AHB ist nicht der Schwerpunkt.",
         spec.heilverfahren ? "Heilverfahren nach Kostenzusage." : "Heilverfahren: Angabe liegt nicht vor.",
-      ],
+        spec.jungeErwachsene ? "Angebot auch für junge Erwachsene, soweit ausgewiesen." : null,
+      ),
       [
         ["Stationär", spec.setting === "tagesklinik" ? "nicht_angeboten" : "vorhanden"],
         ["Tagesklinik", spec.setting === "tagesklinik" || spec.setting === "beides" ? "vorhanden" : "nicht_angeboten"],
@@ -618,7 +675,7 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
     ),
     wohnenAlltag: block(room.bullets, room.chips),
     kinderFamilie: block(
-      [
+      lines(
         genderLine(spec),
         spec.angehoerigenarbeit
           ? "Angehörigenarbeit ist vorgesehen."
@@ -626,7 +683,8 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
         spec.kinderbetreuung
           ? "Kinderbetreuung bzw. Mutter-Kind-Platz nach Absprache."
           : "Keine Regel-Kinderbetreuung im Haus.",
-      ],
+        spec.jungeErwachsene ? "Junge Erwachsene: ausgewiesenes Angebot." : null,
+      ),
       [
         [
           spec.genderSetting === "frauen"
@@ -641,14 +699,15 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
       ],
     ),
     therapie: block(
-      [
-        `Verfahren im Haus: ${spec.therapyForms.join(", ")}.`,
+      lines(
+        extra?.therapieHinweise,
+        verfahrenLine,
         spec.trauma ? "Traumafokus nach interner Einschätzung, nicht automatisch." : "Kein ausgewiesener Traumaschwerpunkt.",
         spec.gluecksspiel
           ? "Glücksspiel / nicht stoffgebundene Sucht ist im Konzept vorgesehen."
           : "Glücksspielmodul: nicht ausgewiesen.",
         "Lohklar wählt keine Therapie und sagt keine Aufnahme zu.",
-      ],
+      ),
       [
         ["Einzeltherapie", spec.therapyForms.some((t) => /einzel/i.test(t)) ? "vorhanden" : "unbekannt"],
         ["Gruppentherapie", spec.therapyForms.some((t) => /gruppe/i.test(t)) ? "vorhanden" : "unbekannt"],
@@ -657,54 +716,64 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
       ],
     ),
     medizin: block(
-      [
+      lines(
         "Ärztliche Leitung und pflegerische Versorgung sind vorgehalten.",
-        spec.substitution
-          ? `Substitution: ${spec.substMittel}.`
-          : `Substitution: ${spec.substMittel}.`,
-        "Mitbehandlung somatischer Erkrankungen im üblichen Reha-Rahmen; Grenzen entscheidet das Haus.",
-      ],
+        spec.substitution ? `Substitution: ${spec.substMittel}.` : `Substitution: ${spec.substMittel}.`,
+        mitbehandlung
+          ? mitbehandlung
+          : "Mitbehandlung somatischer Erkrankungen im üblichen Reha-Rahmen; Grenzen entscheidet das Haus.",
+        spec.barrierefrei ? "Barrierefreiheit ist öffentlich ausgewiesen." : null,
+      ),
       [
         ["Substitution", spec.substitution ? "vorhanden" : "nicht_angeboten"],
         ["Ärztliche Leitung", "vorhanden"],
+        ["Barrierefrei", spec.barrierefrei ? "vorhanden" : "unbekannt"],
       ],
     ),
     sozialdienst: block(
-      [
-        "Klinik-Sozialdienst: Kostenzusage, Entlassplanung, weiterführende Hilfen.",
+      lines(
+        sozial?.length
+          ? sozial
+          : "Klinik-Sozialdienst: Kostenzusage, Entlassplanung, weiterführende Hilfen.",
         "Lohklar vermittelt nicht und schreibt nicht an den Kostenträger.",
         mpu
           ? "MPU-Vorbereitung / Fahreignung ist im Haus vorgesehen. Die MPU selbst führt Lohklar nicht durch."
-          : "",
+          : null,
         klinikStattStrafe
           ? "Anerkennung nach §§ 35/36 BtMG (Klinik statt Strafe / Therapie statt Strafe). Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar."
-          : "",
-      ].filter(Boolean),
+          : null,
+      ),
       [
         ["Sozialdienst", "vorhanden"],
         ["Nachsorgeplanung", "vorhanden"],
+        ["MPU-Vorbereitung", mpu ? "vorhanden" : "nicht_angeboten"],
       ],
     ),
     kostentraeger: block(
-      [
+      lines(
+        `Träger laut öffentlicher Angabe: ${spec.traeger}.`,
         spec.ahb || spec.heilverfahren
           ? "Zugang über DRV und/oder GKV nach Kostenzusage."
           : "Zugang nach Kostenzusage des zuständigen Trägers.",
         "Gesetzliche Zuzahlung: 10 € je Kalendertag, höchstens 28 Tage im Jahr. Befreiung möglich.",
-        "Wahlleistungen und Zuschläge: Angabe liegt nicht vor.",
+        wahl
+          ? /wahlleistung/i.test(wahl)
+            ? wahl
+            : `Wahlleistungen: ${wahl}`
+          : "Wahlleistungen und Zuschläge: Angabe liegt nicht vor.",
         "Beihilfe: Angabe liegt nicht vor.",
-      ],
+      ),
       [
         ["DRV", spec.traegerArt === "privat" ? "unbekannt" : "vorhanden"],
         ["GKV", spec.heilverfahren ? "vorhanden" : "unbekannt"],
         ["AHB", spec.ahb ? "vorhanden" : "nicht_angeboten"],
-        ["Wahlleistungen", "unbekannt"],
+        ["Wahlleistungen", wahl ? "vorhanden" : "unbekannt"],
         ["Einbett-Zuschlag", spec.room === "einbett" || spec.room === "einbett-mehrheit" ? "nicht_angeboten" : "unbekannt"],
         ["Beihilfe", "unbekannt"],
       ],
     ),
     besonderheiten: block(
-      [spec.lage, ...spec.facts],
+      lines(spec.lage, spec.facts, extra?.factsExtra),
       [
         [spec.stateName, "vorhanden"],
         ["Junge Erwachsene", spec.jungeErwachsene ? "vorhanden" : "nicht_angeboten"],

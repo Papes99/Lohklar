@@ -66,6 +66,12 @@ type Row = {
   lage: string;
   fokus: string;
   facts: string[];
+  kontraindikationen?: string[];
+  alltag?: string[];
+  sozialdienstLeistungen?: string[];
+  wahlleistungenHinweis?: string;
+  mitbehandlungHinweis?: string;
+  therapie?: string[];
 };
 
 function row(r: Row, sortOrder: number): HouseSpec {
@@ -103,7 +109,6 @@ function row(r: Row, sortOrder: number): HouseSpec {
     substitution: r.subst ?? false,
     substMittel: r.substM ?? (r.subst ? NA : sucht ? NA : "nicht angeboten"),
     substances,
-    therapyForms: [...einzelGruppe],
     durationWeeksMin: r.dmin,
     durationWeeksMax: r.dmax,
     genderSetting: r.gender ?? "gemischt",
@@ -126,7 +131,13 @@ function row(r: Row, sortOrder: number): HouseSpec {
     wahl: "unbekannt",
     lage: r.lage,
     fokus: r.fokus,
-    facts: r.facts.slice(0, 3),
+    facts: r.facts.slice(0, 8),
+    therapyForms: r.therapie?.length ? r.therapie : [...einzelGruppe],
+    kontraindikationen: r.kontraindikationen,
+    alltag: r.alltag,
+    sozialdienstLeistungen: r.sozialdienstLeistungen,
+    wahlleistungenHinweis: r.wahlleistungenHinweis,
+    mitbehandlungHinweis: r.mitbehandlungHinweis,
   };
 }
 
