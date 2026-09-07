@@ -13,7 +13,7 @@ export const FALLARBEIT_NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard },
   { to: "/app/klar-o-mat", label: "Klar-o-Mat", icon: Compass },
   { to: "/app/fallordner", label: "Fälle", icon: Folder },
-  { to: "/app/lohlotse", label: "LohklarAI", icon: Sparkles },
+  { to: "/app/ki", label: "Lohklar KI", icon: Sparkles },
   { to: "/kliniken", label: "Steckbriefe", icon: Map },
 ] as const;
 
