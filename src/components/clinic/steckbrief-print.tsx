@@ -104,12 +104,11 @@ export function SteckbriefPrintSheet({ clinic }: { clinic: ClinicWithWait }) {
             </section>
           );
         })}
+        <footer className="steckbrief-print-end">
+          Quellen: {clinic.datenstand.quellen}. Angaben ohne Gewähr. Lohklar vermittelt nicht und sagt
+          keine Aufnahme zu.
+        </footer>
       </div>
-
-      <footer className="steckbrief-print-end">
-        Quellen: {clinic.datenstand.quellen}. Angaben ohne Gewähr. Lohklar vermittelt nicht und sagt
-        keine Aufnahme zu.
-      </footer>
     </div>
   );
 }

@@ -151,6 +151,9 @@ function Login() {
               onChange={(event) => setPassword(event.target.value)}
               autoComplete={mode === "up" ? "new-password" : "current-password"}
             />
+            <p className="text-xs text-ink-muted">
+              Lohklar kann Anmelde-Passwörter nicht einsehen.
+            </p>
           </div>
           {error ? (
             <div className="space-y-3">

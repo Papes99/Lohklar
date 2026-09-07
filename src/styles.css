@@ -154,7 +154,9 @@
 }
 
 @media print {
-  .no-print {
+  .no-print,
+  .skip-link,
+  [data-sonner-toaster] {
     display: none !important;
   }
 
@@ -166,6 +168,16 @@
     height: auto !important;
     min-height: 0 !important;
     overflow: visible !important;
+  }
+
+  /* PublicLayout / AppShell: min-h-screen and tab-bar padding must not open a blank page. */
+  .min-h-screen {
+    min-height: 0 !important;
+    height: auto !important;
+  }
+
+  .pb-20 {
+    padding-bottom: 0 !important;
   }
 
   * {
@@ -478,15 +490,15 @@
 
   .steckbrief-print-blocks {
     column-count: 2;
-    column-gap: 5.5mm;
-    column-fill: balance;
+    column-gap: 5mm;
+    column-fill: auto;
   }
 
   .steckbrief-print-block {
     break-inside: avoid;
     page-break-inside: avoid;
     -webkit-column-break-inside: avoid;
-    padding: 2mm 0;
+    padding: 1.4mm 0;
     border-bottom: 0.3pt solid #e4dfd4;
   }
 
@@ -539,8 +551,12 @@
   }
 
   .steckbrief-print-end {
-    margin-top: 3mm;
-    padding-top: 2mm;
+    column-span: all;
+    break-before: avoid;
+    break-after: avoid;
+    break-inside: avoid;
+    margin-top: 2mm;
+    padding-top: 1.6mm;
     border-top: 0.4pt solid #d9d3c6;
     font-size: 7pt;
     color: #5c6661;

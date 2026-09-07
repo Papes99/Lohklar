@@ -107,7 +107,7 @@ const LOCAL_DEV_ORIGINS: string[] = [
 // grok.me host, so without this the OAuth redirect_uri and __Host- session
 // cookie land on grok.me while visitors stay on lohklar.de — Google/X look
 // broken. Preview hosts stay in the allowlist so live-preview sign-in is unchanged.
-const CUSTOM_APP_HOSTS: string[] = ["lohklar.de"];
+const CUSTOM_APP_HOSTS: string[] = ["lohklar.de", "www.lohklar.de"];
 function hostFromUrl(url: string | undefined): string | undefined {
   if (!url) return undefined;
   try {
