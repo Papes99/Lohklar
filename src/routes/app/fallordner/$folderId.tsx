@@ -3,6 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
 import { Ergebnisdokument } from "@/components/dokument/ergebnisdokument";
+import { PersoenlichKarte } from "@/components/personal/persoenlich-karte";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -95,6 +96,8 @@ function FolderPage() {
           <WartezeitSchaetzung estimate={topWait} variant="chip" />
         </div>
       ) : null}
+
+      <PersoenlichKarte folderId={folder.id} clientName={folder.clientName} />
 
       <div role="tablist" aria-label="Fallordner" className="no-print flex flex-wrap gap-1 rounded-[var(--radius-lg)] bg-bg-subtle p-1">
         {tabs.map((item) => (

@@ -98,6 +98,12 @@ export function DokumentPrintSheet({
             <h3>Hinweise zum Haus</h3>
             <p>{house.hints}</p>
           </section>
+          {house.unterlagen ? (
+            <section>
+              <h3>Aufnahmeunterlagen & Fristen</h3>
+              <p>{house.unterlagen}</p>
+            </section>
+          ) : null}
         </article>
       ))}
 

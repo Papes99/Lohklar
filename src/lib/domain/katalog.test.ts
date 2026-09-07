@@ -3,7 +3,8 @@ import assert from "node:assert/strict";
 import { CLINIC_SEED } from "./clinic-seed.ts";
 import { HOUSES } from "./katalog-houses.ts";
 import { STECKBRIEFE } from "./steckbrief-seed.ts";
-import { coverAuftragTag, coverSubstanceTags } from "./types.ts";
+import { coverAuftragTag, coverSubstanceTags, STECKBRIEF_BLOCKS } from "./types.ts";
+import { AUFNAHME_BY_ID } from "./katalog-aufnahme.ts";
 
 describe("katalog echte Häuser", () => {
   it("hat 16 Länder, einzigartige IDs und vollständige Seeds", () => {
@@ -147,6 +148,56 @@ describe("katalog echte Häuser", () => {
     assert.ok(kieferngarten.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
     assert.ok(laim.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
     assert.ok(suedergellersen.photos.some((photo) => photo.slot === "aussen" && photo.imagePath));
+  });
+
+  it("führt Block 14 Aufnahmeunterlagen ohne erfundene Listen und ohne Wartezahl", () => {
+    const block14 = STECKBRIEF_BLOCKS.find((item) => item.key === "aufnahmeunterlagen");
+    assert.ok(block14);
+    assert.equal(block14.nr, "14");
+    assert.equal(block14.countsForComplete, false);
+    for (const clinic of CLINIC_SEED) {
+      const block = clinic.steckbrief.aufnahmeunterlagen;
+      assert.deepEqual(
+        block.chips.map((chip) => chip.label),
+        ["Unterlagenliste", "Entgiftungspflicht", "Bearbeitungszeit"],
+      );
+      assert.match(block.bullets.join(" "), /Keine Aufnahmezusage/);
+      assert.doesNotMatch(block.bullets.join(" "), /\d+\s*Tage/);
+      assert.doesNotMatch(block.bullets.join(" "), /Sie müssen/);
+    }
+    const seewiesen = CLINIC_SEED.find((item) => item.id === "ck-seewiesen");
+    assert.ok(seewiesen);
+    assert.ok(seewiesen.steckbrief.aufnahmeunterlagen.chips.every((chip) => chip.status === "unbekannt"));
+    assert.match(seewiesen.steckbrief.aufnahmeunterlagen.bullets.join(" "), /Angabe liegt nicht vor/);
+
+    const richelsdorf = CLINIC_SEED.find((item) => item.id === "ck-richelsdorf");
+    assert.ok(richelsdorf);
+    const rich = richelsdorf.steckbrief.aufnahmeunterlagen;
+    assert.equal(rich.chips.find((chip) => chip.label === "Unterlagenliste")?.status, "vorhanden");
+    assert.equal(rich.chips.find((chip) => chip.label === "Entgiftungspflicht")?.status, "vorhanden");
+    assert.match(rich.bullets.join(" "), /Arztbericht/);
+    assert.match(rich.bullets.join(" "), /Sozialbericht/);
+    assert.match(rich.bullets.join(" "), /Kostenzusage/);
+
+    const eichelsdorf = CLINIC_SEED.find((item) => item.id === "ck-eichelsdorf");
+    assert.ok(eichelsdorf);
+    assert.equal(
+      eichelsdorf.steckbrief.aufnahmeunterlagen.chips.find((chip) => chip.label === "Entgiftungspflicht")
+        ?.status,
+      "vorhanden",
+    );
+
+    const nauheim = CLINIC_SEED.find((item) => item.id === "ck-nauheim");
+    assert.ok(nauheim);
+    assert.equal(
+      nauheim.steckbrief.aufnahmeunterlagen.chips.find((chip) => chip.label === "Unterlagenliste")?.status,
+      "vorhanden",
+    );
+    assert.match(nauheim.steckbrief.aufnahmeunterlagen.bullets.join(" "), /Freiwilligkeitserklärung/);
+    assert.ok(Object.keys(AUFNAHME_BY_ID).length >= 150);
+    for (const id of Object.keys(AUFNAHME_BY_ID)) {
+      assert.ok(CLINIC_SEED.some((clinic) => clinic.id === id), id);
+    }
   });
 
   it("setzt den Auftrag als Tag, nicht als Substanz", () => {

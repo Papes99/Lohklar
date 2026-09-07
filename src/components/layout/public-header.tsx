@@ -16,7 +16,7 @@ export function PublicHeader() {
   return (
     <header className="no-print border-b border-line bg-surface">
       <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-        <Wordmark size="sm" stacked={false} />
+        <Wordmark size="sm" />
         <nav
           aria-label="Hauptnavigation"
           className="hidden min-w-0 flex-1 items-center justify-center gap-5 text-sm sm:flex"

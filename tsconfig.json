@@ -32,5 +32,8 @@
   "include": [
     "src",
     "server"
+  ],
+  "exclude": [
+    "src/lib/domain/_fill"
   ]
 }

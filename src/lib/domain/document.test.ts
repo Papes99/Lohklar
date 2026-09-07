@@ -87,6 +87,8 @@ describe("buildResultDocument", () => {
       assert.ok(house.features.length >= 3 && house.features.length <= 5);
       assert.ok(house.hints.length > 20);
       assert.ok(house.specials.length > 0);
+      assert.match(house.unterlagen, /Angabe liegt nicht vor|Keine Aufnahmezusage/);
+      assert.doesNotMatch(house.unterlagen, /\d+\s*Tage/);
     }
     const seewiesen = CLINIC_SEED.find((clinic) => clinic.id === "ck-seewiesen");
     assert.ok(seewiesen);

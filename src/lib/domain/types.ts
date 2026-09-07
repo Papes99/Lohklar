@@ -307,7 +307,8 @@ export type SteckbriefKey =
   | "medizin"
   | "sozialdienst"
   | "kostentraeger"
-  | "besonderheiten";
+  | "besonderheiten"
+  | "aufnahmeunterlagen";
 
 export type OfficialSteckbrief = Record<SteckbriefKey, SteckBlock>;
 
@@ -316,66 +317,84 @@ export const STECKBRIEF_BLOCKS: {
   nr: string;
   title: string;
   lead: string;
+  countsForComplete: boolean;
 }[] = [
   {
     key: "indikation",
     nr: "01",
     title: "Indikation",
     lead: "Für wen das Haus vorrangig arbeitet.",
+    countsForComplete: true,
   },
   {
     key: "kontraindikation",
     nr: "02",
     title: "Kontraindikation",
     lead: "Was die Aufnahme ausschließt oder verzögert.",
+    countsForComplete: true,
   },
   {
     key: "settingDauer",
     nr: "03",
     title: "Setting und Dauer",
     lead: "In welcher Form und wie lange behandelt wird.",
+    countsForComplete: true,
   },
   {
     key: "wohnenAlltag",
     nr: "04",
     title: "Wohnen und Alltag",
     lead: "Einzel- oder Mehrbettzimmer, Regeln und Tagesstruktur.",
+    countsForComplete: true,
   },
   {
     key: "kinderFamilie",
     nr: "05",
     title: "Kinder, Familie, Geschlecht",
     lead: "Für wen das Haus familiär und geschlechtsspezifisch ausgelegt ist.",
+    countsForComplete: true,
   },
   {
     key: "therapie",
     nr: "06",
     title: "Therapie und Konzept",
     lead: "Welche Verfahren das Haus vorhält. Lohklar wählt keine Therapie.",
+    countsForComplete: true,
   },
   {
     key: "medizin",
     nr: "07",
     title: "Medizin, Pflege, Mitbehandlung",
     lead: "Ärztliche Besetzung, Medikation und pflegerische Grenzen.",
+    countsForComplete: true,
   },
   {
     key: "sozialdienst",
     nr: "08",
     title: "Sozialdienst und Nachsorge",
     lead: "Was der Klinik-Sozialdienst konkret tut.",
+    countsForComplete: true,
   },
   {
     key: "kostentraeger",
     nr: "09",
     title: "Kostenträger und Zugang",
     lead: "Wer zahlt, Zuzahlung, Wahlleistungen und Preise.",
+    countsForComplete: true,
   },
   {
     key: "besonderheiten",
     nr: "10",
     title: "Besonderheiten",
     lead: "Nur belegte Alleinsteller, ohne Superlative.",
+    countsForComplete: true,
+  },
+  {
+    key: "aufnahmeunterlagen",
+    nr: "14",
+    title: "Aufnahmeunterlagen & Fristen",
+    lead: "Was das Haus vor der Aufnahme konkret braucht — und wie lange die Prüfung üblicherweise dauert.",
+    countsForComplete: false,
   },
 ];
 

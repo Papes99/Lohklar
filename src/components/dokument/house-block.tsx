@@ -130,6 +130,12 @@ export function HouseBlock({
         value={house.hints}
         onChange={(hints) => onChange({ ...house, hints })}
       />
+      <Field
+        id={`house-${house.clinicId}-unterlagen`}
+        label="Aufnahmeunterlagen & Fristen"
+        value={house.unterlagen ?? ""}
+        onChange={(unterlagen) => onChange({ ...house, unterlagen })}
+      />
     </article>
   );
 }

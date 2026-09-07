@@ -1,6 +1,7 @@
 import type { HouseSpec } from "./katalog-houses.ts";
 import { COVER_PHOTO_IDS } from "./katalog-cover-ids.ts";
 import { houseOffersKlinikStattStrafe, houseOffersMpu } from "./katalog-programme.ts";
+import { aufnahmeAngabe } from "./katalog-aufnahme.ts";
 import type {
   ChipStatus,
   Clinic,
@@ -296,7 +297,50 @@ function profile(partial: Partial<OfficialSteckbrief>): OfficialSteckbrief {
     sozialdienst: partial.sozialdienst ?? empty,
     kostentraeger: partial.kostentraeger ?? empty,
     besonderheiten: partial.besonderheiten ?? empty,
+    aufnahmeunterlagen: partial.aufnahmeunterlagen ?? empty,
   };
+}
+
+function aufnahmeunterlagenFrom(spec: HouseSpec): SteckBlock {
+  const extra = aufnahmeAngabe(spec.id);
+  const unterlagenListe = spec.aufnahmeUnterlagen ?? extra?.unterlagen;
+  const entgiftungspflicht =
+    spec.entgiftungspflicht !== undefined ? spec.entgiftungspflicht : extra?.entgiftungspflicht;
+  const bearbeitung = spec.bearbeitungszeitHinweis ?? extra?.bearbeitungszeitHinweis;
+  const bullets: string[] = [];
+  if (unterlagenListe?.length) {
+    bullets.push(...unterlagenListe.slice(0, 5));
+  } else {
+    bullets.push("Unterlagenliste: Angabe liegt nicht vor.");
+  }
+  if (entgiftungspflicht === true) {
+    bullets.push("Entgiftungsnachweis: das Haus fordert ihn öffentlich vor der Aufnahme.");
+  } else if (entgiftungspflicht === false) {
+    bullets.push("Entgiftungsnachweis: öffentlich nicht als Aufnahmebedingung ausgewiesen.");
+  } else {
+    bullets.push("Entgiftungspflicht: Angabe liegt nicht vor.");
+  }
+  if (bearbeitung) {
+    bullets.push(bearbeitung);
+  } else {
+    bullets.push(
+      "Bearbeitungszeit der Unterlagenprüfung: Angabe liegt nicht vor. Die Wartezeit steht nur in der Wartezeit-Komponente.",
+    );
+  }
+  bullets.push("Keine Aufnahmezusage. Stand der öffentlichen Quelle.");
+  const unterlagen: ChipStatus = unterlagenListe?.length ? "vorhanden" : "unbekannt";
+  const entgiftung: ChipStatus =
+    entgiftungspflicht === true
+      ? "vorhanden"
+      : entgiftungspflicht === false
+        ? "nicht_angeboten"
+        : "unbekannt";
+  const bearbeitungChip: ChipStatus = bearbeitung ? "vorhanden" : "unbekannt";
+  return block(bullets, [
+    ["Unterlagenliste", unterlagen],
+    ["Entgiftungspflicht", entgiftung],
+    ["Bearbeitungszeit", bearbeitungChip],
+  ]);
 }
 
 function flag(value: boolean | null, ja: string, nein: string): string {
@@ -669,6 +713,7 @@ export function buildSteckbrief(spec: HouseSpec): OfficialSteckbrief {
         ["Klinik statt Strafe", klinikStattStrafe ? "vorhanden" : "nicht_angeboten"],
       ],
     ),
+    aufnahmeunterlagen: aufnahmeunterlagenFrom(spec),
   });
 }
 

@@ -92,6 +92,10 @@ export async function buildDocxBlob(body: DocumentBody, meta: ExportMeta): Promi
     children.push(p([house.specials]));
     children.push(p(["Hinweise zum Haus"], { muted: true, small: true, caps: true }));
     children.push(p([house.hints]));
+    if (house.unterlagen) {
+      children.push(p(["Aufnahmeunterlagen & Fristen"], { muted: true, small: true, caps: true }));
+      children.push(p([house.unterlagen]));
+    }
   }
 
   if (body.extras.length > 0) {

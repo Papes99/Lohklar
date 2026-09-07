@@ -93,7 +93,7 @@ export function roomIsKnown(clinic: Pick<Clinic, "steckbrief">): boolean {
 }
 
 export function blocksFilled(clinic: Pick<Clinic, "steckbrief">): boolean {
-  return STECKBRIEF_BLOCKS.every(({ key }) => {
+  return STECKBRIEF_BLOCKS.filter((item) => item.countsForComplete).every(({ key }) => {
     const bullets = clinic.steckbrief[key].bullets.filter(
       (bullet) => bullet.trim().length > 0 && !MISSING.test(bullet.trim()),
     );
@@ -101,7 +101,7 @@ export function blocksFilled(clinic: Pick<Clinic, "steckbrief">): boolean {
   });
 }
 
-/** Außenfoto, Telefon, Website, bekannte Zimmerart, alle 10 Blöcke mit Inhalt. */
+/** Außenfoto, Telefon, Website, bekannte Zimmerart, Blöcke 01–10 mit Inhalt. Block 14 zählt nicht. */
 export function isClinicComplete(clinic: Clinic): boolean {
   return (
     hasCoverPhoto(clinic) &&

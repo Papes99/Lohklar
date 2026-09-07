@@ -2,7 +2,7 @@
 
 Orientierung in der medizinischen Rehabilitation. founded by Kerlwerk.
 
-Für Sozialarbeiter:innen. Klar-o-Mat, Fallordner, Wartezeit-Schätzung, offizielle Klinik-Steckbriefe (13-Block-Vorlage).
+Für Sozialarbeiter:innen. Klar-o-Mat, Fallordner, Wartezeit-Schätzung, offizielle Klinik-Steckbriefe (14-Block-Vorlage).
 
 Auth und Datenbank sind an. Regeln: `AGENTS.project.md`.
 

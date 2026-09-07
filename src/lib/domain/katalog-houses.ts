@@ -60,6 +60,12 @@ export type HouseSpec = {
   lage: string;
   fokus: string;
   facts: string[];
+  /** Öffentlich belegte Unterlagen vor der Aufnahme. Nie raten. */
+  aufnahmeUnterlagen?: string[];
+  /** true = Entgiftungsnachweis öffentlich gefordert, false = öffentlich nicht gefordert. */
+  entgiftungspflicht?: boolean | null;
+  /** Öffentliche Angabe zur Unterlagenprüfung, ohne Tages-Hausnummer und ohne Aufnahmezusage. */
+  bearbeitungszeitHinweis?: string;
 };
 
 const psycho = ["depression", "angst", "erschopfung"] as const;

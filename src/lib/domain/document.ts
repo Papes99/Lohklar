@@ -31,6 +31,7 @@ export type DocumentHouse = {
   wait: WaitEstimate;
   specials: string;
   hints: string;
+  unterlagen: string;
   photo: DocumentPhoto | null;
   datenstand: string;
   auftrag?: string;
@@ -311,6 +312,14 @@ export function houseHints(clinic: Clinic): string {
   return chunks.join(" ");
 }
 
+export function houseUnterlagen(clinic: Clinic): string {
+  const bullets = clinic.steckbrief.aufnahmeunterlagen.bullets
+    .map((item) => item.trim())
+    .filter(Boolean);
+  if (bullets.length === 0) return "Angabe liegt nicht vor.";
+  return bullets.join(" ");
+}
+
 export function exteriorPhoto(clinic: Clinic): DocumentPhoto | null {
   const photo = clinic.photos.find((item) => item.slot === "aussen" && item.imagePath);
   if (!photo?.imagePath) return null;
@@ -332,6 +341,7 @@ export function buildHouse(
     wait: match.wait,
     specials: houseSpecials(clinic),
     hints: houseHints(clinic),
+    unterlagen: houseUnterlagen(clinic),
     photo: exteriorPhoto(clinic),
     datenstand: clinic.datenstand.geprueft,
     auftrag: coverAuftragTag(clinic),

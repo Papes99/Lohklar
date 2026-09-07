@@ -43,7 +43,7 @@ export function AppShell() {
         <div className="mt-auto pt-6">{chip}</div>
       </aside>
       <header className="no-print flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
-        <Wordmark size="sm" to="/" stacked={false} />
+        <Wordmark size="sm" to="/" />
         {chip}
       </header>
       <div className="lg:pl-64">
