@@ -1,17 +1,14 @@
 /**
- * Direct Google / X sign-in for the published app (Julian's Vercel).
+ * Direct Google sign-in for the published app (Julian's Vercel).
  *
- * The Grok broker (`grok_preview`) only accepts `*.grok-sandbox.com` callbacks.
- * After the move off Grok-Publish, production would start Google with that
- * preview client and then fail on the way back to lohklar.de.
- *
- * Set in Vercel (Production), never in Git:
+ * Production does not use the Grok broker. Set in Vercel, never in Git:
  *   GOOGLE_CLIENT_ID / GOOGLE_CLIENT_SECRET
  *   Redirect: https://lohklar.de/api/auth/callback/google
  *   Origin:   https://lohklar.de
- * Optional X:
- *   TWITTER_CLIENT_ID / TWITTER_CLIENT_SECRET
- *   Redirect: https://lohklar.de/api/auth/callback/twitter
+ * Dev optional: http://localhost:8080/api/auth/callback/google
+ *
+ * Live preview (`*.grok-sandbox.com`) still uses the shared broker client
+ * in `preview.ts`. Production must never fall back to `grok_preview`.
  */
 function env(key: string): string | undefined {
   const value = process.env[key]?.trim();
@@ -19,40 +16,23 @@ function env(key: string): string | undefined {
 }
 
 export type NativeSocialProviders = {
-  google?: { clientId: string; clientSecret: string };
-  twitter?: { clientId: string; clientSecret: string };
+  google: { clientId: string; clientSecret: string };
 };
 
 export function nativeSocialProviders(): NativeSocialProviders | undefined {
   const googleId = env("GOOGLE_CLIENT_ID");
   const googleSecret = env("GOOGLE_CLIENT_SECRET");
-  const twitterId = env("TWITTER_CLIENT_ID") ?? env("X_CLIENT_ID");
-  const twitterSecret = env("TWITTER_CLIENT_SECRET") ?? env("X_CLIENT_SECRET");
-
-  const providers: NativeSocialProviders = {};
-  if (googleId && googleSecret) {
-    providers.google = { clientId: googleId, clientSecret: googleSecret };
-  }
-  if (twitterId && twitterSecret) {
-    providers.twitter = { clientId: twitterId, clientSecret: twitterSecret };
-  }
-  return Object.keys(providers).length > 0 ? providers : undefined;
+  if (!googleId || !googleSecret) return undefined;
+  return { google: { clientId: googleId, clientSecret: googleSecret } };
 }
 
-/** Which social buttons actually work on this host. */
-export function socialSignInAvailable(): { google: boolean; x: boolean } {
-  if (useGrokPreviewBroker() || env("GROK_AUTH_CLIENT_ID")) {
-    return { google: true, x: true };
-  }
-  const native = nativeSocialProviders();
-  return {
-    google: Boolean(native?.google),
-    x: Boolean(native?.twitter),
-  };
+/** Google button: sandbox broker, or Production when GOOGLE_* is set. Never X. */
+export function socialSignInAvailable(): { google: boolean } {
+  if (useGrokPreviewBroker()) return { google: true };
+  return { google: Boolean(nativeSocialProviders()?.google) };
 }
 
-/** Preview broker client is only valid on grok-sandbox hosts, not lohklar.de. */
+/** Preview broker is only valid on grok-sandbox hosts, not lohklar.de. */
 export function useGrokPreviewBroker(): boolean {
-  return !env("GROK_AUTH_CLIENT_ID") && !env("DATABASE_URL");
+  return !env("DATABASE_URL");
 }
-

@@ -5,10 +5,6 @@ import { nativeSocialProviders, socialSignInAvailable, useGrokPreviewBroker } fr
 const KEYS = [
   "GOOGLE_CLIENT_ID",
   "GOOGLE_CLIENT_SECRET",
-  "TWITTER_CLIENT_ID",
-  "TWITTER_CLIENT_SECRET",
-  "X_CLIENT_ID",
-  "X_CLIENT_SECRET",
   "GROK_AUTH_CLIENT_ID",
   "DATABASE_URL",
 ] as const;
@@ -49,11 +45,20 @@ describe("useGrokPreviewBroker", () => {
   stash();
   afterEach(restore);
 
-  it("is true only in preview (no DATABASE_URL, no grok client)", () => {
+  it("is true only in preview (no DATABASE_URL)", () => {
     for (const key of KEYS) delete process.env[key];
     assert.equal(useGrokPreviewBroker(), true);
+    assert.deepEqual(socialSignInAvailable(), { google: true });
     process.env.DATABASE_URL = "postgres://example";
     assert.equal(useGrokPreviewBroker(), false);
-    assert.deepEqual(socialSignInAvailable(), { google: false, x: false });
+    assert.deepEqual(socialSignInAvailable(), { google: false });
+  });
+
+  it("shows Google in production when GOOGLE_* is set", () => {
+    for (const key of KEYS) delete process.env[key];
+    process.env.DATABASE_URL = "postgres://example";
+    process.env.GOOGLE_CLIENT_ID = "id.apps.googleusercontent.com";
+    process.env.GOOGLE_CLIENT_SECRET = "secret";
+    assert.deepEqual(socialSignInAvailable(), { google: true });
   });
 });

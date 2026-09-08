@@ -35,9 +35,7 @@ function Login() {
   const [error, setError] = useState<string | null>(null);
   const [resetHint, setResetHint] = useState(false);
   const [busy, setBusy] = useState(false);
-  const socialButtons = GROK_PROVIDERS.filter((provider) =>
-    provider.idp === "google" ? social.google : provider.idp === "twitter" ? social.x : false,
-  );
+  const socialButtons = GROK_PROVIDERS.filter(() => social.google);
 
   if (isPending) {
     return (
@@ -110,7 +108,7 @@ function Login() {
                     errorCallbackURL: "/login",
                   }).catch(() => {
                     setError(
-                      "Anmeldung mit Google oder X ist gerade nicht möglich. Bitte E-Mail und Passwort nutzen.",
+                      "Google-Anmeldung ist gerade nicht möglich. Bitte E-Mail und Passwort nutzen.",
                     );
                   })
                 }

@@ -83,36 +83,24 @@ function inLivePreview(): boolean {
 type PopupMessage = { source: "grok-auth-popup"; token: string | null; error?: string };
 
 /**
- * Start sign-in with one upstream provider (`providerId` from `GROK_PROVIDERS`),
- * federating through the Grok auth broker.
+ * Start sign-in.
  *
- * - **Live preview** (`*.grok-sandbox.com` iframe): opens a POPUP to
- *   `/auth/popup`, served by the template Vite plugin (see `vite.config.ts` +
- *   `popup.server.ts`) — 302s to the broker/upstream login (no app chrome) and,
- *   on return, posts the session bearer token back. We store it and refresh the
- *   session; no top-level navigation of the iframe to the broker.
- * - **Deployed** (and local non-iframe): a normal full-page redirect into the broker.
- *
- * Either way it clears any existing local session FIRST so switching providers
- * actually switches identity.
+ * - **Live preview** (`*.grok-sandbox.com`): popup via the Grok broker (Google).
+ * - **Deployed / local**: Better Auth social Google. Never `auth.grok.me`.
  */
 export async function signIn(
   providerId: string,
   opts: { callbackURL?: string; errorCallbackURL?: string } = {},
 ): Promise<void> {
   const callbackURL = opts.callbackURL ?? "/";
-  const errorCallbackURL = opts.errorCallbackURL ?? "/";
+  const errorCallbackURL = opts.errorCallbackURL ?? "/login";
 
-  // Open the popup SYNCHRONOUSLY on the user gesture — before any await
-  // (including signOut). Awaiting first drops user-gesture privilege in some
-  // browsers when the opener is a cross-origin live-preview iframe.
-  const popup = inLivePreview() ? openSignInPopup(providerId) : null;
+  if (providerId !== "google" && providerId !== "grok-google") {
+    throw new Error("Diese Anmeldung ist nicht verfügbar.");
+  }
 
-  // Clear any prior session so switching providers actually switches identity.
-  // Bounded because the popup is already open — a request that never settles
-  // would leave it hanging — but bounded PER ENVIRONMENT: only the server can
-  // end a deployed session, so cutting it short at the preview's 1.5s would
-  // start OAuth with the old session still live.
+  const popup = inLivePreview() ? openSignInPopup("grok-google") : null;
+
   await runPreSignInSignOut({
     livePreview: inLivePreview(),
     hasBearer: Boolean(getBearerToken()),
@@ -140,32 +128,19 @@ export async function signIn(
     return;
   }
 
-  const socialProvider =
-    providerId === "grok-google" ? "google" : providerId === "grok-x" ? "twitter" : null;
-  if (socialProvider) {
-    const social = await authClient.signIn.social({
-      provider: socialProvider,
-      callbackURL,
-      errorCallbackURL,
-    });
-    if (!social.error && social.data?.url) {
-      window.location.href = social.data.url;
-      return;
-    }
-  }
-
-  const { data, error } = await authClient.signIn.oauth2({
-    providerId,
+  const social = await authClient.signIn.social({
+    provider: "google",
     callbackURL,
     errorCallbackURL,
   });
-  if (error) {
-    throw new Error(
-      error.message ??
-        "Diese Anmeldung ist hier nicht eingerichtet. Bitte E-Mail und Passwort nutzen.",
-    );
+  if (!social.error && social.data?.url) {
+    window.location.href = social.data.url;
+    return;
   }
-  if (data?.url) window.location.href = data.url;
+  throw new Error(
+    social.error?.message ??
+      "Google-Anmeldung ist auf diesem Server nicht eingerichtet. Bitte E-Mail und Passwort nutzen.",
+  );
 }
 
 /**

@@ -4,16 +4,8 @@
  * Pre-wired for live preview + deploy — do not rewrite this file. To enable
  * local email/password, flip the flag in `./email-password` only (see auth skill).
  *
- * The app runs its own Better Auth at `/api/auth/*`, so the session cookie stays
- * on this app's own origin. Sign-in federates to the shared **Grok auth broker**
- * (`GROK_AUTH_ISSUER`) via the `genericOAuth` plugin — the broker brokers the
- * upstream sign-in methods (Google, X, …) and holds their shared secrets; this
- * app only holds its own client id/secret and names the upstream it wants via
- * each provider's `idp` hint.
- *
- * Tri-mode:
- *   - Deployed: the deployer injects a per-app `GROK_AUTH_*` + `BETTER_AUTH_URL`
- *     + `DATABASE_URL`, so real federated auth is persisted in Postgres.
+ * Production: Better Auth social Google (`GOOGLE_CLIENT_ID` / `SECRET`).
+ * Live preview: Grok broker (`preview.ts`) for Google only. X is not offered.
  *   - Sandbox live preview: no injection -> falls back to the shared **preview
  *     client** (`./preview`) and derives the preview's `https://*.grok-sandbox.com`
  *     origin from the request, so real sign-in works (no demo users). Sessions
@@ -75,18 +67,21 @@ const env = (key: string): string | undefined => {
 // provisions auth; set it to "false" to force auth off everywhere (dev user).
 const authDisabled = env("VITE_AUTH_ENABLED") === "false";
 
-// Broker federation creds: the deployer injects a per-app client when deployed;
-// otherwise fall back to the shared live-preview client, which the broker accepts
-// for any `*.grok-sandbox.com` callback (see `./preview`). Production on
-// lohklar.de must NOT use grok_preview — that client rejects the apex callback.
+// Broker: sandbox live preview only. Production uses Better Auth social Google
+// (`GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET`) and must never fall back to
+// grok_preview — that client rejects lohklar.de callbacks.
 const grokIssuer = env("GROK_AUTH_ISSUER") ?? GROK_ISSUER_DEFAULT;
-const grokClientId = env("GROK_AUTH_CLIENT_ID") ?? (useGrokPreviewBroker() ? PREVIEW_CLIENT_ID : undefined);
-const grokClientSecret =
-  env("GROK_AUTH_CLIENT_SECRET") ?? (useGrokPreviewBroker() ? PREVIEW_CLIENT_SECRET : undefined);
+const grokBrokerEnabled = !authDisabled && useGrokPreviewBroker();
+const grokClientId = grokBrokerEnabled ? PREVIEW_CLIENT_ID : undefined;
+const grokClientSecret = grokBrokerEnabled ? PREVIEW_CLIENT_SECRET : undefined;
 
-/** True when federated sign-in is active (real auth is enforced). */
+const databaseUrl = env("DATABASE_URL");
+const nativeSocial = nativeSocialProviders();
+
+/** True when real sign-in is active (preview broker, direct Google, or email). */
 export const authConfigured =
-  !authDisabled && Boolean(grokClientId && grokClientSecret);
+  !authDisabled &&
+  Boolean(grokBrokerEnabled || nativeSocial?.google || emailAndPasswordEnabled);
 
 // This app's own Better Auth origin. When deployed the deployer injects the
 // public URL. In the sandbox live preview there's no fixed URL (each preview gets
@@ -144,9 +139,6 @@ const trustedOrigins: string[] = [
   ...(explicitBaseURL ? [explicitBaseURL] : []),
 ];
 
-const databaseUrl = env("DATABASE_URL");
-const nativeSocial = nativeSocialProviders();
-
 function authSecret(): string {
   const injected = env("BETTER_AUTH_SECRET");
   if (injected) return injected;
@@ -182,7 +174,7 @@ export const SESSION_TOKEN_COOKIE = "__Host-grok-auth.session_token";
 
 // Built separately so the `betterAuth({...})` call stays easy to edit without
 // breaking brackets (models often trip on the conditional plugin spread).
-const grokOAuthPlugin = authConfigured
+const grokOAuthPlugin = grokBrokerEnabled
   ? genericOAuth({
       config: GROK_PROVIDERS.map(({ providerId, idp }) => ({
         providerId,
@@ -228,9 +220,9 @@ export const auth = betterAuth({
       enabled: true,
       trustedProviders: [
         ...GROK_PROVIDERS.map((p) => p.providerId),
+        "grok-x",
         GATE_PROVIDER_ID,
         ...(nativeSocial?.google ? (["google"] as const) : []),
-        ...(nativeSocial?.twitter ? (["twitter"] as const) : []),
       ],
       // X's synthetic email is never "verified", so don't gate linking on the
       // local user's email-verified state.
