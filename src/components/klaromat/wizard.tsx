@@ -36,6 +36,16 @@ const STEPS = [
   "Prüfung",
 ];
 
+const STEP_LEADS = [
+  "Welchen Auftrag der Kostenträger voraussichtlich tragen soll — keine Diagnose.",
+  "Was das Haus als Aufnahmeauftrag ausweisen muss.",
+  "Medizinische Rahmen, die Häuser ausschließen können.",
+  "Form, Zugangsweg und ungefähre Dauer.",
+  "Wohnen und Familie — nur setzen, was wirklich nötig ist.",
+  "Ort, Umgebung und grobe Zeitschiene. Wartezeit bleibt eine Schätzung.",
+  "Prüfen Sie die gesetzten Anforderungen, bevor die Rangliste läuft.",
+];
+
 export function KlaromatWizard({
   clientName,
   runNumber,
@@ -173,6 +183,7 @@ export function KlaromatWizard({
         Schritt {step + 1} von {STEPS.length}
       </p>
       <h1 className="mt-2 font-display text-3xl tracking-tight">{STEPS[step]}</h1>
+      <p className="mt-2 text-sm text-ink-muted">{STEP_LEADS[step]}</p>
       <p className="mt-2 text-sm text-ink-muted">
         <a href="#klaromat-help" className="text-primary hover:underline">
           Keine Diagnose eintragen. Bedarf reicht.
@@ -185,8 +196,8 @@ export function KlaromatWizard({
             <fieldset className="space-y-3">
               <legend className="text-sm font-medium">Indikationsbereich</legend>
               <p className="text-sm text-ink-muted">
-                Was der Kostenträger voraussichtlich finanzieren soll. Keine Diagnose. Dual heißt:
-                Sucht und psychische Erkrankung im selben Haus.
+                Was der Kostenträger voraussichtlich finanzieren soll. Keine Diagnose. Dualdiagnose
+                heißt: Sucht und psychische Erkrankung im selben Haus.
               </p>
               {INDICATIONS.map((item) => (
                 <label
@@ -225,7 +236,7 @@ export function KlaromatWizard({
             />
             <Choice
               legend="Kostenträger"
-              hint="DRV ist der übliche Weg in die medizinische Reha. GKV vor allem bei AHB oder wenn die Rente nicht greift. Beihilfe weist der Steckbrief derzeit nicht aus."
+              hint="Deutsche Rentenversicherung ist der übliche Weg in die medizinische Reha. Gesetzliche Krankenkasse vor allem bei Anschlussheilbehandlung nach Krankenhausaufenthalt oder wenn die Rente nicht greift. Beihilfe weist der Steckbrief derzeit nicht aus."
               options={PAYER_FILTERS}
               value={answers.payer}
               onChange={(payer) => setAnswers((prev) => ({ ...prev, payer }))}
@@ -313,6 +324,19 @@ export function KlaromatWizard({
                 onChange={(substitutionNeed) => setAnswers((prev) => ({ ...prev, substitutionNeed }))}
               />
             ) : null}
+            {answers.indication !== "psychosomatik" ? (
+              <Choice
+                legend="Entgiftungsnachweis vor Aufnahme"
+                hint="Viele Häuser fordern einen abgeschlossenen Entzug vor der Reha. „Haus darf Nachweis fordern“ passt zu ausgewiesener Pflicht. „Haus darf keinen Nachweis fordern“ lässt Häuser mit dieser Pflicht zurückfallen — kein Ausschluss."
+                options={[
+                  { id: "egal", label: "Keine Vorgabe" },
+                  { id: "ja", label: "Haus darf Nachweis fordern" },
+                  { id: "nein", label: "Haus darf keinen Nachweis fordern" },
+                ]}
+                value={answers.entgiftungNeed}
+                onChange={(entgiftungNeed) => setAnswers((prev) => ({ ...prev, entgiftungNeed }))}
+              />
+            ) : null}
             {answers.indication === "sucht" && !answers.bedarfe.includes("trauma") ? (
               <Choice
                 legend="Traumafokus"
@@ -324,8 +348,8 @@ export function KlaromatWizard({
             ) : null}
             {answers.indication !== "psychosomatik" ? (
               <Choice
-                legend="MPU-Vorbereitung"
-                hint="Nur setzen, wenn das Haus eine ausgewiesene MPU-Vorbereitung (Fahreignung) vorhalten muss. Die MPU selbst macht Lohklar nicht."
+                legend="Medizinisch-Psychologische Untersuchung (Fahreignung)"
+                hint="Nur setzen, wenn das Haus eine ausgewiesene Vorbereitung auf die Medizinisch-Psychologische Untersuchung vorhalten muss. Die Untersuchung selbst macht Lohklar nicht."
                 options={YES_FILTERS}
                 value={answers.mpuNeed}
                 onChange={(mpuNeed) => setAnswers((prev) => ({ ...prev, mpuNeed }))}
@@ -333,8 +357,8 @@ export function KlaromatWizard({
             ) : null}
             {answers.indication !== "psychosomatik" ? (
               <Choice
-                legend="Klinik statt Strafe"
-                hint="§ 35 BtMG, Therapie statt Strafe. Nur Häuser mit ausgewiesener Anerkennung, vorrangig bei illegalen Drogen. Nicht für reine Alkoholabhängigkeit. Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar."
+                legend="Therapie statt Strafe"
+                hint="§ 35 Betäubungsmittelgesetz. Nur Häuser mit ausgewiesener Anerkennung, vorrangig bei illegalen Drogen. Nicht für reine Alkoholabhängigkeit. Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar."
                 options={YES_FILTERS}
                 value={answers.klinikStattStrafeNeed}
                 onChange={(klinikStattStrafeNeed) =>
@@ -356,14 +380,14 @@ export function KlaromatWizard({
           <div className="space-y-6">
             <Choice
               legend="Behandlungssetting"
-              hint="Tagesklinik nur, wenn die Person vor Ort wohnen und täglich kommen kann. Stationär: Wohnen im Haus. Adaption: eigene Häuser nach der Entwöhnung."
+              hint="Tagesklinik nur, wenn die Person vor Ort wohnen und täglich kommen kann. Stationär: Wohnen im Haus. Adaption: eigene Häuser nach der Entwöhnung, kein Entwöhnungsplatz."
               options={SETTING_FILTERS}
               value={answers.setting}
               onChange={(setting) => setAnswers((prev) => ({ ...prev, setting }))}
             />
             <Choice
               legend="Zugang"
-              hint="Nach Krankenhaus: AHB, Antrag zeitnah. Sonst Heilverfahren über DRV- oder GKV-Antrag. AHB-Häuser ohne diesen Auftrag scheiden aus."
+              hint="Nach Krankenhaus: Anschlussheilbehandlung (AHB), Antrag zeitnah. Sonst Heilverfahren über Antrag bei Rentenversicherung oder Krankenkasse. Häuser ohne den gesetzten Zugangsweg scheiden aus."
               options={ACCESS_FILTERS}
               value={answers.access}
               onChange={(access) => setAnswers((prev) => ({ ...prev, access, ahb: access === "ahb" }))}
@@ -382,7 +406,7 @@ export function KlaromatWizard({
           <div className="space-y-6">
             <Choice
               legend="Zimmer"
-              hint="Steckbrief Wohnen: Einbett, Zweibett, Mehrbett. Einzelzimmer oft bei Trauma oder wenn Mehrbett nicht tragbar ist. Viele Häuser weisen die Zimmerart nicht aus — dann bleibt es eine Rückfrage."
+              hint="Einbettzimmer: allein im Zimmer. Zweibettzimmer: zwei Betten, kein Mehrbett. Viele Häuser weisen die Zimmerart nicht aus — dann bleibt es eine Rückfrage, kein Ausschluss."
               options={ROOM_FILTERS}
               value={answers.roomPref}
               onChange={(roomPref) => setAnswers((prev) => ({ ...prev, roomPref }))}
@@ -517,8 +541,8 @@ export function KlaromatWizard({
             <p className="text-sm text-ink-muted">
               Der Lauf erzeugt eine Rangliste über den Katalog. Oben stehen die Häuser, die diese
               Anforderungen decken. Häuser mit Ausschluss — falscher Auftrag, Substanz, Geschlecht,
-              Substitution, Kinder, AHB oder Setting — stehen unten. Lohklar entscheidet keine
-              Therapie und sagt keine Aufnahme zu. Wartezeiten sind Schätzungen.
+              Substitution, Kinder, Anschlussheilbehandlung oder Setting — stehen unten. Lohklar
+              entscheidet keine Therapie und sagt keine Aufnahme zu. Wartezeiten sind Schätzungen.
             </p>
           </div>
         ) : null}

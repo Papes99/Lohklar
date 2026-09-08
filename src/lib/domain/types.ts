@@ -43,12 +43,12 @@ export const INDICATIONS: {
   {
     id: "psychosomatik",
     label: "Psychosomatik",
-    hint: "AHB und Heilverfahren bei psychosomatischem Bedarf.",
+    hint: "Anschlussheilbehandlung nach Krankenhausaufenthalt (AHB) und Heilverfahren bei psychosomatischem Bedarf.",
   },
   {
     id: "dual",
     label: "Dualdiagnosen",
-    hint: "Sucht und psychische Erkrankung im kombinierten Setting.",
+    hint: "Sucht und psychische Erkrankung im kombinierten Setting (Dualdiagnose).",
   },
 ];
 
@@ -93,8 +93,8 @@ export const EXTRAS: { id: string; label: string }[] = [
   { id: "substitution", label: "Substitutionsbegleitung" },
   { id: "kinder", label: "Kinderbetreuung" },
   { id: "junge", label: "Junge Erwachsene" },
-  { id: "mpu", label: "MPU-Vorbereitung" },
-  { id: "klinikStattStrafe", label: "Klinik statt Strafe" },
+  { id: "mpu", label: "Medizinisch-Psychologische Untersuchung, Fahreignung (MPU)" },
+  { id: "klinikStattStrafe", label: "Therapie statt Strafe (§ 35 Betäubungsmittelgesetz)" },
 ];
 
 export const HOUSE_EXTRAS: { id: string; label: string }[] = [
@@ -124,7 +124,7 @@ export const SETTING_FILTERS: {
   { id: "egal", label: "Keine Vorgabe" },
   { id: "stationaer", label: "Stationär" },
   { id: "tagesklinik", label: "Tagesklinik" },
-  { id: "adaption", label: "Adaption" },
+  { id: "adaption", label: "Adaption (Übergang nach der Entwöhnung)" },
 ];
 
 export const DURATION_FILTERS: {
@@ -132,21 +132,21 @@ export const DURATION_FILTERS: {
   label: string;
 }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "kurz", label: "Eher kurz (bis ca. 6 Wochen)" },
-  { id: "mittel", label: "Mittlere Dauer" },
-  { id: "lang", label: "Länger (ab ca. 10 Wochen)" },
+  { id: "kurz", label: "Eher kurz (bis etwa 6 Wochen)" },
+  { id: "mittel", label: "Mittlere Dauer (etwa 6–10 Wochen)" },
+  { id: "lang", label: "Länger (ab etwa 10 Wochen)" },
 ];
 
-export const ROOM_FILTERS: { id: "egal" | "einbett" | "kein-mehrbett"; label: string }[] = [
+export const ROOM_FILTERS: { id: "egal" | "einbett" | "zweibett"; label: string }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "einbett", label: "Einbett bevorzugt" },
-  { id: "kein-mehrbett", label: "Kein Mehrbettzimmer" },
+  { id: "einbett", label: "Einbettzimmer (allein im Zimmer)" },
+  { id: "zweibett", label: "Zweibettzimmer (zwei Betten)" },
 ];
 
 export const ACCESS_FILTERS: { id: "egal" | "ahb" | "heilverfahren"; label: string }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "ahb", label: "AHB" },
-  { id: "heilverfahren", label: "Heilverfahren" },
+  { id: "ahb", label: "Anschlussheilbehandlung nach Krankenhausaufenthalt (AHB)" },
+  { id: "heilverfahren", label: "Heilverfahren (Antrag über Rentenversicherung oder Krankenkasse)" },
 ];
 
 export const WAIT_FILTERS: { id: "egal" | "schnell" | "passgenau"; label: string }[] = [
@@ -157,8 +157,8 @@ export const WAIT_FILTERS: { id: "egal" | "schnell" | "passgenau"; label: string
 
 export const PAYER_FILTERS: { id: "egal" | "drv" | "gkv"; label: string }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "drv", label: "DRV / Rentenversicherung" },
-  { id: "gkv", label: "GKV / Krankenkasse" },
+  { id: "drv", label: "Deutsche Rentenversicherung (DRV)" },
+  { id: "gkv", label: "Gesetzliche Krankenkasse (GKV)" },
 ];
 
 export const YES_FILTERS: { id: "egal" | "ja"; label: string }[] = [
@@ -205,7 +205,7 @@ export type KlaromatAnswers = {
   extras: string[];
   notes: string;
   personGender: "egal" | "frau" | "mann";
-  roomPref: "egal" | "einbett" | "kein-mehrbett";
+  roomPref: "egal" | "einbett" | "zweibett";
   substitutionNeed: "egal" | "ja" | "nein";
   waitPref: "egal" | "schnell" | "passgenau";
   nearbyStatesOk: boolean;
@@ -218,6 +218,7 @@ export type KlaromatAnswers = {
   traumaNeed: "egal" | "ja";
   mpuNeed: "egal" | "ja";
   klinikStattStrafeNeed: "egal" | "ja";
+  entgiftungNeed: "egal" | "ja" | "nein";
   distancePref: "egal" | "nah" | "distanz-ok";
   lagePref: "egal" | "wasser" | "insel" | "laendlich" | "stadt" | "kurort" | "gebirge";
 };

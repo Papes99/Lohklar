@@ -245,10 +245,18 @@ describe("rankClinics", () => {
     assert.equal(isBlocked(castrop), false);
     assert.equal(isBlocked(ratingen), false);
     assert.ok(
-      castrop.reasons.some((reason) => reason.criterion === "MPU-Vorbereitung" && reason.status === "match"),
+      castrop.reasons.some(
+        (reason) =>
+          reason.criterion === "Medizinisch-Psychologische Untersuchung (Fahreignung)" &&
+          reason.status === "match",
+      ),
     );
     assert.ok(
-      ratingen.reasons.some((reason) => reason.criterion === "MPU-Vorbereitung" && reason.status === "miss"),
+      ratingen.reasons.some(
+        (reason) =>
+          reason.criterion === "Medizinisch-Psychologische Untersuchung (Fahreignung)" &&
+          reason.status === "miss",
+      ),
     );
     assert.ok((castrop.rank ?? 99) < (ratingen.rank ?? 0));
 
@@ -271,7 +279,7 @@ describe("rankClinics", () => {
     assert.equal(isBlocked(huerthKss), true);
     assert.ok(
       friedberg.reasons.some(
-        (reason) => reason.criterion === "Klinik statt Strafe" && reason.status === "match",
+        (reason) => reason.criterion === "Therapie statt Strafe" && reason.status === "match",
       ),
     );
   });
@@ -318,7 +326,7 @@ describe("normalizeAnswers und listedNeeds", () => {
       setting: "adaption",
     });
     assert.ok(
-      needs.some((item) => item.criterion === "Behandlungssetting" && item.value === "Adaption"),
+      needs.some((item) => item.criterion === "Behandlungssetting" && item.value.startsWith("Adaption")),
     );
   });
 
@@ -347,7 +355,105 @@ describe("normalizeAnswers und listedNeeds", () => {
       mpuNeed: "ja",
       klinikStattStrafeNeed: "ja",
     });
-    assert.ok(needs.some((item) => item.criterion === "MPU-Vorbereitung"));
-    assert.ok(needs.some((item) => item.criterion === "Klinik statt Strafe"));
+    assert.ok(needs.some((item) => item.criterion === "Medizinisch-Psychologische Untersuchung (Fahreignung)"));
+    assert.ok(needs.some((item) => item.criterion === "Therapie statt Strafe"));
+  });
+
+  it("rangiert Entgiftungsnachweis ohne Ausschluss", () => {
+    const withNeed = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      entgiftungNeed: "ja",
+    });
+    const listed = listedNeeds({
+      ...emptyAnswers(),
+      indication: "sucht",
+      entgiftungNeed: "nein",
+    });
+    assert.ok(
+      listed.some(
+        (item) =>
+          item.criterion === "Entgiftungsnachweis" && item.value === "Haus darf keinen Nachweis fordern",
+      ),
+    );
+
+    const vorhanden = withNeed.find((item) => {
+      const clinic = CLINIC_SEED.find((row) => row.id === item.clinicId);
+      return clinic?.steckbrief.aufnahmeunterlagen.chips.some(
+        (chip) => chip.label === "Entgiftungspflicht" && chip.status === "vorhanden",
+      );
+    });
+    const unbekannt = withNeed.find((item) => {
+      const clinic = CLINIC_SEED.find((row) => row.id === item.clinicId);
+      const status = clinic?.steckbrief.aufnahmeunterlagen.chips.find(
+        (chip) => chip.label === "Entgiftungspflicht",
+      )?.status;
+      return status === "unbekannt" || status === undefined;
+    });
+    assert.ok(vorhanden && unbekannt);
+    assert.equal(isBlocked(vorhanden), false);
+    assert.equal(isBlocked(unbekannt), false);
+    assert.ok(
+      vorhanden.reasons.some(
+        (reason) => reason.criterion === "Entgiftungsnachweis" && reason.status === "match",
+      ),
+    );
+    assert.ok(
+      unbekannt.reasons.some(
+        (reason) => reason.criterion === "Entgiftungsnachweis" && reason.status === "partial",
+      ),
+    );
+
+    const avoid = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      entgiftungNeed: "nein",
+    });
+    const forced = avoid.find((item) => item.clinicId === vorhanden.clinicId);
+    assert.ok(forced);
+    assert.equal(isBlocked(forced), false);
+    assert.ok(
+      forced.reasons.some(
+        (reason) => reason.criterion === "Entgiftungsnachweis" && reason.status === "miss",
+      ),
+    );
+  });
+
+  it("wandelt altes kein-mehrbett in Zweibettzimmer und schreibt Zugang aus", () => {
+    const answers = normalizeAnswers({
+      indication: "sucht",
+      roomPref: "kein-mehrbett" as never,
+      access: "ahb",
+      payer: "drv",
+    });
+    assert.equal(answers.roomPref, "zweibett");
+    const needs = listedNeeds(answers);
+    assert.ok(
+      needs.some(
+        (item) => item.criterion === "Zimmer" && item.value === "Zweibettzimmer (zwei Betten)",
+      ),
+    );
+    assert.ok(
+      needs.some((item) =>
+        item.value.includes("Anschlussheilbehandlung nach Krankenhausaufenthalt"),
+      ),
+    );
+    assert.ok(needs.some((item) => item.value.includes("Deutsche Rentenversicherung")));
+  });
+
+  it("rangiert Einbettzimmer ohne Ausschluss bei eingeschränkter Angabe", () => {
+    const matches = rankClinics(CLINIC_SEED, {
+      ...emptyAnswers(),
+      indication: "sucht",
+      roomPref: "einbett",
+    });
+    const limited = matches.find((item) => {
+      const clinic = CLINIC_SEED.find((row) => row.id === item.clinicId);
+      const chip = clinic?.steckbrief.wohnenAlltag.chips.find((c) => c.label === "Einbettzimmer");
+      return chip?.status === "eingeschraenkt";
+    });
+    assert.ok(limited);
+    assert.equal(isBlocked(limited), false);
+    assert.ok(limited.reasons.some((reason) => reason.criterion === "Zimmer" && reason.status === "partial"));
   });
 });

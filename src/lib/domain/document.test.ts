@@ -55,6 +55,20 @@ describe("formulateNeeds", () => {
     const island = formulateNeeds(sampleAnswers({ lagePref: "insel" }));
     assert.match(island, /Insel-Lage/);
   });
+
+  it("schreibt Entgiftungsnachweis und Zweibettzimmer aus", () => {
+    const text = formulateNeeds(
+      sampleAnswers({
+        entgiftungNeed: "ja",
+        roomPref: "zweibett",
+        access: "heilverfahren",
+        ahb: false,
+      }),
+    );
+    assert.match(text, /Entgiftungsnachweis/);
+    assert.match(text, /Zweibettzimmer \(zwei Betten\)/);
+    assert.match(text, /Heilverfahren nach Kostenzusage/);
+  });
 });
 
 describe("buildResultDocument", () => {

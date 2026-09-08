@@ -57,7 +57,7 @@ describe("catalog filter", () => {
     const dual = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), auftrag: "dual" });
     assert.ok(dual.length >= 1);
     assert.ok(dual.every((clinic) => clinic.indicationAreas.includes("dual")));
-    const einzel = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), einzelzimmer: true });
+    const einzel = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), room: "einbett" });
     assert.ok(einzel.length >= 1);
     assert.ok(
       einzel.every((clinic) =>
@@ -116,6 +116,34 @@ describe("catalog filter", () => {
     assert.ok(kss.some((clinic) => clinic.id === "ck-salus-friedberg"));
     assert.ok(kss.some((clinic) => clinic.id === "ck-suedergellersen"));
     assert.equal(kss.some((clinic) => clinic.id === "ck-eusserthal"), false);
+
+    const zwei = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), room: "zweibett" });
+    assert.ok(zwei.length >= 1);
+    assert.ok(
+      zwei.every((clinic) =>
+        clinic.steckbrief.wohnenAlltag.chips.some(
+          (chip) => chip.label === "Zweibettzimmer" && chip.status === "vorhanden",
+        ),
+      ),
+    );
+    const hv = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), heilverfahren: true });
+    assert.ok(hv.length >= 1);
+    assert.ok(hv.every((clinic) => clinic.heilverfahren));
+    const drv = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), payer: "drv" });
+    assert.ok(drv.length >= 1);
+    assert.ok(drv.every((clinic) => clinic.zulassung.drv === "vorhanden"));
+    const entgiftung = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), entgiftung: true });
+    assert.ok(entgiftung.length >= 1);
+    assert.ok(
+      entgiftung.every((clinic) =>
+        clinic.steckbrief.aufnahmeunterlagen.chips.some(
+          (chip) => chip.label === "Entgiftungspflicht" && chip.status === "vorhanden",
+        ),
+      ),
+    );
+    const familie = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), angehoerige: true });
+    assert.ok(familie.length >= 1);
+    assert.ok(familie.every((clinic) => clinic.angehoerigenarbeit));
   });
 
   it("ranks multi-token queries by how many facts fit", () => {
@@ -141,6 +169,22 @@ describe("catalog filter", () => {
     assert.ok(btmg.length >= 1);
     assert.ok(btmg.some((clinic) => clinic.klinikStattStrafe));
     assert.ok(btmg.some((clinic) => clinic.id === "ck-salus-friedberg"));
+
+    const zweiQ = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Zweibettzimmer" });
+    assert.ok(zweiQ.length >= 1);
+    assert.ok(
+      zweiQ[0]?.steckbrief.wohnenAlltag.chips.some(
+        (chip) => chip.label === "Zweibettzimmer" && chip.status === "vorhanden",
+      ),
+    );
+
+    const entgiftungQ = filterClinics(CLINIC_SEED, { ...emptyCatalogFilter(), q: "Entgiftungsnachweis" });
+    assert.ok(entgiftungQ.length >= 1);
+    assert.ok(
+      entgiftungQ[0]?.steckbrief.aufnahmeunterlagen.chips.some(
+        (chip) => chip.label === "Entgiftungspflicht" && chip.status === "vorhanden",
+      ),
+    );
   });
 
   it("understands Fachsprache: NRW, PTBS, TK, Einzelzimmer, Mutter-Kind", () => {
