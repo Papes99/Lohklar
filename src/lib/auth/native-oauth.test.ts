@@ -1,6 +1,6 @@
 import { describe, it, afterEach } from "node:test";
 import assert from "node:assert/strict";
-import { nativeSocialProviders, useGrokPreviewBroker } from "./native-oauth.ts";
+import { nativeSocialProviders, socialSignInAvailable, useGrokPreviewBroker } from "./native-oauth.ts";
 
 const KEYS = [
   "GOOGLE_CLIENT_ID",
@@ -54,5 +54,6 @@ describe("useGrokPreviewBroker", () => {
     assert.equal(useGrokPreviewBroker(), true);
     process.env.DATABASE_URL = "postgres://example";
     assert.equal(useGrokPreviewBroker(), false);
+    assert.deepEqual(socialSignInAvailable(), { google: false, x: false });
   });
 });

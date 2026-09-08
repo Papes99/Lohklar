@@ -39,7 +39,20 @@ export function nativeSocialProviders(): NativeSocialProviders | undefined {
   return Object.keys(providers).length > 0 ? providers : undefined;
 }
 
+/** Which social buttons actually work on this host. */
+export function socialSignInAvailable(): { google: boolean; x: boolean } {
+  if (useGrokPreviewBroker() || env("GROK_AUTH_CLIENT_ID")) {
+    return { google: true, x: true };
+  }
+  const native = nativeSocialProviders();
+  return {
+    google: Boolean(native?.google),
+    x: Boolean(native?.twitter),
+  };
+}
+
 /** Preview broker client is only valid on grok-sandbox hosts, not lohklar.de. */
 export function useGrokPreviewBroker(): boolean {
   return !env("GROK_AUTH_CLIENT_ID") && !env("DATABASE_URL");
 }
+
