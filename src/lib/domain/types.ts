@@ -38,17 +38,17 @@ export const INDICATIONS: {
   {
     id: "sucht",
     label: "Sucht / Entwöhnung",
-    hint: "Alkohol, Drogen, Medikamente, Glücksspiel und verwandte Bedarfe.",
+    hint: "Entwöhnung bei Alkohol, Drogen, Medikamenten, Glücksspiel und verwandten Bedarfen. Keine Diagnose eintragen.",
   },
   {
     id: "psychosomatik",
     label: "Psychosomatik",
-    hint: "AHB und Heilverfahren bei psychosomatischem Bedarf.",
+    hint: "Psychische und körperliche Beschwerden im Zusammenhang. Anschlussheilbehandlung (AHB): Reha zeitnah nach Krankenhaus. Heilverfahren: geplante Reha nach Kostenzusage. Keine Diagnose.",
   },
   {
     id: "dual",
-    label: "Dualdiagnosen",
-    hint: "Sucht und psychische Erkrankung im kombinierten Setting.",
+    label: "Dual — Sucht und Psyche im selben Haus",
+    hint: "Ein Haus behandelt Sucht und eine psychische Erkrankung zusammen — nicht zwei getrennte Aufenthalte. Nur setzen, wenn beides Aufnahmeauftrag sein muss. Keine Diagnose.",
   },
 ];
 
@@ -122,9 +122,9 @@ export const SETTING_FILTERS: {
   label: string;
 }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "stationaer", label: "Stationär" },
-  { id: "tagesklinik", label: "Tagesklinik" },
-  { id: "adaption", label: "Adaption" },
+  { id: "stationaer", label: "Stationär (Wohnen im Haus)" },
+  { id: "tagesklinik", label: "Tagesklinik (täglich kommen)" },
+  { id: "adaption", label: "Adaption (Anschlusswohnen nach Entwöhnung)" },
 ];
 
 export const DURATION_FILTERS: {
@@ -133,20 +133,20 @@ export const DURATION_FILTERS: {
 }[] = [
   { id: "egal", label: "Keine Vorgabe" },
   { id: "kurz", label: "Eher kurz (bis ca. 6 Wochen)" },
-  { id: "mittel", label: "Mittlere Dauer" },
+  { id: "mittel", label: "Mittlere Dauer (ca. 6–10 Wochen)" },
   { id: "lang", label: "Länger (ab ca. 10 Wochen)" },
 ];
 
 export const ROOM_FILTERS: { id: "egal" | "einbett" | "kein-mehrbett"; label: string }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "einbett", label: "Einbett bevorzugt" },
-  { id: "kein-mehrbett", label: "Kein Mehrbettzimmer" },
+  { id: "einbett", label: "Einbettzimmer (allein im Zimmer)" },
+  { id: "kein-mehrbett", label: "Kein Mehrbettzimmer (Zweibett ok)" },
 ];
 
 export const ACCESS_FILTERS: { id: "egal" | "ahb" | "heilverfahren"; label: string }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "ahb", label: "AHB" },
-  { id: "heilverfahren", label: "Heilverfahren" },
+  { id: "ahb", label: "Anschlussheilbehandlung (AHB) nach Krankenhaus" },
+  { id: "heilverfahren", label: "Heilverfahren (geplante Reha nach Kostenzusage)" },
 ];
 
 export const WAIT_FILTERS: { id: "egal" | "schnell" | "passgenau"; label: string }[] = [
@@ -157,8 +157,8 @@ export const WAIT_FILTERS: { id: "egal" | "schnell" | "passgenau"; label: string
 
 export const PAYER_FILTERS: { id: "egal" | "drv" | "gkv"; label: string }[] = [
   { id: "egal", label: "Keine Vorgabe" },
-  { id: "drv", label: "DRV / Rentenversicherung" },
-  { id: "gkv", label: "GKV / Krankenkasse" },
+  { id: "drv", label: "Deutsche Rentenversicherung (DRV)" },
+  { id: "gkv", label: "Gesetzliche Krankenversicherung (GKV)" },
 ];
 
 export const YES_FILTERS: { id: "egal" | "ja"; label: string }[] = [
@@ -553,7 +553,7 @@ export function settingKindLabel(value: string): string {
 
 export function durationPrefLabel(value: string): string {
   if (value === "kurz") return "Eher kurz";
-  if (value === "mittel") return "Mittlere Dauer";
+  if (value === "mittel") return "Mittlere Dauer (ca. 6–10 Wochen)";
   if (value === "lang") return "Länger";
   return "Keine Vorgabe";
 }

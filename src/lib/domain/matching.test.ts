@@ -9,6 +9,7 @@ import {
   normalizeAnswers,
   rankClinics,
 } from "./matching.ts";
+import { ROOM_FILTERS } from "./types.ts";
 
 describe("rankClinics", () => {
   it("liefert eine Rangliste über den ganzen Katalog, sortiert nach Deckung", () => {
@@ -318,7 +319,11 @@ describe("normalizeAnswers und listedNeeds", () => {
       setting: "adaption",
     });
     assert.ok(
-      needs.some((item) => item.criterion === "Behandlungssetting" && item.value === "Adaption"),
+      needs.some(
+        (item) =>
+          item.criterion === "Behandlungssetting" &&
+          item.value === "Adaption (Anschlusswohnen nach Entwöhnung)",
+      ),
     );
   });
 
@@ -349,5 +354,89 @@ describe("normalizeAnswers und listedNeeds", () => {
     });
     assert.ok(needs.some((item) => item.criterion === "MPU-Vorbereitung"));
     assert.ok(needs.some((item) => item.criterion === "Klinik statt Strafe"));
+    assert.ok(
+      needs.some((item) =>
+        item.value.includes("Medizinisch-Psychologische Untersuchung"),
+      ),
+    );
+    assert.ok(needs.some((item) => item.value.includes("Betäubungsmittelgesetz")));
+  });
+
+  it("formuliert Zimmerwünsche ohne interne IDs", () => {
+    const einbett = listedNeeds({
+      ...emptyAnswers(),
+      indication: "sucht",
+      roomPref: "einbett",
+    });
+    const keinMehrbett = listedNeeds({
+      ...emptyAnswers(),
+      indication: "sucht",
+      roomPref: "kein-mehrbett",
+    });
+    assert.ok(
+      einbett.some(
+        (item) => item.criterion === "Zimmer" && item.value === "Einbettzimmer bevorzugt",
+      ),
+    );
+    assert.ok(
+      keinMehrbett.some(
+        (item) => item.criterion === "Zimmer" && item.value === "kein Mehrbettzimmer (Zweibett ok)",
+      ),
+    );
+    assert.equal(
+      einbett.some((item) => /\beinbett\b|kein-mehrbett/i.test(`${item.criterion} ${item.value}`)),
+      false,
+    );
+  });
+
+  it("schreibt AHB, DRV und GKV in den gesetzten Anforderungen aus", () => {
+    const ahbDrv = listedNeeds({
+      ...emptyAnswers(),
+      indication: "psychosomatik",
+      access: "ahb",
+      payer: "drv",
+    });
+    assert.ok(
+      ahbDrv.some(
+        (item) => item.criterion === "Zugang" && item.value === "Anschlussheilbehandlung (AHB) nach Krankenhaus",
+      ),
+    );
+    assert.ok(
+      ahbDrv.some(
+        (item) =>
+          item.criterion === "Kostenträger" &&
+          item.value === "Deutsche Rentenversicherung (DRV)",
+      ),
+    );
+    const hvGkv = listedNeeds({
+      ...emptyAnswers(),
+      indication: "psychosomatik",
+      access: "heilverfahren",
+      payer: "gkv",
+    });
+    assert.ok(
+      hvGkv.some(
+        (item) =>
+          item.criterion === "Zugang" &&
+          item.value === "Heilverfahren (geplante Reha nach Kostenzusage)",
+      ),
+    );
+    assert.ok(
+      hvGkv.some(
+        (item) =>
+          item.criterion === "Kostenträger" &&
+          item.value === "Gesetzliche Krankenversicherung (GKV)",
+      ),
+    );
+  });
+
+  it("beschreibt Zimmer-Chips ohne interne IDs", () => {
+    const einbett = ROOM_FILTERS.find((item) => item.id === "einbett");
+    const keinMehrbett = ROOM_FILTERS.find((item) => item.id === "kein-mehrbett");
+    assert.ok(einbett && /allein im Zimmer/.test(einbett.label));
+    assert.ok(keinMehrbett && /Zweibett/.test(keinMehrbett.label));
+    assert.match(einbett.label, /Einbettzimmer/);
+    assert.match(keinMehrbett.label, /Kein Mehrbettzimmer/);
+    assert.equal(/\beinbett\b|kein-mehrbett/.test(`${einbett.label} ${keinMehrbett.label}`), false);
   });
 });

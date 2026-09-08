@@ -174,45 +174,66 @@ export function listedNeeds(raw: KlaromatAnswers): ListedNeed[] {
     items.push({ criterion: bedarfLabel(id), value: "Aufnahme muss ausgewiesen sein" });
   }
   if (answers.substitutionNeed === "ja") {
-    items.push({ criterion: "Substitution", value: "Weiterführung nötig" });
+    items.push({
+      criterion: "Substitution",
+      value: "Opioid-Ersatzmittel weiterführen (zum Beispiel Methadon, Buprenorphin)",
+    });
   }
   if (answers.traumaNeed === "ja" && !answers.bedarfe.includes("trauma")) {
     items.push({ criterion: "Traumafokus", value: "Muss ausgewiesen sein" });
   }
   if (answers.mpuNeed === "ja") {
-    items.push({ criterion: "MPU-Vorbereitung", value: "Fahreignung im Haus" });
+    items.push({
+      criterion: "MPU-Vorbereitung",
+      value: "Medizinisch-Psychologische Untersuchung (Fahreignung) im Haus",
+    });
   }
   if (answers.klinikStattStrafeNeed === "ja") {
-    items.push({ criterion: "Klinik statt Strafe", value: "Anerkennung § 35 BtMG" });
+    items.push({
+      criterion: "Klinik statt Strafe",
+      value: "Therapie statt Strafe (§ 35 Betäubungsmittelgesetz)",
+    });
   }
   if (answers.setting !== "egal") {
     items.push({
       criterion: "Behandlungssetting",
       value:
         answers.setting === "tagesklinik"
-          ? "Tagesklinik"
+          ? "Tagesklinik (täglich kommen)"
           : answers.setting === "adaption"
-            ? "Adaption"
-            : "Stationär",
+            ? "Adaption (Anschlusswohnen nach Entwöhnung)"
+            : "Stationär (Wohnen im Haus)",
     });
   }
-  if (answers.access === "ahb") items.push({ criterion: "Zugang", value: "AHB" });
-  if (answers.access === "heilverfahren") items.push({ criterion: "Zugang", value: "Heilverfahren" });
-  if (answers.payer === "drv") items.push({ criterion: "Kostenträger", value: "DRV" });
-  if (answers.payer === "gkv") items.push({ criterion: "Kostenträger", value: "GKV" });
+  if (answers.access === "ahb") {
+    items.push({ criterion: "Zugang", value: "Anschlussheilbehandlung (AHB) nach Krankenhaus" });
+  }
+  if (answers.access === "heilverfahren") {
+    items.push({ criterion: "Zugang", value: "Heilverfahren (geplante Reha nach Kostenzusage)" });
+  }
+  if (answers.payer === "drv") {
+    items.push({ criterion: "Kostenträger", value: "Deutsche Rentenversicherung (DRV)" });
+  }
+  if (answers.payer === "gkv") {
+    items.push({ criterion: "Kostenträger", value: "Gesetzliche Krankenversicherung (GKV)" });
+  }
   if (answers.durationPref !== "egal") {
     items.push({
       criterion: "Dauer",
       value:
         answers.durationPref === "kurz"
-          ? "eher kurz"
+          ? "eher kurz (bis ca. 6 Wochen)"
           : answers.durationPref === "lang"
-            ? "länger"
-            : "mittlere Dauer",
+            ? "länger (ab ca. 10 Wochen)"
+            : "mittlere Dauer (ca. 6–10 Wochen)",
     });
   }
-  if (answers.roomPref === "einbett") items.push({ criterion: "Zimmer", value: "Einbett bevorzugt" });
-  if (answers.roomPref === "kein-mehrbett") items.push({ criterion: "Zimmer", value: "kein Mehrbett" });
+  if (answers.roomPref === "einbett") {
+    items.push({ criterion: "Zimmer", value: "Einbettzimmer bevorzugt" });
+  }
+  if (answers.roomPref === "kein-mehrbett") {
+    items.push({ criterion: "Zimmer", value: "kein Mehrbettzimmer (Zweibett ok)" });
+  }
   if (answers.mobilityNeed === "ja") items.push({ criterion: "Barrierefreiheit", value: "erforderlich" });
   if (answers.childrenNeed === "ja") items.push({ criterion: "Kinder / Eltern-Kind", value: "mit ins Haus" });
   if (answers.familyWorkNeed === "ja") items.push({ criterion: "Angehörigenarbeit", value: "erforderlich" });
@@ -231,8 +252,10 @@ export function listedNeeds(raw: KlaromatAnswers): ListedNeed[] {
   if (answers.lagePref !== "egal") {
     items.push({ criterion: "Umgebung", value: lageLabel(answers.lagePref) });
   }
-  if (answers.waitPref === "schnell") items.push({ criterion: "Wartezeit", value: "eher zeitnah" });
-  if (answers.waitPref === "passgenau") items.push({ criterion: "Wartezeit", value: "Passung vor Tempo" });
+  if (answers.waitPref === "schnell") items.push({ criterion: "Wartezeit", value: "eher zeitnah (Schätzung)" });
+  if (answers.waitPref === "passgenau") {
+    items.push({ criterion: "Wartezeit", value: "Passgenaues Haus wichtiger als Wartezeit" });
+  }
   return items;
 }
 
@@ -382,19 +405,19 @@ function indicationRow(clinic: Clinic, wanted: KlaromatAnswers["indication"]): S
       return row(
         "Indikation",
         "partial",
-        "Dualdiagnosehaus — Psychosomatik nur im kombinierten Setting, nicht als reine Psychosomatik.",
+        "Sucht und psychische Erkrankung im selben Haus (Dual) — Psychosomatik nur im kombinierten Setting, nicht als reine Psychosomatik.",
         24,
         false,
       );
     }
     return row("Indikation", "miss", "Kein psychosomatischer Auftrag in diesem Haus.", 24, true);
   }
-  if (hasDual) return row("Indikation", "match", "Dualdiagnose ist der Auftrag des Hauses.", 24, false);
+  if (hasDual) return row("Indikation", "match", "Sucht und psychische Erkrankung im selben Haus (Dual) sind der Auftrag.", 24, false);
   if (hasSucht) {
     return row(
       "Indikation",
       "partial",
-      "Suchthaus — Begleiterkrankungen werden oft mitbehandelt, ein ausgewiesenes Dualsetting fehlt.",
+      "Suchthaus — Begleiterkrankungen werden oft mitbehandelt, ein ausgewiesenes Dual-Setting (Sucht und Psyche zusammen) fehlt.",
       24,
       false,
     );
@@ -403,12 +426,12 @@ function indicationRow(clinic: Clinic, wanted: KlaromatAnswers["indication"]): S
     return row(
       "Indikation",
       "partial",
-      "Psychosomatikhaus — Sucht-Entwöhnung ist nicht der Auftrag. Dualbedarf nur teilweise gedeckt.",
+      "Psychosomatikhaus — Sucht-Entwöhnung ist nicht der Auftrag. Dualbedarf (Sucht und Psyche zusammen) nur teilweise gedeckt.",
       24,
       false,
     );
   }
-  return row("Indikation", "miss", "Dualdiagnose ist nicht ausgewiesen.", 24, false);
+  return row("Indikation", "miss", "Sucht und psychische Erkrankung im selben Haus (Dual) sind nicht ausgewiesen.", 24, false);
 }
 
 function personGenderRow(clinic: Clinic, person: KlaromatAnswers["personGender"]): Scored {
@@ -475,20 +498,26 @@ function substitutionRow(clinic: Clinic, need: KlaromatAnswers["substitutionNeed
   if (need !== "ja") return skip("Substitution");
   return clinic.substitution
     ? row("Substitution", "match", substitutionLine(clinic), 20, false)
-    : row("Substitution", "miss", "Substitution muss weitergeführt werden, das Haus weist sie nicht aus.", 20, true);
+    : row(
+        "Substitution",
+        "miss",
+        "Substitution (zum Beispiel Methadon oder Buprenorphin) muss weitergeführt werden; das Haus weist sie nicht aus.",
+        20,
+        true,
+      );
 }
 
 function substitutionLine(clinic: Clinic): string {
   const bullet = clinic.steckbrief.medizin.bullets.find((item) => /Substitution/i.test(item));
-  return bullet ?? "Substitution ist im Steckbrief vorgesehen.";
+  return bullet ?? "Substitution (z. B. Methadon, Buprenorphin) ist im Steckbrief vorgesehen.";
 }
 
 function traumaRow(clinic: Clinic, answers: KlaromatAnswers): Scored {
   if (answers.traumaNeed !== "ja") return skip("Traumafokus");
   if (answers.bedarfe.includes("trauma")) return skip("Traumafokus");
   return clinic.trauma
-    ? row("Traumafokus", "match", "Traumafokus ist im Steckbrief ausgewiesen.", 14, false)
-    : row("Traumafokus", "miss", "Kein ausgewiesener Traumaschwerpunkt.", 14, false);
+    ? row("Traumafokus", "match", "Ein ausgewiesener Traumaschwerpunkt ist im Steckbrief genannt.", 14, false)
+    : row("Traumafokus", "miss", "Kein ausgewiesener Traumaschwerpunkt im Steckbrief.", 14, false);
 }
 
 function mpuRow(clinic: Clinic, need: KlaromatAnswers["mpuNeed"]): Scored {
@@ -497,14 +526,14 @@ function mpuRow(clinic: Clinic, need: KlaromatAnswers["mpuNeed"]): Scored {
     ? row(
         "MPU-Vorbereitung",
         "match",
-        "MPU-Vorbereitung / Fahreignung ist im Steckbrief vorgesehen.",
+        "Vorbereitung auf die Medizinisch-Psychologische Untersuchung (MPU) / Fahreignung ist im Steckbrief vorgesehen.",
         12,
         false,
       )
     : row(
         "MPU-Vorbereitung",
         "miss",
-        "Keine ausgewiesene MPU-Vorbereitung im Haus. Die Entwöhnung bleibt möglich — den Kurs vor Antrag klären.",
+        "Keine ausgewiesene Vorbereitung auf die Medizinisch-Psychologische Untersuchung (MPU) im Haus. Die Entwöhnung bleibt möglich — den Kurs vor Antrag klären.",
         12,
         false,
       );
@@ -519,14 +548,14 @@ function klinikStattStrafeRow(
     ? row(
         "Klinik statt Strafe",
         "match",
-        "Anerkennung nach §§ 35/36 BtMG ist ausgewiesen. Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar.",
+        "Anerkennung nach § 35 Betäubungsmittelgesetz (BtMG, Therapie statt Strafe) ist ausgewiesen. Die Entscheidung trifft Staatsanwaltschaft bzw. Gericht, nicht Lohklar.",
         18,
         false,
       )
     : row(
         "Klinik statt Strafe",
         "miss",
-        "Keine ausgewiesene Anerkennung nach § 35 BtMG. Für Therapie statt Strafe nicht vorgesehen.",
+        "Keine ausgewiesene Anerkennung nach § 35 Betäubungsmittelgesetz (BtMG). Für Therapie statt Strafe nicht vorgesehen.",
         18,
         true,
       );
@@ -606,12 +635,18 @@ function settingRow(clinic: Clinic, wanted: KlaromatAnswers["setting"]): Scored 
   if (wanted === "egal") return skip("Behandlungssetting");
   if (wanted === "adaption") {
     if (clinic.setting === "adaption") {
-      return row("Behandlungssetting", "match", "Adaption nach der Entwöhnung ist das Setting dieses Hauses.", 16, false);
+      return row(
+        "Behandlungssetting",
+        "match",
+        "Adaption (Anschlusswohnen / Nachsorge nach der Entwöhnung) ist das Setting dieses Hauses.",
+        16,
+        false,
+      );
     }
     return row(
       "Behandlungssetting",
       "miss",
-      `Klinik bietet ${settingLabel(clinic.setting)} — keine Adaptionseinrichtung.`,
+      `Klinik bietet ${settingLabel(clinic.setting)} — keine Adaption (kein Anschlusswohnen nach Entwöhnung).`,
       16,
       true,
     );
@@ -623,7 +658,7 @@ function settingRow(clinic: Clinic, wanted: KlaromatAnswers["setting"]): Scored 
     return row(
       "Behandlungssetting",
       "partial",
-      "Adaption nach der Entwöhnung — nicht die Entwöhnungsphase selbst. Nachsorgeweg prüfen.",
+      "Adaption (Anschlusswohnen nach der Entwöhnung) — nicht die Entwöhnungsphase selbst. Nachsorgeweg prüfen.",
       16,
       false,
     );
@@ -650,17 +685,23 @@ function accessRow(clinic: Clinic, access: KlaromatAnswers["access"]): Scored {
   if (access === "egal") return skip("Zugang");
   if (access === "ahb") {
     return clinic.ahb
-      ? row("Zugang", "match", "AHB ist im Steckbrief vorgesehen.", 16, false)
+      ? row(
+          "Zugang",
+          "match",
+          "Anschlussheilbehandlung (AHB) nach Krankenhausaufenthalt ist im Steckbrief vorgesehen.",
+          16,
+          false,
+        )
       : row(
           "Zugang",
           "miss",
-          "AHB ist nicht der Schwerpunkt. Nach Krankenhausentlassung ist das der falsche Zugangsweg.",
+          "Anschlussheilbehandlung (AHB) ist nicht der Schwerpunkt. Nach Krankenhausentlassung ist das der falsche Zugangsweg.",
           16,
           true,
         );
   }
   return clinic.heilverfahren
-    ? row("Zugang", "match", "Heilverfahren nach Kostenzusage ist vorgesehen.", 12, false)
+    ? row("Zugang", "match", "Heilverfahren (geplante Reha nach Kostenzusage) ist vorgesehen.", 12, false)
     : row("Zugang", "miss", "Heilverfahren ist im Steckbrief nicht klar ausgewiesen.", 12, false);
 }
 
@@ -668,18 +709,58 @@ function payerRow(clinic: Clinic, payer: KlaromatAnswers["payer"]): Scored {
   if (payer === "egal") return skip("Kostenträger");
   if (payer === "drv") {
     const status = clinic.zulassung.drv;
-    if (status === "vorhanden") return row("Kostenträger", "match", "DRV-Zugang ist im Steckbrief vorgesehen.", 10, false);
-    if (status === "unbekannt") {
-      return row("Kostenträger", "partial", "DRV: Angabe liegt nicht vor — vor Antrag beim Haus klären.", 10, false);
+    if (status === "vorhanden") {
+      return row(
+        "Kostenträger",
+        "match",
+        "Zugang über die Deutsche Rentenversicherung (DRV) ist im Steckbrief vorgesehen.",
+        10,
+        false,
+      );
     }
-    return row("Kostenträger", "miss", "DRV-Zugang ist nicht ausgewiesen.", 10, false);
+    if (status === "unbekannt") {
+      return row(
+        "Kostenträger",
+        "partial",
+        "Deutsche Rentenversicherung (DRV): Angabe liegt nicht vor — vor Antrag beim Haus klären.",
+        10,
+        false,
+      );
+    }
+    return row(
+      "Kostenträger",
+      "miss",
+      "Zugang über die Deutsche Rentenversicherung (DRV) ist nicht ausgewiesen.",
+      10,
+      false,
+    );
   }
   const status = clinic.zulassung.gkv;
-  if (status === "vorhanden") return row("Kostenträger", "match", "GKV-Zugang ist im Steckbrief vorgesehen.", 10, false);
-  if (status === "unbekannt") {
-    return row("Kostenträger", "partial", "GKV: Angabe liegt nicht vor — vor Antrag beim Haus klären.", 10, false);
+  if (status === "vorhanden") {
+    return row(
+      "Kostenträger",
+      "match",
+      "Zugang über die Gesetzliche Krankenversicherung (GKV) ist im Steckbrief vorgesehen.",
+      10,
+      false,
+    );
   }
-  return row("Kostenträger", "miss", "GKV-Zugang ist nicht ausgewiesen.", 10, false);
+  if (status === "unbekannt") {
+    return row(
+      "Kostenträger",
+      "partial",
+      "Gesetzliche Krankenversicherung (GKV): Angabe liegt nicht vor — vor Antrag beim Haus klären.",
+      10,
+      false,
+    );
+  }
+  return row(
+    "Kostenträger",
+    "miss",
+    "Zugang über die Gesetzliche Krankenversicherung (GKV) ist nicht ausgewiesen.",
+    10,
+    false,
+  );
 }
 
 function durationRow(clinic: Clinic, pref: KlaromatAnswers["durationPref"]): Scored {
@@ -701,25 +782,51 @@ function roomRow(clinic: Clinic, pref: KlaromatAnswers["roomPref"]): Scored {
   if (pref === "einbett") {
     const status = chip(clinic, "wohnenAlltag", "Einbettzimmer");
     if (status === "vorhanden") {
-      return row("Zimmer", "match", "Einbettzimmer ist im Steckbrief als Regel oder vorhanden ausgewiesen.", 12, false);
+      return row(
+        "Zimmer",
+        "match",
+        "Einbettzimmer (allein im Zimmer) ist im Steckbrief als Regel oder vorhanden ausgewiesen.",
+        12,
+        false,
+      );
     }
     if (status === "eingeschraenkt") {
       return row("Zimmer", "partial", "Einbettzimmer nur eingeschränkt / nach Verfügbarkeit.", 12, false);
     }
     if (status === "unbekannt") {
-      return row("Zimmer", "partial", "Zimmerart: Angabe liegt nicht vor — vor Antrag beim Haus klären.", 12, false);
+      return row(
+        "Zimmer",
+        "partial",
+        "Zimmerart: Angabe liegt nicht vor — vor Antrag beim Haus klären. Kein Ausschluss nur wegen fehlender Angabe.",
+        12,
+        false,
+      );
     }
     return row("Zimmer", "miss", "Einbettzimmer ist nicht angeboten.", 12, false);
   }
   const mehr = chip(clinic, "wohnenAlltag", "Mehrbettzimmer");
   if (mehr === "nicht_angeboten") {
-    return row("Zimmer", "match", "Kein Mehrbettzimmer als Regelangebot ausgewiesen.", 8, false);
+    return row(
+      "Zimmer",
+      "match",
+      "Kein Mehrbettzimmer (drei oder mehr Betten) als Regelangebot. Zweibettzimmer bleibt möglich.",
+      8,
+      false,
+    );
   }
   if (mehr === "unbekannt") {
-    return row("Zimmer", "partial", "Mehrbettzimmer: Angabe liegt nicht vor.", 8, false);
+    return row(
+      "Zimmer",
+      "partial",
+      "Mehrbettzimmer: Angabe liegt nicht vor — vor Antrag beim Haus klären. Kein Ausschluss nur wegen fehlender Angabe.",
+      8,
+      false,
+    );
   }
-  if (mehr === "eingeschraenkt") return row("Zimmer", "partial", "Mehrbettzimmer sind eingeschränkt möglich.", 8, false);
-  return row("Zimmer", "miss", "Mehrbettzimmer sind im Steckbrief vorgesehen.", 8, false);
+  if (mehr === "eingeschraenkt") {
+    return row("Zimmer", "partial", "Mehrbettzimmer sind eingeschränkt möglich.", 8, false);
+  }
+  return row("Zimmer", "miss", "Mehrbettzimmer (drei oder mehr Betten) sind im Steckbrief vorgesehen.", 8, false);
 }
 
 function mobilityRow(clinic: Clinic, need: KlaromatAnswers["mobilityNeed"]): Scored {
@@ -781,10 +888,10 @@ function genderLabel(value: string): string {
 }
 
 function settingLabel(value: string): string {
-  if (value === "tagesklinik") return "Tagesklinik";
+  if (value === "tagesklinik") return "Tagesklinik (täglich kommen)";
   if (value === "beides") return "Stationär und Tagesklinik";
-  if (value === "adaption") return "Adaption";
-  return "Stationär";
+  if (value === "adaption") return "Adaption (Anschlusswohnen nach Entwöhnung)";
+  return "Stationär (Wohnen im Haus)";
 }
 
 function row(criterion: string, status: CriterionStatus, detail: string, weight: number, blocking: boolean): Scored {
