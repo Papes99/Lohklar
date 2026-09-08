@@ -87,7 +87,7 @@ export function generateLotseVorschlaege(input: {
     pushUnique(out, seen, runId, "fragen", "Substitution: weiterführen oder nicht?");
   }
   if (answers.payer === "egal") {
-    pushUnique(out, seen, runId, "fragen", "Kostenträger (DRV oder Krankenkasse) noch offen.");
+    pushUnique(out, seen, runId, "fragen", "Kostenträger (Deutsche Rentenversicherung oder gesetzliche Krankenkasse) noch offen.");
   }
 
   return out.filter((item) => isPersonalSection(item.section));

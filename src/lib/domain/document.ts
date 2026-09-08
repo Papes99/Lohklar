@@ -125,11 +125,21 @@ export function formulateNeeds(raw: KlaromatAnswers): string {
   }
 
   if (answers.mpuNeed === "ja") {
-    parts.push("MPU-Vorbereitung / Fahreignung muss im Haus ausgewiesen sein.");
+    parts.push(
+      "Vorbereitung auf die Medizinisch-Psychologische Untersuchung (Fahreignung) muss im Haus ausgewiesen sein.",
+    );
   }
 
   if (answers.klinikStattStrafeNeed === "ja") {
-    parts.push("Klinik statt Strafe: Anerkennung nach § 35 BtMG muss ausgewiesen sein.");
+    parts.push(
+      "Therapie statt Strafe: Anerkennung nach § 35 Betäubungsmittelgesetz muss ausgewiesen sein.",
+    );
+  }
+
+  if (answers.entgiftungNeed === "ja") {
+    parts.push("Das Haus darf einen Entgiftungsnachweis vor der Aufnahme fordern.");
+  } else if (answers.entgiftungNeed === "nein") {
+    parts.push("Das Haus darf keinen Entgiftungsnachweis als Aufnahmebedingung fordern.");
   }
 
   if (answers.states.length > 0) {
@@ -157,21 +167,21 @@ export function formulateNeeds(raw: KlaromatAnswers): string {
   if (answers.genderSetting === "gemischt") settingBits.push("gemischt");
   if (answers.setting === "stationaer") settingBits.push("stationär");
   if (answers.setting === "tagesklinik") settingBits.push("ganztägig ambulant");
-  if (answers.setting === "adaption") settingBits.push("Adaption");
+  if (answers.setting === "adaption") settingBits.push("Adaption (Übergang nach der Entwöhnung)");
   if (settingBits.length > 0) {
     parts.push(`Gewünschtes Setting: ${settingBits.join(", ")}.`);
   }
 
   if (answers.ahb || answers.access === "ahb") {
-    parts.push("Anschlussheilbehandlung ist vorgesehen.");
+    parts.push("Anschlussheilbehandlung nach Krankenhausaufenthalt ist vorgesehen.");
   } else if (answers.access === "heilverfahren") {
-    parts.push("Heilverfahren nach Kostenzusage ist vorgesehen.");
+    parts.push("Heilverfahren nach Kostenzusage (Rentenversicherung oder Krankenkasse) ist vorgesehen.");
   }
 
   if (answers.roomPref === "einbett") {
-    parts.push("Einbettzimmer ist gewünscht.");
-  } else if (answers.roomPref === "kein-mehrbett") {
-    parts.push("Kein Mehrbettzimmer.");
+    parts.push("Einbettzimmer (allein im Zimmer) ist gewünscht.");
+  } else if (answers.roomPref === "zweibett") {
+    parts.push("Zweibettzimmer (zwei Betten) ist gewünscht.");
   }
 
   if (answers.mobilityNeed === "ja") {

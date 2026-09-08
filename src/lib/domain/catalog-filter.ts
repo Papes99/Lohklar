@@ -24,15 +24,19 @@ export type CatalogFilter = {
   gender: "egal" | GenderSetting;
   setting: "egal" | "stationaer" | "tagesklinik" | "adaption";
   ahb: boolean;
+  heilverfahren: boolean;
+  payer: "egal" | "drv" | "gkv";
   substitution: boolean;
-  einzelzimmer: boolean;
+  room: "egal" | "einbett" | "zweibett";
   kinder: boolean;
   barriere: boolean;
   gluecksspiel: boolean;
   trauma: boolean;
   junge: boolean;
+  angehoerige: boolean;
   mpu: boolean;
   klinikStattStrafe: boolean;
+  entgiftung: boolean;
   lage: "egal" | LageKind;
   vollstaendig: boolean;
 };
@@ -47,15 +51,19 @@ export function emptyCatalogFilter(): CatalogFilter {
     gender: "egal",
     setting: "egal",
     ahb: false,
+    heilverfahren: false,
+    payer: "egal",
     substitution: false,
-    einzelzimmer: false,
+    room: "egal",
     kinder: false,
     barriere: false,
     gluecksspiel: false,
     trauma: false,
     junge: false,
+    angehoerige: false,
     mpu: false,
     klinikStattStrafe: false,
+    entgiftung: false,
     lage: "egal",
     vollstaendig: false,
   };
@@ -216,6 +224,12 @@ function clinicSearchIndex(clinic: Clinic): SearchField[] {
   if (chipVorhanden(clinic, "wohnenAlltag", "Einbettzimmer")) {
     add("profil", "Einzelzimmer", "Einbettzimmer", "Einbett");
   }
+  if (chipVorhanden(clinic, "wohnenAlltag", "Zweibettzimmer")) {
+    add("profil", "Zweibettzimmer", "Zweibett");
+  }
+  if (chipVorhanden(clinic, "aufnahmeunterlagen", "Entgiftungspflicht")) {
+    add("profil", "Entgiftung", "Entgiftungsnachweis", "Entgiftungspflicht");
+  }
   for (const tag of clinicLageTags(clinic)) add("profil", ...lageSearchLabels(tag));
 
   const plz = clinic.address.match(/\b(\d{5})\b/);
@@ -370,15 +384,21 @@ export function filterClinics<T extends Clinic>(clinics: T[], filter: CatalogFil
         return false;
       }
       if (filter.ahb && !clinic.ahb) return false;
+      if (filter.heilverfahren && !clinic.heilverfahren) return false;
+      if (filter.payer === "drv" && clinic.zulassung.drv !== "vorhanden") return false;
+      if (filter.payer === "gkv" && clinic.zulassung.gkv !== "vorhanden") return false;
       if (filter.substitution && !clinic.substitution) return false;
-      if (filter.einzelzimmer && !chipVorhanden(clinic, "wohnenAlltag", "Einbettzimmer")) return false;
+      if (filter.room === "einbett" && !chipVorhanden(clinic, "wohnenAlltag", "Einbettzimmer")) return false;
+      if (filter.room === "zweibett" && !chipVorhanden(clinic, "wohnenAlltag", "Zweibettzimmer")) return false;
       if (filter.kinder && !clinic.kinderbetreuung) return false;
       if (filter.barriere && !clinic.barrierefrei) return false;
       if (filter.gluecksspiel && !clinic.gluecksspiel) return false;
       if (filter.trauma && !clinic.trauma) return false;
       if (filter.junge && !clinic.jungeErwachsene) return false;
+      if (filter.angehoerige && !clinic.angehoerigenarbeit) return false;
       if (filter.mpu && !clinic.mpu) return false;
       if (filter.klinikStattStrafe && !clinic.klinikStattStrafe) return false;
+      if (filter.entgiftung && !chipVorhanden(clinic, "aufnahmeunterlagen", "Entgiftungspflicht")) return false;
       if (filter.lage !== "egal" && !clinicHasLage(clinic, filter.lage)) return false;
       if (filter.vollstaendig && !isClinicComplete(clinic)) return false;
       return true;
@@ -506,6 +526,7 @@ export type CatalogPulse = {
   substitution: number;
   kinder: number;
   einzelzimmer: number;
+  zweibettzimmer: number;
   ahb: number;
   tagesklinik: number;
   emailMissing: number;
@@ -565,6 +586,7 @@ export function catalogPulse(clinics: Clinic[], fromYmd = "0000-01-01"): Catalog
     substitution: clinics.filter((clinic) => clinic.substitution).length,
     kinder: clinics.filter((clinic) => clinic.kinderbetreuung).length,
     einzelzimmer: clinics.filter((clinic) => chipVorhanden(clinic, "wohnenAlltag", "Einbettzimmer")).length,
+    zweibettzimmer: clinics.filter((clinic) => chipVorhanden(clinic, "wohnenAlltag", "Zweibettzimmer")).length,
     ahb: clinics.filter((clinic) => clinic.ahb).length,
     tagesklinik: clinics.filter((clinic) => clinic.setting === "tagesklinik" || clinic.setting === "beides")
       .length,

@@ -99,8 +99,8 @@ export function MatchHitList({
         <div className="rounded-[var(--radius-xl)] bg-surface p-6 shadow-[var(--shadow-border)]">
           <h2 className="font-display text-2xl tracking-tight">Keine belastbare Passung</h2>
           <p className="mt-2 text-ink-muted">
-            Substanz, Geschlecht, Substitution, Kinder, AHB oder Setting schließen die Häuser im
-            Katalog aus. Bedarf anpassen oder Region erweitern.
+            Substanz, Geschlecht, Substitution, Kinder, Anschlussheilbehandlung oder Setting
+            schließen die Häuser im Katalog aus. Bedarf anpassen oder Region erweitern.
           </p>
           <div className="mt-4 flex flex-wrap gap-3">
             <Button type="button" onClick={onAdjustNeed}>

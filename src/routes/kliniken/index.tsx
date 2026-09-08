@@ -12,7 +12,7 @@ import {
   filterClinics,
   type CatalogFilter,
 } from "@/lib/domain/catalog-filter";
-import { LAGE_FILTERS, STATES, type Indication } from "@/lib/domain/types";
+import { ACCESS_FILTERS, EXTRAS, LAGE_FILTERS, PAYER_FILTERS, ROOM_FILTERS, SETTING_FILTERS, STATES, type Indication } from "@/lib/domain/types";
 import { lageLabel } from "@/lib/domain/lage";
 import { listClinics } from "@/lib/server/clinics";
 import { cn } from "@/lib/utils";
@@ -125,13 +125,43 @@ function ClinicsPage() {
             </FilterChip>
           </FilterGroup>
 
-          <FilterGroup legend="Passung">
-            <FilterChip
-              active={filter.einzelzimmer}
-              onClick={() => patch({ einzelzimmer: !filter.einzelzimmer })}
-            >
-              Einzelzimmer
+          <FilterGroup legend="Zimmer">
+            {ROOM_FILTERS.filter((item) => item.id !== "egal").map((item) => (
+              <FilterChip
+                key={item.id}
+                active={filter.room === item.id}
+                onClick={() => patch({ room: filter.room === item.id ? "egal" : item.id })}
+              >
+                {item.label}
+              </FilterChip>
+            ))}
+          </FilterGroup>
+
+          <FilterGroup legend="Zugang">
+            <FilterChip active={filter.ahb} onClick={() => patch({ ahb: !filter.ahb })}>
+              {ACCESS_FILTERS.find((item) => item.id === "ahb")?.label ?? "Anschlussheilbehandlung"}
             </FilterChip>
+            <FilterChip
+              active={filter.heilverfahren}
+              onClick={() => patch({ heilverfahren: !filter.heilverfahren })}
+            >
+              {ACCESS_FILTERS.find((item) => item.id === "heilverfahren")?.label ?? "Heilverfahren"}
+            </FilterChip>
+          </FilterGroup>
+
+          <FilterGroup legend="Kostenträger">
+            {PAYER_FILTERS.filter((item) => item.id !== "egal").map((item) => (
+              <FilterChip
+                key={item.id}
+                active={filter.payer === item.id}
+                onClick={() => patch({ payer: filter.payer === item.id ? "egal" : item.id })}
+              >
+                {item.label}
+              </FilterChip>
+            ))}
+          </FilterGroup>
+
+          <FilterGroup legend="Passung">
             <FilterChip
               active={filter.substitution}
               onClick={() => patch({ substitution: !filter.substitution })}
@@ -145,22 +175,19 @@ function ClinicsPage() {
               active={filter.gender === "frauen"}
               onClick={() => patch({ gender: filter.gender === "frauen" ? "egal" : "frauen" })}
             >
-              Frauen
+              Frauenspezifisch
             </FilterChip>
             <FilterChip
               active={filter.gender === "maenner"}
               onClick={() => patch({ gender: filter.gender === "maenner" ? "egal" : "maenner" })}
             >
-              Männer
-            </FilterChip>
-            <FilterChip active={filter.ahb} onClick={() => patch({ ahb: !filter.ahb })}>
-              AHB
+              Männerspezifisch
             </FilterChip>
             <FilterChip
               active={filter.barriere}
               onClick={() => patch({ barriere: !filter.barriere })}
             >
-              Barrierearm
+              Barrierefreiheit
             </FilterChip>
             <FilterChip
               active={filter.setting === "stationaer"}
@@ -168,7 +195,7 @@ function ClinicsPage() {
                 patch({ setting: filter.setting === "stationaer" ? "egal" : "stationaer" })
               }
             >
-              Stationär
+              {SETTING_FILTERS.find((item) => item.id === "stationaer")?.label ?? "Stationär"}
             </FilterChip>
             <FilterChip
               active={filter.setting === "tagesklinik"}
@@ -176,7 +203,7 @@ function ClinicsPage() {
                 patch({ setting: filter.setting === "tagesklinik" ? "egal" : "tagesklinik" })
               }
             >
-              Tagesklinik
+              {SETTING_FILTERS.find((item) => item.id === "tagesklinik")?.label ?? "Tagesklinik"}
             </FilterChip>
             <FilterChip
               active={filter.setting === "adaption"}
@@ -184,7 +211,7 @@ function ClinicsPage() {
                 patch({ setting: filter.setting === "adaption" ? "egal" : "adaption" })
               }
             >
-              Adaption
+              {SETTING_FILTERS.find((item) => item.id === "adaption")?.label ?? "Adaption"}
             </FilterChip>
             <FilterChip
               active={filter.gluecksspiel}
@@ -204,14 +231,28 @@ function ClinicsPage() {
             >
               Junge Erwachsene
             </FilterChip>
+            <FilterChip
+              active={filter.angehoerige}
+              onClick={() => patch({ angehoerige: !filter.angehoerige })}
+            >
+              Angehörigenarbeit
+            </FilterChip>
             <FilterChip active={filter.mpu} onClick={() => patch({ mpu: !filter.mpu })}>
-              MPU-Vorbereitung
+              {EXTRAS.find((item) => item.id === "mpu")?.label ??
+                "Medizinisch-Psychologische Untersuchung (Fahreignung)"}
             </FilterChip>
             <FilterChip
               active={filter.klinikStattStrafe}
               onClick={() => patch({ klinikStattStrafe: !filter.klinikStattStrafe })}
             >
-              Klinik statt Strafe
+              {EXTRAS.find((item) => item.id === "klinikStattStrafe")?.label ??
+                "Therapie statt Strafe"}
+            </FilterChip>
+            <FilterChip
+              active={filter.entgiftung}
+              onClick={() => patch({ entgiftung: !filter.entgiftung })}
+            >
+              Entgiftungsnachweis gefordert
             </FilterChip>
             <FilterChip
               active={filter.vollstaendig}
