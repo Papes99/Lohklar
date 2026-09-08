@@ -5,14 +5,8 @@ import { FoundedLine, Wordmark } from "@/components/brand/wordmark";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  GROK_PROVIDERS,
-  authClient,
-  authEnabled,
-  signIn,
-} from "@/lib/auth/client";
+import { authClient, authEnabled, signIn } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
-import { getSocialSignIn } from "@/lib/server/auth-social";
 
 type Search = { register?: string };
 
@@ -20,13 +14,11 @@ export const Route = createFileRoute("/login")({
   validateSearch: (search: Record<string, unknown>): Search => ({
     register: typeof search.register === "string" ? search.register : undefined,
   }),
-  loader: () => getSocialSignIn(),
   component: Login,
 });
 
 function Login() {
   const { register } = Route.useSearch();
-  const social = Route.useLoaderData();
   const { user, isPending } = useCurrentUserState();
   const [mode, setMode] = useState<"in" | "up">(register === "1" ? "up" : "in");
   const [name, setName] = useState("");
@@ -35,7 +27,6 @@ function Login() {
   const [error, setError] = useState<string | null>(null);
   const [resetHint, setResetHint] = useState(false);
   const [busy, setBusy] = useState(false);
-  const socialButtons = GROK_PROVIDERS.filter(() => social.google);
 
   if (isPending) {
     return (
@@ -94,41 +85,33 @@ function Login() {
           Für Fallarbeit mit getrennten Fallordnern. Jede Person darf sich registrieren.
         </p>
 
-        {authEnabled && socialButtons.length > 0 ? (
-          <div className="mt-6 space-y-2">
-            {socialButtons.map((provider) => (
-              <Button
-                key={provider.providerId}
-                type="button"
-                variant="secondary"
-                className="w-full"
-                onClick={() =>
-                  void signIn(provider.providerId, {
-                    callbackURL: "/app",
-                    errorCallbackURL: "/login",
-                  }).catch(() => {
-                    setError(
-                      "Google-Anmeldung ist gerade nicht möglich. Bitte E-Mail und Passwort nutzen.",
-                    );
-                  })
-                }
-              >
-                Weiter mit {provider.label}
-              </Button>
-            ))}
+        {authEnabled ? (
+          <div className="mt-6">
+            <Button
+              type="button"
+              variant="secondary"
+              className="w-full"
+              onClick={() =>
+                void signIn("google", {
+                  callbackURL: "/app",
+                  errorCallbackURL: "/login",
+                }).catch(() => {
+                  setError(
+                    "Google-Anmeldung ist gerade nicht möglich. Bitte E-Mail und Passwort nutzen.",
+                  );
+                })
+              }
+            >
+              Weiter mit Google
+            </Button>
           </div>
-        ) : null}
-        {!authEnabled ? (
-          <p className="mt-6 text-sm text-ink-muted">Anmeldung ist deaktiviert.</p>
-        ) : null}
-
-        {socialButtons.length > 0 ? (
-          <p className="my-6 text-center text-xs uppercase tracking-[0.14em] text-ink-muted">
-            oder mit E-Mail
-          </p>
         ) : (
-          <div className="mt-6" />
+          <p className="mt-6 text-sm text-ink-muted">Anmeldung ist deaktiviert.</p>
         )}
+
+        <p className="my-6 text-center text-xs uppercase tracking-[0.14em] text-ink-muted">
+          oder mit E-Mail
+        </p>
 
         <form className="space-y-4" onSubmit={(event) => void onSubmit(event)}>
           {mode === "up" ? (
