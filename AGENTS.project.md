@@ -6,6 +6,26 @@
 
 Auth und Datenbank sind **AN**. Jede Serverfunktion mit Nutzerbezug trägt `authMiddleware`; Abfragen nur über `context.userId`.
 
+---
+
+## Deploy (verbindlich)
+
+Live geht nur so: Branch → Commit → Push → Pull Request gegen `main` → Merge. Vercel (Hobby-Projekt lohklar) deployed Production automatisch auf [lohklar.de](https://lohklar.de).
+
+- Kein „Veröffentlichen“, kein Upload-/Apex-Assign, kein Token-Deploy außerhalb von Git.
+- Secrets niemals ins Repo oder in eine `.env` committen: `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`, `DATABASE_URL`, `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`. Nur in Vercel. Nach Env-Änderung: Redeploy Production.
+- PR-Titel und Kurzbeschreibung auf Deutsch. Kleine, reviewbare Diffs. Migrationen nur wenn nötig, mit fortlaufender Nummer.
+- Wenn kein PR angelegt werden kann: Branch-Namen nennen und fertigen PR-Text liefern.
+
+## Auth (Production)
+
+- Direct-Google über Better Auth (`GOOGLE_*`). Redirect: `https://lohklar.de/api/auth/callback/google`. Origin: `https://lohklar.de`.
+- `BETTER_AUTH_URL` = `https://lohklar.de`.
+- Kein Grok-Auth-Broker und kein X-Login auf Production. Preview/Sandbox darf den Broker behalten.
+- Bestehende Auth-/Deploy-Pfade nicht zurückbauen.
+
+---
+
 Diese Datei ist die einzige verbindliche Projektanweisung. Direkte Nutzeranweisungen in der Session haben Vorrang.
 
 Es gibt **keine separaten System-Prompt-Dateien**. Die Rollen A–G sind Ownership bei der Weiterentwicklung, keine Runtime-Agenten. Jede Änderung am Objekt eines Owners muss dessen Dateien und die Regeln unten einhalten.
@@ -180,4 +200,5 @@ Nicht zählen: Dokument-Edit-Protokolle, Rohgesundheitsdaten.
 - WCAG: Kontrast, Fokus, tap ≥ 44px.
 - Leere Leiste: nur „Klinik wählen oder nennen“ — die Leiste nicht im Fließtext beschreiben, außer sie ist leer.
 - Keine Diagnose- oder Garantiesprache in UI-Texten.
+- Nutzerflächen ohne nackte Kürzel: Anschlussheilbehandlung, Deutsche Rentenversicherung, gesetzliche Krankenkasse, Medizinisch-Psychologische Untersuchung — Kürzel höchstens in Klammern. Interne IDs (`ahb`, `drv`, `gkv`, `mpu`) bleiben.
 - Marke: Fraunces + Source Sans 3, Creme `#f3f0e8`, Tinte `#1a2420`, Grün `#245c4a`. Nicht restylen, ohne dass G das Objekt anfasst.
