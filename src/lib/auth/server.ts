@@ -33,12 +33,13 @@ import { betterAuth } from "better-auth";
 import { bearer, genericOAuth } from "better-auth/plugins";
 import { tanstackStartCookies } from "better-auth/tanstack-start";
 import { getCookie } from "@tanstack/react-start/server";
-import { randomBytes } from "node:crypto";
+import { randomBytes, createHash } from "node:crypto";
 import { Pool } from "pg";
 import { ensureDbReady, getPglite } from "../db";
 import { emailAndPasswordEnabled } from "./email-password";
 import { GATE_PROVIDER_ID, gateIdentitySessions } from "./gate-session.server";
 import { GROK_PROVIDERS } from "./providers";
+import { nativeSocialProviders, useGrokPreviewBroker } from "./native-oauth";
 import { pgliteDialect } from "./pglite-dialect";
 import {
   GROK_ISSUER_DEFAULT,
@@ -76,10 +77,12 @@ const authDisabled = env("VITE_AUTH_ENABLED") === "false";
 
 // Broker federation creds: the deployer injects a per-app client when deployed;
 // otherwise fall back to the shared live-preview client, which the broker accepts
-// for any `*.grok-sandbox.com` callback (see `./preview`).
+// for any `*.grok-sandbox.com` callback (see `./preview`). Production on
+// lohklar.de must NOT use grok_preview — that client rejects the apex callback.
 const grokIssuer = env("GROK_AUTH_ISSUER") ?? GROK_ISSUER_DEFAULT;
-const grokClientId = env("GROK_AUTH_CLIENT_ID") ?? PREVIEW_CLIENT_ID;
-const grokClientSecret = env("GROK_AUTH_CLIENT_SECRET") ?? PREVIEW_CLIENT_SECRET;
+const grokClientId = env("GROK_AUTH_CLIENT_ID") ?? (useGrokPreviewBroker() ? PREVIEW_CLIENT_ID : undefined);
+const grokClientSecret =
+  env("GROK_AUTH_CLIENT_SECRET") ?? (useGrokPreviewBroker() ? PREVIEW_CLIENT_SECRET : undefined);
 
 /** True when federated sign-in is active (real auth is enforced). */
 export const authConfigured =
@@ -142,6 +145,19 @@ const trustedOrigins: string[] = [
 ];
 
 const databaseUrl = env("DATABASE_URL");
+const nativeSocial = nativeSocialProviders();
+
+function authSecret(): string {
+  const injected = env("BETTER_AUTH_SECRET");
+  if (injected) return injected;
+  // Deployed serverless: a random secret per instance breaks Google/X (state)
+  // and sessions. Derive a stable fallback from DATABASE_URL until the env
+  // var is set. Preview without a DB keeps the process-local secret.
+  if (databaseUrl) {
+    return createHash("sha256").update(`lohklar-better-auth:${databaseUrl}`).digest("hex");
+  }
+  return previewAuthSecret();
+}
 
 // Static broker OAuth endpoints (skip OIDC discovery on every sign-in / callback).
 // Discovery would cost an extra network hop to the broker before the popup can
@@ -192,7 +208,7 @@ export const auth = betterAuth({
   baseURL,
   // Deployed apps inject BETTER_AUTH_SECRET. Preview: process-stable secret on
   // globalThis so HMR doesn't invalidate PGLite-backed sessions (see above).
-  secret: env("BETTER_AUTH_SECRET") ?? previewAuthSecret(),
+  secret: authSecret(),
   database,
 
   // CSRF / origin check for credentialed auth POSTs (email sign-up/sign-in, …).
@@ -213,6 +229,8 @@ export const auth = betterAuth({
       trustedProviders: [
         ...GROK_PROVIDERS.map((p) => p.providerId),
         GATE_PROVIDER_ID,
+        ...(nativeSocial?.google ? (["google"] as const) : []),
+        ...(nativeSocial?.twitter ? (["twitter"] as const) : []),
       ],
       // X's synthetic email is never "verified", so don't gate linking on the
       // local user's email-verified state.
@@ -228,6 +246,7 @@ export const auth = betterAuth({
 
   // Local email/password — toggled only via `./email-password` (not a plugin).
   ...(emailAndPasswordEnabled ? { emailAndPassword: { enabled: true } } : {}),
+  ...(nativeSocial ? { socialProviders: nativeSocial } : {}),
 
   // `__Host-` prefixed cookies: the browser REFUSES any same-named cookie that
   // carries a `Domain` attribute, so a sibling `*.grok.me` app cannot "toss" a

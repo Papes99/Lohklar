@@ -99,7 +99,14 @@ function Login() {
                 variant="secondary"
                 className="w-full"
                 onClick={() =>
-                  void signIn(provider.providerId, { callbackURL: "/app" })
+                  void signIn(provider.providerId, {
+                    callbackURL: "/app",
+                    errorCallbackURL: "/login",
+                  }).catch(() => {
+                    setError(
+                      "Anmeldung mit Google oder X ist auf diesem Server nicht eingerichtet. Bitte E-Mail und Passwort nutzen.",
+                    );
+                  })
                 }
               >
                 Weiter mit {provider.label}
