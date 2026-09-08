@@ -114,7 +114,10 @@ function ProfilPage() {
         disabled={signingOut}
         onClick={() => {
           setSigningOut(true);
-          void signOut("/").catch(() => setSigningOut(false));
+          void signOut("/login").catch(() => {
+            setSigningOut(false);
+            setError("Abmelden ist fehlgeschlagen. Bitte erneut versuchen.");
+          });
         }}
       >
         {signingOut ? "Abmelden…" : "Abmelden"}

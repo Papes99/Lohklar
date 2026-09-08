@@ -203,25 +203,27 @@ function waitForPopupToken(popup: Window): Promise<string | null> {
  * Use this, never `authClient.signOut()` — see the note on `authClient`.
  * Sequencing lives in `scripts/sign-out-plan.mjs` so it can be unit-tested.
  *
- * **Rejects when deployed if the server never confirms.** There the session is
- * an HttpOnly cookie only the server can clear, so redirecting anyway would
- * report a sign-out that did not happen. `<UserButton />` handles that for you;
- * a hand-rolled control must catch it and let the visitor retry. In the live
- * preview the local clear is sufficient, so it always resolves.
+ * **Live preview:** local bearer clear is enough; bounded server call.
+ * **Deployed:** full-page GET `/logout` so the browser applies Set-Cookie
+ * (fetch-based sign-out can leave the 5-min `session_data` cache in place).
  */
-export async function signOut(redirectTo = "/"): Promise<void> {
-  await runSignOut({
-    livePreview: inLivePreview(),
-    hasBearer: Boolean(getBearerToken()),
-    // Better Auth resolves with `{ error }` instead of rejecting, so surface a
-    // failed response as a rejection for the sequence to act on.
-    requestSignOut: async () => {
-      const { error } = await authClient.signOut();
-      if (error) throw new Error(error.message ?? "Sign-out failed");
-    },
-    clearToken: () => setBearerToken(null),
-    redirect: () => {
-      window.location.href = redirectTo;
-    },
-  });
+export async function signOut(redirectTo = "/login"): Promise<void> {
+  if (inLivePreview()) {
+    await runSignOut({
+      livePreview: true,
+      hasBearer: Boolean(getBearerToken()),
+      requestSignOut: async () => {
+        const { error } = await authClient.signOut();
+        if (error) throw new Error(error.message ?? "Sign-out failed");
+      },
+      clearToken: () => setBearerToken(null),
+      redirect: () => {
+        window.location.href = redirectTo;
+      },
+    });
+    return;
+  }
+
+  const dest = redirectTo.startsWith("/") ? redirectTo : "/login";
+  window.location.assign(`/logout?next=${encodeURIComponent(dest)}`);
 }

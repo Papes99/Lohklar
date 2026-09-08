@@ -15,6 +15,7 @@ import { Route as DatenschutzRouteImport } from './routes/datenschutz'
 import { Route as ImpressumRouteImport } from './routes/impressum'
 import { Route as KlarOMatRouteImport } from './routes/klar-o-mat'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as LogoutRouteImport } from './routes/logout'
 import { Route as UeberRouteImport } from './routes/ueber'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as AppKlarOMatRouteImport } from './routes/app/klar-o-mat'
@@ -53,6 +54,11 @@ const KlarOMatRoute = KlarOMatRouteImport.update({
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const LogoutRoute = LogoutRouteImport.update({
+  id: '/logout',
+  path: '/logout',
   getParentRoute: () => rootRouteImport,
 } as any)
 const UeberRoute = UeberRouteImport.update({
@@ -108,6 +114,7 @@ export interface FileRoutesByFullPath {
   '/impressum': typeof ImpressumRoute
   '/klar-o-mat': typeof KlarOMatRoute
   '/login': typeof LoginRoute
+  '/logout': typeof LogoutRoute
   '/ueber': typeof UeberRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/profil': typeof AppProfilRoute
@@ -124,6 +131,7 @@ export interface FileRoutesByTo {
   '/impressum': typeof ImpressumRoute
   '/klar-o-mat': typeof KlarOMatRoute
   '/login': typeof LoginRoute
+  '/logout': typeof LogoutRoute
   '/ueber': typeof UeberRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/profil': typeof AppProfilRoute
@@ -142,6 +150,7 @@ export interface FileRoutesById {
   '/impressum': typeof ImpressumRoute
   '/klar-o-mat': typeof KlarOMatRoute
   '/login': typeof LoginRoute
+  '/logout': typeof LogoutRoute
   '/ueber': typeof UeberRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/profil': typeof AppProfilRoute
@@ -161,6 +170,7 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/klar-o-mat'
     | '/login'
+    | '/logout'
     | '/ueber'
     | '/app/klar-o-mat'
     | '/app/profil'
@@ -177,6 +187,7 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/klar-o-mat'
     | '/login'
+    | '/logout'
     | '/ueber'
     | '/app/klar-o-mat'
     | '/app/profil'
@@ -194,6 +205,7 @@ export interface FileRouteTypes {
     | '/impressum'
     | '/klar-o-mat'
     | '/login'
+    | '/logout'
     | '/ueber'
     | '/app/klar-o-mat'
     | '/app/profil'
@@ -212,6 +224,7 @@ export interface RootRouteChildren {
   ImpressumRoute: typeof ImpressumRoute
   KlarOMatRoute: typeof KlarOMatRoute
   LoginRoute: typeof LoginRoute
+  LogoutRoute: typeof LogoutRoute
   UeberRoute: typeof UeberRoute
   KlinikenClinicIdRoute: typeof KlinikenClinicIdRoute
   KlinikenIndexRoute: typeof KlinikenIndexRoute
@@ -260,6 +273,13 @@ declare module '@tanstack/react-router' {
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/logout': {
+      id: '/logout'
+      path: '/logout'
+      fullPath: '/logout'
+      preLoaderRoute: typeof LogoutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ueber': {
@@ -353,6 +373,7 @@ const rootRouteChildren: RootRouteChildren = {
   ImpressumRoute: ImpressumRoute,
   KlarOMatRoute: KlarOMatRoute,
   LoginRoute: LoginRoute,
+  LogoutRoute: LogoutRoute,
   UeberRoute: UeberRoute,
   KlinikenClinicIdRoute: KlinikenClinicIdRoute,
   KlinikenIndexRoute: KlinikenIndexRoute,
