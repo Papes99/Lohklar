@@ -57,10 +57,11 @@ DSGVO: keine Diagnosen speichern, keine Rohgesundheitsdaten in Nutzungsstatistik
 | Persönlicher Steckbrief | Karte am Fallordner: „Persönlich für {Arbeitsname}“. Vier Listen. Owner: Agent E. Vorschläge: Agent D. |
 | Dashboard | Nur angemeldet. Tag / Monat / Jahr (Europe/Berlin). URL `?view=&date=`. Nur Zahlen, plus Katalog-Log (aufgenommen / aktualisiert / entfernt). |
 | Profil | Konto der Fachkraft unter `/app/profil`. Name am Konto, keine Fallnamen. Abmelden. |
+| Team-Raum | Träger-Raum, Einladungen, Fallzuordnung. Privatfälle bleiben privat. |
 
 **Entfernt, nicht wieder einbauen:** Antragsweg, Lohklar-KI-Chat.
 
-Navigation: Dashboard, Klar-o-Mat, Fälle, Steckbriefe.
+Navigation: Dashboard, Klar-o-Mat, Fälle, Team, Steckbriefe.
 
 Lauf-Status: `entwurf` | `fertig` | `exportiert`.
 

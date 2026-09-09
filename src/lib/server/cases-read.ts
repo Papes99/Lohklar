@@ -18,6 +18,7 @@ import {
   type FolderDetail,
   type RunDetail,
 } from "./cases-shared";
+import { loadFolderAccess, requireFolderAccess } from "./folder-access";
 
 export const listFolders = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
@@ -37,6 +38,8 @@ export const listFolders = createServerFn({ method: "GET" })
       last_status: string | null;
       last_run_at: string | null;
       last_matches: MatchSnapshot[] | string | null;
+      team_id: string | null;
+      team_name: string | null;
     }>`
       select
         f.id,
@@ -80,9 +83,21 @@ export const listFolders = createServerFn({ method: "GET" })
           where r.folder_id = f.id
           order by r.run_number desc
           limit 1
-        ) as last_matches
+        ) as last_matches,
+        f.team_id,
+        t.name as team_name
       from case_folders f
-      where f.user_id = ${context.userId}
+      left join teams t on t.id = f.team_id
+      where (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
         and exists (select 1 from runs r where r.folder_id = f.id)
       order by f.updated_at desc
     `;
@@ -100,6 +115,9 @@ export const listFolders = createServerFn({ method: "GET" })
         lastStatus: row.last_status ? parseStatus(row.last_status) : null,
         lastRunAt: row.last_run_at ? asIso(row.last_run_at) : null,
         topClinicName: topClinicName(row.last_matches, names),
+        teamId: row.team_id,
+        teamName: row.team_name,
+        shared: Boolean(row.team_id),
       }),
     );
   });
@@ -109,6 +127,8 @@ export const getFolder = createServerFn({ method: "GET" })
   .validator((id: string) => id)
   .handler(async ({ context, data: id }): Promise<FolderDetail | null> => {
     const sql = await getSql();
+    const access = await loadFolderAccess(sql, context.userId, id);
+    if (!access) return null;
     const folders = await sql<{
       id: string;
       client_name: string;
@@ -125,7 +145,7 @@ export const getFolder = createServerFn({ method: "GET" })
         created_at,
         updated_at
       from case_folders
-      where id = ${id} and user_id = ${context.userId}
+      where id = ${id}
     `;
     const folder = folders[0];
     if (!folder) return null;
@@ -150,7 +170,7 @@ export const getFolder = createServerFn({ method: "GET" })
         matches,
         created_at
       from runs
-      where folder_id = ${id} and user_id = ${context.userId}
+      where folder_id = ${id}
       order by run_number asc
     `;
 
@@ -167,7 +187,7 @@ export const getFolder = createServerFn({ method: "GET" })
     }>`
       select id, run_id, folder_id, title, notes, selected_clinic_ids, body, version, updated_at
       from result_documents
-      where folder_id = ${id} and user_id = ${context.userId}
+      where folder_id = ${id}
     `;
     const versionRows = await sql<{
       document_id: string;
@@ -176,7 +196,7 @@ export const getFolder = createServerFn({ method: "GET" })
     }>`
       select document_id, version, created_at
       from result_document_versions
-      where folder_id = ${id} and user_id = ${context.userId}
+      where folder_id = ${id}
       order by version desc
     `;
     const versionsByDoc = new Map<string, DocumentVersionMeta[]>();
@@ -218,6 +238,9 @@ export const getFolder = createServerFn({ method: "GET" })
       createdAt: asIso(folder.created_at),
       updatedAt: asIso(folder.updated_at),
       runs,
+      teamId: access.teamId,
+      teamName: access.teamName,
+      isOwner: access.isOwner,
     };
   });
 
@@ -253,7 +276,17 @@ export const getRun = createServerFn({ method: "GET" })
         (select d.id from result_documents d where d.run_id = r.id limit 1) as document_id
       from runs r
       join case_folders f on f.id = r.folder_id
-      where r.id = ${runId} and r.user_id = ${context.userId}
+      where r.id = ${runId}
+        and (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
     `;
     const row = rows[0];
     if (!row) return null;
@@ -304,16 +337,11 @@ export const startExistingPerson = createServerFn({ method: "POST" })
   .validator((input: { folderId: string; label?: string }) => input)
   .handler(async ({ context, data }) => {
     const sql = await getSql();
-    const existing = await sql<{ id: string; client_name: string }>`
-      select id, client_name from case_folders
-      where id = ${data.folderId} and user_id = ${context.userId}
-    `;
-    const folder = existing[0];
-    if (!folder) throw new Error("Fallordner nicht gefunden.");
+    const folder = await requireFolderAccess(sql, context.userId, data.folderId);
 
     const last = await sql<{ n: number }>`
       select coalesce(max(run_number), 0)::int as n from runs
-      where folder_id = ${data.folderId} and user_id = ${context.userId}
+      where folder_id = ${data.folderId}
     `;
     const previous = Number(last[0]?.n ?? 0);
     if (previous < 1) {
@@ -322,15 +350,15 @@ export const startExistingPerson = createServerFn({ method: "POST" })
     const runNumber = previous + 1;
     const runId = crypto.randomUUID();
     const now = new Date().toISOString();
-    const answers = { ...emptyAnswers(), clientName: folder.client_name };
+    const answers = { ...emptyAnswers(), clientName: folder.clientName };
     await sql.query(
       `insert into runs (id, folder_id, user_id, run_number, answers, matches, created_at, label, status)
        values ($1,$2,$3,$4,$5::jsonb,'[]'::jsonb,$6,$7,'entwurf')`,
       [runId, data.folderId, context.userId, runNumber, JSON.stringify(answers), now, data.label?.trim() ?? ""],
     );
     await sql.query(
-      `update case_folders set updated_at = $1 where id = $2 and user_id = $3`,
-      [now, data.folderId, context.userId],
+      `update case_folders set updated_at = $1 where id = $2`,
+      [now, data.folderId],
     );
     return { folderId: data.folderId, runId, runNumber };
   });
@@ -344,7 +372,17 @@ export const saveDraft = createServerFn({ method: "POST" })
       select r.id, r.folder_id, coalesce(r.status, 'fertig') as status, f.client_name
       from runs r
       join case_folders f on f.id = r.folder_id
-      where r.id = ${data.runId} and r.user_id = ${context.userId}
+      where r.id = ${data.runId}
+        and (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
     `;
     const row = rows[0];
     if (!row) throw new Error("Lauf nicht gefunden.");
@@ -353,12 +391,12 @@ export const saveDraft = createServerFn({ method: "POST" })
     }
     const answers = normalizeAnswers({ ...data.answers, clientName: row.client_name });
     await sql.query(
-      `update runs set answers = $1::jsonb where id = $2 and user_id = $3`,
-      [JSON.stringify(answers), data.runId, context.userId],
+      `update runs set answers = $1::jsonb where id = $2`,
+      [JSON.stringify(answers), data.runId],
     );
     await sql.query(
-      `update case_folders set updated_at = now() where id = $1 and user_id = $2`,
-      [row.folder_id, context.userId],
+      `update case_folders set updated_at = now() where id = $1`,
+      [row.folder_id],
     );
     return { ok: true as const };
   });
@@ -380,7 +418,17 @@ export const completeRun = createServerFn({ method: "POST" })
         coalesce(r.label, '') as label
       from runs r
       join case_folders f on f.id = r.folder_id
-      where r.id = ${data.runId} and r.user_id = ${context.userId}
+      where r.id = ${data.runId}
+        and (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
     `;
     const row = rows[0];
     if (!row) throw new Error("Lauf nicht gefunden.");
@@ -399,13 +447,13 @@ export const completeRun = createServerFn({ method: "POST" })
 
     await sql.query(
       `update runs set answers = $1::jsonb, matches = $2::jsonb
-       where id = $3 and user_id = $4`,
-      [JSON.stringify(answers), JSON.stringify(matches), data.runId, context.userId],
+       where id = $3`,
+      [JSON.stringify(answers), JSON.stringify(matches), data.runId],
     );
 
     await sql.query(
-      `update case_folders set updated_at = $1 where id = $2 and user_id = $3`,
-      [now, row.folder_id, context.userId],
+      `update case_folders set updated_at = $1 where id = $2`,
+      [now, row.folder_id],
     );
 
     return {

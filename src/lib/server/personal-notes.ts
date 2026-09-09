@@ -17,6 +17,7 @@ import {
 import type { KlaromatAnswers, MatchSnapshot } from "@/lib/domain/types";
 import { loadClinics } from "./clinics";
 import { asIso, parseJson } from "./cases-shared";
+import { requireFolderAccess } from "./folder-access";
 
 type LineRow = {
   id: string;
@@ -61,14 +62,8 @@ function mapSuggestion(row: SuggestionRow): PersonalSuggestion | null {
 }
 
 async function requireFolder(userId: string, folderId: string) {
-  const sql = await getSql();
-  const rows = await sql<{ id: string; client_name: string }>`
-    select id, client_name from case_folders
-    where id = ${folderId} and user_id = ${userId}
-  `;
-  const folder = rows[0];
-  if (!folder) throw new Error("Fallordner nicht gefunden.");
-  return folder;
+  const folder = await requireFolderAccess(await getSql(), userId, folderId);
+  return { id: folder.id, client_name: folder.clientName };
 }
 
 async function loadLines(folderId: string, userId: string): Promise<PersonalLine[]> {

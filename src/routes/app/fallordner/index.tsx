@@ -42,6 +42,7 @@ function FoldersPage() {
                     {folder.runCount} {folder.runCount === 1 ? "Durchlauf" : "Durchläufe"}
                     {folder.lastStatus ? ` · ${formatRunStatus(folder.lastStatus)}` : ""}
                     {folder.lastRunAt ? ` · ${formatDeDate(folder.lastRunAt)}` : ""}
+                    {folder.teamName ? ` · Team-Raum ${folder.teamName}` : ""}
                   </span>
                 </span>
                 <span className="text-sm font-medium text-primary">Öffnen</span>

@@ -12,6 +12,7 @@ import { WartezeitSchaetzung } from "@/components/wait/wartezeit-schaetzung";
 import { formatDeDate, formatRunStatus } from "@/lib/format";
 import { indicationLabel } from "@/lib/domain/types";
 import { getFolder, renameFolder, type FolderDetail } from "@/lib/server/cases";
+import { assignFolderToTeam, listMyTeams, type TeamSummary } from "@/lib/server/teams";
 import { listClinics } from "@/lib/server/clinics";
 import { cn } from "@/lib/utils";
 
@@ -40,6 +41,10 @@ function FolderPage() {
   const clinicsQuery = useQuery({
     queryKey: ["clinics"],
     queryFn: () => listClinics(),
+  });
+  const teamsQuery = useQuery({
+    queryKey: ["teams"],
+    queryFn: () => listMyTeams(),
   });
 
   const folder = folderQuery.data;
@@ -78,6 +83,7 @@ function FolderPage() {
                   folder.runs.length === 1 ? "Durchlauf" : "Durchläufe"
                 }`
               : "Kein Lauf"}
+            {folder.teamName ? ` · Team-Raum ${folder.teamName}` : ""}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
@@ -96,6 +102,8 @@ function FolderPage() {
           <WartezeitSchaetzung estimate={topWait} variant="chip" />
         </div>
       ) : null}
+
+      <TeamAssign folder={folder} teams={teamsQuery.data ?? []} />
 
       <PersoenlichKarte folderId={folder.id} clientName={folder.clientName} />
 
@@ -271,5 +279,51 @@ function RenameModal({
         </Button>
       </div>
     </Modal>
+  );
+}
+
+function TeamAssign({ folder, teams }: { folder: FolderDetail; teams: TeamSummary[] }) {
+  const queryClient = useQueryClient();
+  const [busy, setBusy] = useState(false);
+  if (teams.length === 0 && !folder.teamId) return null;
+
+  async function assign(teamId: string | null) {
+    setBusy(true);
+    try {
+      await assignFolderToTeam({ data: { folderId: folder.id, teamId } });
+      await queryClient.invalidateQueries({ queryKey: ["folder", folder.id] });
+      await queryClient.invalidateQueries({ queryKey: ["folders"] });
+      toast.success(teamId ? "Fall ist dem Team-Raum zugeordnet." : "Fall ist wieder privat.");
+    } catch (error) {
+      toast.error(error instanceof Error ? error.message : "Zuordnung fehlgeschlagen.");
+    } finally {
+      setBusy(false);
+    }
+  }
+
+  return (
+    <section className="no-print rounded-[var(--radius-xl)] bg-surface p-5 shadow-[var(--shadow-border)]">
+      <h2 className="font-display text-xl tracking-tight">Team-Raum</h2>
+      <p className="mt-1 text-sm text-ink-muted">
+        {folder.teamName
+          ? `Dieser Fall ist für „${folder.teamName}“ sichtbar.`
+          : "Privat. Nur Sie sehen diesen Fall, bis Sie ihn zuordnen."}
+      </p>
+      {folder.isOwner && teams.length > 0 ? (
+        <div className="mt-3 flex flex-wrap gap-2">
+          {teams.map((team) => (
+            <Button
+              key={team.id}
+              type="button"
+              variant={folder.teamId === team.id ? "primary" : "secondary"}
+              disabled={busy}
+              onClick={() => void assign(folder.teamId === team.id ? null : team.id)}
+            >
+              {folder.teamId === team.id ? "Zuordnung aufheben" : `Zuordnen: ${team.name}`}
+            </Button>
+          ))}
+        </div>
+      ) : null}
+    </section>
   );
 }

@@ -1,5 +1,5 @@
 import { type FormEvent, useState } from "react";
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -107,6 +107,16 @@ function ProfilPage() {
             {save.isPending ? "Speichern…" : "Speichern"}
           </Button>
         </form>
+      </section>
+
+      <section className="rounded-[var(--radius-xl)] bg-surface p-5 shadow-[var(--shadow-border)] sm:p-6">
+        <h2 className="font-display text-2xl tracking-tight">Team-Raum</h2>
+        <p className="mt-2 text-sm text-ink-muted">
+          Beratungsstelle anlegen, Kolleginnen einladen, Fälle gemeinsam sehen.
+        </p>
+        <Button className="mt-4" variant="secondary" asChild>
+          <Link to="/app/team">Zum Team-Raum</Link>
+        </Button>
       </section>
 
       <Button

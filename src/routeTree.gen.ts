@@ -20,11 +20,14 @@ import { Route as UeberRouteImport } from './routes/ueber'
 import { Route as AppIndexRouteImport } from './routes/app/index'
 import { Route as AppKlarOMatRouteImport } from './routes/app/klar-o-mat'
 import { Route as AppProfilRouteImport } from './routes/app/profil'
+import { Route as EinladungTokenRouteImport } from './routes/einladung.$token'
 import { Route as KlinikenIndexRouteImport } from './routes/kliniken/index'
 import { Route as KlinikenClinicIdRouteImport } from './routes/kliniken/$clinicId'
 import { Route as ApiAuthSplatRouteImport } from './routes/api/auth/$'
 import { Route as AppFallordnerIndexRouteImport } from './routes/app/fallordner/index'
 import { Route as AppFallordnerFolderIdRouteImport } from './routes/app/fallordner/$folderId'
+import { Route as AppTeamIndexRouteImport } from './routes/app/team/index'
+import { Route as AppTeamTeamIdRouteImport } from './routes/app/team/$teamId'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -81,6 +84,11 @@ const AppProfilRoute = AppProfilRouteImport.update({
   path: '/profil',
   getParentRoute: () => AppRoute,
 } as any)
+const EinladungTokenRoute = EinladungTokenRouteImport.update({
+  id: '/einladung/$token',
+  path: '/einladung/$token',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const KlinikenIndexRoute = KlinikenIndexRouteImport.update({
   id: '/kliniken/',
   path: '/kliniken/',
@@ -106,6 +114,16 @@ const AppFallordnerFolderIdRoute = AppFallordnerFolderIdRouteImport.update({
   path: '/fallordner/$folderId',
   getParentRoute: () => AppRoute,
 } as any)
+const AppTeamIndexRoute = AppTeamIndexRouteImport.update({
+  id: '/team/',
+  path: '/team/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppTeamTeamIdRoute = AppTeamTeamIdRouteImport.update({
+  id: '/team/$teamId',
+  path: '/team/$teamId',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -118,12 +136,15 @@ export interface FileRoutesByFullPath {
   '/ueber': typeof UeberRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/profil': typeof AppProfilRoute
+  '/einladung/$token': typeof EinladungTokenRoute
   '/kliniken/$clinicId': typeof KlinikenClinicIdRoute
   '/app/': typeof AppIndexRoute
   '/kliniken/': typeof KlinikenIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/fallordner/$folderId': typeof AppFallordnerFolderIdRoute
+  '/app/team/$teamId': typeof AppTeamTeamIdRoute
   '/app/fallordner/': typeof AppFallordnerIndexRoute
+  '/app/team/': typeof AppTeamIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -135,12 +156,15 @@ export interface FileRoutesByTo {
   '/ueber': typeof UeberRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/profil': typeof AppProfilRoute
+  '/einladung/$token': typeof EinladungTokenRoute
   '/kliniken/$clinicId': typeof KlinikenClinicIdRoute
   '/app': typeof AppIndexRoute
   '/kliniken': typeof KlinikenIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/fallordner/$folderId': typeof AppFallordnerFolderIdRoute
+  '/app/team/$teamId': typeof AppTeamTeamIdRoute
   '/app/fallordner': typeof AppFallordnerIndexRoute
+  '/app/team': typeof AppTeamIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -154,12 +178,15 @@ export interface FileRoutesById {
   '/ueber': typeof UeberRoute
   '/app/klar-o-mat': typeof AppKlarOMatRoute
   '/app/profil': typeof AppProfilRoute
+  '/einladung/$token': typeof EinladungTokenRoute
   '/kliniken/$clinicId': typeof KlinikenClinicIdRoute
   '/app/': typeof AppIndexRoute
   '/kliniken/': typeof KlinikenIndexRoute
   '/api/auth/$': typeof ApiAuthSplatRoute
   '/app/fallordner/$folderId': typeof AppFallordnerFolderIdRoute
+  '/app/team/$teamId': typeof AppTeamTeamIdRoute
   '/app/fallordner/': typeof AppFallordnerIndexRoute
+  '/app/team/': typeof AppTeamIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -174,12 +201,15 @@ export interface FileRouteTypes {
     | '/ueber'
     | '/app/klar-o-mat'
     | '/app/profil'
+    | '/einladung/$token'
     | '/kliniken/$clinicId'
     | '/app/'
     | '/kliniken/'
     | '/api/auth/$'
     | '/app/fallordner/$folderId'
+    | '/app/team/$teamId'
     | '/app/fallordner/'
+    | '/app/team/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -191,12 +221,15 @@ export interface FileRouteTypes {
     | '/ueber'
     | '/app/klar-o-mat'
     | '/app/profil'
+    | '/einladung/$token'
     | '/kliniken/$clinicId'
     | '/app'
     | '/kliniken'
     | '/api/auth/$'
     | '/app/fallordner/$folderId'
+    | '/app/team/$teamId'
     | '/app/fallordner'
+    | '/app/team'
   id:
     | '__root__'
     | '/'
@@ -209,12 +242,15 @@ export interface FileRouteTypes {
     | '/ueber'
     | '/app/klar-o-mat'
     | '/app/profil'
+    | '/einladung/$token'
     | '/kliniken/$clinicId'
     | '/app/'
     | '/kliniken/'
     | '/api/auth/$'
     | '/app/fallordner/$folderId'
+    | '/app/team/$teamId'
     | '/app/fallordner/'
+    | '/app/team/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -226,6 +262,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   LogoutRoute: typeof LogoutRoute
   UeberRoute: typeof UeberRoute
+  EinladungTokenRoute: typeof EinladungTokenRoute
   KlinikenClinicIdRoute: typeof KlinikenClinicIdRoute
   KlinikenIndexRoute: typeof KlinikenIndexRoute
   ApiAuthSplatRoute: typeof ApiAuthSplatRoute
@@ -310,6 +347,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppProfilRouteImport
       parentRoute: typeof AppRoute
     }
+    '/einladung/$token': {
+      id: '/einladung/$token'
+      path: '/einladung/$token'
+      fullPath: '/einladung/$token'
+      preLoaderRoute: typeof EinladungTokenRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/kliniken/': {
       id: '/kliniken/'
       path: '/kliniken'
@@ -345,6 +389,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppFallordnerFolderIdRouteImport
       parentRoute: typeof AppRoute
     }
+    '/app/team/': {
+      id: '/app/team/'
+      path: '/team'
+      fullPath: '/app/team/'
+      preLoaderRoute: typeof AppTeamIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/team/$teamId': {
+      id: '/app/team/$teamId'
+      path: '/team/$teamId'
+      fullPath: '/app/team/$teamId'
+      preLoaderRoute: typeof AppTeamTeamIdRouteImport
+      parentRoute: typeof AppRoute
+    }
   }
 }
 
@@ -353,7 +411,9 @@ interface AppRouteChildren {
   AppProfilRoute: typeof AppProfilRoute
   AppIndexRoute: typeof AppIndexRoute
   AppFallordnerFolderIdRoute: typeof AppFallordnerFolderIdRoute
+  AppTeamTeamIdRoute: typeof AppTeamTeamIdRoute
   AppFallordnerIndexRoute: typeof AppFallordnerIndexRoute
+  AppTeamIndexRoute: typeof AppTeamIndexRoute
 }
 
 const AppRouteChildren: AppRouteChildren = {
@@ -361,7 +421,9 @@ const AppRouteChildren: AppRouteChildren = {
   AppProfilRoute: AppProfilRoute,
   AppIndexRoute: AppIndexRoute,
   AppFallordnerFolderIdRoute: AppFallordnerFolderIdRoute,
+  AppTeamTeamIdRoute: AppTeamTeamIdRoute,
   AppFallordnerIndexRoute: AppFallordnerIndexRoute,
+  AppTeamIndexRoute: AppTeamIndexRoute,
 }
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
@@ -375,6 +437,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   LogoutRoute: LogoutRoute,
   UeberRoute: UeberRoute,
+  EinladungTokenRoute: EinladungTokenRoute,
   KlinikenClinicIdRoute: KlinikenClinicIdRoute,
   KlinikenIndexRoute: KlinikenIndexRoute,
   ApiAuthSplatRoute: ApiAuthSplatRoute,

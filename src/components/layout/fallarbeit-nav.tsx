@@ -4,6 +4,7 @@ import {
   Folder,
   LayoutDashboard,
   Map,
+  Users,
   type LucideIcon,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
@@ -12,6 +13,7 @@ export const FALLARBEIT_NAV = [
   { to: "/app", label: "Dashboard", icon: LayoutDashboard },
   { to: "/app/klar-o-mat", label: "Klar-o-Mat", icon: Compass },
   { to: "/app/fallordner", label: "Fälle", icon: Folder },
+  { to: "/app/team", label: "Team", icon: Users },
   { to: "/kliniken", label: "Steckbriefe", icon: Map },
 ] as const;
 
@@ -57,7 +59,7 @@ export function FallarbeitMobileNav() {
   return (
     <nav
       aria-label="Fallarbeit mobil"
-      className="no-print fixed inset-x-0 bottom-0 z-20 grid grid-cols-4 border-t border-line bg-surface lg:hidden"
+      className="no-print fixed inset-x-0 bottom-0 z-20 grid grid-cols-5 border-t border-line bg-surface lg:hidden"
     >
       {FALLARBEIT_NAV.map((item) => (
         <FallarbeitNavLink key={item.to} {...item} compact />

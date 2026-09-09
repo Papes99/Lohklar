@@ -26,6 +26,9 @@ export type FolderSummary = {
   lastStatus: RunStatus | null;
   lastRunAt: string | null;
   topClinicName: string | null;
+  teamId: string | null;
+  teamName: string | null;
+  shared: boolean;
 };
 
 export type ResultDocument = {
@@ -61,6 +64,9 @@ export type FolderDetail = {
   createdAt: string;
   updatedAt: string;
   runs: RunRecord[];
+  teamId: string | null;
+  teamName: string | null;
+  isOwner: boolean;
 };
 
 export type RunDetail = {

@@ -17,6 +17,7 @@ import {
   insertResultDocument,
   requireName,
 } from "./cases-shared";
+import { requireFolderAccess } from "./folder-access";
 
 export const createDraftDocument = createServerFn({ method: "POST" })
   .middleware([authMiddleware])
@@ -37,13 +38,23 @@ export const createDraftDocument = createServerFn({ method: "POST" })
         f.client_name, coalesce(r.label, '') as label, r.answers, r.matches
       from runs r
       join case_folders f on f.id = r.folder_id
-      where r.id = ${data.runId} and r.user_id = ${context.userId}
+      where r.id = ${data.runId}
+        and (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
     `;
     const row = rows[0];
     if (!row) throw new Error("Lauf nicht gefunden.");
 
     const existing = await sql<{ id: string }>`
-      select id from result_documents where run_id = ${data.runId} and user_id = ${context.userId}
+      select id from result_documents where run_id = ${data.runId}
     `;
     if (existing[0]) {
       return { folderId: row.folder_id, runId: data.runId, documentId: existing[0].id };
@@ -65,11 +76,11 @@ export const createDraftDocument = createServerFn({ method: "POST" })
       now,
     });
     const created = await sql<{ id: string }>`
-      select id from result_documents where run_id = ${data.runId} and user_id = ${context.userId}
+      select id from result_documents where run_id = ${data.runId}
     `;
     await sql.query(
-      `update case_folders set updated_at = $1 where id = $2 and user_id = $3`,
-      [now, row.folder_id, context.userId],
+      `update case_folders set updated_at = $1 where id = $2`,
+      [now, row.folder_id],
     );
     return {
       folderId: row.folder_id,
@@ -86,17 +97,28 @@ export const markRunFertig = createServerFn({ method: "POST" })
     const rows = await sql<{ id: string; folder_id: string }>`
       select r.id, r.folder_id from runs r
       join result_documents d on d.run_id = r.id
-      where r.id = ${data.runId} and r.user_id = ${context.userId}
+      join case_folders f on f.id = r.folder_id
+      where r.id = ${data.runId}
+        and (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
     `;
     if (!rows[0]) throw new Error("Bitte zuerst ein Dokument erzeugen.");
     await sql.query(
       `update runs set status = 'fertig'
-       where id = $1 and user_id = $2 and status = 'entwurf'`,
-      [data.runId, context.userId],
+       where id = $1 and status = 'entwurf'`,
+      [data.runId],
     );
     await sql.query(
-      `update case_folders set updated_at = now() where id = $1 and user_id = $2`,
-      [rows[0].folder_id, context.userId],
+      `update case_folders set updated_at = now() where id = $1`,
+      [rows[0].folder_id],
     );
     return { ok: true as const };
   });
@@ -207,16 +229,12 @@ export const renameFolder = createServerFn({ method: "POST" })
   .handler(async ({ context, data }) => {
     const clientName = requireName(data.clientName);
     const sql = await getSql();
-    const result = await sql.query(
+    await requireFolderAccess(sql, context.userId, data.folderId);
+    await sql.query(
       `update case_folders set client_name = $1, updated_at = now()
-       where id = $2 and user_id = $3`,
-      [clientName, data.folderId, context.userId],
+       where id = $2`,
+      [clientName, data.folderId],
     );
-    void result;
-    const check = await sql<{ id: string }>`
-      select id from case_folders where id = ${data.folderId} and user_id = ${context.userId}
-    `;
-    if (!check[0]) throw new Error("Fallordner nicht gefunden.");
     return { ok: true as const, clientName };
   });
 
@@ -243,9 +261,20 @@ export const updateResultDocument = createServerFn({ method: "POST" })
       folder_id: string;
       version: number | string;
     }>`
-      select id, run_id, folder_id, version
-      from result_documents
-      where id = ${data.documentId} and user_id = ${context.userId}
+      select d.id, d.run_id, d.folder_id, d.version
+      from result_documents d
+      join case_folders f on f.id = d.folder_id
+      where d.id = ${data.documentId}
+        and (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
     `;
     const row = rows[0];
     if (!row) throw new Error("Ergebnisdokument nicht gefunden.");
@@ -255,20 +284,19 @@ export const updateResultDocument = createServerFn({ method: "POST" })
     await sql.query(
       `update result_documents
        set notes = $1, selected_clinic_ids = $2::text[], body = $3::jsonb, updated_at = $4
-       where id = $5 and user_id = $6`,
+       where id = $5`,
       [
         data.body.needsText,
         `{${selected.join(",")}}`,
         JSON.stringify(data.body),
         now,
         data.documentId,
-        context.userId,
       ],
     );
 
     const existing = await sql<{ n: number }>`
       select count(*)::int as n from result_document_versions
-      where document_id = ${data.documentId} and user_id = ${context.userId}
+      where document_id = ${data.documentId}
     `;
     const count = Number(existing[0]?.n ?? 0);
     let version = Number(row.version ?? 1);
@@ -290,16 +318,16 @@ export const updateResultDocument = createServerFn({ method: "POST" })
         ],
       );
       await sql.query(
-        `update result_documents set version = $1 where id = $2 and user_id = $3`,
-        [version, data.documentId, context.userId],
+        `update result_documents set version = $1 where id = $2`,
+        [version, data.documentId],
       );
     }
 
     if (data.exported) {
       await sql.query(
         `update runs set status = 'exportiert'
-         where id = $1 and user_id = $2 and status <> 'entwurf'`,
-        [row.run_id, context.userId],
+         where id = $1 and status <> 'entwurf'`,
+        [row.run_id],
       );
       await insertUsageEvent(sql, {
         userId: context.userId,
@@ -308,13 +336,13 @@ export const updateResultDocument = createServerFn({ method: "POST" })
     }
 
     await sql.query(
-      `update case_folders set updated_at = $1 where id = $2 and user_id = $3`,
-      [now, row.folder_id, context.userId],
+      `update case_folders set updated_at = $1 where id = $2`,
+      [now, row.folder_id],
     );
 
     const versionRows = await sql<{ version: number; created_at: string }>`
       select version, created_at from result_document_versions
-      where document_id = ${data.documentId} and user_id = ${context.userId}
+      where document_id = ${data.documentId}
       order by version desc
     `;
     return {
@@ -342,9 +370,19 @@ export const restoreDocumentVersion = createServerFn({ method: "POST" })
       select v.body, v.folder_id
       from result_document_versions v
       join result_documents d on d.id = v.document_id
+      join case_folders f on f.id = v.folder_id
       where v.document_id = ${data.documentId}
         and v.version = ${data.version}
-        and v.user_id = ${context.userId}
+        and (
+          f.user_id = ${context.userId}
+          or (
+            f.team_id is not null
+            and exists (
+              select 1 from team_members m
+              where m.team_id = f.team_id and m.user_id = ${context.userId}
+            )
+          )
+        )
     `;
     const row = rows[0];
     if (!row || !isDocumentBody(parseJson(row.body as DocumentBody | string))) {
@@ -356,19 +394,18 @@ export const restoreDocumentVersion = createServerFn({ method: "POST" })
     await sql.query(
       `update result_documents
        set notes = $1, selected_clinic_ids = $2::text[], body = $3::jsonb, updated_at = $4
-       where id = $5 and user_id = $6`,
+       where id = $5`,
       [
         body.needsText,
         `{${selected.join(",")}}`,
         JSON.stringify(body),
         now,
         data.documentId,
-        context.userId,
       ],
     );
     await sql.query(
-      `update case_folders set updated_at = $1 where id = $2 and user_id = $3`,
-      [now, row.folder_id, context.userId],
+      `update case_folders set updated_at = $1 where id = $2`,
+      [now, row.folder_id],
     );
     return { ok: true as const, body, updatedAt: now };
   });

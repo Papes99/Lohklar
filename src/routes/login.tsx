@@ -7,18 +7,20 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { authClient, authEnabled, signIn } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
+import { safeReturnPath } from "@/lib/domain/teams";
 
-type Search = { register?: string };
+type Search = { register?: string; next?: string };
 
 export const Route = createFileRoute("/login")({
   validateSearch: (search: Record<string, unknown>): Search => ({
     register: typeof search.register === "string" ? search.register : undefined,
+    next: safeReturnPath(search.next) ?? undefined,
   }),
   component: Login,
 });
 
 function Login() {
-  const { register } = Route.useSearch();
+  const { register, next } = Route.useSearch();
   const { user, isPending } = useCurrentUserState();
   const [mode, setMode] = useState<"in" | "up">(register === "1" ? "up" : "in");
   const [name, setName] = useState("");
@@ -36,7 +38,7 @@ function Login() {
     );
   }
   if (user) {
-    return <Navigate to="/app" />;
+    return <Navigate to={next || "/app"} />;
   }
 
   async function onSubmit(event: FormEvent) {
@@ -50,18 +52,18 @@ function Login() {
           email,
           password,
           name: name.trim() || email,
-          callbackURL: "/app",
+          callbackURL: next || "/app",
         });
         if (result.error) throw new Error(result.error.message);
       } else {
         const result = await authClient.signIn.email({
           email,
           password,
-          callbackURL: "/app",
+          callbackURL: next || "/app",
         });
         if (result.error) throw new Error(result.error.message);
       }
-      window.location.href = "/app";
+      window.location.href = next || "/app";
     } catch {
       setError("E-Mail oder Passwort stimmen nicht.");
       setBusy(false);
@@ -93,7 +95,7 @@ function Login() {
               className="w-full"
               onClick={() =>
                 void signIn("google", {
-                  callbackURL: "/app",
+                  callbackURL: next || "/app",
                   errorCallbackURL: "/login",
                 }).catch(() => {
                   setError(
