@@ -8,17 +8,18 @@ import { Label } from "@/components/ui/label";
 import { authClient, authEnabled, signIn } from "@/lib/auth/client";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 
-type Search = { register?: string };
+type Search = { register?: string; logout?: string };
 
 export const Route = createFileRoute("/login")({
   validateSearch: (search: Record<string, unknown>): Search => ({
     register: typeof search.register === "string" ? search.register : undefined,
+    logout: search.logout === "1" ? "1" : undefined,
   }),
   component: Login,
 });
 
 function Login() {
-  const { register } = Route.useSearch();
+  const { register, logout } = Route.useSearch();
   const { user, isPending } = useCurrentUserState();
   const [mode, setMode] = useState<"in" | "up">(register === "1" ? "up" : "in");
   const [name, setName] = useState("");
@@ -35,7 +36,7 @@ function Login() {
       </main>
     );
   }
-  if (user) {
+  if (user && logout !== "1") {
     return <Navigate to="/app" />;
   }
 
@@ -82,7 +83,9 @@ function Login() {
           {mode === "up" ? "Konto erstellen" : "Anmelden"}
         </h1>
         <p className="mt-2 text-ink-muted">
-          Für Fallarbeit mit getrennten Fallordnern. Jede Person darf sich registrieren.
+          {logout === "1"
+            ? "Sie sind abgemeldet. Melden Sie sich an, um weiterzuarbeiten."
+            : "Für Fallarbeit mit getrennten Fallordnern. Jede Person darf sich registrieren."}
         </p>
 
         {authEnabled ? (

@@ -1,16 +1,37 @@
 import { auth } from "@/lib/auth/server";
-import { AUTH_COOKIE_NAMES, expireHostCookieHeader } from "@/lib/auth/logout-cookies";
+import {
+  expireHostCookieHeaderVariants,
+  namesToExpire,
+} from "@/lib/auth/logout-cookies";
 
-function safeNext(raw: string | null): string {
-  if (!raw) return "/login";
-  if (!raw.startsWith("/") || raw.startsWith("//") || raw.includes("\\")) return "/login";
-  return raw;
+const AFTER_LOGOUT = "/login?logout=1";
+
+function logoutHtml(): string {
+  return [
+    "<!doctype html>",
+    '<html lang="de">',
+    "<head>",
+    '<meta charset="utf-8"/>',
+    '<meta name="viewport" content="width=device-width, initial-scale=1"/>',
+    '<meta name="robots" content="noindex"/>',
+    `<meta http-equiv="refresh" content="0;url=${AFTER_LOGOUT}"/>`,
+    "<title>Abmelden</title>",
+    "<style>",
+    'body{margin:0;min-height:100vh;display:grid;place-items:center;background:#f3f0e8;color:#1a2420;font-family:Georgia,"Times New Roman",serif}',
+    "p{margin:0;font-size:1.125rem}",
+    "</style>",
+    `<script>location.replace(${JSON.stringify(AFTER_LOGOUT)})</script>`,
+    "</head>",
+    "<body><p>Sie werden abgemeldet…</p></body>",
+    "</html>",
+  ].join("");
 }
 
 /**
- * Top-level GET logout: delete the session, expire cookies on the document
- * response, redirect to /login. Fetch-based sign-out can leave session_data
- * (cookie cache) in place; a navigation always applies Set-Cookie.
+ * Document GET logout. Fetch-based sign-out left the 5-min `session_data`
+ * cookie cache (and Better Auth chunks `name.0`, `name.1`, …) in place, so
+ * `/get-session` kept answering signed-in. A 200 HTML response (not 302)
+ * lets the browser apply Set-Cookie + Clear-Site-Data before navigating.
  */
 export async function logoutResponse(request: Request): Promise<Response> {
   try {
@@ -19,13 +40,16 @@ export async function logoutResponse(request: Request): Promise<Response> {
     /* still expire cookies so the browser drops the session */
   }
 
-  const dest = safeNext(new URL(request.url).searchParams.get("next"));
   const headers = new Headers({
-    Location: dest,
+    "Content-Type": "text/html; charset=utf-8",
     "Cache-Control": "no-store",
+    "Clear-Site-Data": '"cookies"',
+    "X-Robots-Tag": "noindex",
   });
-  for (const name of AUTH_COOKIE_NAMES) {
-    headers.append("Set-Cookie", expireHostCookieHeader(name));
+  for (const name of namesToExpire(request.headers.get("cookie"))) {
+    for (const header of expireHostCookieHeaderVariants(name)) {
+      headers.append("Set-Cookie", header);
+    }
   }
-  return new Response(null, { status: 302, headers });
+  return new Response(logoutHtml(), { status: 200, headers });
 }

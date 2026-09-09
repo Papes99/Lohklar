@@ -109,18 +109,27 @@ function ProfilPage() {
         </form>
       </section>
 
-      <Button
-        variant="ghost"
-        disabled={signingOut}
-        onClick={() => {
-          setSigningOut(true);
-          void signOut("/login").catch(() => {
-            setSigningOut(false);
-            setError("Abmelden ist fehlgeschlagen. Bitte erneut versuchen.");
-          });
-        }}
-      >
-        {signingOut ? "Abmelden…" : "Abmelden"}
+      <Button variant="ghost" asChild>
+        <a
+          href="/logout"
+          onClick={(event) => {
+            if (
+              typeof window !== "undefined" &&
+              window.location.hostname.endsWith(".grok-sandbox.com")
+            ) {
+              event.preventDefault();
+              setSigningOut(true);
+              void signOut("/login").catch(() => {
+                setSigningOut(false);
+                setError("Abmelden ist fehlgeschlagen. Bitte erneut versuchen.");
+              });
+              return;
+            }
+            setSigningOut(true);
+          }}
+        >
+          {signingOut ? "Abmelden…" : "Abmelden"}
+        </a>
       </Button>
     </div>
   );
