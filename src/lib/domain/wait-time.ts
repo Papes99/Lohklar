@@ -1,1 +1,1 @@
-LOAD_FROM_DISK
+file:///workspace/Lohklar/src/lib/domain/wait-time.ts
