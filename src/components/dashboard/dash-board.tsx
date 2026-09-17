@@ -1,8 +1,7 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { lazy, Suspense, useState } from "react";
 import { DashCalendar } from "@/components/dashboard/dash-calendar";
 import { DashChart } from "@/components/dashboard/dash-chart";
-import { UsageDetailSheet } from "@/components/dashboard/usage-detail";
 import {
   filterCatalogLog,
   formatCatalogLogLine,
@@ -19,6 +18,12 @@ import {
 } from "@/lib/domain/usage";
 import type { DashboardBoard } from "@/lib/server/dashboard";
 import { cn } from "@/lib/utils";
+
+const UsageDetailSheet = lazy(() =>
+  import("@/components/dashboard/usage-detail").then((mod) => ({
+    default: mod.UsageDetailSheet,
+  })),
+);
 
 export type DashSearch = {
   view: DashView;
@@ -348,15 +353,17 @@ export function DashBoard({
         </section>
       </div>
 
-      {data.admin ? (
-        <UsageDetailSheet
-          metric={detail}
-          open={detail != null}
-          view={search.view}
-          date={search.date}
-          periodHeading={heading()}
-          onClose={() => setDetail(null)}
-        />
+      {data.admin && detail ? (
+        <Suspense fallback={null}>
+          <UsageDetailSheet
+            metric={detail}
+            open
+            view={search.view}
+            date={search.date}
+            periodHeading={heading()}
+            onClose={() => setDetail(null)}
+          />
+        </Suspense>
       ) : null}
     </div>
   );

@@ -1,5 +1,6 @@
+import type { ReactNode } from "react";
 import { ClaimGuestDialog } from "@/components/klaromat/claim-guest-dialog";
-import { Outlet } from "@tanstack/react-router";
+import { Outlet, useRouteContext } from "@tanstack/react-router";
 import { Wordmark } from "@/components/brand/wordmark";
 import {
   FALLARBEIT_NAV,
@@ -8,29 +9,43 @@ import {
 } from "@/components/layout/fallarbeit-nav";
 import { ProfileChip } from "@/components/layout/profile-chip";
 import { RedirectToSignIn } from "@/lib/auth/gates";
+import { resolveSignInGateState } from "@/lib/auth/sign-in-gate";
 import { useCurrentUserState } from "@/lib/auth/use-current-user";
 
 export function AppShell() {
+  const { sessionUser } = useRouteContext({ from: "__root__" });
   const { user, isPending } = useCurrentUserState();
-  if (isPending) {
+  const signedIn = Boolean(user || sessionUser);
+  const state = resolveSignInGateState({
+    isPending: isPending && !signedIn,
+    hasUser: signedIn,
+  });
+
+  if (state === "pending") {
     return (
-      <div className="min-h-screen bg-bg p-6">
-        <div className="mx-auto max-w-6xl space-y-4">
-          <div className="h-14 animate-pulse rounded-[var(--radius-lg)] bg-bg-subtle" />
-          <div className="h-64 animate-pulse rounded-[var(--radius-xl)] bg-bg-subtle" />
-        </div>
-      </div>
+      <AppChrome>
+        <AppShellSkeleton />
+      </AppChrome>
     );
   }
-  if (!user) return <RedirectToSignIn />;
+  if (state === "signed_out") return <RedirectToSignIn />;
 
   const chip = (
     <ProfileChip
-      name={user.displayName ?? user.primaryEmail ?? "Profil"}
-      image={user.profileImageUrl}
+      name={user?.displayName ?? user?.primaryEmail ?? sessionUser?.email ?? "Profil"}
+      image={user?.profileImageUrl}
     />
   );
 
+  return (
+    <AppChrome chip={chip}>
+      <ClaimGuestDialog />
+      <Outlet />
+    </AppChrome>
+  );
+}
+
+function AppChrome({ chip, children }: { chip?: ReactNode; children: ReactNode }) {
   return (
     <div className="min-h-screen bg-bg pb-20 lg:pb-0">
       <aside className="no-print hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col lg:border-r lg:border-line lg:bg-surface lg:p-5">
@@ -40,7 +55,7 @@ export function AppShell() {
             <FallarbeitNavLink key={item.to} {...item} />
           ))}
         </nav>
-        <div className="mt-auto pt-6">{chip}</div>
+        {chip ? <div className="mt-auto pt-6">{chip}</div> : null}
       </aside>
       <header className="no-print flex items-center justify-between border-b border-line bg-surface px-4 py-3 lg:hidden">
         <Wordmark size="sm" to="/" />
@@ -48,11 +63,19 @@ export function AppShell() {
       </header>
       <div className="lg:pl-64">
         <div id="inhalt" className="mx-auto max-w-6xl px-4 py-6 sm:px-6">
-          <ClaimGuestDialog />
-          <Outlet />
+          {children}
         </div>
       </div>
       <FallarbeitMobileNav />
+    </div>
+  );
+}
+
+function AppShellSkeleton() {
+  return (
+    <div className="space-y-4" aria-busy="true">
+      <div className="h-14 animate-pulse rounded-[var(--radius-lg)] bg-bg-subtle" />
+      <div className="h-64 animate-pulse rounded-[var(--radius-xl)] bg-bg-subtle" />
     </div>
   );
 }

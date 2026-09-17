@@ -21,6 +21,19 @@ describe("resolveSignInGateState", () => {
     );
   });
 
+  it("treats an existing server session as signed_in even while the client hook is pending", () => {
+    const sessionUser = true;
+    const clientPending = true;
+    const signedIn = sessionUser;
+    assert.equal(
+      resolveSignInGateState({
+        isPending: clientPending && !signedIn,
+        hasUser: signedIn,
+      }),
+      "signed_in",
+    );
+  });
+
   it("is signed_out only after the check resolved with no user", () => {
     assert.equal(
       resolveSignInGateState({ isPending: false, hasUser: false }),
