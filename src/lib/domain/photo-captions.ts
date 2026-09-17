@@ -73,10 +73,6 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
     { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
   ],
-  "ck-prop-laim": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
-  ],
   "ck-rothaar": [
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
@@ -1095,6 +1091,168 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
   ],
 
   "ck-parkland": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+
+  "ck-paul-ehrlich": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+  ],
+
+  "ck-peers-hoop": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-petersen-rostock": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-prop-laim": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-pskbgl": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-pzn-landhaus": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-ratzeburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-renchtal": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+  ],
+
+  "ck-ringgenhof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-rosenberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-rusteberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+  ],
+
+  "ck-sachsenklinik": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salus-adaption-huerth": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salus-castrop": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salus-friedberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salus-hurth": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salus-lindow": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salus-nauheim-adaption": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salus-potsdam": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-salza": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-schielberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-schlossklinik-buchau": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-schloz": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-schorborn": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-segeberg-psom": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-serrahn": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-sieg-reha": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-sprudelhof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-step-tagesklinik": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-stillenberg": [
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
   ],
