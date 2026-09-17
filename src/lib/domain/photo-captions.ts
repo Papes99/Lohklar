@@ -18,27 +18,6 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
     { file: "blaues-haus.jpg", slot: "besonderheit", caption: "Halle" },
   ],
-  "ck-auwald": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
-  "ck-bergstrasse": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
-  "ck-bergzabern": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
-  "ck-borkum": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
-  "ck-burgklinik": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
-    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
-  ],
   "ck-fehmarn": [
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
@@ -47,44 +26,14 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
   ],
-  "ck-haffkueste": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
   "ck-kieferngarten": [
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
-  ],
-  "ck-landelin": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
-  ],
-  "ck-lichtblick": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
-  "ck-muenchwies": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
-  "ck-nordlicht": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
-    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
-  ],
-  "ck-rothaar": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
   ],
   "ck-seehof": [
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
     { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
-  ],
-  "ck-waren": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
   ],
 
 
@@ -1348,6 +1297,165 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
   ],
 
   "ck-zwieselberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+
+  "ck-auwald": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-bergstrasse": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-bergzabern": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-borkum": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-burgklinik": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+  ],
+
+  "ck-eifelhoehe": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-elbingerode": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+  ],
+
+  "ck-elbmarsch": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-erlengrund": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-fredeburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-glotterbad": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+  ],
+
+  "ck-haffkueste": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hainberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-landelin": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-lichtblick": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-mainbogen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-motzen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-muenchwies": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-nordlicht": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-osterholz": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+  ],
+
+  "ck-ratingen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-richelsdorf": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-roseneck": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-rosenhoehe": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-rothaar": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-seewiesen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+  ],
+
+  "ck-sonnenberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-teutoburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-waldschloesschen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-waren": [
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
   ],
