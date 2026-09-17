@@ -15,6 +15,7 @@ export function UpdateBanner() {
     if (typeof window === "undefined") return;
     const host = window.location.hostname;
     if (host.endsWith(".grok-sandbox.com") || host === "localhost") return;
+    if (window.location.pathname.startsWith("/login")) return;
 
     let cancelled = false;
     void fetch("/update.json", { cache: "no-store" })
