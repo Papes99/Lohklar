@@ -4,8 +4,8 @@ import type { ClinicPhoto, PhotoSlot } from "./types.ts";
 export const MAX_CLINIC_PHOTOS = 5;
 
 /**
- * Captions beschreiben den sichtbaren Bildinhalt — nicht den Kliniknamen,
- * nicht „Foto 1“, nichts, was nicht im Bild steht.
+ * Captions beschreiben den sichtbaren Bildinhalt.
+ * Nur Dateien, die im Repo wirklich ein anderes Motiv sind (kein Duplikat der aussen.jpg).
  */
 export const PHOTO_CAPTION_OVERRIDES: Partial<
   Record<string, { file: string; slot: PhotoSlot; caption: string }[]>
@@ -16,6 +16,100 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<
       slot: "aussen",
       caption: "Eingang Neubau zur Straße, Klinikschriftzug über der Glastür",
     },
+  ],
+  "ck-auwald": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-bergstrasse": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-bergzabern": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-borkum": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-burgklinik": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Patientenzimmer" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Weiteres Motiv vom Gelände" },
+  ],
+  "ck-eusserthal": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-fehmarn": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-flechtingen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-haffkueste": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-kieferngarten": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Patientenzimmer" },
+  ],
+  "ck-kompass-hof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Patientenzimmer" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-landelin": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Weiteres Motiv vom Gelände" },
+  ],
+  "ck-lichtblick": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-muenchwies": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-nordlicht": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speiseraum" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Weiteres Motiv vom Gelände" },
+  ],
+  "ck-prop-laim": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Patientenzimmer" },
+  ],
+  "ck-rothaar": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Weiteres Motiv vom Gelände" },
+  ],
+  "ck-seehof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Patientenzimmer" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Weiteres Motiv vom Gelände" },
+  ],
+  "ck-suedergellersen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Patientenzimmer" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-waren": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-weserblick": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Außenanlagen am Haus" },
+  ],
+  "ck-wolkersdorf": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Gebäude von der Straße" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Patientenzimmer" },
   ],
 };
 
