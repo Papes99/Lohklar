@@ -1,6 +1,7 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
+  biweeklyAsOf,
   coerceWaitEstimate,
   computeWaitEstimate,
   formatWaitLabel,
@@ -167,5 +168,19 @@ describe("coerce and summarize", () => {
       /^ca\. \d+(–\d+)? Wochen \(Schätzung, Stand \d{2}\.\d{2}\.\d{4}\)$/,
     );
     assert.match(summary.factors[0]?.effect ?? "", /Keine neue Formel/);
+  });
+});
+
+describe("biweeklyAsOf", () => {
+  it("stays stable inside a 14-day window and advances after", () => {
+    const a = biweeklyAsOf(new Date("2026-09-10T12:00:00Z"));
+    const b = biweeklyAsOf(new Date("2026-09-17T12:00:00Z"));
+    const c = biweeklyAsOf(new Date("2026-09-03T12:00:00Z"));
+    assert.equal(a.toISOString().slice(0, 10), b.toISOString().slice(0, 10));
+    assert.notEqual(a.toISOString().slice(0, 10), c.toISOString().slice(0, 10));
+    const e1 = computeWaitEstimate(base, { peers, asOf: a });
+    const e2 = computeWaitEstimate(base, { peers, asOf: b });
+    assert.equal(e1.asOf, e2.asOf);
+    assert.equal(e1.label, e2.label);
   });
 });
