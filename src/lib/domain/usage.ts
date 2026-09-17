@@ -27,6 +27,49 @@ export const DASH_VIEWS: { id: DashView; label: string }[] = [
   { id: "year", label: "Jahr" },
 ];
 
+export const USAGE_DETAIL_METRICS = ["konten", "aktiv", "neu", "vorgaenge"] as const;
+
+export type UsageDetailMetric = (typeof USAGE_DETAIL_METRICS)[number];
+
+export const USAGE_DETAIL_LIMIT = 200;
+
+export const USAGE_DETAIL_LABELS: Record<UsageDetailMetric, string> = {
+  konten: "Konten",
+  aktiv: "Aktiv",
+  neu: "Neu",
+  vorgaenge: "Vorgänge",
+};
+
+export function isUsageDetailMetric(value: unknown): value is UsageDetailMetric {
+  return (
+    value === "konten" || value === "aktiv" || value === "neu" || value === "vorgaenge"
+  );
+}
+
+export function usageKindLabel(kind: string): string {
+  if (kind === "clinic_view") return "Steckbrief";
+  if (kind === "wait_shown") return "Wartezeit";
+  if (kind === "wait_rechenweg") return "Rechenweg";
+  if (kind === "document_export") return "Export";
+  if (kind === "regional_search") return "Suche";
+  if (kind === "session") return "Sitzung";
+  if (kind === "run") return "Klar-o-Mat";
+  if (kind === "document") return "Dokument";
+  return "Aktion";
+}
+
+export function accountPeriodFlags(
+  createdAt: Date,
+  eventsInPeriod: number,
+  from: Date,
+  to: Date,
+): { newInPeriod: boolean; activeInPeriod: boolean } {
+  return {
+    newInPeriod: createdAt >= from && createdAt < to,
+    activeInPeriod: eventsInPeriod > 0,
+  };
+}
+
 export const MONTH_LABELS_DE = [
   "Jan",
   "Feb",

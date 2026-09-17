@@ -1,14 +1,18 @@
 import { describe, it } from "node:test";
 import assert from "node:assert/strict";
 import {
+  accountPeriodFlags,
   berlinMidnight,
   berlinParts,
   buildSeries,
   catalogPhotoStats,
   dashRange,
   emptySeries,
+  isUsageDetailMetric,
   periodRange,
   sanitizeUsage,
+  USAGE_DETAIL_LABELS,
+  usageKindLabel,
 } from "./usage.ts";
 
 describe("periodRange", () => {
@@ -119,5 +123,39 @@ describe("sanitizeUsage", () => {
     assert.equal(name?.meta, "");
     const health = sanitizeUsage({ kind: "wait_shown", meta: "Diagnose F10.2" });
     assert.equal(health?.meta, "");
+  });
+});
+
+describe("usage details", () => {
+  it("accepts the four Nutzung metrics and labels them in German", () => {
+    assert.equal(isUsageDetailMetric("konten"), true);
+    assert.equal(isUsageDetailMetric("aktiv"), true);
+    assert.equal(isUsageDetailMetric("neu"), true);
+    assert.equal(isUsageDetailMetric("vorgaenge"), true);
+    assert.equal(isUsageDetailMetric("me"), false);
+    assert.equal(USAGE_DETAIL_LABELS.konten, "Konten");
+    assert.equal(USAGE_DETAIL_LABELS.vorgaenge, "Vorgänge");
+  });
+
+  it("maps kinds to labels without client names", () => {
+    assert.equal(usageKindLabel("clinic_view"), "Steckbrief");
+    assert.equal(usageKindLabel("run"), "Klar-o-Mat");
+    assert.equal(usageKindLabel("session"), "Sitzung");
+    assert.equal(usageKindLabel("unknown"), "Aktion");
+  });
+
+  it("flags neu/aktiv against the chosen period", () => {
+    const from = berlinMidnight(2026, 9, 1);
+    const to = berlinMidnight(2026, 10, 1);
+    const createdIn = new Date("2026-09-10T10:00:00+02:00");
+    const createdBefore = new Date("2026-08-01T10:00:00+02:00");
+    const neu = accountPeriodFlags(createdIn, 0, from, to);
+    assert.equal(neu.newInPeriod, true);
+    assert.equal(neu.activeInPeriod, false);
+    const aktiv = accountPeriodFlags(createdBefore, 4, from, to);
+    assert.equal(aktiv.newInPeriod, false);
+    assert.equal(aktiv.activeInPeriod, true);
+    const later = accountPeriodFlags(new Date("2026-10-01T00:00:00+02:00"), 1, from, to);
+    assert.equal(later.newInPeriod, false);
   });
 });

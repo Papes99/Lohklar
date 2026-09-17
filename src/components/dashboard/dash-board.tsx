@@ -1,6 +1,8 @@
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { useState } from "react";
 import { DashCalendar } from "@/components/dashboard/dash-calendar";
 import { DashChart } from "@/components/dashboard/dash-chart";
+import { UsageDetailSheet } from "@/components/dashboard/usage-detail";
 import {
   filterCatalogLog,
   formatCatalogLogLine,
@@ -13,6 +15,7 @@ import {
   formatYmd,
   parseYmd,
   type DashView,
+  type UsageDetailMetric,
 } from "@/lib/domain/usage";
 import type { DashboardBoard } from "@/lib/server/dashboard";
 import { cn } from "@/lib/utils";
@@ -53,6 +56,7 @@ export function DashBoard({
 }) {
   const logFilter = search.log ?? "alle";
   const log = filterCatalogLog(data.log, logFilter);
+  const [detail, setDetail] = useState<UsageDetailMetric | null>(null);
 
   function setView(view: DashView) {
     onSearch({ ...search, view });
@@ -205,11 +209,16 @@ export function DashBoard({
               <h2 className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">
                 Nutzung
               </h2>
+              <p className="mt-1 text-xs text-ink-muted">Zahlen öffnen die Liste.</p>
               <dl className="mt-4 grid grid-cols-2 gap-x-4 gap-y-5 sm:grid-cols-4">
-                <Stat label="Konten" value={data.usersTotal} />
-                <Stat label="Aktiv" value={data.usersActive} />
-                <Stat label="Neu" value={data.usersNew} />
-                <Stat label="Vorgänge" value={data.me} />
+                <Stat label="Konten" value={data.usersTotal} onOpen={() => setDetail("konten")} />
+                <Stat label="Aktiv" value={data.usersActive} onOpen={() => setDetail("aktiv")} />
+                <Stat label="Neu" value={data.usersNew} onOpen={() => setDetail("neu")} />
+                <Stat
+                  label="Vorgänge"
+                  value={data.eventsTotal}
+                  onOpen={() => setDetail("vorgaenge")}
+                />
               </dl>
             </div>
           ) : (
@@ -338,15 +347,59 @@ export function DashBoard({
           )}
         </section>
       </div>
+
+      {data.admin ? (
+        <UsageDetailSheet
+          metric={detail}
+          open={detail != null}
+          view={search.view}
+          date={search.date}
+          periodHeading={heading()}
+          onClose={() => setDetail(null)}
+        />
+      ) : null}
     </div>
   );
 }
 
-function Stat({ label, value }: { label: string; value: number }) {
+function Stat({
+  label,
+  value,
+  onOpen,
+}: {
+  label: string;
+  value: number;
+  onOpen?: () => void;
+}) {
+  if (!onOpen) {
+    return (
+      <div>
+        <dt className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">{label}</dt>
+        <dd className="mt-1.5 font-display text-3xl tabular-nums tracking-tight sm:text-4xl">
+          {value}
+        </dd>
+      </div>
+    );
+  }
   return (
     <div>
-      <dt className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">{label}</dt>
-      <dd className="mt-1.5 font-display text-3xl tabular-nums tracking-tight sm:text-4xl">{value}</dd>
+      <dt className="sr-only">{label}</dt>
+      <dd>
+        <button
+          type="button"
+          onClick={onOpen}
+          aria-haspopup="dialog"
+          aria-label={`${label}, ${value}. Details anzeigen`}
+          className="-m-2 min-h-11 rounded-[var(--radius-md)] p-2 text-left transition-colors hover:bg-bg-subtle"
+        >
+          <span className="text-xs font-medium uppercase tracking-[0.12em] text-ink-muted">
+            {label}
+          </span>
+          <span className="mt-1.5 block font-display text-3xl tabular-nums tracking-tight sm:text-4xl">
+            {value}
+          </span>
+        </button>
+      </dd>
     </div>
   );
 }
