@@ -3,18 +3,48 @@ import type { ClinicPhoto, PhotoSlot } from "./types.ts";
 /** Max. 1 Titel + 4 Galerie. */
 export const MAX_CLINIC_PHOTOS = 5;
 
+type PhotoOverride = {
+  file: string;
+  slot: PhotoSlot;
+  caption: string;
+  /** Offizielle Klinik-URL, falls die Datei noch nicht im Repo liegt. */
+  href?: string;
+};
+
 /**
  * Captions beschreiben den sichtbaren Bildinhalt.
- * Nur Dateien, die im Repo wirklich ein anderes Motiv sind (kein Duplikat der aussen.jpg).
+ * Nur Motive, die belegt und vom Titel verschieden sind.
  */
-export const PHOTO_CAPTION_OVERRIDES: Partial<
-  Record<string, { file: string; slot: PhotoSlot; caption: string }[]>
-> = {
+export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> = {
   "ck-oelmuehle": [
     {
       file: "aussen.jpg",
       slot: "aussen",
       caption: "Eingang Neubau zur Straße, Klinikschriftzug über der Glastür",
+    },
+    {
+      file: "zimmer.jpg",
+      slot: "zimmer_bad",
+      caption: "Einzelzimmer mit Fensterfront, Bett und zwei Stühlen",
+      href: "https://www.fachklinik-alte-oelmuehle.de/fileadmin/_processed_/a/c/csm_Zimmer2_67c44c308e.jpg",
+    },
+    {
+      file: "bad.jpg",
+      slot: "zimmer_bad",
+      caption: "Nasszelle mit Waschbecken, Spiegel und Handtuchtrockner",
+      href: "https://www.fachklinik-alte-oelmuehle.de/fileadmin/_processed_/1/f/csm_Badezimmer_bearbeitet_8c38a644de.jpg",
+    },
+    {
+      file: "adaption.jpg",
+      slot: "umgebung",
+      caption: "Helles mehrstöckiges Haus hinter Bäumen, Eingangstür",
+      href: "https://www.fachklinik-alte-oelmuehle.de/fileadmin/_processed_/c/c/csm_Adaptionshaus_Bearbeitet_409d344792.jpg",
+    },
+    {
+      file: "blaues-haus.jpg",
+      slot: "besonderheit",
+      caption: "Blaues Haus mit Glastür und Pflasterzufahrt",
+      href: "https://www.fachklinik-alte-oelmuehle.de/fileadmin/_processed_/e/0/csm_Blaues_Haus_Sonne1_cfafe9e970.jpg",
     },
   ],
   "ck-auwald": [
@@ -133,7 +163,7 @@ export function applyPhotoPolicy(clinicId: string, photos: ClinicPhoto[]): Clini
         slot: item.slot,
         caption: item.caption,
         alt: item.caption,
-        imagePath: `/clinics/${clinicId}/${item.file}`,
+        imagePath: item.href ?? `/clinics/${clinicId}/${item.file}`,
         source: "klinik" as const,
         asOf: photos[0]?.asOf ?? "09.2026",
       })),
