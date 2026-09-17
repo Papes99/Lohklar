@@ -781,6 +781,166 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
   ],
 
+
+  "ck-median-bernkastel": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-brandis": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-burggraben": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-daun-adaption": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-daun-rosenberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-dormagen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-gottleuba": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-graal-mueritz": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-hohenfeld": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-kinzigtal-soden": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-kuehlungsborn": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-median-lobenstein": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-mecklenburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-muehlengrund": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-odenwald": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-psm-duerkheim": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-ptk-liebenwerda": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-pyrmont-psm": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-rhein-haardt": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-roemhild": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-rothenfelde": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-saale-koesen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-salze": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-schlangenbad": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-schmannewitz": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-schoenen-moos": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+  ],
+
+  "ck-median-schweriner-see": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-sonnenhang": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-suedpark": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-median-toenisstein": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
 };
 
 const SLOT_CAPTION: Record<PhotoSlot, string> = {
