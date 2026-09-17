@@ -39,10 +39,6 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
     { file: "besonderheit.jpg", slot: "besonderheit", caption: "Gelände" },
   ],
-  "ck-eusserthal": [
-    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
-    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
-  ],
   "ck-fehmarn": [
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
@@ -278,6 +274,180 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
     { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+  ],
+
+
+  "ck-bwlv-tagesreha-pforzheim": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-bwlv-tuebingen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-carolabad": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-celenus-carolabad": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+  ],
+
+  "ck-celenus-freiburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-celenus-kinzigtal": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-celenus-ortenau-add": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-celenus-schoemberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-celenus-schweizerwiese": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-dgd-tagesreha-ffm": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-diako-adaption-husum": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+  ],
+
+  "ck-diana": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-do-it-adaption": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-drv-frankenhausen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-drv-hellbachtal": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-drv-lipperland": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-drv-werra": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-drv-wingertsberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-ebel-bergfried": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-ebel-heinrich-heine": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-ebel-vogelsberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-ebhausen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-eichelsdorf": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-eifelklinik": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-eschenberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-eschenburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-eusserthal": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-eusserthal-landau": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-fachklinik-meckenheim": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-friedrichshof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
   ],
 
 };
