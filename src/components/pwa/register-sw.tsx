@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { InstallHint } from "./install-hint";
+import { UpdateBanner } from "./update-banner";
 
 export function PwaRuntime() {
   useEffect(() => {
@@ -15,5 +16,10 @@ export function PwaRuntime() {
     });
   }, []);
 
-  return <InstallHint />;
+  return (
+    <>
+      <InstallHint />
+      <UpdateBanner />
+    </>
+  );
 }

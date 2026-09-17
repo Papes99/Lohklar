@@ -1,8 +1,8 @@
 /* Lohklar service worker.
  * App-Shell / statische Dateien cachen.
- * Auth, API und Logout niemals anfassen — Cookies und OAuth bleiben network-only.
+ * Auth, API, Logout und update.json niemals anfassen.
  */
-const CACHE = "lohklar-shell-v1";
+const CACHE = "lohklar-shell-v2";
 const PRECACHE = ["/manifest.webmanifest", "/favicon.svg"];
 
 function isNetworkOnly(url) {
@@ -11,6 +11,7 @@ function isNetworkOnly(url) {
     path.startsWith("/api/") ||
     path.startsWith("/logout") ||
     path.startsWith("/auth/") ||
+    path === "/update.json" ||
     path.startsWith("/__grok/")
   );
 }
