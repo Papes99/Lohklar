@@ -8,6 +8,7 @@ import {
 import { createServerFn } from "@tanstack/react-start";
 import { Toaster } from "sonner";
 import { PreviewHostBridge } from "@/components/preview-host-bridge";
+import { PwaRuntime } from "@/components/pwa/register-sw";
 import { UsageBeacon } from "@/components/usage/beacon";
 import { AuthProvider } from "@/lib/auth/provider";
 import { getQueryClient } from "@/lib/query";
@@ -34,12 +35,15 @@ export const Route = createRootRoute({
           "Lohklar — Orientierung in der medizinischen Rehabilitation. founded by Kerlwerk.",
       },
       { name: "theme-color", content: "#F3F0E8" },
+      { name: "apple-mobile-web-app-title", content: APP_NAME },
+      { name: "apple-mobile-web-app-capable", content: "yes" },
+      { name: "apple-mobile-web-app-status-bar-style", content: "default" },
     ],
     links: [
       { rel: "icon", type: "image/svg+xml", href: "/favicon.svg" },
       { rel: "stylesheet", href: appCss },
-      { rel: "manifest", href: "/__grok/manifest.webmanifest" },
-      { rel: "apple-touch-icon", href: "/__grok/icon-180.png" },
+      { rel: "manifest", href: "/manifest.webmanifest" },
+      { rel: "apple-touch-icon", href: "/favicon.svg" },
     ],
   }),
   component: RootDocument,
@@ -60,6 +64,7 @@ function RootDocument() {
         <QueryClientProvider client={queryClient}>
           <AuthProvider>
             <UsageBeacon />
+            <PwaRuntime />
             <Outlet />
             <Toaster
               position="bottom-right"
