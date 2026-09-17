@@ -112,6 +112,174 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
     { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
   ],
+
+
+  "ck-adaption-cuxhaven": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+  ],
+
+  "ck-adaption-heppenheim": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-adaption-lahr": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+  ],
+
+  "ck-adaption-leipzig-wermsdorf": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+  ],
+
+  "ck-adaption-schwerin": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+  ],
+
+  "ck-adaption-weimar": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-aggerblick": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-agj-karlsruhe": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-alexianer-reha-koeln": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-alpcura": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-alpenblick": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-alpenland": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-alpenland-reichenhall": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-alte-flugschule": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-ameos-kuehlungsborn": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-ameos-ratzeburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+  ],
+
+  "ck-asklepios-bad-schwartau": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-asklepios-fuerstenhof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-aukrug": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Team" },
+  ],
+
+  "ck-bassum": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-bavaria-kreischa": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-bergisch-land": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-berleburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-berus": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-birkental": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-blankenburg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-blaukreuz-lippe": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-bramstedt": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-burgenlandklinik": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-bussmannshof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+  ],
+
 };
 
 const SLOT_CAPTION: Record<PhotoSlot, string> = {
@@ -119,7 +287,7 @@ const SLOT_CAPTION: Record<PhotoSlot, string> = {
   zimmer_bad: "Zimmer",
   umgebung: "Gelände",
   speiseraum: "Speisesaal",
-  besonderheit: "Gelände",
+  besonderheit: "Halle",
 };
 
 export function capPhotos<T>(photos: T[]): T[] {
