@@ -10,6 +10,7 @@ import {
   type CatalogLogEntry,
 } from "@/lib/domain/catalog-log";
 import {
+  accountPeriodFlags,
   berlinTodayYmd,
   berlinYmd,
   buildSeries,
@@ -17,9 +18,13 @@ import {
   dashRange,
   daysInBerlinMonth,
   formatYmd,
+  isUsageDetailMetric,
   parseYmd,
+  USAGE_DETAIL_LIMIT,
+  usageKindLabel,
   type DashView,
   type SeriesPoint,
+  type UsageDetailMetric,
 } from "@/lib/domain/usage";
 
 export type DashAction = {
@@ -43,6 +48,7 @@ export type DashboardBoard = {
   usersTotal: number;
   usersActive: number;
   usersNew: number;
+  eventsTotal: number;
   me: number;
   houses: number;
   updates: number;
@@ -51,6 +57,36 @@ export type DashboardBoard = {
   actions: DashAction[];
   log: CatalogLogEntry[];
 };
+
+export type UsageAccountRow = {
+  email: string;
+  name: string;
+  createdAt: string;
+  lastLoginAt: string | null;
+  lastActiveAt: string | null;
+  newInPeriod: boolean;
+  activeInPeriod: boolean;
+  eventsInPeriod: number;
+};
+
+export type UsageKindRow = {
+  kind: string;
+  label: string;
+  count: number;
+};
+
+export type UsageDetailOk = {
+  ok: true;
+  metric: UsageDetailMetric;
+  view: DashView;
+  date: string;
+  fromYmd: string;
+  accounts: UsageAccountRow[];
+  kinds: UsageKindRow[];
+  truncated: boolean;
+};
+
+export type UsageDetailResult = UsageDetailOk | { ok: false; error: "forbidden" };
 
 function n(value: unknown): number {
   return Number(value ?? 0);
@@ -70,14 +106,14 @@ async function optional<T>(run: () => Promise<T>, fallback: T): Promise<T> {
 
 function actionLabel(kind: string, clinicName: string | null): string {
   if (kind === "clinic_view") return clinicName ? `Steckbrief ${clinicName}` : "Steckbrief";
-  if (kind === "wait_shown") return "Wartezeit";
-  if (kind === "wait_rechenweg") return "Rechenweg";
-  if (kind === "document_export") return "Export";
-  if (kind === "regional_search") return "Suche";
-  if (kind === "session") return "Sitzung";
-  if (kind === "run") return "Klar-o-Mat";
-  if (kind === "document") return "Dokument";
-  return "Aktion";
+  return usageKindLabel(kind);
+}
+
+function asIso(value: string | Date | null | undefined): string | null {
+  if (value == null) return null;
+  const date = value instanceof Date ? value : new Date(value);
+  if (Number.isNaN(date.getTime())) return null;
+  return date.toISOString();
 }
 
 const NAMES = new Map(CLINIC_SEED.map((clinic) => [clinic.id, clinic.shortName]));
@@ -273,6 +309,7 @@ export const getDashboard = createServerFn({ method: "POST" })
       usersTotal: admin ? n(people[0]?.users_total) : 0,
       usersActive: admin ? n(active[0]?.n) : 0,
       usersNew: admin ? n(people[0]?.users_new) : 0,
+      eventsTotal: admin ? inRange.length : 0,
       me: n(mine[0]?.n),
       houses: housesAt(range.to, CATALOG_LOG),
       updates: houseLog.length,
@@ -280,5 +317,142 @@ export const getDashboard = createServerFn({ method: "POST" })
       calendar: { year: cal.year, month: cal.month, days },
       actions,
       log: houseLog,
+    };
+  });
+
+type AccountQueryRow = {
+  email: string;
+  name: string;
+  created_at: string | Date;
+  last_login: string | Date | null;
+  last_active: string | Date | null;
+  events_in_period: number;
+};
+
+function mapAccountRows(
+  rows: AccountQueryRow[],
+  from: Date,
+  to: Date,
+  metric: UsageDetailMetric,
+): { accounts: UsageAccountRow[]; truncated: boolean } {
+  const mapped: UsageAccountRow[] = [];
+  for (const row of rows) {
+    const createdAt = asIso(row.created_at);
+    if (!createdAt) continue;
+    const created = new Date(createdAt);
+    const eventsInPeriod = n(row.events_in_period);
+    const flags = accountPeriodFlags(created, eventsInPeriod, from, to);
+    if (metric === "neu" && !flags.newInPeriod) continue;
+    if ((metric === "aktiv" || metric === "vorgaenge") && !flags.activeInPeriod) continue;
+    mapped.push({
+      email: row.email,
+      name: (row.name ?? "").trim(),
+      createdAt,
+      lastLoginAt: asIso(row.last_login),
+      lastActiveAt: asIso(row.last_active),
+      newInPeriod: flags.newInPeriod,
+      activeInPeriod: flags.activeInPeriod,
+      eventsInPeriod,
+    });
+  }
+  if (metric === "aktiv" || metric === "vorgaenge") {
+    mapped.sort((a, b) => {
+      if (b.eventsInPeriod !== a.eventsInPeriod) return b.eventsInPeriod - a.eventsInPeriod;
+      return (b.lastActiveAt ?? "").localeCompare(a.lastActiveAt ?? "");
+    });
+  } else {
+    mapped.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  }
+  const truncated = mapped.length > USAGE_DETAIL_LIMIT;
+  return { accounts: mapped.slice(0, USAGE_DETAIL_LIMIT), truncated };
+}
+
+export const getUsageDetails = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .validator((input: { metric?: string; view?: string; date?: string } | undefined) => {
+    const metric = isUsageDetailMetric(input?.metric) ? input.metric : ("konten" as const);
+    const view = isView(input?.view) ? input.view : ("month" as const);
+    const date =
+      typeof input?.date === "string" && parseYmd(input.date) ? input.date : berlinTodayYmd();
+    return { metric, view, date };
+  })
+  .handler(async ({ context, data }): Promise<UsageDetailResult> => {
+    const sql = await getSql();
+    const admin = await resolveAdmin(sql, context.userId);
+    if (!admin) return { ok: false, error: "forbidden" };
+
+    const range = dashRange(data.view, data.date);
+    const from = range.from.toISOString();
+    const to = range.to.toISOString();
+
+    const rows = await optional(
+      () =>
+        sql<AccountQueryRow>`
+      select
+        u.email,
+        u.name,
+        u."createdAt" as created_at,
+        s.last_login,
+        a.last_active,
+        coalesce(a.events_in_period, 0)::int as events_in_period
+      from "user" u
+      left join (
+        select "userId" as uid, max("createdAt") as last_login
+        from "session"
+        group by "userId"
+      ) s on s.uid = u.id
+      left join (
+        select
+          uid,
+          max(created_at) as last_active,
+          sum(case when created_at >= ${from} and created_at < ${to} then 1 else 0 end)::int as events_in_period
+        from (
+          select user_id as uid, created_at from usage_events
+          union all
+          select user_id, created_at from runs
+        ) e
+        group by uid
+      ) a on a.uid = u.id
+      where u."createdAt" < ${to}
+    `,
+      [],
+    );
+
+    const { accounts, truncated } = mapAccountRows(rows, range.from, range.to, data.metric);
+
+    const kinds =
+      data.metric === "vorgaenge"
+        ? (
+            await optional(
+              () =>
+                sql<{ kind: string; n: number }>`
+          select kind, count(*)::int as n from (
+            select kind from usage_events
+              where created_at >= ${from} and created_at < ${to}
+            union all
+            select 'run'::text as kind from runs
+              where created_at >= ${from} and created_at < ${to}
+          ) s
+          group by kind
+          order by n desc
+        `,
+              [],
+            )
+          ).map((row) => ({
+            kind: row.kind,
+            label: usageKindLabel(row.kind),
+            count: n(row.n),
+          }))
+        : [];
+
+    return {
+      ok: true,
+      metric: data.metric,
+      view: range.view,
+      date: range.dateYmd,
+      fromYmd: range.fromYmd,
+      accounts,
+      kinds,
+      truncated,
     };
   });
