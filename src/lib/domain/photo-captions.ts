@@ -450,6 +450,172 @@ export const PHOTO_CAPTION_OVERRIDES: Partial<Record<string, PhotoOverride[]>> =
     { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
   ],
 
+
+  "ck-furth": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-gelderland": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-germerode": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-goehren": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-greifswald": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-griesbacherhof": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-groenenbach": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hartwald": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-haus-im-sueden": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-haus-lenne": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-haussee": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-heiligenfeld-berlin": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-heiligenfeld-rosengarten": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hermannsborn": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hirtenstein": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hochgrat": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hochstadt": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hoechsten": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-hoehenklinik-bischofsgruen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-holthausen": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-holthauser-muehle": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-huettenbuehl": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-irmingard": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "speiseraum.jpg", slot: "speiseraum", caption: "Speisesaal" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-isargrund": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-johannesbad-adaption-dortmund": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "adaption.jpg", slot: "umgebung", caption: "Adaption" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-johannesbad-fuessing": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "bad.jpg", slot: "zimmer_bad", caption: "Bad" },
+    { file: "besonderheit.jpg", slot: "besonderheit", caption: "Halle" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-johannesbad-nuernberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-johannesbad-saarschleife": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+    { file: "zimmer.jpg", slot: "zimmer_bad", caption: "Zimmer" },
+  ],
+
+  "ck-kaisberg": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
+  "ck-kamillushaus": [
+    { file: "aussen.jpg", slot: "aussen", caption: "Eingang" },
+    { file: "umgebung.jpg", slot: "umgebung", caption: "Gelände" },
+  ],
+
 };
 
 const SLOT_CAPTION: Record<PhotoSlot, string> = {
